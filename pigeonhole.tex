@@ -1,0 +1,123 @@
+
+\section{抽屉原理}
+\label{sec:pigeonhole-principle}
+
+\begin{theorem}[抽屉原理]
+  若有$n$个笼子和$kn+1$只鸽子，所有的鸽子都被关在鸽笼里，那么至少有一个笼子有至少$k+1$只鸽子。
+\end{theorem}
+
+抽屉原理，也叫鸽笼原理，鴿巢原理(Pigeonhole Principle)。
+
+\begin{proof}
+  反证法，若每个笼子最多有不超过$k$个鸽子，那么所有笼子鸽子总数不超过$kn$个，与原来有$kn+1$个鸽子矛盾。
+\end{proof}
+
+当$k=1$时，是抽屉原理最觉的情况：若有$n$个笼子和$n+1$只鸽子，所有的鸽子都被关在鸽笼里，那么至少有一个笼子有至少$2$只鸽子。
+
+\think 若上面$n+1$只鸽子换成$n+1,n+2,\cdots$是否成立？
+
+\begin{example}
+  普遍认为成人的头发数量约在10万左右，那么对于深圳的常住人口（按2018年2180万算），基本可以肯定有人有相同的头发数。
+\end{example}
+
+\begin{proof}
+  按头发数做鸽笼，按统计数据成人头发约为10万左右，可认为深圳常住人口的头发数量都小于等于2000万根。按抽屉原理可得。
+\end{proof}
+
+\begin{example}
+  在$1,2,\cdots,100$里任意选51个数，总能在这选出来的数中找到两个互质数。
+\end{example}
+
+\begin{proof}
+  将100个数按$(1,2), (3,4), \cdots, (99,100)$分为50组，则选51个数总有两个落到同一组中，而同一组的两数互质，从而得证。
+\end{proof}
+
+\begin{question}
+  在$1,2,\cdots,100$里任意选51个数，总能在这选出来的数中找到两个，使得其中一个被另一个整除。
+\end{question}
+\hints $\forall a\in\mathcal{Z}^+$，存在奇数$k$及整数$n$，使得$a=k\cdot 2^n$。对所有整数按$k$分类。
+
+\begin{example}
+  在任意9个两两不等的实数中，总能选出两个，设其为$a,b$，满足以下条件
+  \begin{align*}
+    0 < \frac{a-b}{1+ab} < \sqrt2 -1
+  \end{align*}
+\end{example}
+
+\begin{proof}
+  联想公式
+  \begin{align*}
+    \tan(\alpha-\beta)=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}
+  \end{align*}
+
+  而$\tan(x)$的周期是$(-\pi/2, \pi/2]$，将区间8等份（让9个数总有两个落入其中一份）为以下8个区间
+  \begin{align*}
+    (-\frac\pi2, -\frac{3\pi}8], (-\frac{3\pi}8, -\frac\pi4], \cdots, (\frac{3\pi}8, \frac\pi8]
+  \end{align*}
+
+  $\forall a, \exists\hat a\in(-\pi/2, \pi/2], s.t. \tan\hat a = a$，从而任意9个实数，总存在两个，记为$a,b$，存在$\hat a, \hat b$落在上述8个区间中的同一个，且有$a=\tan\hat a, b=\tan\hat b$。不妨设$a>b$，从而$0<\hat a-\hat b<\pi/8$，由$\tan(x)$在上述每个区间中均为严格单调递增，有
+  \begin{align*}
+             & 0 < \tan(\hat a - \hat b) < \tan\frac\pi8\\
+    \implies & 0 < \frac{a - b}{1+ab} < \sqrt2 - 1
+  \end{align*}
+\end{proof}
+
+
+\begin{question}[XLI Mathematical Olympiad in Poland]
+  一个三角形可以放置在一个单位正方形内，且存在一种放置方法使得正方形的中心不在三角形内。那么该三角形有一条边长小于1。
+\end{question}
+
+\hints 将正方形划分几份，使得三角形至少有两个顶点落在某份中。
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Questions
+%%%%%%%%%%%%%%%%%%%%
+\begin{question}
+  从$1,2,\cdots,100$中任意取11个数字，那么这11个数字组成的集合中，总存在两个不相交的非空子集，其元素之和相等。
+\end{question}
+
+\hints 11个元素组成的集合，其非空真子集总共有$2^{11}-2=2046$个，而1到100取10个数字（\think 为什么取10个而不是11个）其和最大值为$91+92+\cdots+100=955$。
+
+\begin{question}
+  在三维空间中任意选取9个坐标都是整数的点。证明这连接9个点而形成的线段中至少包含另外一个坐标为整数的点
+\end{question}
+
+\begin{question}
+  任意六个人中，以下两个结论总有一个成立：
+  \begin{enumerate}
+  \item 其中有三人互相认识。
+  \item 其中有三人互相不认识。
+  \end{enumerate}
+\end{question}
+
+\hints 相当于正六边形的六个顶点用两种颜色的线段两两连接起来，则这些线段组合的三角形中，总存在一个同色的三角形。
+
+\begin{question}
+  任意一个16位的正整数的数字所组成的数字串中，总存在一个子串，其数字的乘积是一个完全平方数。
+\end{question}
+
+\hints 若16位数中含有数字$0,1,4,9$，那么取这个数字本身组成的子串即可，从而只需考虑由数字$2,3,5,6,7,8$组成的16位数。由于
+\begin{align*}
+  6 = 2\times 3,\quad 8=2^3
+\end{align*}
+从而任意一个子串各数字的乘积可以写成如下形式
+\begin{align*}
+  2^a \times 3^b \times 5^c \times 7^d
+\end{align*}
+若$a,b,c,d$都是偶数，那么这个子串数字的乘积就是完全平方数。而$a,b,c,d$的奇偶组合数总共有$2^4=16$种，即
+\begin{align*}
+  \text{(奇奇奇奇)},\quad \text{(奇奇奇偶)},\quad \text{(奇奇偶奇)},\quad \text{(奇奇偶偶)}\\
+  \text{(奇偶奇奇)},\quad \text{(奇偶奇偶)},\quad \text{(奇偶偶奇)},\quad \text{(奇偶偶偶)}\\
+  \text{(偶奇奇奇)},\quad \text{(偶奇奇偶)},\quad \text{(偶奇偶奇)},\quad \text{(偶奇偶偶)}\\
+  \text{(偶偶奇奇)},\quad \text{(偶偶奇偶)},\quad \text{(偶偶偶奇)},\quad \text{(偶偶偶偶)}
+\end{align*}
+
+从而至少需要构造17种选取方式。记16位数各数字按顺序分别为$x_1,x_2,\cdots,x_{16}$，令
+\begin{align*}
+  F(k) =
+  \begin{cases}
+    1 = 2^0 \times 3^0 \times 5^0 \times 7^0 & k=0\\
+    \prod_{i=1}^k x_i = 2^{a_k} \times 3^{b_k} \times 5^{c_k} \times 7^{d_k},&k=1,2,\cdots,16
+  \end{cases}
+\end{align*}
+则$F(0),F(1),\cdots,F(16)$这17个数中至少有两个，其$a,b,c,d$的奇偶性组合相同，不妨记为$F(k_1),F(k_2)$，且$k_1<k_2$，从而$F(k_2)/F(k_1)$是完全平方数，从而两个数对应的子串，长串中拿掉短串部分，其数字乘积即为完全平方数。

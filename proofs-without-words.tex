@@ -1,0 +1,506 @@
+
+\section{无字证明}
+\label{sec:proofs-without-words}
+
+\begin{example}
+  前$n$个奇数的和等于$n^2$，即
+  \begin{align}
+    \underbrace{1 + 3 + 5 + \cdots + (2n-1)}_{n\text{个}} = n^2
+  \end{align}
+\end{example}
+
+\begin{center}
+  \begin{tikzpicture}[scale=0.6]
+    \begin{scope}[shift={(0,0)}]
+      \foreach \r/\f in{1/white,2/red!30,3/white,4/blue!30,5/white,6/violet!30}{
+        \draw[fill=\f](-\r,-\r) rectangle(\r-1,1-\r);
+        \draw(-\r,-\r)grid(\r-1,1-\r);
+        \draw[pattern=north east lines, pattern color=black](-1,-\r) rectangle(0,1-\r);
+      }    
+    \end{scope}
+    \begin{scope}[shift={(7,0)}]
+      \draw[|<->|](0,0)--(0,-6) node[midway,fill=white]{$n$层};
+    \end{scope}
+    \begin{scope}[shift={(9,0)}]
+      \foreach \r/\f in{1/white,2/red!30,3/white,4/blue!30,5/white,6/violet!30}{
+        \draw[fill=\f](0,-\r) rectangle(\r,1-\r);
+        \draw(0,-\r)grid(\r,1-\r);
+        \draw[fill=\f](\r,0) rectangle(\r-1,-\r);
+        \draw(\r,0) grid(\r-1,-\r);
+        \draw[pattern=north east lines, pattern color=black](\r-1,1-\r) rectangle(\r,-\r);
+      }
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+
+\begin{example}
+  前$n$个数的和是$\dfrac12n(n+1)$，即
+  \begin{align}
+    1+2+3+\cdots+n=\frac12n(n+1)
+  \end{align}
+\end{example}
+\begin{center}
+  \begin{tikzpicture}[scale=0.6]
+    \begin{scope}[shift={(0,0)}]
+      \foreach \r/\f in{1/white,2/red!30,3/white,4/blue!30,5/white,6/violet!30}{
+        \draw[fill=\f](0,1-\r) rectangle(\r, -\r);
+        \draw(0,1-\r) grid(\r, -\r);
+      }    
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+      \draw[|<->|](0,0)--(0,-6) node[midway,fill=white]{$n$层};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+      \foreach \r/\f in{1/white,2/red!30,3/white,4/blue!30,5/white,6/violet!30}{
+        \draw[fill=\f](0,1-\r) rectangle(\r, -\r);
+        \draw(0,1-\r) grid(\r, -\r);
+      }
+      \foreach \r/\f in{1/violet!30,2/white,3/blue!30,4/white,5/red!30,6/white}{
+        \draw[fill=\f](\r,1-\r) rectangle(7, -\r);
+        \draw(\r,1-\r) grid(7, -\r);
+      }
+      \draw[very thick](1,0)--(1,-1)--(2,-1)--(2,-2)--(3,-2)--(3,-3)
+                     --(4,-3)--(4,-4)--(5,-4)--(5,-5)--(6,-5)--(6,-6);
+      \draw[|<->|](0,-7)--(7,-7) node[midway,fill=white]{$n+1$};      
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+
+\newcommand{\fixedcirclenode}[3]{\draw #1 circle(#2) node {#3};}
+\begin{example}
+  \begin{align*}
+    1^2+2^2+3^2+\cdots=\frac{n(n+1)(2n+1)}6
+  \end{align*}
+  \centering
+  \begin{tikzpicture}[scale=.6]
+    \begin{scope}[shift={(0,0)}]
+      \fixedcirclenode{(0,0)}{.5}{1};
+      \fixedcirclenode{(-.5,-1)}{.5}{2}; \fixedcirclenode{(.5,-1)}{.5}{2};
+      \fixedcirclenode{(-1,-2)}{.5}{3};  \fixedcirclenode{(0,-2)}{.5}{3};  \fixedcirclenode{(1,-2)}{.5}{3}; 
+      \fixedcirclenode{(-1.5,-3)}{.5}{4};  \fixedcirclenode{(-.5,-3)}{.5}{4};  \fixedcirclenode{(.5,-3)}{.5}{4}; \fixedcirclenode{(1.5,-3)}{.5}{4}; \fixedcirclenode{(-2,-4)}{.5}{$\cdots$};
+      \fixedcirclenode{(-1,-4)}{.5}{$\cdots$};  \fixedcirclenode{(0,-4)}{.5}{$\cdots$}; \fixedcirclenode{(1,-4)}{.5}{$\cdots$}; \fixedcirclenode{(2,-4)}{.5}{$\cdots$}; 
+      \fixedcirclenode{(-2.5,-5)}{.5}{$n$}; \fixedcirclenode{(-1.5,-5)}{.5}{$n$};  \fixedcirclenode{(-.5,-5)}{.5}{$\cdots$};  \fixedcirclenode{(.5,-5)}{.5}{$\cdots$}; \fixedcirclenode{(1.5,-5)}{.5}{$n$}; \fixedcirclenode{(2.5,-5)}{.5}{$n$}; 
+    \end{scope}
+    
+    \begin{scope}[shift={(3.5,0)}]
+      \node at (0,-2) {{\huge $+$}};
+    \end{scope}
+
+    \begin{scope}[shift={(7,0)}]
+      \fixedcirclenode{(0,0)}{.5}{$n$};
+      \fixedcirclenode{(-.5,-1)}{.5}{$\cdots$}; \fixedcirclenode{(.5,-1)}{.5}{$n$};
+      \fixedcirclenode{(-1,-2)}{.5}{4};  \fixedcirclenode{(0,-2)}{.5}{$\cdots$};  \fixedcirclenode{(1,-2)}{.5}{$\cdots$}; 
+      \fixedcirclenode{(-1.5,-3)}{.5}{3}; \fixedcirclenode{(-.5,-3)}{.5}{4}; \fixedcirclenode{(.5,-3)}{.5}{$\cdots$}; \fixedcirclenode{(1.5,-3)}{.5}{$\cdots$}; 
+      \fixedcirclenode{(-2,-4)}{.5}{2};  \fixedcirclenode{(-1,-4)}{.5}{3};  \fixedcirclenode{(0,-4)}{.5}{4}; \fixedcirclenode{(1,-4)}{.5}{$\cdots$}; \fixedcirclenode{(2,-4)}{.5}{$n$}; 
+      \fixedcirclenode{(-2.5,-5)}{.5}{1}; \fixedcirclenode{(-1.5,-5)}{.5}{2};  \fixedcirclenode{(-.5,-5)}{.5}{3};  \fixedcirclenode{(.5,-5)}{.5}{4}; \fixedcirclenode{(1.5,-5)}{.5}{$\cdots$}; \fixedcirclenode{(2.5,-5)}{.5}{$n$}; 
+    \end{scope}
+
+    \begin{scope}[shift={(10.5,0)}]
+      \node at (0,-2) {{\huge $+$}};
+    \end{scope}
+    
+    \begin{scope}[shift={(14,0)}]
+      \fixedcirclenode{(0,0)}{.5}{$n$};
+      \fixedcirclenode{(-.5,-1)}{.5}{$n$}; \fixedcirclenode{(.5,-1)}{.5}{$\cdots$};
+      \fixedcirclenode{(-1,-2)}{.5}{$\cdots$}; \fixedcirclenode{(0,-2)}{.5}{$\cdots$};  \fixedcirclenode{(1,-2)}{.5}{4}; 
+      \fixedcirclenode{(-1.5,-3)}{.5}{$\cdots$};  \fixedcirclenode{(-.5,-3)}{.5}{$\cdots$};  \fixedcirclenode{(.5,-3)}{.5}{4}; \fixedcirclenode{(1.5,-3)}{.5}{3};
+      \fixedcirclenode{(-2,-4)}{.5}{$n$};  \fixedcirclenode{(-1,-4)}{.5}{$\cdots$};  \fixedcirclenode{(0,-4)}{.5}{4}; \fixedcirclenode{(1,-4)}{.5}{3}; \fixedcirclenode{(2,-4)}{.5}{2}; 
+      \fixedcirclenode{(-2.5,-5)}{.5}{$n$}; \fixedcirclenode{(-1.5,-5)}{.5}{$\cdots$};  \fixedcirclenode{(-.5,-5)}{.5}{4};  \fixedcirclenode{(.5,-5)}{.5}{3}; \fixedcirclenode{(1.5,-5)}{.5}{2}; \fixedcirclenode{(2.5,-5)}{.5}{1}; 
+    \end{scope}
+  \end{tikzpicture}
+
+  \begin{tikzpicture}[scale=1.4]
+    \node at (-3,-2) {{\huge $=$}};
+    \begin{scope}[shift={(0,0)}]
+      \fixedcirclenode{(0,0)}{.5}{$2n+1$};
+      \fixedcirclenode{(-.5,-1)}{.5}{$2n+1$}; \fixedcirclenode{(.5,-1)}{.5}{$2n+1$};
+      \fixedcirclenode{(-1,-2)}{.5}{$2n+1$};  \fixedcirclenode{(0,-2)}{.5}{$2n+1$};  \fixedcirclenode{(1,-2)}{.5}{$2n+1$}; 
+      \fixedcirclenode{(-1.5,-3)}{.5}{$2n+1$};  \fixedcirclenode{(-.5,-3)}{.5}{$2n+1$};  \fixedcirclenode{(.5,-3)}{.5}{$2n+1$}; \fixedcirclenode{(1.5,-3)}{.5}{$2n+1$}; \fixedcirclenode{(-2,-4)}{.5}{$\cdots$};
+      \fixedcirclenode{(-1,-4)}{.5}{$\cdots$};  \fixedcirclenode{(0,-4)}{.5}{$\cdots$}; \fixedcirclenode{(1,-4)}{.5}{$\cdots$}; \fixedcirclenode{(2,-4)}{.5}{$\cdots$}; 
+      \fixedcirclenode{(-2.5,-5)}{.5}{$2n+1$}; \fixedcirclenode{(-1.5,-5)}{.5}{$2n+1$};  \fixedcirclenode{(-.5,-5)}{.5}{$\cdots$};  \fixedcirclenode{(.5,-5)}{.5}{$\cdots$}; \fixedcirclenode{(1.5,-5)}{.5}{$2n+1$}; \fixedcirclenode{(2.5,-5)}{.5}{$2n+1$}; 
+    \end{scope}
+  \end{tikzpicture}
+  \begin{align*}
+    \text{从而有}\quad 3\left(1^2+2^2+3^2+\cdots+n^2\right) = (2n+1)\cdot \frac{n(n+1)}2
+  \end{align*}
+\end{example}
+
+\begin{example}[维维亚尼定理，Viviani's Theorem]
+  记等边三角形的高为$h$，三角形内任意一点$P$到三边的距离分别为$l,m,n$，则
+  \begin{align}
+    h=l+m+n
+  \end{align}
+\end{example}
+\begin{center}
+  \begin{tikzpicture}[scale=1]
+    \tkzDefPoint[label=below left:$A$](0,0){A}
+    \tkzDefPoint[label=below right:$B$](6,0){B}
+    \tkzDefPoint[label=above:$C$](60:6){C} %polar coordinate
+    \tkzDefPoint[label=below left:$P$](35:4){P}
+    \coordinate(D) at ($(B)!(P)!(C)$);
+    \coordinate(E) at ($(C)!(P)!(A)$);
+    \coordinate(F) at ($(A)!(P)!(B)$);
+
+    \coordinate(Q) at (0,6);
+    \coordinate(C'') at ($(A)!(C)!(Q)$);
+    \coordinate(P'') at ($(A)!(P)!(Q)$);
+    \coordinate(MN) at($(P) + (120:6)$);
+    \tkzInterLL(P,MN)(A,C)\tkzGetPoint{M};
+    \tkzInterLL(P,MN)(A,B)\tkzGetPoint{N};
+    \tkzInterLL(P,MN)(C,C'')\tkzGetPoint{C'};
+    \tkzInterLL(P,P'')(A,C)\tkzGetPoint{P'};
+    
+    \coordinate(M'') at($(A)!(M)!(Q)$);
+
+    % the altitude
+    \coordinate(H) at (-1,0);
+    \coordinate(H') at (-1,6);
+    \coordinate(H'') at ($(H)!(C)!(H')$);
+    \draw[|<->|](H)--(H'') node[midway,fill=white]{$h$};
+
+    \tkzMarkRightAngle[color=blue](B,D,P)
+    \tkzMarkRightAngle[color=blue](C,E,P)
+    \tkzMarkRightAngle[color=blue](A,F,P)
+
+    \tkzDrawPoints(A,B,C,P,D,E,F,C',C'',P',P'',M,M'',N);
+    \tkzLabelPoints[above](C')
+
+    \draw[very thick](A)--(B)--(C)--cycle;
+    \draw(P)--(D) node[pos=0.45,above]{$l$}
+         (P)--(E) node[pos=0.7, below]{$m$}
+         (P)--(F) node[midway, left]{$n$}
+         (A)--(P'') node[midway, left]{$n$}
+         (P'')--(M'') node[midway,left]{$m$}
+         (M'')--(C'') node[midway,left]{$l$};
+    \draw[dashed](P)--(P'') (M)--(M'') (C)--(C'') (N)--(C');
+    \tkzMarkRightAngle[color=blue](P,P'',A)
+    \tkzMarkRightAngle[color=blue](M,M'',A)
+    \tkzMarkRightAngle[color=blue](C,C'',A)
+    \tkzMarkRightAngle[color=blue](Q,A,B)
+
+    \draw[red,thick](P)--(P')--(C)--(C')--cycle;
+  \end{tikzpicture}
+\end{center}
+
+\begin{center}
+  \begin{tikzpicture}[scale=.7]
+    \begin{scope}[shift={(0,0)}]
+      \tkzDefPoint(0,0){A}
+      \tkzDefPoint(6,0){B}
+      \tkzDefPoint(60:6){C} %polar coordinate
+      \tkzDefPoint(35:4){P}
+      \coordinate(D) at ($(B)!(P)!(C)$);
+      \coordinate(E) at ($(C)!(P)!(A)$);
+      \coordinate(F) at ($(A)!(P)!(B)$);
+      
+      \coordinate(F1) at ($(P)!sqrt(4/3)!30:(F)$);
+      \coordinate(F2) at ($(P)!sqrt(4/3)!-30:(F)$);
+
+      \coordinate(E1) at ($(P)!sqrt(4/3)!30:(E)$);
+      \coordinate(E2) at ($(P)!sqrt(4/3)!-30:(E)$);
+
+      \coordinate(D1) at ($(P)!sqrt(4/3)!30:(D)$);
+      \coordinate(D2) at ($(P)!sqrt(4/3)!-30:(D)$);
+      
+      \draw[fill=red!30] (P)--(F1)--(F2)--cycle;
+      \draw[fill=violet!30] (P)--(D1)--(D2)--cycle;
+      \draw[fill=blue!30]  (P)--(E1)--(E2)--cycle;
+      \draw (A)--(B)--(C)--cycle;
+      \draw[very thick] (P)--(D) (P)--(E) (P)--(F);
+    \end{scope}
+
+    \begin{scope}[shift={(7,0)}]
+      \tkzDefPoint(0,0){A}
+      \tkzDefPoint(6,0){B}
+      \tkzDefPoint(60:6){C} %polar coordinate
+      \tkzDefPoint(35:4){P}
+      \coordinate(D) at ($(B)!(P)!(C)$);
+      \coordinate(E) at ($(C)!(P)!(A)$);
+      \coordinate(F) at ($(A)!(P)!(B)$);
+      
+      \coordinate(F1) at ($(P)!sqrt(4/3)!30:(F)$);
+      \coordinate(F2) at ($(P)!sqrt(4/3)!-30:(F)$);
+
+      \coordinate(E1) at ($(P)!sqrt(4/3)!30:(E)$);
+      \coordinate(E2) at ($(P)!sqrt(4/3)!-30:(E)$);
+
+      \coordinate(D1) at ($(P)!sqrt(4/3)!30:(D)$);
+      \coordinate(D2) at ($(P)!sqrt(4/3)!-30:(D)$);
+
+      \coordinate(E') at ($(E2)!(E1)!(P)$);
+      
+      \draw[fill=red!30] (P)--(F1)--(F2)--cycle;
+      \draw[fill=violet!30] (P)--(D1)--(D2)--cycle;
+      \draw[fill=blue!30]  (P)--(E1)--(E2)--cycle;
+      \draw (A)--(B)--(C)--cycle;
+      \draw[very thick] (P)--(D) (E1)--(E') (P)--(F);
+    \end{scope}
+
+    \begin{scope}[shift={(14,0)}]
+      \tkzDefPoint(0,0){A}
+      \tkzDefPoint(6,0){B}
+      \tkzDefPoint(60:6){C} %polar coordinate
+      \tkzDefPoint(35:4){P}
+      \coordinate(D) at ($(B)!(P)!(C)$);
+      \coordinate(E) at ($(C)!(P)!(A)$);
+      \coordinate(F) at ($(A)!(P)!(B)$);
+      
+      \coordinate(F1) at ($(P)!sqrt(4/3)!30:(F)$);
+      \coordinate(F2) at ($(P)!sqrt(4/3)!-30:(F)$);
+
+      \coordinate(E1) at ($(P)!sqrt(4/3)!30:(E)$);
+      \coordinate(E2) at ($(P)!sqrt(4/3)!-30:(E)$);
+
+      \coordinate(D1) at ($(P)!sqrt(4/3)!30:(D)$);
+      \coordinate(D2) at ($(P)!sqrt(4/3)!-30:(D)$);
+
+      \coordinate(E') at ($(E2)!(E1)!(P)$);
+      
+      \draw[fill=red!30] (P)--(F1)--(F2)--cycle;
+      \draw (A)--(B)--(C)--cycle;
+      \draw[very thick] (P)--(F);
+      \draw (C)--(E1)--(D2)--cycle;
+
+      \coordinate(O) at ($1/3*(C)+1/3*(E1)+1/3*(D2)$);
+      \coordinate(P) at ($(O)!1!-120:(P)$);
+      \coordinate(D1) at ($(O)!1!-120:(D1)$);
+      \coordinate(D2) at ($(O)!1!-120:(D2)$);
+      \coordinate(D)  at ($(O)!1!-120:(D)$);
+      \coordinate(E1) at ($(O)!1!-120:(E1)$);
+      \coordinate(E2) at ($(O)!1!-120:(E2)$);
+      \coordinate(E') at ($(O)!1!-120:(E')$);
+      % \draw(C)--(O);
+      % \begin{scope}[rotate around={-60:(O)}]
+        \draw[rotate around={-120:(O)},fill=violet!30] (P)--(D1)--(D2)--cycle;
+        \draw[rotate around={-120:(O)},fill=blue!30] (P)--(E1)--(E2)--cycle;
+        \draw[rotate around={-120:(O)},very thick] (P)--(D) (E1)--(E');
+      % \end{scope}
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+
+\begin{example}\mbox{}\par\nopagebreak
+\centering
+\begin{tikzpicture}[scale=0.2]
+  \node[left] at (-40,-16) {$\sum\limits_{n=1}^\infty \left(\dfrac14\right)^n = \dfrac13$};
+  \draw(0,-1)rectangle(-1,0) rectangle(-2,-1)rectangle(-1,-2)rectangle(0,-1);
+  \fill(-1,-1)rectangle(-2,-2);
+
+  \draw[scale=2](0,-1)rectangle(-1,0) rectangle(-2,-1)rectangle(-1,-2)rectangle(0,-1);
+  \fill[scale=2](-1,-1)rectangle(-2,-2);
+
+  \draw[scale=4](0,-1)rectangle(-1,0) rectangle(-2,-1)rectangle(-1,-2)rectangle(0,-1);
+  \fill[scale=4](-1,-1)rectangle(-2,-2);
+
+  \draw[scale=8](0,-1)rectangle(-1,0) rectangle(-2,-1)rectangle(-1,-2)rectangle(0,-1);
+  \fill[scale=8](-1,-1)rectangle(-2,-2);
+
+  \draw[scale=16](0,-1)rectangle(-1,0)rectangle(-2,-1)rectangle(-1,-2)rectangle(0,-1);
+  \fill[scale=16](-1,-1)rectangle(-2,-2);
+\end{tikzpicture}
+
+每个\hskip5pt\tikz[scale=0.5]{\fill(0,0)rectangle(1,1);\draw(0,1)rectangle(1,2) (1,0)rectangle(2,1);}\hskip5pt 中阴影部分占$\dfrac13$。
+\end{example}
+
+\begin{example}
+  证明：$3<\pi<4$。
+
+\begin{center}
+  \begin{tikzpicture}[scale=2]
+    \begin{scope}[shift={(0,0)}]
+      \draw(0,0)circle(1);
+      \draw(0:1)\foreach \x in {60,120,...,360} {  -- (\x:1) } --cycle;
+      \draw(0:1)--(180:1) (60:1)--(240:1) (120:1)--(300:1);
+      \node[label=below:{比周长$6<2\pi$}] at (0,-1.3) {};
+    \end{scope}
+    \begin{scope}[shift={(3,0)}]
+      \draw(0,0)circle(1);
+      \draw(-1,-1)grid(1,1);
+      \node[label=below:{比面积$\pi<4$}] at (0,-1.3) {};
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+\end{example}
+
+
+\begin{example}
+  正方形$ABCD$和直角三角形$ABE$，则$\angle AEB$的角平分线将正方形$ABCE$分为两个全等的部分。\nopagebreak
+
+  % \nopagebreak has no effect before a \begin{center} environment
+\centering
+  \begin{tikzpicture}[scale=.7,line join=round]
+    \begin{scope}[shift={(0,0)}]
+      \coordinate[label=left:$A$](A) at (0,0);
+      \coordinate[label=above:$B$](B) at (4,2);
+      \coordinate[label=right:$C$](C) at ($(B)!1!90:(A)$);
+      \coordinate[label=below:$D$](D) at ($(C)!1!90:(B)$);
+      \coordinate(E') at ($(B)!0.2!-50:(A)$);
+      \coordinate[label=above:$E$](E) at ($(B)!(A)!(E')$);
+
+      % middle of AB
+      % \coordinate[label=above right:$F$](F) at ($(A)!.5!(B)$);
+      % bisector of AEB
+      \tkzDefLine[bisector](A,E,B)\tkzGetPoint{f}
+      \tkzInterLL(A,B)(E,f)\tkzGetPoint{F}\tkzLabelPoints[above](F)
+
+      \tkzInterLL(E,F)(C,D)\tkzGetPoint{G}\tkzLabelPoints[below](G)
+      \tkzDrawPoints(A,B,C,D,E,F,G)
+
+      \tkzMarkRightAngle[color=blue](B,E,A);
+      \fill[pattern=horizontal lines,pattern color=red!30](A)--(F)--(G)--(D)--cycle;
+      \fill[pattern=vertical lines,pattern color=blue!30](F)--(G)--(C)--(B)--cycle;
+      \draw(A)--(B)--(C)--(D)--cycle;
+      \draw(A)--(E)--(B) (E)--(F)--(G);
+    \end{scope}
+
+    \begin{scope}[shift={(10,0)}]
+      \coordinate[label=left:$A$](A) at (0,0);
+      \coordinate[label=above:$B$](B) at (4,2);
+      \coordinate[label=right:$C$](C) at ($(B)!1!90:(A)$);
+      \coordinate[label=below:$D$](D) at ($(C)!1!90:(B)$);
+      \coordinate(E') at ($(B)!0.2!-50:(A)$);
+      \coordinate[label=above:$E$](E) at ($(B)!(A)!(E')$);
+
+      % middle of AB
+      % \coordinate[label=above right:$F$](F) at ($(A)!.5!(B)$);
+      % bisector of AEB
+      \tkzDefLine[bisector](A,E,B)\tkzGetPoint{f}
+      \tkzInterLL(A,B)(E,f)\tkzGetPoint{F}\tkzLabelPoints[above](F)
+
+      \tkzInterLL(E,F)(C,D)\tkzGetPoint{G}\tkzLabelPoints[below](G)
+      \tkzDrawPoints(A,B,C,D,E,F,G)
+
+      \tkzMarkRightAngle[color=blue](B,E,A);
+      \fill[pattern=horizontal lines,pattern color=red!30](A)--(F)--(G)--(D)--cycle;
+      \fill[pattern=vertical lines,pattern color=blue!30](F)--(G)--(C)--(B)--cycle;
+      \draw(A)--(B)--(C)--(D)--cycle;
+      \draw(A)--(E)--(B) (E)--(F)--(G);
+
+      \coordinate[label=left:$L$](L) at ($(E)!(D)!(A)$);
+      \coordinate[label=right:$M$](M) at ($(E)!(C)!(B)$);
+      \tkzInterLL(M,C)(L,D)\tkzGetPoint{N}\tkzLabelPoints[below](N)
+      \draw[dashed](B)--(M)--(C)--(N)--(D)--(L)--(A) (G)--(N);
+    \end{scope}
+  \end{tikzpicture}
+\end{example}
+
+\begin{example}
+  将$x^2+ax$配方，有
+  \begin{align*}
+    x^2+ax=\left(x+\frac a2\right)^2-\left(\frac a2\right)^2
+  \end{align*}
+\end{example}\nopagebreak
+\begin{center}
+  \begin{tikzpicture}[scale=1,line join=round]
+    \begin{scope}[shift={(0,0)}]
+      \draw (0,0)rectangle(3,3);
+      \draw[fill=blue!30] (0,-.5) rectangle(3,-1.5);
+      \node at (0,1.5)[left]{$x$};
+      \node at (1.5,3)[above]{$x$};
+      \node at (0,-1)[left]{$a$};
+    \end{scope}
+    
+    \begin{scope}[shift={(4,0)}]
+      \node at (0,1) {$\xlongequal{\phantom{abcd}}$};
+    \end{scope}
+    
+    \begin{scope}[shift={(5,0)}]
+      \draw (0,0)rectangle(3,3);
+      \draw[fill=blue!30] (0,-.5) rectangle(3,-1);
+      \draw[fill=blue!30] (0,-1.2) rectangle(3,-1.7);
+      \node at (0,1.5)[left]{$x$};
+      \node at (1.5,3)[above]{$x$};
+      \node at (0,-.75)[left]{$a/2$};
+      \node at (0,-1.45)[left]{$a/2$};
+    \end{scope}
+
+    \begin{scope}[shift={(9,0)}]
+      \node at (0,1) {$\xlongequal{\phantom{abcd}}$};
+    \end{scope}
+
+    \begin{scope}[shift={(10,0)}]
+      \draw (0,0)rectangle(3,3);
+      \draw[fill=blue!30] (0,0) rectangle(3,-.5);
+      \draw[fill=blue!30] (3,0) rectangle(3.5,3);
+      \draw[dashed](3,-.5)--(3.5,-.5)--(3.5,0);
+      \node at (0,1.5)[left]{$x$};
+      \node at (1.5,3)[above]{$x$};
+      \node at (0,-.25)[left]{$a/2$};
+      \node at (3.25,2.9)[above]{$a/2$};
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+
+
+\begin{example}[半角正切公式]\mbox{}\par\nopagebreak %to mandatorily make it break line
+  \centering
+    \begin{tikzpicture}[scale=.9]
+      \coordinate (A) at (-4,0);
+      \coordinate (O) at (0,0);
+      \coordinate (B) at (4,0);
+      \coordinate (C) at ($4*(.5, {sqrt(3)*.5})$);
+      \coordinate (D) at ($(A)!(C)!(B)$);
+      \tkzMarkRightAngle(B,C,A)\tkzMarkRightAngle(C,D,A)
+      \draw(O)--(A) node[midway,below]{1};
+      \draw[very thick](O)--(C) node[pos=.45,above]{1};
+      \draw[very thick](C)--(D) node[pos=.55,fill=white]{$\sin\theta$};
+      \draw[very thick](O)--(D) node[midway,below]{$\cos\theta$};
+      \draw(D)--(B) node[midway,below]{$1-\cos\theta$};
+      \draw(A)--(C)--(B);
+      \draw(B)arc(0:180:4);
+      \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--O--C};
+      \draw pic["$\frac\theta2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.7cm]{angle=O--A--C};
+      \draw pic["$\frac\theta2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.7cm]{angle=D--C--B};
+      % \draw (C)--(A)--(B)--cycle--(D);
+      \node[left] at (-4,2){$\tan\dfrac\theta2=\dfrac{\sin\theta}{1+\cos\theta}=\dfrac{1-\cos\theta}{\sin\theta}$};
+    \end{tikzpicture}
+\end{example}
+
+\begin{example}[反正切求和]\mbox{}\par\nopagebreak
+\centering
+  \begin{tikzpicture}[scale=0.7]
+    \node[left] at (-2,3) {$\atan\dfrac12+\atan\dfrac13=\dfrac\pi4$};
+    \coordinate (A) at (0,3);
+    \coordinate (B) at (6,0);
+    \coordinate (C) at (9,6);
+    \coordinate (D) at (6,3);
+    \coordinate (E) at (9,3);
+    \draw[help lines,dashed](0,0)grid[step=3](9,6);
+    \draw[very thick, line join=round](A)--(B)node[midway,sloped]{||}--(C)node[midway,sloped]{||}--cycle;
+    \draw(A)--(E)--(C) (D)--(B);
+    \draw pic["$\atan\frac12$",<->,draw=orange,angle eccentricity=2,angle radius=1.5cm]{angle=B--A--D};
+    \draw pic["$\atan\frac13$",<->,draw=orange,angle eccentricity=2,angle radius=1.5cm]{angle=D--A--C};
+    \tkzMarkRightAngle(A,B,C);
+  \end{tikzpicture}
+\end{example}
+
+\begin{example}[反正切求和]\mbox{}\par\nopagebreak
+\centering
+  \begin{tikzpicture}[scale=0.7]
+    \node[left] at (-2,3.5) {$\atan\dfrac ab+\atan\dfrac{b-a}{b+a}=\dfrac\pi4$};
+    \draw[help lines,dashed](0,0)grid(7,7);
+    \draw (2,0) node (A){} --(7,2) node (B){} --(5,7) node (C){} --(0,5)node (D){}--cycle;
+    \draw (B)--(D);
+    \draw (0,5)--(0,2)--(7,2) (2,2) node (E){} --(2,0);
+    \draw pic["$\atan\frac ab$",<->,draw=orange,angle eccentricity=2.8,angle radius=.8cm]{angle=E--B--A};
+    \draw pic["$\atan\frac {b-a}{b+a}$",<->,draw=orange,angle eccentricity=3.8,angle radius=.6cm]{angle=D--B--E};
+    \draw[|<->|] (0,-.5)--(2,-.5)node[midway,fill=white]{$a$};
+    \draw[|<->|] (2,-.5)--(7,-.5)node[midway,fill=white]{$b$};
+    \draw[|<->|] (7.5,0)--(7.5,2)node[midway,fill=white,sloped]{$a$};
+    \draw[|<->|] (-.5,2)--(-.5,5)node[midway,fill=white,sloped]{$b-a$};
+  \end{tikzpicture}
+\end{example}
+
+\begin{example}[反正切求和]\mbox{}\par\nopagebreak
+\centering
+  \begin{tikzpicture}[scale=0.7]
+    \node[left] at(-2,3) {$\atan1+\atan2+\atan3=\pi$};
+    \draw[help lines,dashed](0,0)grid(6,6);
+    \draw[very thick, line join=round](0,1)--(1,1)--(0,0)--(0,3)--(1,1)--(6,6)--(0,3);
+    % use coordinate transform to draw the arc: ([shift=(t:r)] x, y),
+    % where (x,y) is the center and (t:r) is the polar coordinate of
+    % starting point.
+    \draw([shift=(225:0.3)] 1,1) arc(225:45:0.3);
+  \end{tikzpicture}
+\end{example}
+

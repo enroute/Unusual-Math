@@ -1,0 +1,57 @@
+% Minkowski Inequality
+
+\section{Minkowski不等式}
+\label{sec:minkowski-inequality}
+
+
+\begin{theorem}[Minkowski不等式]
+  $\forall p\ge 1$以下不等式对任意$x_i,y_i\in\mathcal{R}$成立：
+  \begin{align}
+    \left(\sum_{i=1}^{n}\left|x_i+y_i\right|^p\right)^\frac{1}{p}
+    \le
+    \left(\sum_{i=1}^{n}\left|x_i\right|^p\right)^\frac{1}{p}
+    +
+    \left(\sum_{i=1}^{n}\left|y_i\right|^p\right)^\frac{1}{p}
+  \end{align}
+  当且仅当存在不同时为零的常数$\alpha,\beta$，$\alpha x_i=\beta
+  y_i$对$\forall i\in\{1,2,\cdots,n\}$都成立时等号成立。即若记
+  \begin{align*}
+    \vec{x}&\equiv\left[x_1,x_2,\cdots,x_n\right]\\
+    \vec{y}&\equiv\left[y_1,y_2,\cdots,y_n\right]
+  \end{align*}
+  则当且仅当 $\vec{x}$ 和 $\vec{y}$ 线性相关时等号成立。
+\end{theorem}
+
+Minkowski不等式与函数的凸性相关。
+
+\begin{proof}
+  当$p=1$时显然不等式成立。下面考虑$p>1$的情况。由引理\ref{lemma:convexity-of-power-function}，$|x|^p$是凸函数，$|x|^{\frac{1}{p}}$是凹函数，从而$\forall t\in(0,1)$，有
+  \begin{align*}
+    \left|x_i + y_i\right|^p &= \left|t\cdot\frac{x_i}{t} + (1-t)\cdot\frac{y_i}{1-t}\right|^p & \forall t\in (0,1)\\
+    &\le t \left|\frac{x_i}{t}\right|^p + (1-t)\left|\frac{y_i}{1-t}\right|^p \\
+    &= t^{1-p}|x_i|^p + (1-t)^{1-p}|y_i|^p
+  \end{align*}
+  求和，则有
+  \begin{align*}
+    \sum_{i=1}^{n}\left|x_i+y_i\right|^p \le
+    t^{1-p}\sum_{i=1}^{n}|x_i|^p + (1-t)^{1-p}\sum_{i=1}^{n}|y_i|^p
+  \end{align*}
+  记
+  \begin{align*}
+    \norm{X}  \equiv\left(\sum_{i=1}^{n} |x_i|^p\right)^{\frac1p},\quad
+    \norm{Y}  \equiv\left(\sum_{i=1}^{n} |y_i|^p\right)^{\frac1p},\quad
+    \norm{X+Y}\equiv\left(\sum_{i=1}^{n} |x_i+y_i|^p\right)^{\frac1p}
+  \end{align*}
+  并令$t\equiv\frac{\norm{X}}{\norm{X}+\norm{Y}}$（显然 $t\in[0,1]$ 。
+  若$t=0$或者$t=1$，则$\norm{X}=0$或者$\norm{Y}=0$，从而Minkowski等号成
+  立，所以下面只考虑$t\in(0,1)$的情况），代入则有
+  \begin{align*}
+    \norm{X + Y}^p &= \sum_{i=1}^{n}\left|x_i+y_i\right|^p\\
+    &\le t^{1-p}\sum_{i=1}^{n}|x_i|^p + (1-t)^{1-p}\sum_{i=1}^{n}|y_i|^p\\
+    &= \left(\frac{\norm{X}}{\norm{X}+\norm{Y}}\right)^{1-p} \norm{X}^p +
+      \left(\frac{\norm{Y}}{\norm{X}+\norm{Y}}\right)^{1-p} \norm{Y}^p\\
+    &=\frac{\norm{X}+\norm{Y}}{\left(\norm{X}+\norm{Y}\right)^{1-p}}\\
+    &= \left(\norm{X}+\norm{Y}\right)^{p}
+  \end{align*}
+  从而有$\norm{X+Y}\le\norm{X}+\norm{Y}$，即Minkowski不等式成立。
+\end{proof}

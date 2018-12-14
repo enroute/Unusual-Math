@@ -1,0 +1,45 @@
+\begin{tikzpicture}[scale=1]
+  \tkzDefPoint[label=below left:$A$](0,0){A}
+  \tkzDefPoint[label=below right:$B$](6,0){B}
+  \tkzDefPoint[label=above:$C$](5,5){C}
+  
+  \tkzDefCircle[in](A,B,C)\tkzGetPoint{I}\tkzGetLength{rIN}
+  \tkzDrawCircle[R](I,\rIN pt);
+  \tkzDrawSegments(A,B B,C C,A)
+  % \tkzDrawSegments[dashed](I,A I,B I,C)
+
+  % \coordinate(IA) at ($(B)!(I)!(C)$);
+  \coordinate[label=above left:$D$](IB) at ($(C)!(I)!(A)$);
+  % \coordinate(IC) at ($(A)!(I)!(B)$);
+
+  % \tkzDrawSegments[dashed](I,IA I,IB I,IC)
+  \tkzDrawSegments[dashed](I,IB)
+  % \tkzMarkRightAngle[color=blue](B,IC,I)
+  % \tkzMarkRightAngle[color=blue](C,IA,I)
+  \tkzMarkRightAngle[color=blue](A,IB,I)
+
+  % circumcircle
+  \tkzCircumCenter(A,B,C)\tkzGetPoint{G}
+  \tkzDrawCircle(G,A)
+  \tkzInterLC(G,I)(G,A)\tkzGetPoints{P}{Q}
+
+  \draw[dashed](A)--(I);
+  \draw[dashed](I)--(P);
+  \draw[dashed](I)--(Q);
+  \draw[thick](G)--(I);
+
+  \tkzInterLC(C,I)(G,A)\tkzGetPoints{}{L}
+  \tkzInterLC(L,G)(G,A)\tkzGetPoints{}{M}
+
+  \tkzLabelPoints[left](P)
+  \tkzLabelPoints[right](Q,I)
+  \tkzLabelPoints[below](L)
+  \tkzLabelPoints[below left](G)
+  \tkzLabelPoints[above](M)
+
+  \draw[dashed](C)--(L)--(M)--(A)--(L);
+
+  \foreach \p in{A,B,C,I,G,P,Q,IB,L,M}{
+    \tkzDrawPoint(\p)
+  }
+\end{tikzpicture}

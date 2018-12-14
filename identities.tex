@@ -1,0 +1,29 @@
+
+\section{恒等式}
+\label{sec:identities}
+
+\begin{theorem}[Sophie-Germain恒等式]
+  $\forall x,y$，有
+  \begin{align*}
+    x^4 + 4y^4 = (x^2 + 2xy + 2y^2)(x^2 - 2xy + 2y^2)
+  \end{align*}
+  在上式中令$y=1$，则有
+  \begin{align*}
+    x^4 + 4 = (x^2 + 2x + 2)(x^2 - 2x + 2)
+  \end{align*}
+\end{theorem}
+
+\begin{theorem}[贝祖定理，B\'ezout's identity]
+  $\forall a,b\in\mathcal{Z},\exists x,y\in\mathcal{Z}$使得
+  \begin{align*}
+    ax+by=\mathrm{gcd}(a,b)
+  \end{align*}
+  若$a,b$互质，则有$ax+by=1$。
+\end{theorem}
+
+$x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,y$不是唯一的，可以通过扩展欧几里得算法来计算得到。
+
+\begin{definition}[扩展欧几里得算法]
+  Ref. \verb|https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm|
+\end{definition}
+

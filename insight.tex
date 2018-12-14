@@ -1,0 +1,33 @@
+
+\section{洞察}
+\label{sec:insight}
+
+\begin{example}[消失的方块]证明：$31.5=32.5$。
+
+  \centering
+  \begin{tikzpicture}[scale=0.6,line join=round]
+    \begin{scope}[shift={(0,0)}]
+      \draw[very thick,pattern=north east lines, pattern color=black](1,1)--(9,1)--(9,4)--cycle;
+      \draw[very thick,pattern=dots, pattern color=red](9,1)--(14,1)--(14,3)--(11,3)--(11,2)--(9,2)--cycle;
+      \draw[very thick,pattern=bricks, pattern color=blue](14,3)--(11,3)--(11,2)--(9,2)--(9,4)--(14,4)--cycle;
+      \draw[very thick,pattern=checkerboard, pattern color=violet](9,4)--(14,4)--(14,6)--cycle;
+      % \draw[very thick](1,1)--(14,1)--(14,6)--(9,4)--cycle;
+      \draw[help lines](0,0)grid(15,7);
+    \end{scope}
+    \begin{scope}[shift={(0,-8)}]
+      \draw[very thick,xshift=5cm,yshift=2cm,pattern=north east lines, pattern color=black](1,1)--(9,1)--(9,4)--cycle;
+      \draw[very thick,pattern=dots, pattern color=red](9,1)--(14,1)--(14,3)--(11,3)--(11,2)--(9,2)--cycle;
+      \draw[very thick,xshift=-3cm,yshift=-1cm,pattern=bricks, pattern color=blue](14,3)--(11,3)--(11,2)--(9,2)--(9,4)--(14,4)--cycle;
+      \draw[very thick,xshift=-8cm,yshift=-3cm,pattern=checkerboard, pattern color=violet](9,4)--(14,4)--(14,6)--cycle;
+      \draw[help lines](0,0)grid(15,7);
+      % \draw[very thick](1,1)--(14,1)--(14,6)--(6,3)--cycle;
+    \end{scope}
+  \end{tikzpicture}
+\end{example}
+
+\begin{proof}
+  考虑阴影部分总面积，由上图，其面积为$\dfrac12\times13\times5=32.5$；由下图，其面积为$32.5-1=31.5$。而上下两图都是由相同组件组成，其面积应相同，从而有$32.5=31.5$。
+\end{proof}
+
+请指出上述证明中的错误之处。\hints 最大的“三角形”并不是真正的三角形。
+

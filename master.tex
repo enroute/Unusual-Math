@@ -1,0 +1,239 @@
+\documentclass[a4paper,12pt]{article}
+
+% comment this if don't want to show answer
+\def\withanswer{1}
+
+% For Chinese fonts
+% \usepackage{fontspec}
+% \setmainfont{SimSun}
+\usepackage[AutoFakeBold,SlantFont]{xeCJK}
+% \usepackage[SlantFont]{xeCJK}   %AutoFakeBold=true makes CJK characters in the generated PDF can't be copied
+
+\setCJKmainfont{SimSun}
+
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pstricks-add}  % For \psrotate, \psbrace
+\usepackage{epsfig}
+\usepackage{pst-grad} % For gradients
+\usepackage{pst-plot} % For axes
+\usepackage{pst-node} % For nodes
+\usepackage[space]{grffile} % For spaces in paths
+\usepackage{etoolbox} % For spaces in paths
+
+\usepackage{pst-eucl}
+
+\usepackage[english]{babel}     % For enquote
+\usepackage{csquotes} 
+
+\usepackage{colortbl}
+
+\usepackage{tikz,fp}
+% \usetikzlibrary{angles}         % for perpendicular symbols
+\usetikzlibrary{calc,intersections,patterns,angles,quotes}           % 
+
+\usepackage{tkz-euclide} % for perpendicular symbols, \tkzMarkRightAngle, \tkzDefPoint
+\usetkzobj{all}
+
+\makeatletter
+\def\calcLength(#1,#2)#3{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}%
+               {\pgfpointanchor{#2}{center}}%
+  \pgf@xa=\pgf@x%
+  \pgf@ya=\pgf@y%
+  \FPeval\@temp@a{\pgfmath@tonumber{\pgf@xa}}%
+  \FPeval\@temp@b{\pgfmath@tonumber{\pgf@ya}}%
+  \FPeval\@temp@sum{(\@temp@a*\@temp@a+\@temp@b*\@temp@b)}%
+  \FProot{\FPMathLen}{\@temp@sum}{2}%
+  \FPround\FPMathLen\FPMathLen5\relax
+  \global\expandafter\edef\csname #3\endcsname{\FPMathLen}
+}
+
+\def\drawArc(#1,#2,#3){%
+  \pgfmathanglebetweenpoints{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#2}{center}}
+  \let\StartAngle\pgfmathresult
+  \pgfmathanglebetweenpoints{\pgfpointanchor{#1}{center}}{\pgfpointanchor{#3}{center}}
+  \let\EndAngle\pgfmathresult
+  \calcLength(#1,#2){myr@dius}
+  \draw (#2) arc[start angle=\StartAngle, end angle=\EndAngle, radius=\myr@dius pt];
+}
+\makeatother
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+
+\makeatletter % For spaces in paths
+    \patchcmd\Gread@eps{\@inputcheck#1 }{\@inputcheck"#1"\relax}{}{}
+
+    % Font of theorem subtitle
+    \def\th@plain{%
+      \thm@notefont{}% same as heading font
+      \kai % body font
+    }
+    \def\th@definition{%
+      \thm@notefont{}% same as heading font
+      \bfseries \kai % body font
+    }
+\makeatother
+
+\def\answer#1{
+  \ifx\withanswer\undefined\else 提示：\par\nopagebreak #1\fi
+}
+
+\usepackage{mathtools,amsthm,amsfonts,amssymb,bm}
+\usepackage{extarrows}          % for xlongequal
+\setCJKfamilyfont{kai}{KaiTi}
+\newcommand{\kai}{\CJKfamily{kai}}
+
+% % patch \newtheoremstyle to accept \newline<other tokens>
+% \makeatletter
+% \patchcmd{\newtheoremstyle}
+%  {\def\@tempb{\newline}}
+%  {\def\@tempb{\newline}\edef\@tempa{\unexpanded\expandafter{\@car#8\@nil}}}
+%  {}{}
+% \patchcmd{\newtheoremstyle}
+%  {\def\thmheadnl{\newline}}
+%  {\def\thmheadnl{#8}}
+%  {}{}
+% \makeatother
+
+\newtheoremstyle{break}% name
+  {15pt}%      Space above, empty = `usual value'
+  {}%          Space below
+  {\kai}%     Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  %{\newline\hspace*{\parindent}}% Space after thm head: \newline = linebreak
+  {5pt plus 1pt minus 1pt}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+\theoremstyle{break}
+\newtheorem{theorem}{\kai 定理}[section]
+\newtheorem{example}[theorem]{\kai 例} % Use the same counter as theorem
+\newtheorem{property}[theorem]{\kai 性质} % Use the same counter as theorem
+\newtheorem{question}[theorem]{\kai 题} % Use the same counter as theorem
+\newtheorem{definition}[theorem]{\kai 定义} % Use the same counter as theorem
+\newtheorem{corollary}{\kai 推论}[theorem]  % Reset after every theorem
+\newtheorem{lemma}[theorem]{\kai 引理}  % Use the same counter as theorem
+% \renewcommand*{\proofname}{证明}
+\newcommand{\note}{\begingroup\bfseries\kai 注：\endgroup}
+\newcommand{\think}{\begingroup\bfseries\kai 思考：\endgroup}
+\newcommand{\hints}{\begingroup\bfseries\kai 提示：\endgroup}
+
+\newcommand{\kurschak}{K\"ursch\'ak}
+\newcommand{\term}[1]{\begingroup\bfseries\kai{#1}\endgroup}
+
+\DeclareMathOperator{\atan}{atan}
+
+% w/o using the babel package
+% \renewcommand{\figurename}{\kai 图}
+% w/ babel packge and English as language
+\addto\captionsenglish{\renewcommand{\figurename}{\kai 图}}
+
+% Change colon(:) in figure caption to period(.)
+\usepackage{caption}
+\captionsetup{labelsep=period}
+
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+\renewcommand*{\vec}[1]{\mathbf{#1}}
+\renewcommand*{\le}{\leqslant}
+\renewcommand*{\ge}{\geqslant}
+\renewcommand*\labelenumi{(\theenumi)}
+
+% Make proof environemtn skip the first line
+\makeatletter
+\renewenvironment{proof}[1][证明]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep
+    \bfseries \kai%\itshape
+    #1\@addpunct{.}]%\mbox{}\\*% new line after \proofname
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% \newcommand*{\max}[1]{\begingroup\mathrm{max}\left(#1\right)\endgroup}
+% \newcommand*{\min}[1]{\mathrm{min}\left(#1\right)}
+
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand*{\arraystretch}{1.5}
+
+\usepackage{graphicx}%\resizebox
+\graphicspath{{images/}} %Setting the graphicspath
+
+\usepackage[makeroom]{cancel} % for xcancel/cancel/bcancel etc.
+
+\usepackage{fancyvrb}           % for BVerbatim environment
+
+\usepackage{verbatim}
+\usepackage{varwidth}
+% Center verbatim environment, with the help from verbatim package
+\makeatletter
+\def\verbatim@font{\normalfont\ttfamily\kai\Large
+  \hyphenchar\font\m@ne
+  \@noligs}
+\makeatother
+\newenvironment{pcontent}{%
+  \par
+  \centering
+  \varwidth{\linewidth}%
+  \verbatim
+}{%
+  \endverbatim
+  \endvarwidth
+  \par\vskip10pt
+}
+
+\newcommand{\ptitle}[1]{\par\vskip20pt{\centering\bfseries\kai\Large{#1}\par}\nopagebreak\vskip5pt\nopagebreak}
+\newcommand{\pauthor}[1]{\par{\centering\kai【{#1}】\par}\nopagebreak\vskip10pt}
+\newcommand{\premark}[1]{\par\kai\small【注释】{#1}\par\vskip5pt}
+\newcommand{\ppreface}[1]{{\setlength{\parindent}{2em}\small\kai{#1}}\par\vskip5pt}
+
+% \par indent
+\usepackage{indentfirst}
+% parindent to 2 characters
+\setlength{\parindent}{2em}
+\setlength{\parskip}{3pt}
+
+\usepackage{ifthen}             % for \ifelsethen, \whiledo
+% \ifthenelse{CONDITION}{POSITIVE}{NEGATIVE}
+%     2 is an \ifthenelse{\isodd{2}}{ODD}{EVEN} number.
+% \whiledo{CONDITION}{LOOP CONSTRUCT}
+%     \newcounter{X}
+%     \whiledo{\value{X}<10}{\value{X},\stepcounter{X}}
+
+% 3 counters for loops
+\newcounter{X}
+\newcounter{Y}
+\newcounter{Z}
+
+\include{myconfig}
+
+% comment this when compile the whole document
+% \includeonly{proofs-without-words}
+% \includeonly{golden-ratio}
+
+\begin{document}
+
+
+\include{number-theory}
+\include{golden-ratio}
+\include{function}
+\include{monotonic-functions}
+\include{metric-space}
+\include{fixed-point}
+\include{identities}
+\include{perfect_squares}
+\include{pigeonhole}
+\include{buffalo-way}
+\include{basic-inequalities}
+\include{pythagorean_triples}
+\include{geometric-inequality}
+\include{cauchy-schwarz}
+\include{convex}
+\include{minkowski}
+\include{proofs-without-words}
+\include{insight}
+\end{document}
+

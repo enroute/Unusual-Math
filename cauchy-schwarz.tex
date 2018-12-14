@@ -1,0 +1,40 @@
+\section{Cauchy-Schwarz不等式}
+\label{sec:cauchy-schwarz-inequalities}
+
+% Cauchy-Schwarz
+\begin{theorem}[Cauchy-Schwarz Inequality]
+对 $\forall a_i, b_i\in \mathcal{R}$, $\forall n\in\mathcal{Z}^+$, 总有
+\begin{align}
+  \left(\sum_{i=1}^{n} a_ib_i\right)^2 \le \left(\sum_{i=1}^{n}a_i^2\right) \left(\sum_{i=1}^{n}b_i^2\right)
+\end{align}
+\end{theorem}
+
+\begin{proof}
+  令
+  \begin{align*}
+    S_n = \left(\sum_{i=1}^{n}a_i^2\right) \left(\sum_{i=1}^{n}b_i^2\right) - \left(\sum_{i=1}^{n} a_ib_i\right)^2
+  \end{align*}
+  则 $S_1 = a_1^2b_1^2 - (a_1b_1)^2 = 0$，且
+  \begin{align*}
+    S_{n+1} - S_n =& \phantom{-} \left(\sum_{i=1}^{n+1}a_i^2\right) \left(\sum_{i=1}^{n+1}b_i^2\right) - \left(\sum_{i=1}^{n+1} a_ib_i\right)^2 \\
+     &- \left(\sum_{i=1}^{n}a_i^2\right) \left(\sum_{i=1}^{n}b_i^2\right) + \left(\sum_{i=1}^{n} a_ib_i\right)^2\\
+  \end{align*}
+  请自行证明 $S_{n+1}\ge S_n$。从而有 $S_{n+1}\ge S_n\ge\cdots S_1 = 0$。
+\end{proof}
+
+\note 令$A\equiv\left(\sum_{i=1}^{n}a_i^2\right)$, $B\equiv\left(\sum_{i=1}^{n}b_i^2\right)$，$C\equiv\left(\sum_{i=1}^{n}b_i^2\right)$，则
+\begingroup\allowdisplaybreaks
+\begin{align*}
+  S_{n+1} - S_n &=&& (A+a_{n+1}^2)(B+b_{n+1}^2) - (C+a_{n+1}b_{n+1})^2 - AB + C^2\\
+  &=&& AB + Ab_{n+1}^2 + a_{n+1}^2B + a_{n+1}^2b_{n+1}^2 - C^2 - 2a_{n+1}b_{n+1}C - a_{n+1}^2b_{n+1}^2\\
+  &&&- AB + C^2\\
+  &=&& Ab_{n+1}^2 + a_{n+1}^2B - 2a_{n+1}b_{n+1}C\\
+  &=&& \left(\sum_{i=1}^{n}a_i^2\right) b_{n+1}^2 + \left(\sum_{i=1}^{n}b_i^2\right) a_{n+1}^2
+       - \left(\sum_{i=1}^{n}a_ib_i\right) \cdot 2a_{n+1}b_{n+1}\\
+  &=&& \sum_{i=1}^{n} \left( a_i^2b_{n+1}^2 + b_i^2a_{n+1}^2 - a_ib_i\cdot 2a_{n+1}b_{n+1} \right)\\
+  &=&& \sum_{i=1}^{n} \left( (a_ib_{n+1})^2 + (b_ia_{n+1})^2 - 2(a_ib_{n+1})(b_ia_{n+1}) \right)\\
+  &=&& \sum_{i=1}^{n} \left( (a_ib_{n+1} - b_ia_{n+1})^2 \right)\\
+  &\ge&&0
+\end{align*}
+\endgroup
+

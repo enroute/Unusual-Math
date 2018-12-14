@@ -1,0 +1,147 @@
+
+\section{勾股数}
+\label{sec:pythagorean_triples}
+
+\begin{definition}[勾股数]
+  若正整数$a,b,c$满足$a^2+b^2=c^2$，则称$a,b,c$为勾股数。
+\end{definition}
+
+勾股数也称为毕达哥拉斯三元组(Pythagorean Triples)。常见的勾股数有
+\begin{align*}
+  (3,4,5),\quad (5,12,13)
+\end{align*}
+
+\begin{property}
+  $a,b,c$是勾股数，则
+  \begin{enumerate}
+  \item 若$a,b,c$三者的最大公约数是1，则$a,b,c$两两互质。
+  \end{enumerate}
+\end{property}
+
+\begin{proof}
+  略。
+\end{proof}
+
+\begin{definition}[Primitive Pythagorean Triples]
+  勾股数$a,b,c$若两两互质，则称$a,b,c$为原始毕达哥拉斯三元组。
+\end{definition}
+
+\begin{lemma}
+  $\forall n\in\mathcal{Z}^+, 4n+2$不是完全平方数。
+\end{lemma}
+
+\begin{proof}
+  $4n+2=2(2n+1)$，而$2n+1$是奇数，即$4n+2$的因式分解中2的幂是奇数1，从而$4n+2$不可能是完全平方数。
+\end{proof}
+
+\begin{lemma}
+  若$(a,b,c)$是原始毕达哥拉斯三元组，则$a,b$必是一奇一偶。
+\end{lemma}
+
+\begin{proof}
+  首先排除$a,b$都是偶数的情况，否则$c$也是偶数，这样$(a,b,c)$不互质。再次排除$a,b$都是奇数的情况。假如$a,b$都是奇数，则$a^2\equiv b^2\equiv 1(\mod 4)$，从而$c^2\equiv 1 + 1\equiv 2(\mod 4)$不是一个完全平方数，矛盾。
+\end{proof}
+
+\begin{theorem}[Euclid's Formula]
+  对任意整数$m>n>0$，则以下三元组是Pythagorean三元组
+  \begin{align*}
+    a=m^2-n^2,\quad b=2mn,\quad c=m^2+n^2
+  \end{align*}
+\end{theorem}
+
+\begin{proof}
+  略。按定义立得。
+\end{proof}
+
+\begin{theorem}\label{th:pythagorean-triples}
+  若$(a,b,c)$是原始勾股数，且$a$是奇数，$b$是偶数，则存在两个互质且奇偶相反的整数$m>n>0$，使得
+  \begin{align*}
+    a=m^2-n^2,\quad b=2mn,\quad c=m^2+n^2
+  \end{align*}
+\end{theorem}
+
+由此定理可知，原始勾股数都可以由Euclid公式生成。
+
+\begin{proof}
+  由于$b$是偶数，$a,c$都是奇数，从而$c\pm a$都是偶数，且有
+  \begin{align*}
+    \left(\frac b2\right)^2 = \frac{c+a}2\times\frac{c-a}2
+  \end{align*}
+  
+  先证明$\dfrac{c\pm a}2$是互质的，否则存在整数$d>1$整除两数的和(等于$c$)与差(等于$a$)，从而$c$和$a$有大于1的公约数$d$，与$(a,b,c)$两两互质矛盾。从而存在$m,n\in\mathcal{Z}^+$，使得
+  \begin{align*}
+    \frac{c+a}2=m^2,\quad \frac{c-a}2=n^2
+  \end{align*}
+  由上式得到$(a,b,c)$由$m,n$的表达式，后续过程以及请自行补充完整。
+
+  关于$m,n$的奇偶性不同，首先由$m,n$互质排除两者都是偶数；若都是奇数，则由上面的表达式，$(a,b,c)$三者均为偶数，与$(a,b,c)$两两互质矛盾。从而$m,n$奇偶性不同。
+\end{proof}
+
+
+\begin{example}[1965 Putnam Exam.]
+  面积的数值是其周长数值的两倍，且边长是整数的直角三角形总共只有3个。
+\end{example}
+
+\begin{proof}
+  由定理\ref{th:pythagorean-triples}，可设满足条件的三角形边长由下式给出
+  \begin{align*}
+    a = (m^2-n^2)d,\quad b=2mnd,\quad c=(m^2+n^2)d
+  \end{align*}
+  其中$d$是三边长的最大公约数，$m,n$满足定理\ref{th:pythagorean-triples}中的条件。再由面积的数值是周长数值的两倍，从而有
+  \begin{align*}
+    \frac12 \times (m^2-n^2)d\times 2mnd & = 2\left( (m^2-n^2)d + 2mnd + (m^2+n^2)d \right)\\
+    \implies (m-n)nd & = 4
+  \end{align*}
+  由于$m-n$是奇数，从而$m-n=1$，又$n$是4的因数可取$1,2,4$，从而$m,n,d$的有以下三种组合
+  \begin{align*}
+    (2,1,4),\quad (3,2,2),\quad (5,4,1)
+  \end{align*}
+  此时对应的三角边长分别是
+  \begin{align*}
+    (12,16,20),\quad (10,24,26),\quad (9,40,41)
+  \end{align*}
+  即只有上述三种三角形。
+\end{proof}
+
+\begin{example}[1975 IMO]
+  证明单位圆上任意两点间距离是有理数的点的集合可以有无限个元素。
+\end{example}
+
+\hints 令$A=(1,0),B=(-1,0),O$是原点。考虑
+\begin{align*}
+  \mathcal{P}\equiv\{p:AP=\frac{2(m^2-n^2)}{m^2+n^2}, BP=frac{4mn}{m^2+n^2}
+\end{align*}
+其中$m,n$满足定理\ref{th:pythagorean-triples}，求$\mathcal{P}$中任意两点距离。
+
+\begin{example}[Wiadom. Mat.(1955/56), pp.194-5, Polish]
+  求$3^x+4^y=5^z$的所有正整数解。
+\end{example}
+
+\begin{proof}
+  首先证明$z$是偶数。考虑模3的余数，有
+  \begin{align*}
+    1 \equiv 0 + 1^y \equiv 3^x + 4^y \equiv 5^z \equiv (-1)^z \tag*{$\pmod 3$}
+  \end{align*}
+  从而$z$必须是偶数，设$z=2w$，其中$w\in\mathcal{Z}^+$。从而有
+  \begin{align*}
+    3^x = 5^{2w} - 4^y = \left(5^w\right)^2 - \left(2^y\right)^2 = \left(5^w + 2^y\right)\left(5^w - 2^y\right)
+  \end{align*}
+  由于$(5^w + 2^y) + (5^w - 2^y) = 2\times 5^w$不能被3整除，从而$5^w + 2^y$和$5^w - 2^y$中有一个不能被3整除，再由上式，可知
+  \begin{align*}
+    5^w-2^y =1,\quad 5^w+2^y =3^x
+  \end{align*}
+  上式对3取模，有
+  \begin{align*}
+    (-1)^w - (-1)^y &= 1 \tag*{$\pmod 3$}\\
+    (-1)^w + (-1)^y &= 0 \tag*{$\pmod 3$}\\
+  \end{align*}
+  从而$w$是奇数，$y$是偶数（请自行考虑）。若$y>2$，则
+  \begin{align*}
+     5^w\equiv 5^w+2^y \equiv 3^x \equiv 1\text{或者}3 \tag*{$\pmod 8$}
+  \end{align*}
+  又$w$是奇数，从而存在非负整数$u$，使得$w=2u + 1$，从而有
+  \begin{align*}
+    5^w \equiv 5^{2u + 1} \equiv 5\times 25^u \equiv 5\times (24 + 1)^u \equiv 5 \tag*{$\pmod 8$}
+  \end{align*}
+  两个结果矛盾，从而$y=2$。而由$5^w-2^y=1$，有$w=1$，从而$z=2w=2$，$x=2$。
+\end{proof}

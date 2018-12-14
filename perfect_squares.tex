@@ -1,0 +1,9 @@
+
+\section{完全平方数}
+\label{sec:perfect-squares}
+
+\begin{example}[1953 \kurschak]
+  $\forall n\in\mathcal{Z}^+$，若正整数$d$整除$2n^2$，则$n^2+d$不是完全平方数。
+\end{example}
+
+\hints 反证。令$d=2n^2/k$，若$n^2+d=n^2+2n^2/k=m^2$，则$(mk)^2=n^2(k^2+2k)$，从而$k^2+2k$也是一个完全平方数。然而$k^2<k^2+2k<k^2+2k+1=(k+1)^2$，即$k^2+2k$位于两个相邻的完全平方数之间，从而不能是完全平方数，矛盾。

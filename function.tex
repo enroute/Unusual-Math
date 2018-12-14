@@ -1,0 +1,32 @@
+
+\section{函数}
+\label{sec:function}
+
+\begin{definition}[对合，Involution]
+  一个函数若存在反函数且其反函数为其本身，则称此函数为对合或对合函数。
+\end{definition}
+
+\begin{example}
+  以下三个都是对合函数的例子：
+  \begin{align*}
+    f(x)=x,\quad g(x)=\frac1x,\quad h(x)=\frac{x}{x-1}
+  \end{align*}
+\end{example}
+
+\begin{example}
+  存在无限个对合函数。
+\end{example}
+\begin{proof}
+  显然，一个函数是对合函数$\iff$其在笛卡尔坐标下的曲线关于直线$y=x$对称，这样的曲线是可以无限地构造出来。比如任意非零实数$a$，$f(x)=\frac{a}{x}$都是对合函数。或者，利用下面的定理构造。
+\end{proof}
+
+\begin{theorem}
+  若$f$是对合函数，$g$有反函数$\bar g$，则$h\equiv g\circ f\circ\bar g$是对合函数。
+\end{theorem}
+\begin{proof}
+  任意定义域内$x$，有
+  \begin{align*}
+    h(x)&= g(f(\bar g(x)))\\
+    h(h(x))&=g(f(\underline{\bar g( g}(f(\bar g(x))) ))) = g(\underline{f(f}(\bar g(x)))) = g(\bar g(x)) = x \qedhere
+  \end{align*}
+\end{proof}
