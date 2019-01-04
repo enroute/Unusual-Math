@@ -1,0 +1,125 @@
+
+\chapter{无穷级数}
+\label{chap:inifinite-series}
+
+\begin{example}[等比数列]
+  求无穷等比数列的和，其中比例系数$q<1$：
+  \begin{align*}
+    S=a + aq + aq^2 + aq^3 + \cdots
+  \end{align*}
+\end{example}
+\begin{proof}[解]
+  两边同乘以$q$，有
+  \begin{eqnarray*}
+            & qS=& aq + aq^2 + aq^3 + aq^4 + \cdots\\
+    \implies& qS=& S - a\\
+    \implies&  S=& \frac{a}{1-q}
+  \end{eqnarray*}
+  关于无穷级数的一个技巧在于乘以其个数后找到与原数的关系。
+\end{proof}
+
+\begin{example}[$\zeta$函数]
+  $\zeta$函数是按以下无穷级数定义的函数
+  \begin{align}
+    \zeta(x)\equiv \frac1{1^x} + \frac1{2^x} + \frac1{3^x} + \cdots
+  \end{align}
+  当$x=1$时，$\zeta(1)$就是调和函数。证明当$x\ge2$时，$\zeta$函数是收敛的。
+\end{example}
+\begin{proof}
+  显然$\zeta(x)$在$x>1$时是严格单调递减正函数，从而只需考虑$\zeta(2)$的收敛性。由
+  \begin{align*}
+    \frac1{k^2} \le \frac1{k(k-1)},\quad\forall k>1
+  \end{align*}
+  从而有$\zeta(2)$的前$n$项和为
+  \begin{align*}
+    \zeta(2)_n&=\frac1{1^2} + \frac1{2^2} + \frac1{3^2} + \cdots + \frac1{n^2}\\
+            &\le \frac1{1^2} + \frac1{2\times(2-1)} + \frac1{3\times(3-1)} +\frac1{4\times(4-1)}+ \cdots + \frac1{n\times(n-1)}\\
+            &= 1 + \left(1 - \frac12\right) + \left(\frac12 - \frac13\right) + \cdots + \left(\frac1{n-1}-\frac1n\right)\\
+            &= 2 - \frac1n
+  \end{align*}
+  令$n\to+\infty$，有$\zeta(2)\le2$。从而$\zeta(2)$有上界，收敛。
+\end{proof}
+
+\begin{example}
+  求下列级数的和：
+  \begin{align*}
+    q + 2q^2 + 3q^3 + 4q^4 + \cdots + nq^n
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  记其和为$S_n$，则
+  \begin{align*}
+    qS_n = q^2 + 2q^3 + 3q^4 + 4q^5 + \cdots + nq^{n+1}
+  \end{align*}
+  与原式相减，则有
+  \begin{align*}
+    S_n - qS_n = \underline{q + q^2 + q^3 + \cdots + q^n} - nq^{n+1}
+  \end{align*}
+  去掉首尾两项（下划线部分）后是等比级数，应用等比数列求和公式并化简可得。
+\end{proof}
+
+\begin{example}
+  求和
+  \begin{align*}
+    \dfrac1{1\times2\times3} + \dfrac1{2\times3\times4} + \dfrac1{3\times4\times5} + \cdots + \dfrac1{n\times(n+1)\times(n+2)}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  利用下式拆项
+  \begin{align*}
+    \frac1{n(n+1)(n+2)} = \frac12 \left(\frac1{n(n+1)} - \frac1{(n+1)(n+2)}\right)&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}[推广]
+  是否有简单方法对下式求和
+  \begin{align*}
+    S_{n,k}=\sum_{i=1}^{n} \frac1{\prod_{j=i}^{i+k-1} j}
+  \end{align*}
+  如
+  \begin{align*}
+    S_{n,4} = \sum_{i=1}^{n}\frac1{i(i+1)(i+2)(i+3)}
+  \end{align*}
+\end{example}
+
+\begin{example}
+  对下式求和：
+  \begin{align*}
+    1\times2\times3 + 2\times3\times4 + 3\times4\times5 + \cdots + n(n+1)(n+2)
+  \end{align*}
+  并推广。
+\end{example}
+
+\begin{example}
+  计算可知$\left\lfloor\sqrt{44}\right\rfloor=6$，$\left\lfloor\sqrt{4444}\right\rfloor=66$，其中$\left\lfloor x\right\rfloor$是指对$x$向下取整。请推广。
+\end{example}
+\begin{proof}[解]
+  记
+  \begin{align*}
+    S_1&=44\\
+    S_2&=4444=100S_1+44\\
+    S_3&=444444=100S_2+44\\
+    \multicolumn{2}{c}{$\cdots$}\\
+    S_n&=100S_{n-1}+44
+  \end{align*}
+  其中$6<\sqrt{S_1}<7$，假设对任意$n\le k$，有
+  \begin{align*}
+    10*b_n+6<S_n<10*b_n+7
+  \end{align*}
+  其中$b_n=6*10^0+6*10+6*10^2+\cdots+6*10^n$，
+\end{proof}
+
+\begin{example}
+  求和$1\times 1!+2\times 2! + \cdots + n\times n!.$
+\end{example}
+\begin{proof}[解]
+  记其和为$S_n$，即
+  \begin{align*}
+    S_n&=1\times 1!+2\times 2! + \cdots + n\times n!
+  \end{align*}
+  则
+  \begin{align*}
+    S_n - S_{n-1} = n\times n!
+  \end{align*}
+
+\end{proof}

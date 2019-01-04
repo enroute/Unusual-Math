@@ -1,0 +1,209 @@
+
+\chapter{平面几何五大模型}
+\label{chap:five-models-in-geometry}
+
+% \subsection{等积模型}
+% \label{sec:same-volumne-model}
+
+\begin{theorem}
+  两个三角形若等底等高，则其面积相等。
+\end{theorem}
+
+此结论由三角形面积公式显然可得。
+
+\begin{definition}[共角三角形]
+  两三角形若有一个角相等或互补，则称这两个三角形为共同三角形。
+\end{definition}
+
+\begin{theorem}[共角定理，鸟头定理]
+  共角三角形的面积比等于相等或互补的角的两夹边的乘积比。
+\end{theorem}
+\begin{proof}
+  由三角形的另一面积公式$S=\dfrac12ab\sin C$，结论显然成立。
+\end{proof}
+
+\begin{example}
+  如图，其中线段长度如标示，求阴影部分与非阴影部分的面积比。
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \begin{scope}[shift={(0,0)}]
+      \coordinate (A) at (2,2);
+      \coordinate (B) at (0,0);
+      \coordinate (C) at (3,0);
+      \coordinate (D) at ($.75*(B) + .25*(A)$);
+      \coordinate (E) at ($2/3*(A) + 1/3*(C)$);
+      \draw(E)--(D)
+              --(B)node[pos=.15,left]{$1$}
+              --(C)
+              --(E)node[pos=.65,right]{$2$}
+              --(A)node[pos=.65,right]{$1$}
+              --(D)node[pos=.35,left]{$3$};
+      \fill[pattern=north west lines,pattern color=blue!30](A)--(D)--(E)--cycle;
+    \end{scope}
+  \end{tikzpicture}
+\end{example}
+\begin{proof}[解]
+  由共角定理，阴影部分与大三角形面积比为
+  \begin{align*}
+    \frac{3\times 1}{(3+1)\times(1+2)}=\frac{3}{3\times4}=\frac14
+  \end{align*}
+  从而在大三角形中，阴影部分面积占$\dfrac14$，非阴影部分点$\dfrac34$，阴影与非阴影面积之比为$1:3$。
+\end{proof}
+
+\begin{question}
+  以下图形的阴影与非阴影面积之间的比例关系同样可应用鸟头定理，请自行思考。
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \begin{scope}[shift={(0,0)}]
+      \coordinate(A) at (2,2);
+      \coordinate(B) at (0,0);
+      \coordinate(C) at (3,0);
+      \coordinate(D) at ($.4*(C)+.6*(A)$);
+      \coordinate(E) at ($1.4*(A)$);
+      \draw[pattern=north west lines,pattern color=blue!30](A)--(D)--(E)--cycle;
+      \draw(D)--(C)--(B)--(A);
+    \end{scope}
+
+    \begin{scope}[shift={(5,0)}]
+      \coordinate(A) at (2,2);
+      \coordinate(B) at (0,0);
+      \coordinate(C) at (3,0);
+      \coordinate(D) at ($1.6*(C)-.6*(A)$);
+      \coordinate(E) at ($.4*(A)$);
+      \draw[pattern=north west lines,pattern color=blue!30](A)--(D)--(E)--cycle;
+      \draw(A)--(C)--(B)--(E);
+    \end{scope}
+
+    \begin{scope}[shift={(8,0)}]
+      
+    \end{scope}
+  \end{tikzpicture}
+\end{question}
+
+
+\begin{theorem}[蝴蝶定理]
+  如图，任意凸四边形的对角线将四边形分成$4$个小三角形，则其面积$S_1,S_2,S_3,S_4$满足以下关系
+  \begin{align*}
+    S_1S_3=S_2S_4
+  \end{align*}
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate(A)at(0,0);
+    \coordinate(B)at(4,0);
+    \coordinate(C)at(3,2.5);
+    \coordinate(D)at(1,3);
+    \draw(A)--(B)--(C)--(D)--(A)--(C) (B)--(D);
+    \tkzInterLL(A,C)(B,D)\tkzGetPoint{O}
+    \fill[pattern=north west lines,pattern color=blue!30](A)--(O)--(B)--cycle;
+    \fill[pattern=north west lines,pattern color=blue!30](C)--(O)--(D)--cycle;
+    \node at ($1/3*(D)+1/3*(A)+1/3*(O)$) {$S_2$};
+    \node at ($1/3*(A)+1/3*(B)+1/3*(O)$) {$S_3$};
+    \node at ($1/3*(B)+1/3*(C)+1/3*(O)$) {$S_4$};
+    \node at ($1/3*(C)+1/3*(D)+1/3*(O)$) {$S_1$};
+  \end{tikzpicture}
+\end{theorem}
+\begin{proof}
+  找同底或等高关系，可得$\dfrac{S_1}{S_2}=\dfrac{S_4}{S_3}$，变换一下即得证。
+\end{proof}
+
+\begin{example}[梯形中的蝴蝶定理]
+  如图，梯形中的上下底边长分别为$a$和$b$，则对角线分成的$4$个小三角形的面积有如下关系：
+  \begin{align*}
+    S_1:S_2:S_3:S_4=a^2:ab:b^2:ab
+  \end{align*}
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate(A)at(0,0);
+    \coordinate(B)at(5,0);
+    \coordinate(C)at(4,3);
+    \coordinate(D)at(2,3);
+    \draw(A)--(B) node[midway,below]{$b$}--(C)--(D) node[midway,above]{$a$}--(A)--(C) (B)--(D);
+    \tkzInterLL(A,C)(B,D)\tkzGetPoint{O}
+    \fill[pattern=north west lines,pattern color=blue!30](A)--(O)--(B)--cycle;
+    \fill[pattern=north west lines,pattern color=blue!30](C)--(O)--(D)--cycle;
+    \node at ($1/3*(D)+1/3*(A)+1/3*(O)$) {$S_2$};
+    \node at ($1/3*(A)+1/3*(B)+1/3*(O)$) {$S_3$};
+    \node at ($1/3*(B)+1/3*(C)+1/3*(O)$) {$S_4$};
+    \node at ($1/3*(C)+1/3*(D)+1/3*(O)$) {$S_1$};
+  \end{tikzpicture}
+\end{example}
+\begin{proof}
+  首先由三角形相似性，有$S_1:S_3=a^2:b^2$。其次$S_2+S_3$与$S_4+S_3$同底等高从而面积相等，也就是$S_2=S_4$。再由蝴蝶定理，并令$S_1=a^2$，从而有$S_3=b^2$，并且
+  \begin{align*}
+    S_1\cdot S_3=S_2\cdot S_4\implies a^2 \cdot b^2 = S_2^2\implies S_2=ab&\qedhere
+  \end{align*}
+\end{proof}
+
+
+\begin{theorem}[燕尾定理]
+  如图，$D,E,F$分别是三角形$ABC$三边上一点，且$AD$、$BE$与$CF$有共同的交点$O$，则
+  \begin{align*}
+    S_{\triangle ABO}:S_{\triangle ACO} = S_{\triangle OBD}:S_{\triangle OCD} = BD:CD
+  \end{align*}
+  其余三角形有类似结论。
+  
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \begin{scope}[shift={(0,0)}]
+      \coordinate(A)at(1,3);
+      \coordinate(B)at(0,0);
+      \coordinate(C)at(4,0);
+      \coordinate(O)at(1.5,1.5);
+      \tkzInterLL(A,O)(B,C)\tkzGetPoint{D}
+      \tkzInterLL(B,O)(C,A)\tkzGetPoint{E}
+      \tkzInterLL(C,O)(A,B)\tkzGetPoint{F}
+      \fill[color=blue!30](A)--(B)--(O)--(C)--(A);
+      \draw(A)--(B)--(C)--cycle (A)--(D) (B)--(E) (C)--(F);
+      \tkzLabelPoints[above](A)
+      \tkzLabelPoints[below left](B)
+      \tkzLabelPoints[below right](C)
+      \tkzLabelPoints[below](D)
+      \tkzLabelPoints[right](E)
+      \tkzLabelPoints[left](F)
+      \node at($(O) + (-.1,-.4)$) {$O$};
+    \end{scope}
+
+    \begin{scope}[shift={(7,0)}]
+      \coordinate(A)at(1,3);
+      \coordinate(B)at(0,0);
+      \coordinate(C)at(4,0);
+      \coordinate(O)at(1.5,1.5);
+      \tkzInterLL(A,O)(B,C)\tkzGetPoint{D}
+      \tkzInterLL(B,O)(C,A)\tkzGetPoint{E}
+      \tkzInterLL(C,O)(A,B)\tkzGetPoint{F}
+      \fill[pattern=north west lines,pattern color=blue!30](A)--(B)--(O);
+      \fill[pattern=north east lines,pattern color=red!30](A)--(C)--(O);
+      \draw(A)--(B)--(C)--cycle (A)--(D) (B)--(O) (C)--(O);
+      \tkzLabelPoints[above](A)
+      \tkzLabelPoints[below left](B)
+      \tkzLabelPoints[below right](C)
+      \tkzLabelPoints[below](D)
+      % \tkzLabelPoints[right](E)
+      % \tkzLabelPoints[left](F)
+      \node at($(O) + (-.1,-.4)$) {$O$};
+    \end{scope}
+  \end{tikzpicture}
+\end{theorem}
+\begin{proof}[说明]
+  如第二图的最小模型，若只考虑一个燕尾，可在$AD$上随意取点$O$即有上述结论，即无需知道$E,F$两点。
+\end{proof}
+
+\begin{example}
+  在燕尾定理的图中，证明
+  \begin{align*}
+    \frac{BD}{DC}\times\frac{CE}{EA}\times\frac{AF}{FB}=1
+  \end{align*}
+\end{example}
+\begin{proof}
+  由燕尾定理，有
+  \begin{align*}
+    S_{\triangle ABO}:S_{\triangle ACO} &= BD:DC\\
+    S_{\triangle ACO}:S_{\triangle CBO} &= AF:FB\\
+    S_{\triangle CBO}:S_{\triangle ABO} &= CE:EA
+  \end{align*}
+  三式相乘可得。
+\end{proof}

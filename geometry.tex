@@ -1,0 +1,256 @@
+
+\chapter{几何}
+\label{chap:geometry}
+
+\begin{example}
+  有6个棱长是$3\times4\times5$的相同长方体。现在要把它们的一些面染成红色，要求其中一个染一面，一个染两面，一个染三面，一个染四面，一个染五面，一个染六面。染完后将6个长方体都切成$1\times1\times1$的正方体，问如何染色才能使切出来的正方体中只有一面是红色的个数最多？
+\end{example}
+\begin{proof}[提示]
+  6个正方体分别考虑，使其染完后切成的正方体中含单面红色的最多。
+  \begin{enumerate}
+  \item 染6面红色的长方体，只有一个染色方案，其中切完后，只有一面是红色的小正方体共有$(2+3+6)\times2=22$个(阴影部分)。
+
+    \begin{center}
+      % \tdplotsetmaincoords{70}{120}
+      \begin{tikzpicture}[scale=.5,
+        % tdplot_main_coords,
+        fill red/.style={fill=red, fill opacity=.1},
+        slash lines/.style={pattern=north west lines, pattern color=black}]
+        \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+        \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+        \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+        \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+        \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+        \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+        \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+        \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+        \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5);
+      \end{tikzpicture}
+    \end{center}
+    
+  \item 只染一个面时，如下图有三种染法。其中第三种染法使得切成小正方体后只有一面是红色的小正方体的数量最多，为$4\times5=20$个。
+
+    \begin{center}
+      % \tdplotsetmaincoords{70}{120}
+      \begin{tikzpicture}[scale=.5,
+        % tdplot_main_coords,
+        fill red/.style={fill=red, fill opacity=.1},
+        slash lines/.style={pattern=north west lines, pattern color=black}]
+        \begin{scope}[shift={(0,0)}]
+          \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4,slash lines](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          % \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          % \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          % \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          % \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){$3\times5=15$};
+        \end{scope}
+
+        \begin{scope}[shift={(7,0)}]
+          % \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          % \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5,slash lines](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          % \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          % \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){$3\times4=12$};
+        \end{scope}
+
+        \begin{scope}[shift={(14,0)}]
+          % \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          % \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          % \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          % \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3,slash lines](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){$4\times5=20$};
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+
+
+  \item 只染两个面时，有如下图三种相邻的染法。其中第三种染法使得切成小正方体后只有一面是红色的小正方体的数量最多，为$5\times\left((4-1)+(3-1)\right)=25$个。
+
+    \begin{center}
+      % \tdplotsetmaincoords{70}{120}
+      \begin{tikzpicture}[scale=.5,
+        % tdplot_main_coords,
+        fill red/.style={fill=red, fill opacity=.1},
+        slash lines/.style={pattern=north west lines, pattern color=black}]
+        \begin{scope}[shift={(0,0)}]
+          \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4,slash lines](0,0)rectangle(4,3);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5,slash lines](0,0)rectangle(3,3);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          % \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          % \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){$3\times7=21$};
+        \end{scope}
+
+        \begin{scope}[shift={(7,0)}]
+          % \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          % \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5,slash lines](0,0)rectangle(4,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3,slash lines](0,0)rectangle(4,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){$4\times6=24$};;
+        \end{scope}
+
+        \begin{scope}[shift={(14,0)}]
+          \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4,slash lines](0,0)rectangle(5,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          % \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          % \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3,slash lines](0,0)rectangle(3,5);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){$5\times5=25$};;
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+
+    还有三种不相邻的染法。由只染一面的结论可知，染两面$5\times4$的两个不相邻面时，切成的小方块只有一面是红色的数量最多，为$5\times4\times2=40$个。
+
+    \begin{center}
+      % \tdplotsetmaincoords{70}{120}
+      \begin{tikzpicture}[scale=.5,
+        % tdplot_main_coords,
+        fill red/.style={fill=red, fill opacity=.1},
+        slash lines/.style={pattern=north west lines, pattern color=black}]
+        \begin{scope}[shift={(0,0)}]
+          \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4,slash lines](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+          \draw[canvas is xy plane at z=3,->](-3,2.5)--(-.5,2.5) node[midway,above]{左边};
+
+          % \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          % \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          % \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          % \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5);
+        \end{scope}
+
+        \begin{scope}[shift={(7,0)}]
+          % \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          % \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5,slash lines](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+          \draw[canvas is xy plane at z=3,->](2,-3)--(2,-.5) node[midway,right]{底面};
+
+          % \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          % \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5);
+        \end{scope}
+
+        \begin{scope}[shift={(14,0)}]
+          % \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          % \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          % \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          % \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3,slash lines](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5);
+          \draw[canvas is yz plane at x=4,->](2.5,-3)--(2.5,-.5)node[pos=0,right]{背面};
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+    
+  \item 染五面红色只有三种染法（相当于取哪一面不染，与染一面的类似）。
+
+    \begin{center}
+      % \tdplotsetmaincoords{70}{120}
+      \begin{tikzpicture}[scale=.5,
+        % tdplot_main_coords,
+        fill red/.style={fill=red, fill opacity=.1},
+        slash lines/.style={pattern=north west lines, pattern color=black}]
+        \begin{scope}[shift={(0,0)}]
+          \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,3);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,3);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          % \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          % \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){只有前面不染};
+        \end{scope}
+
+        \begin{scope}[shift={(7,0)}]
+          % \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          % \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(4,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(4,4);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){只有右面不染};;
+        \end{scope}
+
+        \begin{scope}[shift={(14,0)}]
+          \fill[canvas is yz plane at x=4,fill red   ](0,0)rectangle(5,3);
+          \draw[canvas is yz plane at x=4,slash lines](1,1)rectangle(5,2);
+          \draw[canvas is yz plane at x=4            ](0,0)grid     (5,3);
+
+          % \fill[canvas is xz plane at y=5,fill red   ](0,0)rectangle(4,3);
+          % \draw[canvas is xz plane at y=5,slash lines](1,1)rectangle(3,2);
+          \draw[canvas is xz plane at y=5            ](0,0)grid     (4,3);
+
+          \fill[canvas is xy plane at z=3,fill red   ](0,0)rectangle(4,5);
+          \draw[canvas is xy plane at z=3,slash lines](1,1)rectangle(3,5);
+          \draw[canvas is xy plane at z=3            ](0,0)grid     (4,5) node at(2,-1){只有上面不染};;
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+
+    第一种，$4\times2(\text{上面加下面})+6\times2(\text{左面加右面})+6(\text{背面})=26$。
+
+    第二种，$3\times2(\text{上面加下面})+9\times2(\text{前面加后面})+3(\text{左面})=27$。
+
+    第三种，$8\times2(\text{前面加后面})+4\times2(\text{左面加右面})+2(\text{底面})=26$。
+
+  \item 染四面红色只有六种染法（相当于取哪两面不染，与染两面的类似）。
+  \item 染三面红色时最麻烦，染色方案最多。请自行考虑。
+  \end{enumerate}
+
+  六个长方体都讨论完，结论自然就出来了。
+\end{proof}

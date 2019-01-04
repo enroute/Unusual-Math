@@ -1,7 +1,29 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt,book]{memoir}
 
 % comment this if don't want to show answer
 \def\withanswer{1}
+
+%%% check mark and x mark
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+% \newcommand{\xmark}{\ding{55}}%
+\newcommand{\xmark}{\times}
+
+\newcommand*\numcircled[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {#1}}}}
+
+
+\usepackage[xetex,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=false,
+            pdfborder={0 0 1},
+            citecolor=blue,
+            linkcolor=red,
+            anchorcolor=green,
+            urlcolor=blue,
+            breaklinks=true,
+            naturalnames  %与algorithm2e宏包协调
+            ]{hyperref}
 
 % For Chinese fonts
 % \usepackage{fontspec}
@@ -11,6 +33,8 @@
 
 \setCJKmainfont{SimSun}
 
+\usepackage{multirow}
+\usepackage{ulem}               % Fro \sout
 \usepackage[usenames,dvipsnames]{pstricks}
 \usepackage{pstricks-add}  % For \psrotate, \psbrace
 \usepackage{epsfig}
@@ -26,10 +50,13 @@
 \usepackage{csquotes} 
 
 \usepackage{colortbl}
+\usepackage{booktabs}       % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}
 
 \usepackage{tikz,fp}
 % \usetikzlibrary{angles}         % for perpendicular symbols
-\usetikzlibrary{calc,intersections,patterns,angles,quotes}           % 
+\usetikzlibrary{calc,intersections,patterns,angles,quotes}           %
+\usepackage{tikz-3dplot}
+\usetikzlibrary{3d}
 
 \usepackage{tkz-euclide} % for perpendicular symbols, \tkzMarkRightAngle, \tkzDefPoint
 \usetkzobj{all}
@@ -56,6 +83,10 @@
   \calcLength(#1,#2){myr@dius}
   \draw (#2) arc[start angle=\StartAngle, end angle=\EndAngle, radius=\myr@dius pt];
 }
+
+% tikz command to draw arc with center
+\def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+{ \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
 \makeatother
 
 \usepackage{pgfplots}
@@ -81,8 +112,37 @@
 
 \usepackage{mathtools,amsthm,amsfonts,amssymb,bm}
 \usepackage{extarrows}          % for xlongequal
+% use `fc-list|grep -i kai' to get installed font list
 \setCJKfamilyfont{kai}{KaiTi}
+\setCJKmonofont{NSimSun}
 \newcommand{\kai}{\CJKfamily{kai}}
+
+%% chapter style
+% \usepackage{titlesec, blindtext, color}
+% \definecolor{gray75}{gray}{0.75}
+% \newcommand{\hsp}{\hspace{20pt}}
+% \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+\makechapterstyle{box}{
+  \renewcommand*{\printchaptername}{}
+  \renewcommand*{\chapnumfont}{\normalfont\sffamily\huge\bfseries}
+  \renewcommand*{\printchapternum}{
+    \flushright
+    \begin{tikzpicture}
+      \draw[fill,color=black!30] (0,0) rectangle (2cm,2cm);
+      \draw[color=white] (1cm,1cm) node { \chapnumfont\thechapter };
+    \end{tikzpicture}
+  }
+  \renewcommand*{\chaptitlefont}{\normalfont\sffamily\Huge\bfseries}
+  \renewcommand*{\printchaptertitle}[1]{\flushright\chaptitlefont##1}
+}
+\chapterstyle{box}
+%% This won't work with the `babel' package
+% \renewcommand\chaptername{第~\thechapter~章}
+%% We have to use the following fix
+\addto\captionsenglish{%
+  \renewcommand\chaptername{第~\thechapter~章}
+  \renewcommand\contentsname{目~~~~录}
+}
 
 % % patch \newtheoremstyle to accept \newline<other tokens>
 % \makeatletter
@@ -156,6 +216,13 @@
 % \newcommand*{\max}[1]{\begingroup\mathrm{max}\left(#1\right)\endgroup}
 % \newcommand*{\min}[1]{\mathrm{min}\left(#1\right)}
 
+\usepackage{enumitem}
+% \setlist{nolistsep}
+% \setitemize{labelindent=\parindent,leftmargin=*,align=left,itemindent=2em,noitemsep}%,leftmargin=*,topsep=2pt,partopsep=0pt}
+\setitemize{leftmargin=0em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.3em,align=left}
+\setenumerate{leftmargin=0em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.5em,align=left}
+
+
 \renewcommand{\baselinestretch}{1.1}
 \renewcommand*{\arraystretch}{1.5}
 
@@ -208,18 +275,43 @@
 \newcounter{Y}
 \newcounter{Z}
 
-\include{myconfig}
+% \include{myconfig}
+
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
+% \newcommand{\dz}{\mathrm{d}z}
+
 
 % comment this when compile the whole document
 % \includeonly{proofs-without-words}
 % \includeonly{golden-ratio}
+% \includeonly{area}
+% \includeonly{five-models}
+% \includeonly{logic}
+% \includeonly{geometry}
 
 \begin{document}
 
+\frontmatter
+\include{cover}
 
+%% Remvoe the self reference of tableofcontents
+\tableofcontents*
+% \begin{KeepFromToc}
+%   \tableofcontents
+% \end{KeepFromToc}
+
+\mainmatter
+\include{introduction}
 \include{number-theory}
 \include{golden-ratio}
+\include{induction}
+\include{area}
+\include{quadratic-equation}
 \include{function}
+\include{symetric}
+\include{extreme}
+\include{infinite-series}
 \include{monotonic-functions}
 \include{metric-space}
 \include{fixed-point}
@@ -229,11 +321,16 @@
 \include{buffalo-way}
 \include{basic-inequalities}
 \include{pythagorean_triples}
+\include{five-models}
+\include{geometry}
 \include{geometric-inequality}
 \include{cauchy-schwarz}
 \include{convex}
 \include{minkowski}
 \include{proofs-without-words}
 \include{insight}
+\include{fun}
+\include{methods}
+\include{logic}
 \end{document}
 

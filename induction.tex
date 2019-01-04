@@ -1,0 +1,50 @@
+
+\chapter{归纳}
+\label{chap:induction}
+
+\begin{definition}
+  一个命题，若满足以下条件：
+  \begin{enumerate}
+  \item 存在非负整数$k_0$，命题在$n=k_0$时成立；
+  \item 假设命题在$n\le k$时成立可以推出命题在$n=k+1$时成立。
+  \end{enumerate}
+  则该命题对任意整数$n\ge k_0$都成立。此证明方法称为数学归纳法。
+\end{definition}
+
+\begin{example}[求和]
+  \begin{align*}
+    \frac1{1\times2}+\frac1{2\times3}+\frac1{3\times4}+\cdots+\frac1{n\times (n+1)}
+  \end{align*}
+\end{example}
+
+可以利用拆项，由$\dfrac1{k\times (k+1)}=\dfrac1k-\dfrac1{k+1}$，从而有
+\begin{align*}
+  &\frac1{1\times2}+\frac1{2\times3}+\frac1{3\times4}+\cdots+\frac1{(n-1)\times n}\\
+  =&\left(\frac11-\frac13\right) + \left(\frac13-\frac14\right) + \cdots + \left(\frac1n-\frac1{n+1}\right)\\
+  =&\frac11-\frac1{n+1}\\
+  =&\frac{n}{n+1}
+\end{align*}
+
+若观察不到拆项的规律，可以考虑一下数学归纳法。记当$n=k$时的和为$S_k$，则
+\begin{enumerate}
+\item 当$n=1$时，有$S_1=\dfrac12$；
+\item 当$n=2$时，有$S_2=\dfrac23$；
+\item 当$n=3$时，有$S_3=\dfrac34$；
+\item $\cdots$
+\end{enumerate}
+猜测，$\forall n$，有$S_n=\dfrac{n}{n+1}$。
+\begin{proof}
+  当$n=1$时，显然成立。
+
+  设当$n\le k$时成立，考虑$n=k+1$的情况。
+  \begin{align*}
+    S_{k+1}&=S_k + \frac1{(k+1)\times(k+2)}\\
+           &=\frac{k}{k+1}+\frac1{(k+1)\times(k+2)}\\
+           &=\frac{k(k+2)+1}{(k+1)(k+2)}\\
+           &=\frac{k^2+2k+1}{(k+1)(k+2)}\\
+           &=\frac{k+1}{k+2}
+  \end{align*}
+  从而对任意整数$n\ge1$，猜测成立。
+\end{proof}
+
+

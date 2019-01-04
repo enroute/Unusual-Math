@@ -1,0 +1,415 @@
+
+\chapter{逻辑}
+\label{chap:logic}
+
+\section{排除法}
+\begin{example}
+  警察在审问四个嫌疑犯：甲，乙，丙，丁。他们的回话如下：
+  \fbox{\parbox{\textwidth}{
+      \begin{itemize}
+      \item 甲说：我不是罪犯
+      \item 乙说：丁是罪犯
+      \item 丙说：乙是罪犯
+      \item 丁说：我不是罪犯
+      \end{itemize}
+    }}
+  研究完其它材料后警察发现以上四人只有一个人说假话，请问：谁是罪犯？
+\end{example}
+\begin{proof}[提示]
+  找出说假话的人，甲乙丙丁四人逐一排除，若剩余一人无法排除，则就是此人说假话。
+  \begin{enumerate}
+  \item 假设甲说假话，则其余三人说的都是真话，即以下四句为真：
+    \begin{align*}
+      \text{\numcircled1 甲是罪犯；\numcircled2 丁是罪犯；\numcircled3 乙是罪犯；\numcircled4 丁不是罪犯}
+    \end{align*}
+    从而有以下表格：
+
+    \begin{center}
+      \begin{tabular}{c|c|c|c|c}
+        \hline
+             & 甲 & 乙 & 丙 & 丁\\
+        \hline
+        罪犯 & $\checkmark^1$  & $\checkmark^3$  &    & $\checkmark^2\ \xmark^4$\\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    其中\checkmark 代表此人是罪犯，$\xmark$代表此人不是罪犯，数字代表该符号对应于第几句话。由表格，可以看出两个矛盾的地方：\numcircled1 共有3个罪犯，但实际应只有一个罪犯；\numcircled2 丁既是罪犯又不是罪犯（既有\checkmark 符号，又有$\xmark$符号）。
+    
+    从而排除甲说假话。
+
+  \item 假设乙说的假话，则其余三人说的是真话，即以下四句为真：
+    \begin{align*}
+      \text{\numcircled1 甲不是罪犯；\numcircled2 丁不是罪犯；\numcircled3 乙是罪犯；\numcircled4 丁不是罪犯}
+    \end{align*}
+    从而有以下表格：
+    \begin{center}
+      \begin{tabular}{c|c|c|c|c}
+        \hline
+             & 甲 & 乙 & 丙 & 丁\\
+        \hline
+        罪犯 & $\xmark^1$  & $\checkmark^3$  &    & $\xmark^2\ \xmark^4$\\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    找不到矛盾。
+
+  \item 假设丙说的是假话，则欺其余三人说的是真话，即以下四句为真：
+    \begin{align*}
+      \text{\numcircled1 甲不是罪犯；\numcircled2 丁是罪犯；\numcircled3 乙不是罪犯；\numcircled4 丁不是罪犯}
+    \end{align*}
+    从而有以下表格：
+
+    \begin{center}
+      \begin{tabular}{c|c|c|c|c}
+        \hline
+             & 甲 & 乙 & 丙 & 丁\\
+        \hline
+        罪犯 & $\xmark^1$  & $\xmark^3$  &    & $\checkmark^2\ \xmark^4$\\
+        \hline
+      \end{tabular}
+    \end{center}
+    从表格可以看出丁既是罪犯又不是罪犯，矛盾。排除丙说假话。
+    
+  \item 假设丁说的是假话，则欺其余三人说的是真话，即以下四句为真：
+    \begin{align*}
+      \text{\numcircled1 甲不是罪犯；\numcircled2 丁是罪犯；\numcircled3 乙是罪犯；\numcircled4 丁是罪犯}
+    \end{align*}
+    从而有以下表格：
+
+    \begin{center}
+      \begin{tabular}{c|c|c|c|c}
+        \hline
+             & 甲 & 乙 & 丙 & 丁\\
+        \hline
+        罪犯 & $\xmark^1$  & $\checkmark^3$  &    & $\checkmark^2\ \checkmark^4$\\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    此处隐藏的条件是，说假话的是罪犯，说真话的不是罪犯。由于只有一个人说假话，从而只有一个罪犯，而由上面的表格容易看出乙和丁都是罪犯，这与只有一个罪犯矛盾。排除丁说假话。
+  \end{enumerate}
+
+  这样排除完甲丙丁三人，剩余一人，乙就是说假话的人，即罪犯就是乙。
+\end{proof}
+
+
+\begin{example}[歌唱家的年龄]
+  甲乙丙丁四人正在讨论某位歌唱家的年龄：
+  \begin{itemize}
+  \item 甲说：她不会超过25岁。
+  \item 乙说：她不会超过30岁。
+  \item 丙说：她绝对在35岁以上。
+  \item 丁说：她在40岁以下。
+  \end{itemize}
+  事实是这四人中只有一人说对了。那么请猜测下歌唱家的年龄范围。
+\end{example}
+\begin{proof}[提示]
+  记歌唱家的真实年龄是$x$，那么四人的话等价于
+  \begin{align*}
+    \text{\numcircled1} x\le25,\quad \text{\numcircled2} x\le30,\quad \text{\numcircled3} x>35,\quad \text{\numcircled4} x<40
+  \end{align*}
+  如果用数轴表示，则会非常直观。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.2]
+      \draw[<->](-5,0)--(55,0);
+      \foreach \x in {0,10,20,30,40,50}{
+        \draw(\x,0) node[below]{$\x$}--(\x,1);
+      }
+      \draw[->](25,0)--(25,3)--(-5,3)node[left]{$x\le25$};
+      \draw[->](30,0)--(30,6)--(-5,6)node[left]{$x\le30$};
+      \draw[->](35,0)--(35,3)--(55,3)node[right]{$x>35$};
+      \draw[->](40,0)--(40,9)--(-5,9)node[left]{$x<40$};
+      \draw[fill=black](25,0)circle(8pt) (30,0)circle(8pt);
+      \draw[fill=white](40,0)circle(8pt) (35,0)circle(8pt);
+    \end{tikzpicture}
+  \end{center}
+  或者下面这种表示方式：
+  \begin{center}
+    \begin{tikzpicture}[scale=.2]
+      \draw[<->](-5,0)--(55,0);
+      \foreach \x in {0,10,20,30,40,50}{
+        \draw(\x,0) node[below]{$\x$}--(\x,1);
+      }
+      \draw[->,line width=2pt](25,-3)--(-5,-3)node[left]{$x\le25$};
+      \draw[->,line width=2pt](30,-6)--(-5,-6)node[left]{$x\le30$};
+      \draw[->,line width=2pt](35,-3)--(55,-3)node[right]{$x>35$};
+      \draw[->,line width=2pt](40,-9)--(-5,-9)node[left]{$x<40$};
+      \draw[fill=black](25,-3)circle(10pt) (30,-6)circle(10pt);
+      \draw[fill=white](40,-9)circle(10pt) (35,-3)circle(10pt);
+    \end{tikzpicture}
+  \end{center}
+
+  其中实心圈表示包含该点，空心圈表示不含此点。由上两图可以看出，只有$(30,35]$及$[40,+\infty)$这两个区间才是只被一个条件所覆盖的。
+\end{proof}
+
+
+\begin{example}
+  有个遭遇到海难的人最终在一个小岛上顽强地生存了下来。有一天他被毒蛇咬伤了，需要用$3$升的纯净水来配药解毒，一点不能多一点不能少。但由于物资匮乏，他手里只有一个$5$升和$6$升的两个容器，以及之前他用蒸馏的方法获取到的足够多的备用纯净水。由于时间紧迫，请帮他用最少的步骤量出精确的$3$升纯净水。
+\end{example}
+\begin{proof}[提示]
+  其中一种方法如表格~\ref{tab:water-ops}所示。经过若干步骤后6升容器里有纯净水3升。
+  \begin{table}[htbp]
+    \centering
+    \caption{倒水操作}
+    \label{tab:water-ops}
+    \renewcommand*{\arraystretch}{1.0}
+    \begin{tabular}{clcc}
+      \toprule[1.5pt]
+      % Use multicolumn to make the multirow center horizontally
+      \multirow{2}{*}{步骤} & \multicolumn{1}{c}{\multirow{2}{*}{操作}} & \multicolumn{2}{c}{操作后容器含水量(升)} \\
+      \cline{3-4}
+           &      & $5$升容器 & $6$升容器 \\
+      \midrule[1pt]
+      0 & (开始状态)                       & 0 & 0\\
+      \midrule[1pt]
+      1 & 用备用纯净水灌满6升容器          & 0 & 6\\
+      2 & 用6升容器里的水灌满5升容器       & 5 & 1\\
+      3 & 清空5升容器                      & 0 & 1\\
+      4 & 6升容器里的剩余的水全倒入5升容器 & 1 & 0\\
+      5 & 用备用纯净水灌满6升容器          & 1 & 6\\
+      6 & 用6升容器里的水灌满5升容器       & 5 & 2\\
+      7 & 清空5升容器                      & 0 & 2\\
+      8 & 6升容器里的剩余的水全倒入5升容器 & 2 & 0\\
+      9 & 用备用纯净水灌满6升容器          & 2 & 6\\
+     10 & 用6升容器里的水灌满5升容器       & 5 & 3\\
+      \bottomrule[1.5pt]
+    \end{tabular}
+  \end{table}
+\end{proof}
+
+
+\begin{example}
+  小毛是学校出名的机灵鬼，也是家里让人头疼的调皮蛋。有一天他急急忙忙写完作业就要出动玩，妈妈便说还有一道题，要做完了才能出去玩。妈妈的题目是这样的：有6个杯子排成一排，前面3个装满了水，后面3个是空的。若只能移动一个杯子，能否将装满水的水杯与空杯间隔开？
+\end{example}
+\begin{proof}[提示]
+  若“移动”还包括倒水的动作，那么是有可能的。只需要将前三杯中间的杯子里的水倒到后三杯中间的空杯子里，然后再放回原位即可。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \foreach \x in {0,1,2,3,4,5}{
+      \begin{scope}[shift={(2 * \x,0)}]
+        \coordinate(A)at(0,1.2);
+        \coordinate(B)at(0.2,0);
+        \coordinate(C)at(0.6,0);
+        \coordinate(D)at(0.8,1.2);
+        \coordinate(W1)at(0.05,1);
+        \coordinate(W2)at(0.1,1.1);
+        \coordinate(W3)at(0.2,1);
+        \coordinate(W4)at(0.3,1.1);
+        \coordinate(W5)at(0.4,1);
+        \coordinate(W6)at(0.5,1.1);
+        \coordinate(W7)at(0.6,1);
+        \coordinate(W8)at(0.7,1.1);
+        \coordinate(W9)at(0.75,1);
+        \ifthenelse{\x<3}{
+          \fill[pattern=dots,pattern color=blue!30](W1)--(W2)--(W3)--(W4)--(W5)--(W6)--(W7)--(W8)--(W9)--(C)--(B)--cycle;
+          \draw[color=blue!30](W1)--(W2)--(W3)--(W4)--(W5)--(W6)--(W7)--(W8)--(W9);
+        }{}
+        \draw(A)--(B)--(C)--(D);
+      \end{scope}
+      }
+      \node(X)at(2.4,-.2){};
+      \node(Y)at(8.4,-.2){};
+      \draw[->](X) to[out=330,in=210](Y);
+      \node at(5.4,-.7){倒水};
+    \end{tikzpicture}
+  \end{center}
+  % don't show qed symbol for this example only
+  \let\qed\relax
+\end{proof}
+
+\begin{example}[爱因斯坦难题]
+  在一条街上,有5座房子，喷了5种颜色。每个房子了住着不同国籍的人，每个人
+  喝着不同的饮料，抽不同品牌的香烟，养着不同的宠物，这有一些他们的信
+  息：
+  \begin{enumerate}
+  \item 英国人住在红房子里，
+  \item 瑞典人养了一条狗，
+  \item 丹麦人喝茶，
+  \item 绿房子在白房子左边(注：是指紧挨着的左边)，
+  \item 绿房子主人喝咖啡，
+  \item 抽PALL MALL烟的人养了一只鸟，
+  \item 黄房子主人抽DUNHILL烟，
+  \item 住在中间那间房子的人喝牛奶，
+  \item 挪威人住第一间房子，
+  \item 抽BLENDS烟的人住在养猫人的旁边，
+  \item 养马的人住在DUNHILL烟的人旁边，
+  \item 抽BLUE MASTER烟的人喝啤酒，
+  \item 德国人抽PRINCE烟，
+  \item 挪威人住在蓝房子旁边，
+  \item 抽BLENDS烟的人的邻居喝矿泉水。
+  \end{enumerate}
+  那么谁在养鱼？
+\end{example}
+\begin{proof}[提示]
+  做表格，一个个排除，一个个填，与数独类似。
+
+  首先由(8)和(9)，可以先填入下表：
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2 & 3    & 4 & 5\\\hline
+        颜色     &        &   &      &   &  \\\hline
+        国籍     & 挪威人 &   &      &   &  \\\hline
+        饮料     &        &   & 牛奶 &   &  \\\hline
+        烟       &        &   &      &   &  \\
+        宠物     &        &   &      &   &  \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    再由(14)，填入蓝房子
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2  & 3    & 4 & 5\\\hline
+        颜色     &        & 蓝 &      &   &  \\\hline
+        国籍     & 挪威人 &    &      &   &  \\\hline
+        饮料     &        &    & 牛奶 &   &  \\\hline
+        烟       &        &    &      &   &  \\\hline
+        宠物     &        &    &      &   &  \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    再由(1)和(4)，红、绿、白房子只能都在3、4 、5号房子里，从而1号是黄房子。由(7)可填入1号房子主人抽什么。再由(11)可填入马。
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2  & 3    & 4 & 5\\\hline
+        颜色     & 黄     & 蓝 &      &   &  \\\hline
+        国籍     & 挪威人 &    &      &   &  \\\hline
+        饮料     &        &    & 牛奶 &   &  \\\hline
+        烟       & DUNHILL&    &      &   &  \\\hline
+        宠物     &        & 马 &      &   &  \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    再由(4)，“绿白”要紧挨着填入，只能填“34”或“45”号房子。由(5)，“绿”不能是3号房子，从而“绿白”要填入“45”号房子，继而3号房子是红房子，再由(1)，填入英国人。由(5)填入咖啡。
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2  & 3     & 4     & 5\\\hline
+        颜色     & 黄     & 蓝 & 红    & 绿    &白\\\hline
+        国籍     & 挪威人 &    & 英国人&       &  \\\hline
+        饮料     &        &    & 牛奶  & 咖啡  &  \\\hline
+        烟       & DUNHILL&    &       &       &  \\\hline
+        宠物     &        & 马 &       &       &  \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    此时，划掉已经无用的条件，剩余如下：
+    \begin{enumerate}
+    \item \sout{英国人住在红房子里，}
+    \item 瑞典人养了一条狗，
+    \item 丹麦人喝茶，
+    \item \sout{绿房子在白房子左边(注：是指紧挨着的左边)，}
+    \item \sout{绿房子主人喝咖啡，}
+    \item 抽PALL MALL烟的人养了一只鸟，
+    \item \sout{黄房子主人抽DUNHILL烟，}
+    \item \sout{住在中间那间房子的人喝牛奶，}
+    \item \sout{挪威人住第一间房子，}
+    \item 抽BLENDS烟的人住在养猫人的旁边，
+    \item \sout{养马的人住在DUNHILL烟的人旁边，}
+    \item 抽BLUE MASTER烟的人喝啤酒，
+    \item 德国人抽PRINCE烟，
+    \item \sout{挪威人住在蓝房子旁边，}
+    \item 抽BLENDS烟的人的邻居喝矿泉水。
+    \end{enumerate}
+
+    由(3)，“丹麦人”和“喝茶”两个一起填入的只剩下2号和5号房。由(12)，“抽BLUE MASTER”和“喝啤酒”两个一起填入的也只剩下2号和5号房。再由(15)，还有人“喝矿泉水”。此时可知“喝矿泉水”的是1号房，并且2号房抽BLENDS烟。
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2      & 3     & 4     & 5\\\hline
+        颜色     & 黄     & 蓝     & 红    & 绿    &白\\\hline
+        国籍     & 挪威人 &        & 英国人&       &  \\\hline
+        饮料     & 矿泉水 &        & 牛奶  & 咖啡  &  \\\hline
+        烟       & DUNHILL& BLENDS &       &       &  \\\hline
+        宠物     &        & 马     &       &       &  \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    此时再由(12)，能够一起填入抽BLUE MASTER和喝啤酒的就只剩下5号房了，从而可在5号房填入BLUE MASTER和啤酒。这样之后由(3)，丹麦人和苶就只能填在2号房了。再划掉(3)、(12)，表格及剩余条件如下。
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2      & 3     & 4     & 5           \\\hline
+        颜色     & 黄     & 蓝     & 红    & 绿    &白           \\\hline
+        国籍     & 挪威人 & 丹麦人 & 英国人&       &             \\\hline
+        饮料     & 矿泉水 & 茶     & 牛奶  & 咖啡  &啤酒         \\\hline
+        烟       & DUNHILL& BLENDS &       &       &BLUE MASTER  \\\hline
+        宠物     &        & 马     &       &       &  \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    \begin{enumerate}
+    \item \sout{英国人住在红房子里，}
+    \item 瑞典人养了一条狗，
+    \item \sout{丹麦人喝茶，}
+    \item \sout{绿房子在白房子左边(注：是指紧挨着的左边)，}
+    \item \sout{绿房子主人喝咖啡，}
+    \item 抽PALL MALL烟的人养了一只鸟，
+    \item \sout{黄房子主人抽DUNHILL烟，}
+    \item \sout{住在中间那间房子的人喝牛奶，}
+    \item \sout{挪威人住第一间房子，}
+    \item 抽BLENDS烟的人住在养猫人的旁边，
+    \item \sout{养马的人住在DUNHILL烟的人旁边，}
+    \item \sout{抽BLUE MASTER烟的人喝啤酒，}
+    \item 德国人抽PRINCE烟，
+    \item \sout{挪威人住在蓝房子旁边，}
+    \item 抽BLENDS烟的人的邻居喝矿泉水。
+    \end{enumerate}
+
+    此时由(13)，德国人抽PRINCE烟只能在4号房。由(2)，剩下的瑞典人养狗只能在5号房。由(6)，PALL MALL烟和养鸟在3号房。
+    \begin{center}
+      \renewcommand*{\arraystretch}{1.0}
+      \begin{tabular}{l|l|l|l|l|l}
+        \hline
+        房号     & 1      & 2      & 3         & 4     & 5           \\\hline
+        颜色     & 黄     & 蓝     & 红        & 绿    &白           \\\hline
+        国籍     & 挪威人 & 丹麦人 & 英国人    & 德国人&瑞典人       \\\hline
+        饮料     & 矿泉水 & 茶     & 牛奶      & 咖啡  &啤酒         \\\hline
+        烟       & DUNHILL& BLENDS & PALL MALL & PRINCE&BLUE MASTER  \\\hline
+        宠物     &        & 马     & 鸟        &       &狗           \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    此时由(10)，养猫只能在1号房。从而表格中只剩余4号房养什么宠物未知。而由题目是问谁养鱼，故养鱼只能填在4号房。
+\end{proof}
+
+
+\begin{example}
+  黛西参加学校举行的小学生数学比赛，比赛结束后，艾玛问黛西得了第几名，黛西故意卖关子，说：“我考的分数、名次和我的年龄的乘积是1958，你猜猜看。”请算算黛西的分数、名次和年龄。
+\end{example}
+\begin{proof}[提示]
+  将由于$1958=2\times11\times 89$，1958有如下的三数连乘分解方式，并注意到黛西，有
+  \begin{align*}
+    \setlength\arraycolsep{2pt}
+    \begin{array}{cccccccl}
+    1958&=&1 & \times & 1  &\times & 1958 &\quad\implies\text{年龄是1或1958，不可能}\hfill\\
+    1958&=&1 & \times & 2  &\times & 979  &\quad\implies\text{年龄是1、2或者979，不可能}\hfill\\
+    1958&=&1 & \times & 11 &\times & 178  &\quad\implies\text{年龄可能是11，分数可能是1或者179}\\
+    1958&=&1 & \times & 22 &\times & 89   &\quad\implies\text{年龄不可能}\\
+    1958&=&2 & \times & 11 &\times & 89   &\quad\implies\text{年龄可能是11，分数可能是2或者89}
+    \end{array}
+  \end{align*}
+  由此，出现的数字有1、2、11、22、89、178、979、1958共8个。
+  
+  第一个信息：小学生。由此年龄只能是11岁。
+  
+  第二个信息：参加比赛。能参加比赛的，成绩一般不会太差，排除分数不在$[0,100]$区间且分数特别低的比如1分2分的情况，从而只剩下11岁89分第2名这种情况。
+\end{proof}

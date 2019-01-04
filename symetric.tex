@@ -1,0 +1,18 @@
+\chapter{对称性}
+\label{chap:symetric}
+
+\begin{example}
+  求解方程 $x^4+x^3+x^2+x+1=0$。
+\end{example}
+\begin{proof}[解]
+  利用系数的对称性及$x\ne 0$，两边除以$x^2$，有
+  \begin{align*}
+    &x^2+x+1+\frac1x+\frac1{x^2}=0\\
+    \implies& \left(x^2+\frac1{x^2}\right) + \left(x+\frac1x\right) + 1 = 0
+  \end{align*}
+  分组后令$u=x+\dfrac1x$，则有$u^2=x^2+\dfrac1{x^2}+2$，从而原方程变换为
+  \begin{align*}
+    u^2 + u - 1 = 0
+  \end{align*}
+  剩余略。
+\end{proof}

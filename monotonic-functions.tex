@@ -1,6 +1,6 @@
 
-\section{单调函数}
-\label{sec:monotonic-functions}
+\chapter{单调函数}
+\label{chap:monotonic-functions}
 
 \begin{example}
   任意非负数$a,b,c$满足$a\le b+c$，则
@@ -9,7 +9,6 @@
   \end{align*}
   并说明等号成立的充要条件。
 \end{example}
-
 \begin{proof}
   容易知道$f(x)=\dfrac{x}{1+x}$在$x\ge0$时是严格单调递增函数，从而
   \begin{align*}
@@ -18,4 +17,19 @@
     &\le\frac{b}{1+b} + \frac{c}{1+c}&\text{等号成立}\iff b=c=0
   \end{align*}
   从而原不等式得证，且当且仅当$a=b=c=0$时等号成立。
+\end{proof}
+
+\begin{example}
+  比较两数$\dfrac{2018}{2019}$和$\dfrac{2019}{2020}$的大小。
+\end{example}
+\begin{proof}[解]
+  这个简单的题目有很多方法，此处利用单调函数的方法。考虑函数
+  \begin{align*}
+    f(x)\equiv \frac{x}{x+1}
+  \end{align*}
+  当$x\ne0$时，将$f(x)$变换为如下形式
+  \begin{align*}
+    f(x) = \frac1{1+\frac1x}
+  \end{align*}
+  由这种形式可以很容易看出$f(x)$在$x>0$时是严格单调递增的，从而$f(2018)<f(2019)$。
 \end{proof}
