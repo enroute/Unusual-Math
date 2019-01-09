@@ -3,6 +3,55 @@
 % comment this if don't want to show answer
 \def\withanswer{1}
 
+% Turn on subsection numbering in memoir class
+\setsecnumdepth{subsection}
+
+% For epigraphs
+\usepackage{epigraph}
+
+% Use varwidth to make epigraph length adaptive
+\usepackage{varwidth}
+\renewcommand{\epigraphsize}{\normalsize}
+\setlength{\epigraphwidth}{0.8\textwidth}
+\renewcommand{\textflush}{flushright}
+\renewcommand{\sourceflush}{flushright}
+% A useful addition
+\newcommand{\epitextfont}{\kai}
+\newcommand{\episourcefont}{\kai}
+
+\makeatletter
+\newsavebox{\epi@textbox}
+\newsavebox{\epi@sourcebox}
+\newlength\epi@finalwidth
+\renewcommand{\epigraph}[2]{%
+  \vspace{\beforeepigraphskip}
+  {\epigraphsize\begin{\epigraphflush}
+   \epi@finalwidth=\z@
+   \sbox\epi@textbox{%
+     \varwidth{\epigraphwidth}
+     \begin{\textflush}\epitextfont#1\end{\textflush}
+     \endvarwidth
+   }%
+   \epi@finalwidth=\wd\epi@textbox
+   \sbox\epi@sourcebox{%
+     \varwidth{\epigraphwidth}
+     \begin{\sourceflush}\episourcefont#2\end{\sourceflush}%
+     \endvarwidth
+   }%
+   \ifdim\wd\epi@sourcebox>\epi@finalwidth 
+     \epi@finalwidth=\wd\epi@sourcebox
+   \fi
+   \leavevmode\vbox{
+     \hb@xt@\epi@finalwidth{\hfil\box\epi@textbox}
+     \vskip1.75ex
+     \hrule height \epigraphrule
+     \vskip.75ex
+     \hb@xt@\epi@finalwidth{\hfil\box\epi@sourcebox}
+   }%
+   \end{\epigraphflush}
+   \vspace{\afterepigraphskip}}}
+\makeatother
+
 %%% check mark and x mark
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \newcommand{\cmark}{\ding{51}}%
@@ -43,6 +92,8 @@
 \usepackage{pst-node} % For nodes
 \usepackage[space]{grffile} % For spaces in paths
 \usepackage{etoolbox} % For spaces in paths
+\AtBeginEnvironment{quote}{\kai\small} %for quote environment
+\AtBeginEnvironment{quotation}{\kai\small} %for quotation environment
 
 \usepackage{pst-eucl}
 
@@ -140,7 +191,8 @@
 % \renewcommand\chaptername{第~\thechapter~章}
 %% We have to use the following fix
 \addto\captionsenglish{%
-  \renewcommand\chaptername{第~\thechapter~章}
+  % \renewcommand\chaptername{第~\thechapter~章}
+  \renewcommand\chaptername{}
   \renewcommand\contentsname{目~~~~录}
 }
 
@@ -234,7 +286,6 @@
 \usepackage{fancyvrb}           % for BVerbatim environment
 
 \usepackage{verbatim}
-\usepackage{varwidth}
 % Center verbatim environment, with the help from verbatim package
 \makeatletter
 \def\verbatim@font{\normalfont\ttfamily\kai\Large
@@ -289,6 +340,14 @@
 % \includeonly{five-models}
 % \includeonly{logic}
 % \includeonly{geometry}
+% \includeonly{graphs-of-functions}
+% \includeonly{proofs-without-words}
+% \includeonly{board-coverage}
+% \includeonly{graphs}
+% \includeonly{traps}
+% \includeonly{intuition}
+% \includeonly{algorithm}
+\includeonly{magic-square}
 
 \begin{document}
 
@@ -305,6 +364,7 @@
 \include{introduction}
 \include{number-theory}
 \include{golden-ratio}
+\include{numerical-method}
 \include{induction}
 \include{area}
 \include{quadratic-equation}
@@ -327,10 +387,22 @@
 \include{cauchy-schwarz}
 \include{convex}
 \include{minkowski}
+\include{graphs-of-functions}
+
 \include{proofs-without-words}
+\include{board-coverage}
+\include{graphs}
+
 \include{insight}
 \include{fun}
 \include{methods}
 \include{logic}
+
+\include{magic-square}
+
+\include{algorithm}
+
+\include{intuition}
+\include{traps}
 \end{document}
 

@@ -34,9 +34,9 @@
 \end{center}
 
 \begin{example}
-  前$n$个数的和是$\dfrac12n(n+1)$，即
+  前$n$个数的和是$\dfrac{(n+1)}{2}$，即
   \begin{align}
-    1+2+3+\cdots+n=\frac12n(n+1)
+    1+2+3+\cdots+n=\frac{n(n+1)}{2}
   \end{align}
 \end{example}
 \begin{center}
@@ -65,6 +65,37 @@
     \end{scope}
   \end{tikzpicture}
 \end{center}
+
+\begin{example}
+  \begin{align*}
+    1+2+3+\cdots+(n-1)=\binom n2
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(0,0)}]
+        \foreach \x/\y in {
+          0/0,
+          -.6/-1,.6/-1,
+          -1.2/-2,0/-2,1.2/-2,
+          -1.8/-3,-.6/-3,.6/-3,1.8/-3,
+          -2.4/-4,-1.2/-4,0/-4,1.2/-4,2.4/-4,
+          -3.0/-5,-1.8/-5,-.6/-5,.6/-5,1.8/-5,3.0/-5
+          }{
+            \draw[fill=yellow!30](\x,\y)circle(.5);
+          }
+          \foreach \x/\y in {
+            -3.6/-6,-2.4/-6,-1.2/-6,0/-6,1.2/-6,2.4/-6,3.6/-6
+          }{
+            \draw[pattern=north west lines](\x,\y)circle(.5);
+          }
+          \draw[->](.6,-3)--(-1.2,-6);
+          \draw[->](.6,-3)--(2.4,-6);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  如图，在$7$个带阴影的圆中选$2$个，每种选法与其上某个圆圈一一对应，即三个圆圆心组成一个等腰三角形。
+\end{example}
 
 \pagebreak
 \newcommand{\fixedcirclenode}[3]{\draw #1 circle(#2) node {#3};}

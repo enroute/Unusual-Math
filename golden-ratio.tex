@@ -2,16 +2,30 @@
 \chapter{黄金比例}
 \label{ch:golden-ratio}
 
+
+\section{定义}
+\label{sec:golden-ration-defition}
+
 \begin{definition}
   将线段分为长短两截，若短的一截比长的一截等于长的一截比原线段的长度，则此分割为\term{黄金分割}。
 \end{definition}
 
+\begin{center}
+  \begin{tikzpicture}[scale=6.0]
+    \draw[line width=2pt,fill=black](0,0)circle(.3pt)--(.382,0) circle(.3pt)--(1,0)circle(.3pt);
+    \draw[|<->|](0,.1)--(0.382,.1)node[midway,above]{$s$};
+    \draw[|<->|](1,.1)--(0.382,.1)node[midway,above]{$l$};
+    \draw[|<->|](0,-.1)--(1.000,-.1)node[midway,below]{$L$};
+    \node[left] at(1.5,0) {$\dfrac{s}{l}=\dfrac{l}{L}$};
+  \end{tikzpicture}
+\end{center}
+
 记原线段长度为L，在黄金分割下，长一截长度为$l$，短的一截长度为$s$，则
 \begin{align*}
-  &\frac sl=\frac lL,\quad l+s=L\\
-  \implies& \frac sl=\frac l{l+s}
+  \frac sl=\frac l{l+s} \quad\implies \frac sl = \frac1{1+\dfrac sl}\quad\implies
+  \left(\frac sl\right)^2 + \frac sl = 1
 \end{align*}
-从而有
+再加上条件$s<l$，从而有
 \begin{align*}
   \frac ls=\frac{\sqrt5+1}2\approx 1.618, \quad \frac sl=\frac{\sqrt5-1}2\approx 0.618
 \end{align*}
@@ -19,6 +33,10 @@
 \begin{align*}
   \phi\equiv\frac{\sqrt5+1}2,\quad \Phi\equiv\frac{\sqrt5-1}2
 \end{align*}
+
+
+\section{性质}
+\label{sec:golden-ration-properties}
 
 \begin{question}
   证明下列恒等式：
@@ -68,7 +86,7 @@
   $\phi=1 + 2\sin18^\circ.$
 \end{example}
 \begin{proof}
-  由$\phi=1+\Phi$，等价于证明$\sin18^\circ=\dfrac\Phi2$。令$x\equiv18^\circ$，则$2x+3x=5x=90^\circ$，应用以下公式
+  由$\phi=1+\Phi$，等价于证明$2\sin18^\circ=\Phi$。令$x\equiv18^\circ$，则$2x+3x=5x=90^\circ=\frac\pi2$，应用以下公式
   \begin{align*}
     \sin 2x &= \cos \left(\frac\pi2 - 2x\right) = \cos 3x\\
     \sin 2x &=2\sin x\cos x\\
@@ -216,7 +234,7 @@
   $\phi$是方程$x^2-x-1=0$的一个解，应用牛顿迭代法(Newton's method)逐渐逼近$\phi$。
 \end{example}
 
-选择初始点$x_0=3$，利用牛顿迭代公式
+选择初始点$x_0=3$，利用牛顿迭代公式(参考第~\pageref{sec:Newton-method}~页~\ref{sec:Newton-method}~节)
 \begin{align*}
   x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}=x_n-\frac{x_n^2-x_n-1}{2x^n-1}=\frac{x_n^2+1}{2x^n-1}
 \end{align*}
