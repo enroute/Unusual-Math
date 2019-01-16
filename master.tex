@@ -6,6 +6,19 @@
 % Turn on subsection numbering in memoir class
 \setsecnumdepth{subsection}
 
+% toc style
+\usepackage{titletoc}% http://ctan.org/pkg/titletoc
+\setcounter{tocdepth}{2}% Display up to \subsection in ToC
+% \titlecontents*{section}% <section>
+\titlecontents*{subsection}% <section>
+  [3.8em]% <left>
+  {\small}% <above-code>
+  {}% <numbered-entry-format>; you could also use {\thecontentslabel. } to show the numbers
+  {}% <numberless-entry-format>
+  {\ \thecontentspage}% <filler-page-format>
+  [,\ \ \ \ ]% <separator>
+  []% <end>
+
 % For epigraphs
 \usepackage{epigraph}
 
@@ -94,6 +107,7 @@
 \usepackage{etoolbox} % For spaces in paths
 \AtBeginEnvironment{quote}{\kai\small} %for quote environment
 \AtBeginEnvironment{quotation}{\kai\small} %for quotation environment
+\patchcmd{\quotation}{1.5em}{2em}{}{}
 
 \usepackage{pst-eucl}
 
@@ -108,6 +122,20 @@
 \usetikzlibrary{calc,intersections,patterns,angles,quotes}           %
 \usepackage{tikz-3dplot}
 \usetikzlibrary{3d}
+
+\newcommand{\tikzmark}[2]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {$#2$};}
+
+\newcommand{\DrawVLine}[3][black, thick, opacity=0.5]{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \draw[shorten <=0.3ex, #1] (#2.north) -- (#3.south);
+  \end{tikzpicture}
+}
+
+\newcommand{\DrawHLine}[3][black, thick, opacity=0.5]{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \draw[shorten <=0.2em, #1] (#2.west) -- (#3.east);
+  \end{tikzpicture}
+}
 
 \usepackage{tkz-euclide} % for perpendicular symbols, \tkzMarkRightAngle, \tkzDefPoint
 \usetkzobj{all}
@@ -162,6 +190,11 @@
 }
 
 \usepackage{mathtools,amsthm,amsfonts,amssymb,bm}
+% For \notdivides which has a negating line longer than \nmid in the
+% `amssymb' package and shorter than the \centernot in the `centernot'
+% package.
+\usepackage{mathabx}
+
 \usepackage{extarrows}          % for xlongequal
 % use `fc-list|grep -i kai' to get installed font list
 \setCJKfamilyfont{kai}{KaiTi}
@@ -188,13 +221,23 @@
 }
 \chapterstyle{box}
 %% This won't work with the `babel' package
-% \renewcommand\chaptername{第~\thechapter~章}
+%% \renewcommand\chaptername{第~\thechapter~章}
 %% We have to use the following fix
+%% w/o using the babel package
+%% \renewcommand{\figurename}{\kai 图}
+%% w/ babel packge and English as language
 \addto\captionsenglish{%
   % \renewcommand\chaptername{第~\thechapter~章}
   \renewcommand\chaptername{}
   \renewcommand\contentsname{目~~~~录}
+  \renewcommand\tablename{表}
+  \renewcommand\figurename{图}
+  \renewcommand\figurename{\kai 图}  
 }
+% Or use the following
+% \AtBeginDocument{%
+%   \renewcommand\tablename{表}
+% }
 
 % % patch \newtheoremstyle to accept \newline<other tokens>
 % \makeatletter
@@ -226,6 +269,7 @@
 \newtheorem{definition}[theorem]{\kai 定义} % Use the same counter as theorem
 \newtheorem{corollary}{\kai 推论}[theorem]  % Reset after every theorem
 \newtheorem{lemma}[theorem]{\kai 引理}  % Use the same counter as theorem
+
 % \renewcommand*{\proofname}{证明}
 \newcommand{\note}{\begingroup\bfseries\kai 注：\endgroup}
 \newcommand{\think}{\begingroup\bfseries\kai 思考：\endgroup}
@@ -235,11 +279,6 @@
 \newcommand{\term}[1]{\begingroup\bfseries\kai{#1}\endgroup}
 
 \DeclareMathOperator{\atan}{atan}
-
-% w/o using the babel package
-% \renewcommand{\figurename}{\kai 图}
-% w/ babel packge and English as language
-\addto\captionsenglish{\renewcommand{\figurename}{\kai 图}}
 
 % Change colon(:) in figure caption to period(.)
 \usepackage{caption}
@@ -271,8 +310,8 @@
 \usepackage{enumitem}
 % \setlist{nolistsep}
 % \setitemize{labelindent=\parindent,leftmargin=*,align=left,itemindent=2em,noitemsep}%,leftmargin=*,topsep=2pt,partopsep=0pt}
-\setitemize{leftmargin=0em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.3em,align=left}
-\setenumerate{leftmargin=0em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.5em,align=left}
+\setitemize{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.3em,align=left}
+\setenumerate{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.5em,align=left}
 
 
 \renewcommand{\baselinestretch}{1.1}
@@ -331,9 +370,11 @@
 \newcommand{\dx}{\mathrm{d}x}
 \newcommand{\dy}{\mathrm{d}y}
 % \newcommand{\dz}{\mathrm{d}z}
-
+% \newcommand{\gcd}{\mathrm{gcd}}
+\newcommand{\lcm}{\mathrm{lcm}}
 
 % comment this when compile the whole document
+% \includeonly{basic-inequalities}
 % \includeonly{proofs-without-words}
 % \includeonly{golden-ratio}
 % \includeonly{area}
@@ -347,7 +388,12 @@
 % \includeonly{traps}
 % \includeonly{intuition}
 % \includeonly{algorithm}
-\includeonly{magic-square}
+% \includeonly{magic-square}
+% \includeonly{geometric-inequality}
+% \includeonly{number-theory}
+% \includeonly{continued-fraction}
+% \includeonly{calendar}
+% \includeonly{diophantine-equation}
 
 \begin{document}
 
@@ -363,6 +409,9 @@
 \mainmatter
 \include{introduction}
 \include{number-theory}
+\include{continued-fraction}
+\include{diophantine-equation}
+\include{calendar}
 \include{golden-ratio}
 \include{numerical-method}
 \include{induction}

@@ -1,0 +1,164 @@
+
+\chapter{不定方程}
+\label{chap:diophantine-equation}
+
+\epigraph{三人同行七十稀，五树梅花廿一支，\\七子团圆正半月，除百零五便得知。}{明·程大位《孙子歌诀》}
+
+一般来说，求解$n$个未知变量，需要$n$个条件。
+不定方程是指约束个数少于未知数个数的方程(组)。由于约束少，不定方程通常有无穷多的解。
+
+这里只讨论整数系数不定方程的整数解问题。早在三世纪初，古希腊数学家丢番图(Diophantus)就研究过若干此类方程，所以不定方程也称为丢番图方程(Diophantine equation)。
+
+\section{线性不定方程}
+\label{sec:linear-diophantine-equation}
+
+\begin{theorem}
+  若$\gcd(a,b)\notdivides c$，则不定方程$ax+by=c$无整数解。
+\end{theorem}
+\begin{proof}
+  反证。假设存在整数解$x=x_0, y=y_0$，由于存在整数$a_0,b_0$满足$a=a_0\cdot\gcd(a,b), b=b_0\cdot\gcd(a,b)$，从而有
+  \begin{align*}
+    &c=a_0\cdot\gcd(a,b)x_0 + b_0\cdot\gcd(a,b)y_0=\gcd(a,b)(a_0x_0+b_0y_0)
+  \end{align*}
+  从而有$\gcd(a,b)\mid c$，矛盾。
+\end{proof}
+
+\begin{theorem}
+  若不定方程$ax+by=c$有一个整数解$x_0, y_0$，则不定方程的通解为
+  \begin{align*}
+    \begin{cases}
+      x=x_0+k\cdot\gcd(a,b)\\
+      y=y_0-k\cdot\gcd(a,b)
+    \end{cases}, \quad k\in\mathcal{Z}
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  首先容易验证$x=x_0+kb, y=y_0-ka$是不定方程的整数解。其次，对不定方程的任一整数解$x=x', y=y'$，由
+  \begin{align*}
+    ax_0 + by_0 =c, \quad ax' + by' =c
+  \end{align*}
+  两式相减，则有$a(x_0-x')=b(y'-y_0)$。记$a_0=a/\gcd(a,b), b_0=b/\gcd(a,b)$，则$a_0,b_0$互质，且有$a_0(x_0-x')=b_0(y'-y_0)$，从而$a_0\mid y'-y_0$，从而存在整数$k$，使得$y'-y_0=ka_0$，代入可分别求得$x'=x_0-kb_0, y'=y_0+ka_0$。
+
+  由此定理，要求不定方程的通解，只需找到一组特解即可。
+\end{proof}
+
+\begin{example}
+  求不定方程$4x+6y=14$的所有整数解。
+\end{example}
+\begin{proof}[提示]
+  首先原不定方程化简为$2x+3y=7$，其系数为$2,3$，由$\gcd(2,3)=1\mid 7$，原不定方程有整数解。将方程变形，有
+  \begin{align*}
+    2x = 7-3y,\quad\implies\quad x=\frac{7-3y}{2}=3-y+\frac{1-y}{2}
+  \end{align*}
+  为使$x$是整数，取$y=1$，则$x=2$，此即为特解。其通解按公式可得。
+\end{proof}
+
+\begin{example}
+  求不定方程$7x+19y=283$的所有整数解。
+\end{example}
+\begin{proof}[提示]
+  首先$\gcd(7,19)=1$，所以有整数解。变换形式如下
+  \begin{align*}
+    x=\frac{283-19y}{7}=40+\frac{3-19y}{7}=40+\frac{3-21y+2y}{7}=40-3y+\frac{3+2y}{7}
+  \end{align*}
+  用$y=1,2,3,\cdots$枚举，试出$7\mid 3+2y$的某个$y$。
+  \begin{center}
+    \begin{tabular}{cccccccccc}
+      \toprule
+      $y$    & 1 & 2 & 3 & 4  & 5  & 6  & 7  & 8  & 9 \\
+      $3+2y$ & 5 & \textcircled{7} & 9 & 11 & 13 & 15 & 17 & 19 & \textcircled{21}\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  取$y=2$，使$x=40-3*2+1=35$，此即为特解。  
+\end{proof}
+
+\section{的士数}
+\label{sec:taxicab-number}
+
+1919年，哈代(Godfrey Harold Hardy)前往看望病重的拉马努金(Srinivasa Ramanujan)。哈代说：“我乘的士来，车牌号码是1729。这个数可真没趣，希望不是不祥之兆。”拉马努金回答说：“不，那是个有趣得很的数。可以用两个立方数之和来表达而且有两种表达方式的数中，1729是最小的。”
+
+\begin{definition}[的士数，Taxicab number]
+  能以$n$个不同的方法表示成两个正立方数之和的最小的正整数称为第$n$个的士数，通常记为$\mathrm{Ta}(n)$。
+\end{definition}
+
+对于$\mathrm{Ta}(2)$，它实际上是不定方程$x^3+y^3=u^3+v^3$的一个正整数解的立方和。到上前为止，只找到前6个的士数。前两个如表~\ref{tab:taxicab-number}所示。$\mathrm{Ta}(5)$和$\mathrm{Ta}(6)$过于复杂，此处不列出。
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cl}
+    \toprule
+    $n$              & \multicolumn{1}{c}{$\mathrm{Ta}(n)$}\\\midrule
+    1                & $2 = 1^3 + 1^3$\\
+    2                & $1729=1^3+12^3=9^3+10^3$\\
+    3                & $87539319=167^3+436^3=228^3+423^3=255^3+414^3$\\
+    \bottomrule
+  \end{tabular}
+  \caption{的士数}
+  \label{tab:taxicab-number}
+\end{table}
+
+\section{中国剩余定理}
+\label{sec:Chinese-remainder-theorem}
+
+\begin{definition}[模反元素，Modular multiplicative inverse]
+  整数$a,b,m$若满足$ab\equiv1\pmod m$，则称$a,b$是模$m$的模反元素。
+\end{definition}
+
+\begin{theorem}[模反的存在性]
+  若$a,m$互质，则存在$a$模$m$的模反元素。
+\end{theorem}
+\begin{proof}[提示]
+  考虑$0,a,2a,3a,\cdots,(m-1)a$这$m$个数，由于$a,m$互质，它们模$m$是两两不同余的，否则两个同余的相减会导出$m\mid a$的矛盾。而模$m$的同余类只有$m$个，从而其中必有一个模$m$等于1。
+\end{proof}
+
+\begin{example}
+  南北朝·孙子《孙子算经》：有物不知其数，三三数之剩二，五五数之剩三，七七数之剩二。问物几何？
+\end{example}
+\begin{proof}[提示]
+  与二元线性不方程类似，只要找到一组特解$x$，则所有的整数解都可以表达为$x+t\cdot\lcm(3,5,7)=x+105t$。
+
+  三人同行七十稀。对$3,5,7$，先找一个数$a$，满足$a\equiv 1\pmod3, a\equiv0\pmod5, a\equiv0\pmod7$，由后两个，有$a=5\cdot7\cdot x$，取$x$为$5\cdot 7$为模$3$的模反元素，即$35x\equiv1\pmod3$，可取$x=2$，此时$a=70$。
+
+  五树梅花廿一枝。对$3,5,7$，找一个数$b$，满足$b\equiv0\pmod3, b\equiv1\pmod5,b\equiv0\pmod7$，由模3模7为0，有$b=21y$，取$y$为21模5的模反元素，即$21y\equiv1\pmod5$，可取$y=1$，此时$b=21$。
+
+  七子团圆正半月。对$3,5,7$，找一个数$c$，满足$b\equiv0\pmod3, b\equiv0\pmod5,b\equiv1\pmod7$，由模3模5为0，有$c=15z$，取$z$为15模7的模反元素，即$15z\equiv1\pmod7$，可取$z=1$，此时$c=15$。
+
+  由此可得到一个特解$2\times 70+3\times 21+2\times 15=233$。其所有正整数解为$23,128,233,338,\cdots$。
+\end{proof}
+
+\begin{theorem}[孙子定理，中国剩余定理，Chinese remaider theorem]
+  大于$1$的正整数$n_1,n_2,\cdots, n_k$两两互质，则对任意整数$a_1,a_2,\cdots,a_k$，方程组
+  \begin{align*}
+    x\equiv&\ a_1\pmod{n_1}\\
+    x\equiv&\ a_2\pmod{n_2}\\
+    &\cdots\\
+    x\equiv&\ a_k\pmod{n_k}
+  \end{align*}
+  有正整数解。  
+\end{theorem}
+\begin{proof}
+  用构造方法找出一组特解。取定下标$i$，构造数$x_i$，使得
+  \begin{align*}
+    \begin{cases}
+      x_i\equiv1\pmod{n_i}\\
+      x_i\equiv0\pmod{n_j}, \quad\forall j\ne i
+    \end{cases}
+  \end{align*}
+  由后一个条件，$x_i$为如下形式
+  \begin{align*}
+    x_i=t_i\cdot \underbrace{n_1n_2\cdots n_{i-1}n_{i+1}\cdots n_k}_{\text{没有}n_i}=t_i\cdot \frac{n_1n_2 \cdots n_k}{n_i}
+  \end{align*}
+  记$M_i\equiv\dfrac{n_1n_2\cdots n_k}{n_i}$，取$t_i$为$M_i$模$n_i$的模反元素(由于$n_i,M_i$互质，$t_i$是存在的)，则$x_i=t_iM_i$满足条件。
+
+  对所有下标$i$，构造出$x_i$后，可得一个特解
+  \begin{align*}
+    x=a_1x_1+a_2x_2+\cdots+a_kx_k&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  记$x$是剩余问题的一个特解，则其整数通解为$x+t\cdot n_1n_2\cdots n_k$.
+\end{theorem}
+\begin{proof}
+  设$y$是剩余问题的任一整数解，考虑$y-x$，则对任意下标$i$，有$y-x\equiv0\pmod{n_i}$，而$n_1,n_2,\cdots,n_k$两两互质，从而存在整数$t$，使得$y-x=t\cdot n_1n_2\cdots n_k$。
+\end{proof}

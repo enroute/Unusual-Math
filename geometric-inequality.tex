@@ -2,6 +2,59 @@
 \chapter{几何不等式}
 \label{chap:geometric-inequality}
 
+\section{基本不等式}
+\label{sec:basic-geometric-inequality}
+
+\begin{theorem}
+  平面上两点间直线段长度最短。
+\end{theorem}
+
+\begin{example}
+  平面上凸四边形$ABCD$，$M,N$分别是$AD$和$BC$的中点，则
+  \begin{align*}
+    MN\le\frac{AB+CD}{2}
+  \end{align*}
+  当且仅当$AB\parallel CD$时等号成立。
+
+  \centering
+  \begin{tikzpicture}[scale=1.0,line join=round]
+    \begin{scope}[shift={(0,0)}]
+      \coordinate[label=below left:$A$]  (A) at (0,0);
+      \coordinate[label=below right:$B$] (B) at (5,0);
+      \coordinate[label=above right:$C$] (C) at (4,4);
+      \coordinate[label=above left:$D$]  (D) at (2,3);
+      \coordinate[label=left:$M$]        (M) at ($.5*(A)+.5*(D)$);
+      \coordinate[label=right:$N$]       (N) at ($.5*(B)+.5*(C)$);
+      % \coordinate[label=below:$P$] (P) at ($.5*(D)+.5*(B)$);
+      \draw(A)--(B)--(C)--(D)--cycle;
+      \draw(M)--(N);%--(P)--cycle;
+      %\draw(D)--(B);
+      \tkzDrawPoints(A,B,C,D,M,N);
+    \end{scope}
+    \begin{scope}[shift={(7,0)}]
+      \coordinate[label=below left:$A$]  (A) at (0,0);
+      \coordinate[label=below right:$B$] (B) at (5,0);
+      \coordinate[label=above right:$C$] (C) at (4,4);
+      \coordinate[label=above left:$D$]  (D) at (2,3);
+      \coordinate[label=left:$M$]        (M) at ($.5*(A)+.5*(D)$);
+      \coordinate[label=right:$N$]       (N) at ($.5*(B)+.5*(C)$);
+      \coordinate[label=below right:$P$] (P) at ($.5*(D)+.5*(B)$);
+      \draw(A)--(B)--(C)--(D)--cycle;
+      \draw(M)--(N);
+      \draw[help lines, dashed](M)--(P)--(N);
+      \draw[help lines, dashed](D)--(B);
+      \tkzDrawPoints(A,B,C,D,M,N,P);
+    \end{scope}
+  \end{tikzpicture}
+\end{example}
+\begin{proof}
+  如图取$BD$的点$P$并作辅助线，则
+  \begin{align*}
+    MN\le MP+NP=\frac{AB+CD}{2}
+  \end{align*}
+  当且仅当点$P$在$MN$上时等号成立，而$P$在$MN$上时等价于$AB\parallel CD$。
+\end{proof}
+
 \begin{theorem}[Pythagorean不等式]
   记三角形的三边分别为$a\le b\le c$，则
   \begin{enumerate}
@@ -10,10 +63,17 @@
   \item 三角形是钝角三角形$\iff a^2+b^2<c^2$。
   \end{enumerate}
 \end{theorem}
+\begin{proof}
+  由余弦定理$c^2=a^2+b^2-2ab\cos\mathrm{C}$可得。
+\end{proof}
+
 
 \begin{theorem}[等周不等式，Isoperimetric Inequality]
   若一个平面图形的面积与周长分别为$A$和$P$，则$4\pi A\le P^2$。也就是说在平面上用长度为$P$的线段能围成的最大面积是半径为$\dfrac{P}{2\pi}$的圆，其面积为$\dfrac{P^2}{4\pi}$。
 \end{theorem}
+\begin{proof}[提示]
+  该定理的证明并不平凡，
+\end{proof}
 
 \begin{theorem}[三角不等式，Trigonometric Inequality]
   记三角形的三个角分别为$A,B,C$，则

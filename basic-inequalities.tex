@@ -1,11 +1,16 @@
 
-\chapter{基本不等式}
-\label{chap:basic-inequalities}
+\chapter{不等式}
+\label{chap:inequality}
+
+
+\section{基本不等式}
+\label{sec:basic-inequalities}
 
 \begin{definition}[算术平均数，Arithmetic Means, AM)]
   $\forall x_i$，下式称为其代数平均数
   \begin{align*}
     A_n\equiv\frac{\sum\limits_{i=1}^{n} x_i}{n}
+    =\frac{x_1+x_2+x_3+\cdots+x_n}{n}
   \end{align*}
 \end{definition}
 
@@ -13,13 +18,16 @@
   $\forall x_i\ge0$，下式称为其几何平均数
   \begin{align*}
     G_n\equiv\sqrt[n]{\prod_{i=1}^{n}x_i}
+    =\sqrt[n]{x_1 x_2 x_3\cdots x_n}
   \end{align*}
 \end{definition}
 
 \begin{definition}[调和平均数，Harmonic Means, HM]
   $\forall x_i\ge0$，下式称为其调和平均数
   \begin{align*}
-    H_n\equiv\frac{n}{\sum\limits_{i=1}^{n}\frac1{x_i}}
+    H_n\equiv\frac{n}{\sum\limits_{i=1}^{n}\dfrac1{x_i}}
+    =\frac{n}{\dfrac1{x_1}+\dfrac1{x_2}+\cdots+\dfrac1{x_n}}
+    =\frac{1}{\frac{\frac1{x_1}+\frac1{x_2}+\cdots+\frac1{x_n}}{n}}
   \end{align*}
 \end{definition}
 
@@ -27,9 +35,22 @@
   $\forall x_i$，下式称不其平方平均数
   \begin{align*}
     Q_n\equiv\sqrt{\dfrac{\sum\limits_{i=1}^n x_i^2}{n}}
+    =\sqrt{\frac{x_1^2+x_2^2+\cdots+x_n^2}{n}}
   \end{align*}
   平均平方数也称为\term{均方根}(Root Mean Square)。
 \end{definition}
+
+若令
+\begin{align*}
+  \phi(x_1,x_2,\cdots,x_n;p)\equiv\left(\frac{\sum_{i=1}^{n} x_i^p}{n} \right)^{\frac1p}
+  =\left( \frac{x_1^p + x_2^p + \cdots + x_n^p}{n} \right)^{\frac1p}
+\end{align*}
+则显然有
+\begin{align*}
+  H_n \equiv \mathrm{HM}(x_1,x_2,\cdots,x_n)&=\phi(x_1,x_2,\cdots,x_n;-1)\\
+  A_n \equiv \mathrm{AM}(x_1,x_2,\cdots,x_n)&=\phi(x_1,x_2,\cdots,x_n;1)\\
+  Q_n \equiv \mathrm{QM}(x_1,x_2,\cdots,x_n)&=\phi(x_1,x_2,\cdots,x_n;2)
+\end{align*}
 
 \begin{theorem}[HM-GM-AM-QM]
   任意正数序列$x_i$，有
@@ -37,13 +58,14 @@
     H_n\le G_n\le A_n\le Q_n
   \end{align*}
 \end{theorem}
-
 \begin{figure}[htbp]
   \centering
-  \begin{tikzpicture}[scale=1]
-    \draw(-6,0)--(6,0) arc (0:180:6);
-    \draw[|<->|](-6,-0.6)--(3,-0.6) node[midway,fill=white]{$x_1$};
-    \draw[|<->|](3,-0.6)--(6,-0.6) node[midway,fill=white]{$x_2$};
+  \begin{tikzpicture}[scale=1.0]
+    \draw[help lines](-6,0)--(6,0) arc (0:180:6);
+    \draw[help lines,|<->|](-6,-0.6)--(3,-0.6) node[midway,fill=white]{$x_1$};
+    \draw[help lines,|<->|](3,-0.6)--(6,-0.6) node[midway,fill=white]{$x_2$};
+    \draw[help lines,|<->|](-6,-1.5)--(0,-1.5)node[midway,fill=white]{$\dfrac{x_1+x_2}2$};
+    \draw[help lines,|<->|](0,-1.5)--(3,-1.5)node[midway,fill=white]{$\dfrac{x_1-x_2}2$};
     \coordinate (G) at (60:6);
     \coordinate (H) at (60:1.5);
     \tkzDefPoint(3,0){C}
@@ -67,6 +89,8 @@
   \caption{$n=2$时HM,GM,AM,QM的几何示意}
   \label{fig:HM-GM-AM-QM}
 \end{figure}
+
+思考：是否能推出固定$x_1,x_2,\cdots,x_n$，则$\phi(x_1,x_2,\cdots,x_n;p)$关于$p$是递增函数？
 
 \begin{lemma}\label{lemma:b-1-a}
   若$b\le1\le a$，则$ab\le a+b-1$。
@@ -129,8 +153,8 @@
   其对应的高分别为 $h_a, h_b, h_c$，则三角形面积$S=\frac12
   ah_a = \frac12 bh_b = \frac12 ch_c$，同样有$S=\frac12 r(a+b+c)$，从而
   \begin{align*}
-    & S = \frac12 r\left( \frac{2S}{h_c} +\frac{2S}{h_a} + \frac{2S}{h_b} \right)\\
-    \implies & r=\frac{1}{\dfrac1{h_a} + \dfrac1{h_b} + \dfrac1{h_c}} \qedhere
+    & S = \frac12 r\left( \frac{2S}{h_c} +\frac{2S}{h_a} + \frac{2S}{h_b} \right)
+    \quad \implies\quad  r=\frac{1}{\dfrac1{h_a} + \dfrac1{h_b} + \dfrac1{h_c}} \qedhere
   \end{align*}
 \end{proof}
 
@@ -235,7 +259,7 @@
   \iff & \underline{zx(1+y)} - (1+y) - 1-x-z-\underline{zx}\ge 0\\
   \iff & zxy - 2 - (x+y+z)\ge 0\\
   \iff & (a+b)(b+c)(c+a) - 2 - 2(a+b+c)\ge 0\\
-  \iff & (a+b+c)(ab+bc+ca) - abc -2(a+b+c)\ge 2\\
+  \iff & (a+b+c)(ab+bc+ca) - abc -2(a+b+c)\ge 2 \quad(\text{把}abc=1\text{代入})\\
   \iff & (a+b+c)(ab+bc+ca-2)\ge 3
   % \iff & (1+c+a)(1+a+b) + (1+b+c)(1+a+b) + (1+b+c)(1+c+a) \le (1+b+c)(1+c+a)(1+a+b)\\
   % \iff & (b+c)(1+c+a)(1+a+b) - (1+b+c)(1+a+b) - (1+b+c)(1+c+a) \ge 0\\
@@ -392,12 +416,12 @@ $\forall a,b,c,d\in\mathcal{R}$，有
 
 
 \begin{example}
-  $a,b$是小于1的正数，则
+  $x,y$是小于1的正数，则
   \begin{align*}
     \frac1{1-x^2} + \frac1{1-y^2} \ge \frac2{1-xy}
   \end{align*}
 \end{example}
-由$a+b\ge2\sqrt{ab}$，有
+由$x+y\ge2\sqrt{xy}$，有
 \begin{align*}
   \frac1{1-x^2} + \frac1{1-y^2} &\ge \frac2{\sqrt{(1-x^2)(1-y^2)}} &&\text{等号成立}\iff x=\pm y\\
   &=\frac2{\sqrt{1+x^2y^2-x^2-y^2}} \\

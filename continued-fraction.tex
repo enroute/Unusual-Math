@@ -1,0 +1,25 @@
+
+\chapter{连分数}
+\label{chap:continued-fraction}
+
+\section{定义}
+\label{sec:definition-of-continued-fraction}
+
+\begin{definition}
+  对于正整数$a_0, a_1, a_2, \cdots, a_n$，以下形式的有理数称为连分数：
+  \begin{align*}
+    a_0 + \dfrac1{a_1 + \dfrac1{a_2 + \dfrac1{\ddots + \dfrac1{a_n}}}}
+  \end{align*}
+\end{definition}
+
+利用\ref{sec:Euclidean-algorithm}中的欧拉辗转相除法，可以将一个有理数转化为连分数。
+
+\begin{example}
+  将$324/138$化为连分数的形式。
+  \begin{align*}
+    324 = 138\times2 + 48 &\quad\implies\quad \frac{324}{138} = 2 + \dfrac{48}{138} = 2 + \dfrac1{\dfrac{138}{48}}\\
+    138 = 48\times 2 + 42 &\quad\implies\quad \frac{324}{138} = 2 + \dfrac{1}{2 + \dfrac{42}{48}} = 2 + \dfrac{1}{2 + \dfrac1{\dfrac{48}{42}}}\\
+    48 = 42\times1 + 6 & \quad\implies\quad \frac{324}{138} = 2 + \dfrac{1}{2 + \dfrac1{1 + \dfrac{6}{42}}} =  2 + \dfrac{1}{2 + \dfrac1{1 + \dfrac1{\dfrac{42}{6}}}}\\
+    42 = 6\times7 + 0 &  \quad\implies\quad \frac{324}{138} = 2 + \dfrac{1}{2 + \dfrac1{1 + \dfrac1{7}}}
+  \end{align*}
+\end{example}
