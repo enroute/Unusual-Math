@@ -8,3 +8,59 @@
 \label{sec:Newton-method}
 
 牛顿法是一种迭代方法。迭代方法的思想是通过一个初始点，不断地迭代得到一系列的点，而这些点序列最终会收敛到目标点上。具体来说，牛顿法是通过曲线的切线来构造下一个点，因而牛顿法通常也叫做切线法。
+
+\begin{enumerate}
+\item 从一个初始点$(x_0, 0)$开始，找到曲线上的点$(x_0, f(x_0))$；
+\item 作切线，找到切线与$x$轴的交点$(x_1,0)$；
+\item 从$(x_1,0)$开始重复上述步骤
+\end{enumerate}
+
+按上述步骤，可得到一系列的值$x_0, x_1, x_2, \cdots, $。在某些条件下，$x_i$会收敛到曲线与$x$轴的交点。其递推关系为
+\begin{align*}
+  x_{n+1}=x_0 - \frac{f(x_0)}{f'(x_0)}
+\end{align*}
+上述迭代的不动点(即迭代完了之后还是它本身)，在$f'$不为零的情况下等价于$f(x)$的零点。这是因为
+\begin{align*}
+  x=x-\frac{f(x)}{f'(x)} \quad \overset{f'\ne0}{\iff}\quad f(x)=0
+\end{align*}
+
+\begin{theorem}
+  若函数$f(x)$在$x=\alpha$处为零，即$f(\alpha)=0$，且$f(x)$有连续的导数，且$f'(\alpha)\ne0$。则存在$x=\alpha$的一个邻域，在此邻域内任意一点$x_0$出发按牛顿切线法得出的点序列$\{x_i\}$收敛于$\alpha$。
+\end{theorem}
+由此定理可知，有连续导数的函数的零点如果其导数不会零，则该零点有一个吸引域，在此吸引域内的点按牛顿切线法得到的序列总会收敛于该零点。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \begin{scope}[shift={(0,0)},decoration={
+        markings,
+        mark=at position 0.5 with {\arrow{>}}
+      }]
+      \draw[->](-1,0)--(11,0)node[right]{$x$};
+      \draw[->](0,-2)--(0,9)node[above]{$y$};
+      \draw[very thick,domain=-.75:9.5,smooth,variable=\x]plot({\x},{.1*(\x-1)*(\x-1)-1});
+      \coordinate[label=below:$x_0$] (x0) at (9.3,0);
+      \coordinate[label=above left:{$\left( x_0,f(x_0)\right)$}] (f0) at (9.3,5.889);
+      \coordinate[label=below:$x_1$] (x1) at (5.7524,0);
+      \coordinate (f1) at (5.7524,1.2585);
+      \coordinate[label=below:$x_2$] (x2) at (4.4283,0);
+      \coordinate (f2) at (4.4283,0.1753);
+      \draw[help lines,postaction={decorate}](x0)--(f0);
+      \draw[help lines,postaction={decorate}](f0)--(x1);
+      \draw[help lines,postaction={decorate}](x1)--(f1);
+      \draw[help lines,postaction={decorate}](f1)--(x2);%--(f2);
+      \tkzDrawPoints(x0,f0,x1,f1,x2)
+      \draw[help lines,|<->|](9.3,-1)--(5.7524,-1)node[midway,fill=white,black]{$\dfrac{f(x_0)}{f'(x_0)}$};
+      \draw[help lines, <->|](10,0)--(10,5.889)node[midway,fill=white,black]{$f(x_0)$};
+      \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=x0--x1--f0};
+      \coordinate (f) at ($.7*(x1)+.3*(f0)$);
+      \coordinate[label=above:{切线斜率$\tan\theta=f'(x_0)$}] (t) at (5,3);
+      \draw[dashed,->,help lines](f)--(t);
+    \end{scope}
+    \begin{scope}[shift={(0,0)}]
+      
+    \end{scope}
+  \end{tikzpicture}
+  \caption{牛顿切线法}
+  \label{fig:numeric-newton-method}
+\end{figure}

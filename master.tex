@@ -3,8 +3,21 @@
 % comment this if don't want to show answer
 \def\withanswer{1}
 
+% Make different footmark reference the same footnote
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
 % Turn on subsection numbering in memoir class
 \setsecnumdepth{subsection}
+
+\usepackage{metalogo}           %for \XeTeX, \XeLaTeX, \LuaTeX and \LuaLaTeX
+
+%% subfigure is obsolete and conilict with tocloft package, use subcaption or subfig insted
+% \usepackage{subfigure}
+% \usepackage[subfigure]{tocloft}
+% \PassOptionsToPackage{subfigure}{tocloft}
+\usepackage{subcaption}
 
 % toc style
 \usepackage{titletoc}% http://ctan.org/pkg/titletoc
@@ -115,13 +128,17 @@
 \usepackage{csquotes} 
 
 \usepackage{colortbl}
-\usepackage{booktabs}       % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}
+% \usepackage[table]{xcolor}      %this will load colortbl package, for the \cellcolor
+
+\usepackage{booktabs}       % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}, not compactible with vertical line
+\usepackage{boldline}       % for \hlineB, bold horizontal lines compactable with vertical line
 
 \usepackage{tikz,fp}
 % \usetikzlibrary{angles}         % for perpendicular symbols
 \usetikzlibrary{calc,intersections,patterns,angles,quotes}           %
 \usepackage{tikz-3dplot}
 \usetikzlibrary{3d}
+\usetikzlibrary{decorations.markings} %for decorate, arrow in the middle of a line
 
 \newcommand{\tikzmark}[2]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {$#2$};}
 
@@ -310,8 +327,8 @@
 \usepackage{enumitem}
 % \setlist{nolistsep}
 % \setitemize{labelindent=\parindent,leftmargin=*,align=left,itemindent=2em,noitemsep}%,leftmargin=*,topsep=2pt,partopsep=0pt}
-\setitemize{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.3em,align=left}
-\setenumerate{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=2.5em,align=left}
+\setitemize{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=4em,align=left}
+\setenumerate{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=4em,align=left}
 
 
 \renewcommand{\baselinestretch}{1.1}
@@ -360,6 +377,7 @@
 %     \newcounter{X}
 %     \whiledo{\value{X}<10}{\value{X},\stepcounter{X}}
 
+
 % 3 counters for loops
 \newcounter{X}
 \newcounter{Y}
@@ -394,6 +412,10 @@
 % \includeonly{continued-fraction}
 % \includeonly{calendar}
 % \includeonly{diophantine-equation}
+% \includeonly{numerical-method}
+% \includeonly{identities}
+% \includeonly{nim-game}
+% \includeonly{cover}
 
 \begin{document}
 
@@ -446,6 +468,7 @@
 \include{fun}
 \include{methods}
 \include{logic}
+\include{nim-game}
 
 \include{magic-square}
 

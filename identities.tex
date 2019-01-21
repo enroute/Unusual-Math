@@ -2,6 +2,9 @@
 \chapter{恒等式}
 \label{chap:identities}
 
+\section{代数}
+\label{sec:algebra-identities}
+
 \begin{theorem}[Sophie-Germain恒等式]
   $\forall x,y$，有
   \begin{align*}
@@ -21,9 +24,54 @@
   若$a,b$互质，则有$ax+by=1$。
 \end{theorem}
 
-$x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,y$不是唯一的，可以通过扩展欧几里得算法来计算得到。
+\begin{theorem}\label{th:inverse-bezout}
+  若整数$x,y,a,b$满足$ax+by=1$，则$x,y$互质。从而$\gcd(a,b)=\gcd(a,y)=\gcd(x,b)=\gcd(x,y)=1$。
+\end{theorem}
+\begin{proof}
+  记$g=\gcd(x,y)$，则$x'=x/g$与$y'=y/g$是互质的两个整数，代入有
+  \begin{align*}
+    1=ax+by=ax'g+by'g=g'(ax'+by')
+  \end{align*}
+  从而$g\mid 1$，从而$g=1$。
+\end{proof}
 
-\begin{definition}[扩展欧几里得算法]
-  Ref. \verb|https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm|
-\end{definition}
+%%% $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,y$不是唯一的，可以通过扩展欧几里得算法来计算得到。
+$x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,y$不是唯一的，可以通过类似于欧几里得辗转相除法得到。
 
+\begin{example}
+  求整数$a,b$使得$211a+37b=1$。
+\end{example}
+\begin{proof}[提示]
+\begin{align*}
+  211a+37b=1 &\iff 37b=1-211a \\
+             &\iff b=\frac{1-211a}{37}=-5a+\frac{1-26a}{37}\\
+             &\iff b=-6a+\frac{1+11a}{37} 
+\end{align*}
+令$1+11a=37t_1$，其中$t_1$为整数，从而
+\begin{align*}
+  1+11a=37t_1 & \iff a=\frac{37t_1-1}{11}=3t_1 + \frac{4t_1-1}{11}
+\end{align*}
+令$4t_1-1=11t_2$，其中$t_2$为整数，则$t_1=2t_2+(3t_2+1)/4$。若能观察出来取$t_2=1$可使$t_1$为整数，则代入即可。
+
+若观察不出来，继续令$3t_2+1=4t_3$，则$t_2=t_3+(t_3-1)/3$，若还观察不出来$t_3$应取什么值可使$t_2$为整数，继续令$t_3-1=3t_4$，从而$t_3=3t_4+1$，整数$t_4$可随意挑选，再一步步反向代入，可得$t_3,t_2,t_1,a,b$。
+\end{proof}
+
+
+% \begin{definition}[扩展欧几里得算法]
+%   Ref. \verb|https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm|
+% \end{definition}
+
+\begin{example}[1959 IMO]
+  求证对任意正整数$n$，分数$\dfrac{21n+4}{14n+3}$不可约。
+\end{example}
+\begin{proof}[提示]
+  相当于证明$21n+4$与$14n+3$互质。尝试使用定理\ref{th:inverse-bezout}，若能找到两个整数$a,b$，使得$a(21n+4)+b(14n+3)=1$，则有$21n+4$与$14n+3$互质。而
+  \begin{align*}
+    a(21n+4)+b(14n+3)=1 \iff (21a + 14b)n + 4a + 3b = 1
+  \end{align*}
+  而上式要对任意整数$n$成立，等价于以下两式同时成立
+  \begin{align*}
+    21a+14b=0, \quad 4a+3b=1
+  \end{align*}
+  而这个方程组是有整数解$a=-2, b=3$，从而原问题得证。
+\end{proof}

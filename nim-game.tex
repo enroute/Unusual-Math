@@ -1,0 +1,112 @@
+
+\chapter{尼姆游戏}
+\label{chap:nim-game}
+
+\section{一元尼姆游戏}
+\label{sec:one-pile-nim-game}
+
+\begin{example}
+  两人用一堆石头玩游戏，规则是轮流拿，每次只能拿1或2或3块石头，谁拿走最后一块石头的人将是胜利者。你的最佳策略是什么？
+\end{example}
+\begin{proof}[提示]
+  也可以用硬币或纸牌等替换石头，尼姆游戏特别适合旅途中玩。
+
+  最佳策略的关键点是找到必赢和必输点。考虑剩下$n$块石头时，下一次要走的人是必赢还是必输，结果如表~\ref{tab:win-lose-position-of-one-pile-nim-game}所示。
+  \begin{table}[htbp]
+    \begin{minipage}{\textwidth}\centering
+    \begin{tabular}{c|ccccccccccc}
+      \toprule
+      $n$ & 1 & 2 & 3 & \textcircled{4} & 5 & 6 & 7 & \textcircled{8} & 9 & 10 & $\cdots$ \\\hline
+          & W & W & W & \textcircled{L} & W & W & W & \textcircled{L} & W & W  & $\cdots$ \\
+      \bottomrule
+    \end{tabular}
+    \end{minipage}
+    \caption{输赢点，W表示必赢点(Win)，L表示必输点(Lose)}
+    \label{tab:win-lose-position-of-one-pile-nim-game}
+  \end{table}
+
+  其中$1,2,3$是必赢点，是因为玩家可以直接拿完全部剩余的石头获取胜利。$4$是必输点是因为不管如何走，走完后都会让对手处于必赢点$1,2,3$中的某一个。$5,6,7$是必赢点，是因为玩家可以拿走适当的石头，让对手面临必输点$4$。依次类推，可知$4n$是必输点，其余为必赢点，可用数学归纳法证明。
+
+  最佳策略就是设法让对手面临必输点，即设法让走完后剩余$4n$块石头。
+\end{proof}
+
+\begin{example}
+  上题中，如果胜利规则改为谁拿到最后一块石头谁就输，那么最佳策略又该是如何呢？
+\end{example}
+\begin{proof}[提示]
+  找输赢点，如下表所示。
+  \begin{center}
+    \begin{tabular}{c|ccccccccccc}
+      \toprule
+      $n$ & \textcircled{1} & 2 & 3 & 4 & \textcircled{5} & 6 & 7 & 8 & \textcircled{9} & 10 & $\cdots$ \\\hline
+          & \textcircled{L} & W & W & W & \textcircled{L} & W & W & W & \textcircled{L} & W  & $\cdots$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  最佳策略就是设法剩余$4n+1$块石头留给对手。
+\end{proof}
+
+\section{二元尼姆游戏}
+\label{sec:two-piles-nim-game}
+
+\begin{example}
+  有两堆石头，规则变为每人可以从任意一堆中取走任意数量的石头，但不可不取。谁拿到最后一块石头谁获得胜利。此时的最佳策略又该如何？
+\end{example}
+\begin{proof}[提示]
+  还是找输赢点。
+  \begin{enumerate}
+  \item 首先，如果两堆中有一堆已经被拿光，那么直接拿剩余一堆的所有石头可以获取胜利；
+  \item 考虑下一个位置(1,1)，即两堆都只剩一块石头，则不管如何，只能走到(1,0)或者(0,1)这两个W点，从而让对手获胜，即(1,1)是L点；
+  \item 考虑$(n,1)$和$(1,n)$，其中$n>1$，这些位置走一步都可以到达(1,1)这个L点让对手必输，所以这些都是W点；
+  \item 再考虑(2,2)这个点，它的上方和左方都是W点，从而不管如何走都会让对手处于W点，即这个位置是L点；
+  \item $\cdots$
+  \end{enumerate}
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+        & 0 & 1 & 2 & 3 & 4 & 5\\\hline
+      0 &   & W & W & W & W & W\\\hline
+      1 & W &   &   &   &   &  \\\hline
+      2 & W &   &   &   &   &  \\\hline
+      3 & W &   &   &   &   &  \\\hline
+      4 & W &   &   &   &   &  \\\hline
+      5 & W &   &   &   &   &  \\\hline
+    \end{tabular}
+    $\quad\to\quad$
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+        & 0 & 1 & 2 & 3 & 4 & 5\\\hline
+      0 &   & W & W & W & W & W\\\hline
+      1 & W & \cellcolor{blue!20}L &   &   &   &  \\\hline
+      2 & W &   &   &   &   &  \\\hline
+      3 & W &   &   &   &   &  \\\hline
+      4 & W &   &   &   &   &  \\\hline
+      5 & W &   &   &   &   &  \\\hline
+    \end{tabular}
+  \end{center}
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+        & 0 & 1 & 2 & 3 & 4 & 5\\\hline
+      0 &   & W & W & W & W & W\\\hline
+      1 & W & L & \cellcolor{blue!20}W & \cellcolor{blue!20}W & \cellcolor{blue!20}W & \cellcolor{blue!20}W\\\hline
+      2 & W & \cellcolor{blue!20}W &   &   &   &  \\\hline
+      3 & W & \cellcolor{blue!20}W &   &   &   &  \\\hline
+      4 & W & \cellcolor{blue!20}W &   &   &   &  \\\hline
+      5 & W & \cellcolor{blue!20}W &   &   &   &  \\\hline
+    \end{tabular}
+    $\quad\to\quad$
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+        & 0 & 1 & 2 & 3 & 4 & 5\\\hline
+      0 &   & W & W & W & W & W\\\hline
+      1 & W & L & W & W & W & W\\\hline
+      2 & W & W & \cellcolor{blue!20}L  &   &   &  \\\hline
+      3 & W & W &   &   &   &  \\\hline
+      4 & W & W &   &   &   &  \\\hline
+      5 & W & W &   &   &   &  \\\hline
+    \end{tabular}
+  \end{center}
+依次填下去，就会发现对角线上的点$(n,n)$都是L点，而且除了这些点外，其余的都是W点。
+\end{proof}
+

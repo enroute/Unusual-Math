@@ -40,7 +40,7 @@
   \begin{tabular}{c|cccccccc}
     \toprule[2pt]
     阶数 & 3  & 4  & 5  & 6   & 7   & 8   & 9   & 10 \\\hline
-         & 15 & 34 & 65 & 111 & 175 & 260 & 369 & 505\\
+    幻和 & 15 & 34 & 65 & 111 & 175 & 260 & 369 & 505\\
     \bottomrule[2pt]
   \end{tabular}
   \caption{各阶幻方常数}
@@ -50,7 +50,7 @@
 \section{构造方法}
 \label{sec:magic-squares-construction-method}
 
-利用南宋·杨辉《续古摘奇算法》中的写到：
+早在南宋年间，杨辉在《续古摘奇算法》中就记录了关于三阶幻方的构造方法：
 \begin{quotation}
   九子斜排，上下对易，左右相更，四维挺出。
 \end{quotation}
@@ -594,6 +594,104 @@
   \end{center}
 
   此时最左列与最右列都剩余4个空格，都需要填入两个小数和两个大数。其排列组合只有若干几种，排除后可得最终结果。(若不用排除法是否有更简单的方法？)
+\end{proof}
+
+\section{变种}
+\label{sec:alien-magic-squares}
+
+\begin{example}
+  将$21,22,23,24,25,26$填入下面的圆圈中，使得三角形每边三个数字的和相等。
+
+  \centering
+  \begin{tikzpicture}[scale=.7]
+    \coordinate (v0) at (210:3);
+    \coordinate (v2) at (330:3);
+    \coordinate (v4) at ( 90:3);
+    \coordinate (v1) at ($.5*(v0)+.5*(v2)$);
+    \coordinate (v3) at ($.5*(v2)+.5*(v4)$);
+    \coordinate (v5) at ($.5*(v4)+.5*(v0)$);
+    \draw(v0)--(v2)--(v4)--cycle;
+    \foreach \v in {v0, v1, v2, v3, v4, v5}{
+      \draw[fill=white](\v)circle(.5);
+    }
+  \end{tikzpicture}
+\end{example}
+\begin{proof}[提示]
+  每个数减20，原题变化为在图中填入$1,2,3,4,5,6$这6个数，使三角形三边数字和相等。如图，给每个圆圈中的数字编号，分别记为$a_1,a_2,a_3,a_4,a_5,a_6.$
+  \begin{center}
+    \begin{tikzpicture}[scale=.7]
+      \begin{scope}[shift={(0,0)}]
+        \coordinate (v0) at (210:3);
+        \coordinate (v2) at (330:3);
+        \coordinate (v4) at ( 90:3);
+        \coordinate (v1) at ($.5*(v0)+.5*(v2)$);
+        \coordinate (v3) at ($.5*(v2)+.5*(v4)$);
+        \coordinate (v5) at ($.5*(v4)+.5*(v0)$);
+        \draw(v0)--(v2)--(v4)--cycle;
+        \foreach \v/\t/\c in {v0/$a_1$/red!30, v1/$a_2$/white, v2/$a_3$/red!30, v3/$a_4$/white, v4/$a_5$/red!30, v5/$a_6$/white}{
+          \draw[fill=\c](\v)circle(.5)node{\t};
+        }
+    \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  记每边的和为$x$，则
+  \begin{align*}
+    3x=&(a_1+a_2+a_3) + (a_3+a_4+a_5) + (a_5+a_6+a_1)\\
+      =&(a_1+a_2+a_3+a_4+a_5+a_6) + (a_1 + a_3 + a_5)\\
+      =&(1+2+3+4+5+6) + (a_1+a_2+a_3)\\
+      =&21+(a_1+a_2+a_3)
+  \end{align*}
+
+  从而$a_1+a_2+a_3$必须能被3整除，$a_2+a_4+a_6=21-a_1+a_3+a_5$也能被3整除。
+
+  将$1,2,3,4,5,6$按模3的同余类划分可分为三组
+  \begin{align*}
+    \{1,4\}, \quad\equiv1\pmod3\\
+    \{2,5\}, \quad\equiv2\pmod3\\
+    \{3,6\}, \quad\equiv0\pmod3
+  \end{align*}
+  在1到6中取3个使其和能被3整除，则在上面分类中，必须每类都取且仅取一个。其可能的组合共$2^3=8$种，列表如下：
+  \begin{center}
+    \begin{tabular}{cc||cc}
+      \toprule
+      $\{a_1,a_3,a_5\}$ & $\{a_2,a_4,a_6\}$ & $\{a_1,a_3,a_5\}$ & $\{a_2,a_4,a_6\}$\\\hline
+      \underline{\{1,2,3\}} & \underline{\{4,5,6\}} & \{4,5,6\} & \{1,2,3\}\\
+      \{1,2,6\} & \{4,5,3\} & \{4,5,3\} & \{1,2,6\}\\
+      \underline{\{1,5,3\}} & \underline{\{4,2,6\}} & \{4,2,6\} & \{1,5,3\}\\
+      \{1,5,6\} & \{4,2,3\} & \{4,2,3\} & \{1,5,6\}\\      
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  其中有些有解，有些无解，下图给出了其中两个有解(表中带下划线的两组)的组合。$\hfill\qedhere$
+  \begin{center}
+\begin{tikzpicture}[scale=.7]
+      \begin{scope}[shift={(0,0)}]
+        \coordinate (v0) at (210:3);
+        \coordinate (v2) at (330:3);
+        \coordinate (v4) at ( 90:3);
+        \coordinate (v1) at ($.5*(v0)+.5*(v2)$);
+        \coordinate (v3) at ($.5*(v2)+.5*(v4)$);
+        \coordinate (v5) at ($.5*(v4)+.5*(v0)$);
+        \draw(v0)--(v2)--(v4)--cycle;
+        \foreach \v/\t/\c in {v0/$1$/red!30, v1/$6$/white, v2/$2$/red!30, v3/$4$/white, v4/$3$/red!30, v5/$5$/white}{
+          \draw[fill=\c](\v)circle(.5)node{\t};
+        }
+      \end{scope}
+      \begin{scope}[shift={(7,0)}]
+        \coordinate (v0) at (210:3);
+        \coordinate (v2) at (330:3);
+        \coordinate (v4) at ( 90:3);
+        \coordinate (v1) at ($.5*(v0)+.5*(v2)$);
+        \coordinate (v3) at ($.5*(v2)+.5*(v4)$);
+        \coordinate (v5) at ($.5*(v4)+.5*(v0)$);
+        \draw(v0)--(v2)--(v4)--cycle;
+        \foreach \v/\t/\c in {v0/$1$/red!30, v1/$6$/white, v2/$3$/red!30, v3/$2$/white, v4/$5$/red!30, v5/$4$/white}{
+          \draw[fill=\c](\v)circle(.5)node{\t};
+        }
+      \end{scope}
+    \end{tikzpicture}    
+  \end{center}
 \end{proof}
 
 \section{练一练}
