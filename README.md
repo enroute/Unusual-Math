@@ -1,5 +1,7 @@
-# IMOTopics
-Collection for IMO topics
+~~# IMOTopics~~
+~~Collection for IMO topics~~
+
+It was intended to show some topics of IMO. But as things move on, it turns out to be more appropriate to show the unusual and funny aspects of math. So the name of the booklet is changed to Unusual Math.
 
 # How to build
 Just type `make` in the console with pwd set to the source code directory.
