@@ -38,3 +38,21 @@
 \end{align*}
 \endgroup
 
+
+\begin{lemma}[Titu's lemma，T2 lemma]\label{lemma:titu}
+  任意两正数序列$a_1,a_2,\cdots,a_n$和$b_1,b_2,\cdots,b_n$，有
+  \begin{align*}
+    \frac{a_1^2}{b_1} + \frac{a_2^2}{b_2} + \cdots + \frac{a_n^2}{b_n} \ge
+    \frac{\left(a_1+a_2+\cdots a_n\right)^2}{b_1+b_2+\cdots+b_n}
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  构造两序列应用柯西--施瓦茨不等式。构造两序列如下：
+  \begin{align*}
+    \begin{matrix}%
+      \Big\{ &\sqrt{b_1}, &\sqrt{b_2},&\cdots,\sqrt{b_n} &\Big\}\\
+      \Big\{ &\dfrac{a_1}{\sqrt{b_1}}, &\dfrac{a_2}{\sqrt{b_2}},&\cdots,\dfrac{a_n}{\sqrt{b_n}} & \Big\}
+    \end{matrix}
+  \end{align*}
+  应用柯西--施瓦茨不等式立得。
+\end{proof}

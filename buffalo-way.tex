@@ -2,7 +2,7 @@
 \chapter{Buffalo Way}
 \label{chap:buffalo-way}
 
-Buffalo Way通常用于解决对称性问题，对于$x_1\le x_2\le x_3\le \cdots\le x_n$，令
+Buffalo Way(BW)是一种方法，通常用于解决对称性问题，对于$x_1\le x_2\le x_3\le \cdots\le x_n$，令
 \begin{align*}
   x_1&=y_1\\
   x_2&=y_1+y_2\\
@@ -16,7 +16,7 @@ Buffalo Way通常用于解决对称性问题，对于$x_1\le x_2\le x_3\le \cdot
   证明：若$0\le a\le b\le c$，则$(a+b)(a+c)^2\ge 6abc$。
 \end{example}
 \begin{proof}
-  应用Buffalo Way，令$a=x, b=x+y, c=x+y+z$，其中$x,y,z$均为非负数。代入，有
+  应用Buffalo Way，令$a=x$, $b=x+y$, $c=x+y+z$，其中$x$,$y$,$z$均为非负数。代入，有
   \begin{align*}
     &(a+b)(a+c)^2\ge 6abc\\
     \iff& (2x+y)(2x+y+z)^2\ge 6x(x+y)(x+y+z)
@@ -38,15 +38,30 @@ Buffalo Way通常用于解决对称性问题，对于$x_1\le x_2\le x_3\le \cdot
   \begin{align*}
     \sum_{\mathrm{cyc}} \frac{x^4}{8x^3+5y^3}\ge\frac{x+y+z}{13}
   \end{align*}
+  其中$\sum\limits{\mathrm{cyc}}$表示轮换求和，对上式的$x$，$y$和$z$作轮换，则有
+  \begin{align*}
+    \sum_{\mathrm{cyc}}\frac{x^4}{8x^3+5y^3} \implies
+    \begin{cases}
+      \dfrac{x^4}{8x^3+5y^3} \xRightarrow{x\leftarrow x, y\leftarrow y} \dfrac{x^4}{8x^3+5y^3} \\
+      \dfrac{x^4}{8x^3+5y^3} \xRightarrow{x\leftarrow y, y\leftarrow z} \dfrac{y^4}{8y^3+5z^3} \\
+      \dfrac{x^4}{8x^3+5y^3} \xRightarrow{x\leftarrow z, y\leftarrow x} \dfrac{z^4}{8z^3+5x^3}
+    \end{cases}%
+  \end{align*}
+  上面三式相加，可得：
+  \begin{align*}
+    \sum_{\mathrm{cyc}} \frac{x^4}{8x^3+5y^3} = \frac{x^4}{8x^3+5y^3}
+    + \frac{y^4}{8y^3+5z^3}
+    + \frac{z^4}{z^3+5x^3}
+  \end{align*}
 \end{example}
 \begin{proof}
-  应用BW，不妨设$0<x\le y\le z$，且$y=x+u, z=x+u+v$，代入。\color{red}，非常繁琐！竞赛题基本可放弃此类方法，另辟蹊径。
+  应用BW，不妨设$0<x\le y\le z$，且$y=x+u$，$z=x+u+v$，代入。{\color{red}非常繁琐！如果想锻炼计算能力，可以一试；如果是竞赛题，基本可放弃此方法，需另辟蹊径。}
 \end{proof}
 
 \begin{example}
   证明：对任意正数$x,y,z$，有
   \begin{align*}
-    \frac1{(x-y)^2}+\frac1{(y-z)^2}+\frac1{(z-x)^2}\ge\frac4{xy+yz+zx}
+    \sum_{\mathrm{cyc}}\frac1{(x-y)^2}\equiv\frac1{(x-y)^2}+\frac1{(y-z)^2}+\frac1{(z-x)^2}\ge\frac4{xy+yz+zx}
   \end{align*}
 \end{example}
 \begin{proof}

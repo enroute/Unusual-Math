@@ -49,7 +49,9 @@
     \filldraw[draw=titlepagecolor,fill=titlepagecolor](O)--([xshift=-5cm]O)--([xshift=-5cm]bottom-right)--(bottom-right)--cycle;
     \filldraw[draw=titlepagecolor!30!white,fill=titlepagecolor!30!white,opacity=0.3] (O)--(right)--(bottom-right)--cycle;
 
-    \node[below right] at ([xshift=3cm,yshift=-4cm]current page.north west) {\parbox{\textwidth}{\color{white}\fontsize{60}{72} \selectfont\kai 不一样的数学}};
+    \node[below right] (T) at ([xshift=3cm,yshift=-4cm]current page.north west) {\parbox{\textwidth}{\color{white}\fontsize{60}{72} \selectfont\kai 不一样的数学}};
+    \filldraw[very thick, draw=white,opacity=50]([xshift=1.5cm,yshift=-.5cm]T.south west)--([xshift=1cm,yshift=-.5cm]T.south east);
+    \node[below right,color=white,opacity=.2] at ([xshift=1.5cm,, yshift=-1cm]T.south west) {\scalebox{1}[-1]{\textsc{\fontsize{40}{48}\selectfont\kai Unusual Math}}};
     \node[below left] at ([xshift=-3cm,yshift=-4cm]current page.east){\parbox{.3\textwidth}{\raggedleft
       {\large 白羽}\par
       {\small\texttt mario.li@foxmail.com}\par
