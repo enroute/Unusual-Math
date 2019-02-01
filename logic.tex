@@ -413,3 +413,262 @@
   
   第二个信息：参加比赛。能参加比赛的，成绩一般不会太差，排除分数不在$[0,100]$区间且分数特别低的比如1分2分的情况，从而只剩下11岁89分第2名这种情况。
 \end{proof}
+
+\begin{example}[失窃的艺术品]
+  一件艺术失窃案发生后，警察询问了六名嫌疑人是谁干的。图~\ref{fig:statements-of-suspects}是他们的陈述。
+
+  % \begin{multicols}{3}
+  % Alex说：
+  % \begin{enumerate}
+  % \item 不是Blake；
+  % \item 不是Drew；
+  % \item 不是Emery。
+  % \end{enumerate}
+
+  % Blake说：
+  % \begin{enumerate}
+  % \item 不是Alex；
+  % \item 不是Chris；
+  % \item 不是Emery。
+  % \end{enumerate}
+
+  % Chris说：
+  % \begin{enumerate}    
+  % \item 不是Blake；
+  % \item 不是Frankie；
+  % \item 不是Emery。
+  % \end{enumerate}
+
+  % Drew说：
+  % \begin{enumerate}
+  % \item 不是Alex；
+  % \item 不是Frankie；
+  % \item 不是Chris。
+  % \end{enumerate}
+
+  % Emery说：
+  % \begin{enumerate}
+  % \item 不是Chris；
+  % \item 不是Drew；
+  % \item 不是Frankie。
+  % \end{enumerate}
+
+  % Frankie说：
+  % \begin{enumerate}
+  % \item 不是Chris；
+  % \item 不是Drew；
+  % \item 不是Alex。
+  % \end{enumerate}
+
+  % \end{multicols}
+
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(0,0)}]
+        \node[text width=3.5cm,rotate=30] at (0,0) {\fbox{\vbox{
+            Alex说：
+            \begin{enumerate}
+            \item 不是Blake；
+            \item 不是Drew；
+            \item 不是Emery。
+            \end{enumerate}
+          }}};
+      \end{scope}
+      \begin{scope}[shift={(4.5,0)}]
+        \node[text width=3.5cm,rotate=0] at (0,0) {\fbox{\vbox{
+              Blake说：
+              \begin{enumerate}
+              \item 不是Alex；
+              \item 不是Chris；
+              \item 不是Emery。
+              \end{enumerate}
+          }}};
+      \end{scope}
+      \begin{scope}[shift={(9,0)}]
+        \node[text width=3.5cm,rotate=-30] at (0,0) {\fbox{\vbox{
+              Chris说：
+              \begin{enumerate}    
+              \item 不是Blake；
+              \item 不是Frankie；
+              \item 不是Emery。
+              \end{enumerate}
+          }}};
+      \end{scope}
+
+
+      \begin{scope}[shift={(0,-4.5)}]
+        \node[text width=3.5cm,rotate=-30] at (0,0) {\fbox{\vbox{
+              Drew说：
+              \begin{enumerate}
+              \item 不是Alex；
+              \item 不是Frankie；
+              \item 不是Chris。
+              \end{enumerate}
+          }}};
+      \end{scope}
+      \begin{scope}[shift={(4.5,-4.5)}]
+        \node[text width=3.5cm,rotate=0] at (0,0) {\fbox{\vbox{
+              Emery说：
+              \begin{enumerate}
+              \item 不是Chris；
+              \item 不是Drew；
+              \item 不是Frankie。
+              \end{enumerate}
+          }}};
+      \end{scope}
+      \begin{scope}[shift={(9,-4.5)}]
+        \node[text width=3.5cm,rotate=30] at (0,0) {\fbox{\vbox{
+              Frankie说：
+              \begin{enumerate}
+              \item 不是Chris；
+              \item 不是Drew；
+              \item 不是Alex。
+              \end{enumerate}
+            }}};
+      \end{scope}
+    \end{tikzpicture}
+    \caption{嫌疑人供词}
+    \label{fig:statements-of-suspects}
+  \end{figure}
+  
+  经过调查，警察发现他们当中恰好有四个人每人说了一句假话，其余所有话都是真的。那么，到底罪犯是谁？  
+\end{example}
+\begin{proof}[提示]
+  还是用假设--排除的方法。
+  \begin{enumerate}
+  \item 假设Alex是罪犯，那么可以得到下面的表格。
+    \begin{center}
+    \begin{tabular}{cccccc}
+      \toprule
+      Alex & Blake & Chris & Drew & Emery & Frankie\\\midrule
+      $\checkmark\checkmark\checkmark$ & $\xmark\checkmark\checkmark$ & $\checkmark\checkmark\checkmark$ & $\xmark\checkmark\checkmark$ & $\checkmark\checkmark\checkmark$ & $\checkmark\checkmark\xmark$\\                                         
+      \bottomrule
+    \end{tabular}
+    \end{center}
+    其中$\xmark$表示一句假话，$\checkmark$表示一句真话。由上表可以看到，只有3个人每人说了一句假话，与恰好有4人每人说了一句假话矛盾。
+    
+  \item 假设Blake是罪犯，那么有
+    \begin{center}
+      \begin{tabular}{cccccc}
+        \toprule
+        Alex & Blake & Chris & Drew & Emery & Frankie\\\midrule
+        $\xmark\checkmark\checkmark$ & $\checkmark\checkmark\checkmark$ & $\xmark\checkmark\checkmark$ & $\checkmark\checkmark\checkmark$ & $\checkmark\checkmark\checkmark$ & $\checkmark\checkmark\checkmark$\\
+        \bottomrule
+      \end{tabular}
+    \end{center}
+  \item 依此类推，若能排除五人，剩余一人不能排除，则剩余的人就是罪犯了。\hfill $\qedhere$
+  \end{enumerate}
+\end{proof}
+
+
+\begin{example}[找火车]
+  在一个洞察力大赛中，5名参赛者在桌子边上一字排开，他们从桌上的图案中观察到的飞机数量有$(26,86,123,174,250)$，观察到的火车数则有$(5,42,45,98,105)$，而他们的年龄则分别为$(21,23,31,36,40)$。根据下面的信息，请判断各人的位置，年龄，观察到的飞机和火车数量以及衣服的颜色。
+  \begin{enumerate}
+  \item Simon找到的火车比他找到的飞机少44；
+  \item Keith的年龄是36；
+  \item 最右边的人比Simon年轻8岁，并且他找到了174架飞机；
+  \item James穿着米黄色的衣服，并且跟Simon比起来他找到的火车数少了37；
+  \item 穿着绿色衣服的人比他左手边的人年轻19岁；
+  \item Steven找到了105辆火车和250架飞机；
+  \item 站中间的人是31岁，穿着蓝色的衣服，并且他找到了42辆火车；
+  \item Alan站在最左边，找到了26架飞机，并且他找到的火车数量比他找到的飞机数量多了72；
+  \item 穿红衣服的人比Keith大4岁，并且不在穿蓝衣服的人的旁边；
+  \item 在31岁的人旁边但不在找到26架飞机的人旁边的那个人穿着橙色的衣服，找到了45辆火车。
+  \end{enumerate}
+\end{example}
+\begin{proof}[提示]
+  首先填入可以直接使用的条件，可得表~\ref{tab:contester-info-of-train-spotting}。
+  \begin{table}[htbp]
+    \centering
+    \begin{tabularx}{.8\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
+      \hline
+      \rowcolor{LightCyan}
+      编号 & 1    & 2 & 3  & 4 & 5\\\hline
+      名字 & Alan &   &    &   &  \\\hline
+      年龄 &      &   & 31 &   &  \\\hline
+      颜色 &      &   & 蓝 &   &  \\\hline
+      飞机 & 26   &   &    &   & 174 \\\hline
+      火车 & 98   &   & 42 &   &  \\\hline
+    \end{tabularx}
+    \caption{洞察力比赛参赛者信息}
+    \label{tab:contester-info-of-train-spotting}
+  \end{table}
+
+  作一个年龄差值表，如下所示：
+  \begin{center}
+    \begin{tabularx}{.6\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
+      % \cline{2-6} % \cline not compactible with colortblb
+      \hhline{~-----}
+      \cline{2-6}
+      \rowcolor{LightCyan}
+      \multicolumn{1}{c|}{\cellcolor{white}} 
+         & 21 & 23 & 31 & 36 & 40\\\hline
+      21 &    & 2  & 10 & 15 & 19\\\hline
+      23 &    &    &  8 & 13 & 17\\\hline
+      31 &    &    &    &  5 & 9 \\\hline
+      36 &    &    &    &    & 4 \\\hline
+      40 &    &    &    &    &   \\\hline
+    \end{tabularx}
+  \end{center}
+
+  根据(10)，在31岁的人的旁边，但不在找到26架飞机的人的旁边，只能是编号为4的人，从而4号穿橙色衣服且找到了45辆火车
+  
+  同时观察年龄差值表，每个差值只有一种组合。观察条件(3)，年龄差值为8的年龄组合为23和31，其中Simon年龄较大为31，最右边的年龄较小为23，填入Simon与23。再由(1)，填入Simon找到的飞机数。如下表。
+  \begin{center}
+    \begin{tabularx}{.8\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
+      \hline
+      \rowcolor{LightCyan}
+      编号 & 1    & 2 & 3     & 4 & 5  \\\hline
+      名字 & Alan &   & \cellcolor{blue!25}Simon &   &   \\\hline
+      年龄 &      &   & 31    &    & \cellcolor{blue!25}23  \\\hline
+      颜色 &      &   & 蓝    & \cellcolor{red!25}橙 &   \\\hline
+      飞机 & 26   &   & \cellcolor{blue!25}86    &    & 174 \\\hline
+      火车 & 98   &   & 42    & \cellcolor{red!25}45 &     \\\hline
+    \end{tabularx}
+  \end{center}
+
+  考虑(5)，年龄差为19的组合为21和40。从而21、40可以并且只能填在2、1号，同时填入绿衣服。而由(9)，年龄差为4的组合是36和40，从而40岁的人穿红衣服。
+  \begin{center}
+    \begin{tabularx}{.8\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
+      \hline
+      \rowcolor{LightCyan}
+      编号 & 1    & 2 & 3     & 4  & 5  \\\hline
+      名字 & Alan &   & Simon &    &    \\\hline
+      年龄 & \cellcolor{blue!25}40   & \cellcolor{blue!25}21& 31    &    & 23  \\\hline
+      颜色 & \cellcolor{blue!25}红   & \cellcolor{blue!25}绿& 蓝    & 橙 &     \\\hline
+      飞机 & 26   &   & 86    &    & 174 \\\hline
+      火车 & 98   &   & 42    & 45 &     \\\hline
+    \end{tabularx}
+  \end{center}
+
+  划掉已经用掉的条件，剩余如下：
+  \begin{enumerate}
+  \item \sout{Simon找到的火车比他找到的飞机少44；}
+  \item Keith的年龄是36；
+  \item \sout{最右边的人比Simon年轻8岁，并且他找到了174架飞机；}
+  \item James穿着米黄色的衣服，并且跟Simon比起来他找到的火车数少了37；
+  \item \sout{穿着绿色衣服的人比他左手边的人年轻19岁；}
+  \item Steven找到了105辆火车和250架飞机；
+  \item \sout{站中间的人是31岁，穿着蓝色的衣服，并且他找到了42辆火车；}
+  \item \sout{Alan站在最左边，找到了26架飞机，并且他找到的火车数量比他找到的飞机数量多了72；}
+  \item \sout{穿红衣服的人比Keith大4岁，并且不在穿蓝衣服的人的旁边；}
+  \item \sout{在31岁的人旁边但不在找到26架飞机的人旁边的那个人穿着橙色的衣服，找到了45辆火车。}
+  \end{enumerate}  
+
+  由(4)，填入4号。由(6)，填入2号。
+  \begin{center}
+    \begin{tabularx}{.8\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
+      \hline
+      \rowcolor{LightCyan}
+      编号 & 1    & 2      & 3     & 4  & 5    \\\hline
+      名字 & Alan & \cellcolor{blue!25}Steve  & Simon &    & \cellcolor{red!25}James\\\hline
+      年龄 & 40   & 21     & 31    &    & 23   \\\hline
+      颜色 & 红   & 绿     & 蓝    & 橙 & \cellcolor{red!25}米黄 \\\hline
+      飞机 & 26   & \cellcolor{blue!25}250    & 86    &    & 174  \\\hline
+      火车 & 98   & \cellcolor{blue!25}105    & 42    & 45 &      \\\hline
+    \end{tabularx}
+  \end{center}
+
+  剩余的一一填入即可。
+\end{proof}
