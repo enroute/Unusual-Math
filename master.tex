@@ -13,6 +13,48 @@
 
 \usepackage{metalogo}           %for \XeTeX, \XeLaTeX, \LuaTeX and \LuaLaTeX
 
+%%% \DeclareUnicodeCharacter not compatible with xelatex
+% \usepackage[utf8]{inputenc}
+% \DeclareUnicodeCharacter{1F019}{\yibing}
+% \DeclareUnicodeCharacter{1F01A}{\erbing}
+% \DeclareUnicodeCharacter{1F01B}{\sanbing}
+% \newcommand{\yibing}{\symbol{"1F019}}
+% \newcommand{\yibing}{\fontfamily{Symbola}\selectfont\DeclareUnicodeCharacter{1F019}{kk}}
+
+% Ref. Mahjong tiles in unicode: http://www.unicode.org/charts/PDF/U1F000.pdf
+% Symbola font is one of those fonts that implements the mahjong range in unicode
+\newcommand{\mahjongsymbol}[1]{\begingroup\Huge\setmainfont{Symbola}%
+  \rule[-.3\baselineskip]{0pt}{\baselineskip}%strut to ensure the height
+  \symbol{"#1}\endgroup}
+\newcommand{\mjbing}[1]{
+  \ifthenelse{#1=1}{\mahjongsymbol{1F019}}{% 1 bing
+    \ifthenelse{#1=2}{\mahjongsymbol{1F01A}}{% 2 bing
+      \ifthenelse{#1=3}{\mahjongsymbol{1F01B}}{% 3 bing
+        \ifthenelse{#1=4}{\mahjongsymbol{1F01C}}{% 4 bing
+          \ifthenelse{#1=5}{\mahjongsymbol{1F01D}}{% 5 bing
+            \ifthenelse{#1=6}{\mahjongsymbol{1F01E}}{% 6 bing
+              \ifthenelse{#1=7}{\mahjongsymbol{1F01F}}{% 7 bing
+                \ifthenelse{#1=8}{\mahjongsymbol{1F020}}{% 8 bing
+                  \ifthenelse{#1=9}{\mahjongsymbol{1F021}}{% 9 bing
+                  }}}}}}}}}}
+  
+\newcommand{\yibing}{\mjbing1}
+\newcommand{\erbing}{\mjbing2}
+\newcommand{\sanbing}{\mjbing3}
+\newcommand{\sibing}{\mjbing4}
+\newcommand{\wubing}{\mjbing5}
+% \newcommand{\yibing}{\mahjongsymbol{1F019}}
+% \newcommand{\erbing}{\mahjongsymbol{1F01A}}
+% \newcommand{\sanbing}{\mahjongsymbol{1F01B}}
+% \newcommand{\sibing}{\mahjongsymbol{1F01C}}
+% \newcommand{\wubing}{\mahjongsymbol{1F01D}}
+
+% \newcommand{\yibing}{\begingroup\Huge\setmainfont{Symbola}\symbol{"1F019}\endgroup}
+% \newcommand{\erbing}{\begingroup\Huge\setmainfont{Symbola}\symbol{"1F01A}\endgroup}
+% \newcommand{\sanbing}{\begingroup\Huge\setmainfont{Symbola}\symbol{"1F01B}\endgroup}
+% \newcommand{\sibing}{\begingroup\Huge\setmainfont{Symbola}\symbol{"1F01C}\endgroup}
+% \newcommand{\wubing}{\begingroup\Huge\setmainfont{Symbola}\symbol{"1F01D}\endgroup}
+
 %% subfigure is obsolete and conilict with tocloft package, use subcaption or subfig insted
 % \usepackage{subfigure}
 % \usepackage[subfigure]{tocloft}
@@ -141,7 +183,7 @@
 
 \usepackage{tikz,fp}
 % \usetikzlibrary{angles}         % for perpendicular symbols
-\usetikzlibrary{calc,intersections,patterns,angles,quotes}           %
+\usetikzlibrary{calc,intersections,patterns,angles,quotes,shapes}           %
 \usepackage{tikz-3dplot}
 \usetikzlibrary{3d}
 \usetikzlibrary{decorations.markings} %for decorate, arrow in the middle of a line
@@ -333,8 +375,8 @@
 \usepackage{enumitem}
 % \setlist{nolistsep}
 % \setitemize{labelindent=\parindent,leftmargin=*,align=left,itemindent=2em,noitemsep}%,leftmargin=*,topsep=2pt,partopsep=0pt}
-\setitemize{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=4em,align=left}
-\setenumerate{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=4em,align=left}
+\setitemize{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=3.75em,align=left}
+\setenumerate{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=3.75em,align=left}
 
 
 \renewcommand{\baselinestretch}{1.1}
@@ -424,6 +466,7 @@
 % \includeonly{cover}
 % \includeonly{infinite-series}
 % \includeonly{tricks}
+\includeonly{game}
 
 \begin{document}
 
@@ -462,6 +505,7 @@
 \include{basic-inequalities}
 \include{pythagorean_triples}
 \include{five-models}
+\include{circle}
 \include{geometry}
 \include{geometric-inequality}
 \include{cauchy-schwarz}
@@ -477,6 +521,7 @@
 \include{fun}
 \include{methods}
 \include{logic}
+\include{game}
 \include{nim-game}
 
 \include{magic-square}

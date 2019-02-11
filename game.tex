@@ -1,0 +1,177 @@
+
+\chapter{游戏}
+\label{chap:games}
+
+\section{麻将}
+\label{sec:mahjong}
+
+麻将里，三张相邻的牌叫搭子，也叫顺子，如{\yibing\erbing\sanbing}；两张相同的牌叫对子，如\mbox{\sibing\sibing}；三张相同的牌叫刻子，如\mbox{\wubing\wubing\wubing}。若玩家手里的牌能组成某种预定组合时，则可胡牌。一般的胡牌组合包括：
+\begin{enumerate}
+\item 七对胡。14张牌组成七个对子。
+\item 一对胡。14线牌中的两张组成一个对子，另外12张每3张组成一个搭子或一个刻子。其中的一对称为将。
+\end{enumerate}
+
+\begin{example}[九莲宝灯]
+  以下的牌型，能胡哪一张筒子？
+  
+  \centering
+  \mjbing1\mjbing1\mjbing1\mjbing2\mjbing3\mjbing4\mjbing5\mjbing6\mjbing7\mjbing8\mjbing9\mjbing9\mjbing9
+\end{example}
+\begin{proof}[提示]
+  6筒与4筒，7筒与3筒，8筒与2筒，9筒与1筒，这4组分别关于5筒对称，能胡6筒等价于能胡4筒，其余类似。所以只需考虑能否胡1到5筒中的筒子即可。能否胡6到9筒中的牌则由对称性可得。
+
+  首先，不可能能胡七对。其次，按谁做将分类。
+  \begin{enumerate}
+  \item \mjbing1 作将，除去刻子 \mjbing9\mjbing9\mjbing9 与搭子\mjbing1\mjbing2\mjbing3 ，连子
+    \begin{align*}
+      \text{\mjbing4\mjbing5\mjbing6\mjbing7\mjbing8}
+    \end{align*}
+    可胡3、6、9筒。
+  \item \mjbing2 作将，必须摸一个\mjbing2 ，除去两个\mjbing2 作将，以及两个刻子\mbox{\mjbing1\mjbing1\mjbing1}与\mbox{\mjbing9\mjbing9\mjbing9}之外，连子
+    \begin{align*}
+      \text{\mjbing3\mjbing4\mjbing5\mjbing6\mjbing7\mjbing8}
+    \end{align*}
+    可组成两个搭子。即摸回2筒作将可胡。
+    
+  \item \mjbing5 作将，胡5筒。
+  \end{enumerate}
+
+  由对称性，9筒作将，胡1、4和7筒。8筒作将胡8筒；3、4及与其对称的6、7筒作将不能胡。综合后可知此牌型可胡筒子中任意一张牌。此牌型称为九莲宝灯，也称九子连环、天衣无缝。
+\end{proof}
+
+
+\section{亏损加仓}
+\label{sec:Martingale}
+
+亏损加仓(Martingale)是博弈论中多次博弈中的一种策略，是指第一次亏损后，在下次博弈中增加筹码，以期望第二次获益时，可以部分或全部补回第一次的损失。如第二次也亏损，那就第三次投入比第二次再增加，增幅和策略有关。如此不断加仓，直至最后赢利为止。
+
+\begin{example}
+  赌场有个猜大小的机器，玩家可猜大或小，每次压注不限，猜对双倍返还，猜错不退。若机器开大与开小的概率都是50\%，那么玩家用亏损加仓的策略是否能稳赢？
+\end{example}
+\begin{proof}[提示]
+  以下述具体策略为例。每次都下注大，下注额如下：
+  \begin{enumerate}
+  \item 第一次下注1元，赢了结束，重新下注1元；
+  \item 否则第二次下注2元，赢了结束，重新下注1元；
+  \item 否则第三次下注4元，赢了结束，重新下注1元；
+  \item 否则第四次下注8元，赢了结束，重新下注1元；
+  \item 否则第四次下注16元，赢了结束，重新下注1元；
+  \item $\cdots\cdots$
+  \end{enumerate}
+
+  记每局玩家猜对大小的概率是$q$，则第一局结束的概率是$q$。
+
+  第二局结束的概率，相当于第一局输且第二局赢，从而是$(1-q)\times q=q(1-q)$。
+
+  以此类推，第$n$局结束的概率是$q(1-q)^{n-1}$。而在第$n$局或之前结束的概率是$1-q(1-q)^{n-1}$，可见局数越多，玩家能获取总共1元收益的概率越接近于1。然而，真实情况是玩家是稳赢的吗？所谓十赌九输，剩下一个赢的是赌场。这种玩法，早在18世纪就已经流行过了，但至今仍未见过用这种方法笑到最后的人。
+
+  原因在于这种策略稳赢的基础需要一个非常苛刻的没有任何人可以达到的条件，即没有任何一个人的资金是无限的。就算世界上最富裕人的，假设他拥有的资金是99999999999999999，这仍然是有限的，不是无限。有限与无限之间存在着本质上的区别。下面分析一下，希望能让仍然抱有希望的赌徒能回心转意。
+
+  如果把回报率定义为期望收益与总下注的比值，则可得表~\ref{tab:martingale-profit}，其中局数$n$是指前$n-1$局都输了然后进行的第$n$次加注。可以看到，越到后面，收益与风险越不成比例，越是依赖于多局回本，越有可能一次破产，即资金变为0。用数学黑话马尔可夫链来描述的话，这个破产状态就像无底深渊，只要{\bfseries 无限}地玩下去，总有一次会掉落到这个无底深渊里从而无法再跳脱出来，如图~\ref{fig:transition-of-capital-status}所示。所以赌场从来不怕赌徒借钱，怕的是赌徒不赌了。
+
+  \begin{table}[htbp]
+    \centering
+    \caption{亏损加仓赢利表}
+    \label{tab:martingale-profit}
+    \begin{tabular}{ccccccc}
+      \toprule
+      局 & 下注前亏损 & 本局下注 & 若赢的收益 & 回报率   & 概率   & 累计赢面\\\midrule
+      1  & 0          & 1        & 1          & $q$      & $q$    & $q$     \\
+      2  & 1          & 2        & 1          & $qp/3$   & $qp$   & $q + qp$    \\
+      3  & 3          & 4        & 1          & $qp^2/7$ & $qp^2$ & $q(1+p+p^2)$   \\
+      4  & 7          & 8        & 1          & $qp^3/15$& $qp^3$ & $q(1+p+p^2+p^3)$  \\
+      5  & 15         & 16       & 1          &          & $qp^4$ & \\
+      6  & 31         & 32       & 1          &          & $qp^5$ & \\
+      7  & 63         & 64       & 1          &          & $qp^6$ & \\
+      8  & 127        & 128      & 1          &          & $qp^7$ & \\
+      9  & 255        & 256      & 1          &          & $qp^8$ & \\
+      10 & 511        & 512      & 1          &          & $qp^9$ & \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  % 赌徒前$n$局都输掉的概率是$\left(\dfrac12\right)^n$。
+
+  \begin{figure}[htbp]
+    \centering\begin{subfigure}[t]{\textwidth}
+    \begin{tikzpicture}[scale=1.0]
+      \node[draw,ellipse,minimum width=12cm,fill=red!20] (N0) at (6,2) {0};
+      \node[draw,circle] (N1) at (0.0,0) {1};
+      \node[draw,circle] (N2) at (1.5,0) {2};
+      \node[draw,circle] (N3) at (3.0,0) {3};
+      \node[draw,circle] (N4) at (4.5,0) {4};
+      \node[draw,circle] (N5) at (6.0,0) {5};
+      \node[draw,circle] (N6) at (7.5,0) {6};
+      \node[draw,circle] (N7) at (9.0,0) {7};
+      \node[draw,circle] (N8) at (10.5,0) {8};
+      \node[draw,circle] (N9) at (12,0) {$\cdots$};
+      \foreach \x/\y in {%
+        N0/N1,N0/N2,N0/N3,N0/N4,N0/N5,N0/N6,N0/N7,N0/N8,N0/N9}{%
+        \draw[<-](\x)--(\y);
+      }
+      \foreach \x/\y in {%
+        N1/N2,N2/N3,N3/N4,N4/N5,N5/N6,N6/N7,N7/N8,N8/N9}{%
+        \draw[<->](\x)--(\y);
+      }
+      \foreach \x/\y in {%
+        N3/N1,%
+        N4/N2,N4/N1,%
+        N5/N3,N5/N1,%
+        N6/N4,N6/N2,%
+        N7/N5,N7/N3,%
+        N8/N6,N8/N4}{%
+        \draw[->](\x)edge[bend left=30](\y);
+      }
+    \end{tikzpicture}
+    \caption{下注允许超过剩余资本}
+    \label{fig:transition-of-capital-status}
+    \end{subfigure}
+  % \end{figure}
+
+  % \begin{figure}[htbp]
+    \vspace{.5cm}
+    \centering\begin{subfigure}[t]{\textwidth}
+    \begin{tikzpicture}[scale=1.0]
+      \node[draw,ellipse,minimum width=12cm,fill=red!20] (N0) at (6,2) {0};
+      \node[draw,circle] (N1) at (0.0,0) {1};
+      \node[draw,circle] (N2) at (1.5,0) {2};
+      \node[draw,circle] (N3) at (3.0,0) {3};
+      \node[draw,circle] (N4) at (4.5,0) {4};
+      \node[draw,circle] (N5) at (6.0,0) {5};
+      \node[draw,circle] (N6) at (7.5,0) {6};
+      \node[draw,circle] (N7) at (9.0,0) {7};
+      \node[draw,circle] (N8) at (10.5,0) {8};
+      \node[draw,circle] (N9) at (12,0) {$\cdots$};
+      \foreach \x/\y in {%
+        N0/N1,N0/N2,N0/N4,N0/N8}{%
+        \draw[<-](\x)--(\y);
+      }
+      \foreach \x/\y in {%
+        N1/N2,N2/N3,N3/N4,N4/N5,N5/N6,N6/N7,N7/N8,N8/N9}{%
+        \draw[<->](\x)--(\y);
+      }
+      \foreach \x/\y in {%
+        N3/N1,%
+        N4/N2,N4/N1,%
+        N5/N3,N5/N1,%
+        N6/N4,N6/N2,%
+        N7/N5,N7/N3,%
+        N8/N6,N8/N4}{%
+        \draw[->](\x)edge[bend left=30](\y);
+      }
+    \end{tikzpicture}
+    \caption{下注不能超过剩余资本}\label{fig:transition-of-capital-status-2}
+    \end{subfigure}
+    \caption{剩余资本状态转移}
+    \label{fig:transition-of-capital-status-1}
+  \end{figure}
+
+  若下注额不允许超过资金剩余资金额，则除去2的正整数幂外，其余剩余资金状态不会直接跳到破产状态，则状态转移图变为图~\ref{fig:transition-of-capital-status-2}所示。可见只要是有限的资本，同样在无限次操作的过程中总是要落入到破产的深渊中的。
+\end{proof}
+
+\begin{theorem}[赌徒破产定理，Gambler's ruin]
+  在一个输赢都是50\%概率的“公平”游戏中，任何一个拥有有限赌本的赌徒，只要长期赌下去，必然有一天会输个精光。
+\end{theorem}
+\begin{proof}[提示]
+  重点是{\bfseries 有限}的赌本。抛开“公平”，赌场还有各种手段控制赌徒的赢面，比如限制下注上限，比如设计道具使得赌徒在每局的赢面只有49\%，等等。
+\end{proof}

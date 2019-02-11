@@ -180,6 +180,15 @@
   \end{table}
 \end{proof}
 
+\begin{question}
+  古时候有家酒馆的老板特别节省，他只购买了一个7两和一个11两的勺子给客人打酒。有个刁钻的客人想要为难老板，于是一连10天跑去酒馆打酒，第一天只打一两，第二天打二两，第三天打三两，$\cdots\cdots$，第十天打十两。如果你是酒馆的老板，你如何应对这个客人的要求？
+\end{question}
+\begin{proof}[提示]
+  类似地，可不停试验。
+
+  其实可以归结为$7x+11y=1$的整数解问题，其解法参考第~\ref{chap:diophantine-equation}章~\nameref{chap:diophantine-equation}。其一个特解是$x=-3$，$y=2$。所以2个11两的倒满7两3次，可剩1两。$7x+11y=k$问题类似，其中$k$是任意正整数。
+\end{proof}
+
 
 \begin{example}
   小毛是学校出名的机灵鬼，也是家里让人头疼的调皮蛋。有一天他急急忙忙写完作业就要出动玩，妈妈便说还有一道题，要做完了才能出去玩。妈妈的题目是这样的：有6个杯子排成一排，前面3个装满了水，后面3个是空的。若只能移动一个杯子，能否将装满水的水杯与空杯间隔开？
@@ -561,6 +570,30 @@
   \end{enumerate}
 \end{proof}
 
+\begin{example}
+  在一场数学竞赛里，Alvin、Brian和Carlos都获得了一枚奖牌，其中一人得了金牌，一人得了银牌，一人得了铜牌。David猜：“Alvin得了金牌，Brian没得金牌，Carlos没得铜牌。”事实上David只猜对了一个。那么三人分别得了什么奖牌？
+\end{example}
+\begin{proof}[提示]
+  三人三种奖牌，即三奖牌的全排列，共有$P_3^3=3!=3\times2\times1=6$种，如表~\ref{tab:permutation-of-medals}所示：
+  \begin{table}[htbp]
+    \centering
+    \begin{tabular}{ccccc}
+      \toprule
+      序号 & Alvin & Brian & Carlos & David的猜测\\\midrule
+      1    & 金    & 银    & 铜     & $\checkmark\checkmark\xmark$\\
+      2    & 金    & 铜    & 银     &\\
+      3    & 银    & 金    & 铜     &\\
+      4    & 银    & 铜    & 金     &\\
+      5    & 铜    & 金    & 银     &\\
+      6    & 铜    & 银    & 金     &\\\bottomrule
+    \end{tabular}
+    \caption{三种奖牌的全排列}
+    \label{tab:permutation-of-medals}
+  \end{table}
+
+  分析每一种情况。比如，假设是第一种，那么David的三句猜测的对错如表~\ref{tab:permutation-of-medals}所示。可见David猜对了两人，矛盾，可排除这种情况。其余类推。若最后只剩余一种情况无法排除，那就是它了。
+\end{proof}
+
 
 \begin{example}[找火车]
   在一个洞察力大赛中，5名参赛者在桌子边上一字排开，他们从桌上的图案中观察到的飞机数量有$(26,86,123,174,250)$，观察到的火车数则有$(5,42,45,98,105)$，而他们的年龄则分别为$(21,23,31,36,40)$。根据下面的信息，请判断各人的位置，年龄，观察到的飞机和火车数量以及衣服的颜色。
@@ -578,9 +611,11 @@
   \end{enumerate}
 \end{example}
 \begin{proof}[提示]
-  首先填入可以直接使用的条件，可得表~\ref{tab:contester-info-of-train-spotting}。
+  首先填入可以直接使用的条件，可得表~\ref{tab:contester-info-of-train-spotting}。然后再作一个年龄差值表，如表~\ref{tab:contester-info-of-age-diff}所示。
   \begin{table}[htbp]
     \centering
+    \caption{洞察力比赛参赛者信息}
+    \label{tab:contester-info-of-train-spotting}
     \begin{tabularx}{.8\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
       \hline
       \rowcolor{LightCyan}
@@ -591,12 +626,12 @@
       飞机 & 26   &   &    &   & 174 \\\hline
       火车 & 98   &   & 42 &   &  \\\hline
     \end{tabularx}
-    \caption{洞察力比赛参赛者信息}
-    \label{tab:contester-info-of-train-spotting}
   \end{table}
 
-  作一个年龄差值表，如下所示：
-  \begin{center}
+  \begin{table}[htbp]
+    \centering
+    \caption{年龄差值}
+    \label{tab:contester-info-of-age-diff}
     \begin{tabularx}{.6\textwidth}{|>{\columncolor{LightCyan}}c|*{5}{>{\centering\arraybackslash}X|}}
       % \cline{2-6} % \cline not compactible with colortblb
       \hhline{~-----}
@@ -610,8 +645,8 @@
       36 &    &    &    &    & 4 \\\hline
       40 &    &    &    &    &   \\\hline
     \end{tabularx}
-  \end{center}
-
+  \end{table}
+  
   根据(10)，在31岁的人的旁边，但不在找到26架飞机的人的旁边，只能是编号为4的人，从而4号穿橙色衣服且找到了45辆火车
   
   同时观察年龄差值表，每个差值只有一种组合。观察条件(3)，年龄差值为8的年龄组合为23和31，其中Simon年龄较大为31，最右边的年龄较小为23，填入Simon与23。再由(1)，填入Simon找到的飞机数。如下表。
@@ -671,4 +706,18 @@
   \end{center}
 
   剩余的一一填入即可。
+\end{proof}
+
+
+
+\section{极端值}
+\label{sec:extream-point}
+
+\begin{example}
+  有一个考试试卷只有5道题，答对3道或以上就及格。在100个参加考试的人中，有81人答对第一题，91人答对第二题，85人答对第三题，79人答对第四题，74人答对第五题。问这100人中，至少有多少人及格？
+\end{example}
+\begin{proof}[提示]
+  考虑如何才能在满足题目条件的情况下使不及格的人尽可能的多，那么该情况下的及格人数就是及格人数的最少值，为问题之解。
+
+  不及格等价于答错三题或三题以上。
 \end{proof}

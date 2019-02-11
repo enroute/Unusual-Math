@@ -9,7 +9,7 @@
   求解方程$x\cdot \lfloor x\rfloor=80$，其中$\lfloor x\rfloor$表示不大于$x$的最大整数（向下取整）。
 \end{example}
 \begin{proof}[解]
-  $x\cdot \lfloor x\rfloor$与$\lfloor x\rfloor ^2$接近，而与$80$最近的完全平方数是$81$，可以考虑$\lfloor x\rfloor=\pm 9$的情况。
+  可用猜测法。$x\cdot \lfloor x\rfloor$与$\lfloor x\rfloor ^2$接近，而与$80$最近的完全平方数是$81$，可以考虑$\lfloor x\rfloor=\pm 9$的情况。若$\lfloor x\rfloor=9$，则$x=80/9$，从而$\lfloor x\rfloor=8\ne 9$，矛盾。若$\lfloor x\rfloor=-9$，则$x=-80/9$，这个是吻合的。这种猜测法只是给出了某个解，并没有证明这个解就是所有的解。
 
   下面是完整解法。由定义，显然有$\lfloor x\rfloor\le x \le \lfloor x\rfloor + 1$。由原题，首先有$x>1$或者$x<-1$。
 

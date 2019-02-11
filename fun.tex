@@ -31,11 +31,97 @@
 其中和相等的只有两种组合，即$(1,6,6)$和$(2,2,9)$，其和均为$13$。由于主人说就算知道年龄之和也算不出来，可知三人年龄组合只能是$(1,6,6)$和$(2,2,9)$两种这一。而由最后一句，主人有一个最大的女儿，而不是两个一样大的大女儿，从而可知三人年龄组合是$(2,2,9)$。
 \end{proof}
 
-
+\begin{question}
+  一个经理有三个女儿，三个女儿的年龄加起来等于13，三个女儿的年龄乘起来等于经理自己的年龄。有一个下属已知道经理的年龄，但仍不能确定经理三个女儿的年龄，这时经理说只有一个女儿的头发是黑的，然后这个下属就知道了经理三个女儿的年龄。请问三个女儿的年龄分别是多少？
+\end{question}
+\begin{proof}[提示]\let\qed\relax%remove qed symbol
+  这里说的是中国人。中国小孩特别小的时候头发是黄的，所以有黄毛丫头一说。慢慢长大之后头发才开始变黑。考虑三数为13的组合情况。
+  \begin{align*}\setlength\arraycolsep{3pt}\renewcommand*{\arraystretch}{.9}
+    \begin{array}{cccccccccccccc}
+      1 & \times & 1 & \times & 11 & = & 11, &\quad
+      1 & \times & 2 & \times & 10 & = & 20\\
+      1 & \times & 3 & \times &  9 & = & 27, &\quad
+      1 & \times & 4 & \times &  8 & = & 32\\
+      1 & \times & 5 & \times &  7 & = & 35, &\quad
+      1 & \times & 6 & \times &  6 & = & \underline{36}\\
+      2 & \times & 2 & \times &  9 & = & \underline{36}, &\quad
+      2 & \times & 3 & \times &  8 & = & 48\\
+      2 & \times & 4 & \times &  7 & = & 56, &\quad
+      2 & \times & 5 & \times &  6 & = & 60\\
+      3 & \times & 3 & \times &  7 & = & 63, &\quad
+      3 & \times & 4 & \times &  6 & = & 72\\
+      3 & \times & 5 & \times &  5 & = & 75, &\quad
+      4 & \times & 4 & \times &  5 & = & 80
+    \end{array}
+  \end{align*}
+\end{proof}
 
 \begin{example}
   扎西多吉是个藏人，喜欢随身带着一柄$1.5$米长的长刀。有一次他出远门需要坐火车，但列车安全员不允许将长刀作为手提行李带上车。如果托运，火车的托运规定行李箱又不能超过$1$米。扎西多吉怎么才能合法地将他的长刀带上火车呢？
 \end{example}
 \begin{proof}[解答]
 若局限在二维平面内考虑，是无解的。考虑一个$1\times1\times1$的箱子，其对角线长度为$\sqrt3>1.5$米，可以放下扎西多吉的长刀。
+\end{proof}
+
+\begin{example}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}%use symbol rather than number in footnote markers
+  唐宋明清铸造钱币的机构叫钱监。有一次，钱监里储存了10箱黄金，每箱100块，每块一两。有一个官员，为了捞油水，把某一个箱子里的每块黄金都磨掉了一钱\footnote{一两等于十钱}。如果允许带一个精度及量程都足够用的称重工具回去，如何能称一次就找到被磨了的那一箱黄金？
+\end{example}
+\begin{proof}[提示]\let\qed\relax%
+  给箱子编号。称法的关键在于称出的重量能与箱子编号一一对应。1号取一块，2号取2块，3号取3块，$\cdots\cdots$，10号取10块，放在一起称。若全都是足称的金块，则应该是$1+2+3+\cdots+10=55$两，但某箱有缺陷，故实际称出来会比55两少。如果是1号被磨，则缺1钱；如果是2号被磨，则缺2钱。缺多少钱就是哪号箱子被磨了。
+\end{proof}
+
+\begin{question}
+  药厂仓库保存了某种药片共8罐。后来由于异常断电仓库温度失控，导致某一罐中药片与空气发生了化学反应从而变质了，其每片的质量也重了1克。问如何只称一次就判断出是哪个罐子里的药片变质了？
+\end{question}
+
+\begin{example}[空瓶换酒]\label{ex:beer}
+  超市里某种啤酒在作促销，两元一瓶的啤酒，若集齐两个空瓶子则可以免费换一瓶。小胖手里有10元钱，那么在这个超市里他的钱最多可以让他喝到几瓶啤酒？
+\end{example}
+\begin{proof}[提示]\renewcommand{\thefootnote}{\fnsymbol{footnote}}%use symbol rather than number in footnote markers
+  方法一，借空瓶。买一瓶会得一空瓶，再加一空瓶即可换一瓶。因此2元买一瓶，喝完剩一空瓶，再借一空瓶，换一瓶，喝完又剩一空瓶，把空瓶还了。此时2元喝了两瓶，手里无剩余，无外债。即2元最多可喝2瓶。也就是10元最多可喝10瓶。
+
+  方法二，计算啤酒不含瓶的成本。价值上，两个空瓶等于一整瓶，从而空瓶的成本是$2/2=1$元，啤酒(不含瓶)的成本是$2-1=1$元，从而10元能喝到的啤酒(不含瓶)的数量最多为$10/1=10$瓶。\footnote{此方法只给出了上限，没有证明存在某种方法能达到上限}
+\end{proof}
+
+\begin{question}
+  在例~\ref{ex:beer}中，若集齐3个空瓶才能换一瓶，则又如何？
+\end{question}
+\begin{proof}[提示]
+  借一空瓶，买两瓶，则4元可喝3瓶。8元可喝6瓶。剩两元可喝1瓶，剩余一个空瓶子。一个空瓶子不足以换取一瓶啤酒里的酒水(不含瓶)，即最多可喝7瓶。
+\end{proof}
+
+
+\begin{example}
+  推推开关是一种按一次就转变接通与断开状态的开关。现有10个推推开关对应10盏灯。开始时所有灯都是灭的。现进行如下操作(顺序不定)：
+  \begin{enumerate}
+  \item 编号为1的倍数的开关都按一次；
+  \item 编号为2的倍数的开关都按一次；
+  \item 编号为3的倍数的开关都按一次；
+  \item $\cdots\cdots$；
+  \item 编号为10的倍数的开关都按一次。
+  \end{enumerate}
+  这样操作之后，问10盏灯的亮灭状态。
+\end{example}
+\begin{proof}[提示]\let\qed\relax
+  首先，操作顺序不影响最终状态，因为某盏灯的最终状态只与对应开关被按的次数(精确地说是奇偶性)相关。开关总共被按了奇数次的灯是亮的，被按了偶数次的灯是灭的。
+
+  而一个开关被按的次数，相当于其因数(包含1与其本身)的个数。
+
+  \centering
+  \begin{tabular}{clcccccccc}
+    \toprule
+    开关编号 & \multicolumn{1}{c}{因数} & 因数个数 & 灯最终状态\\\midrule
+    1        & 1    & 1        & 亮\\
+    2        & 1,2  & 2        & 灭\\
+    3        & 1,3  & 2        & 灭\\
+    4        & 1,2,4& 3        & 亮\\
+    5        & 1,5  & 2        & 灭\\
+    6        & 1,2,3,6 & 4        & 灭\\
+    7        & 1,7  & 2        & 灭\\
+    8        & 1,2,4,8 & 4        & 灭\\
+    9        & 1,3,9   & 3        & 亮\\
+    10       & 1,2,5,10& 4        & 灭\\
+    \bottomrule
+  \end{tabular}
 \end{proof}
