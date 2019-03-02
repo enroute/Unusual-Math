@@ -1,0 +1,78 @@
+
+\chapter{找规律}
+\label{chap:pattern}
+
+\section{序列}
+\label{sec:series-pattern}
+
+\begin{example}\mbox{}\par
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      % \begin{scope}[shift={(0,0)}]
+      %   \coordinate(A) at (0,0);
+      %   \coordinate(B) at (2,0);
+      %   \coordinate(C) at (60:2);
+      %   \coordinate(O) at ($1/3*(A)+1/3*(B)+1/3*(C)$);
+      %   \draw(A)--(B)--(C)--cycle;
+      %   \node at ($(90:.5)+(O)$) {1};
+      %   \node at ($(210:.5)+(O)$) {2};
+      %   \node at ($(330:.5)+(O)$) {3};
+      % \end{scope}
+
+      \begin{scope}[shift={(3,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (2,0);
+        \coordinate(C) at (60:2);
+        \coordinate(O) at ($1/3*(A)+1/3*(B)+1/3*(C)$);
+        \draw(A)--(B)--(C)--cycle;
+        \node at ($(90:.5)+(O)$) {1};
+        \node at ($(210:.5)+(O)$) {2};
+        \node at ($(330:.5)+(O)$) {3};
+      \end{scope}
+
+      \begin{scope}[shift={(6,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (2,0);
+        \coordinate(C) at (60:2);
+        \coordinate(O) at ($1/3*(A)+1/3*(B)+1/3*(C)$);
+        \draw(A)--(B)--(C)--cycle;
+        \node at ($(90:.5)+(O)$) {4};
+        \node at ($(210:.5)+(O)$) {5};
+        \node at ($(330:.5)+(O)$) {6};
+      \end{scope}
+
+      \begin{scope}[shift={(9,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (2,0);
+        \coordinate(C) at (60:2);
+        \coordinate(O) at ($1/3*(A)+1/3*(B)+1/3*(C)$);
+        \draw(A)--(B)--(C)--cycle;
+        \node at ($(90:.5)+(O)$) {7};
+        \node at ($(210:.5)+(O)$) {8};
+        \node at ($(330:.5)+(O)$) {9};
+      \end{scope}
+      
+      \begin{scope}[shift={(12,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (2,0);
+        \coordinate(C) at (60:2);
+        \coordinate(O) at ($1/3*(A)+1/3*(B)+1/3*(C)$);
+        \draw(A)--(B)--(C)--cycle;
+        \node at ($(90:.5)+(O)$) {10};
+        \node at ($(210:.5)+(O)$) {18};
+        \node at ($(330:.5)+(O)$) {?};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  \begin{align*}
+    (\mathrm{A})\ 200 \quad\quad (\mathrm{B})\ 600 \quad\quad (\mathrm{C})\ 800\quad\quad (\mathrm{D})\ 1200
+  \end{align*}
+\end{example}
+\begin{proof}[提示]平方和的数字和，直到最后是一位数。
+  \begin{align*}
+    &1^2+2^2+3^2 = 14, && \implies 1 + 4 = 5\\
+    &4^2+5^2+6^2 = 74, && \implies 7 + 4 = 14, && \implies 1+4=5\\
+    &7^2+8^2+9^2 = 194,&& \implies 1+9+4=14, && \implies 1+4=5
+  \end{align*}
+  按这个规律，?号处填200，最后会得到5。
+\end{proof}
