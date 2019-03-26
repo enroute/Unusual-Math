@@ -2,7 +2,30 @@
 \chapter{序列与级数}
 \label{chap:series}
 
-\begin{example}[等比数列]
+数学上，序列是被排成一列的对象。当对象是数时，就是数列。在序列里，元素之间的顺序非常重要。
+
+\section{基本序列}
+\label{sec:basic-series}
+
+\begin{example}[等差数列，算术数列，Arithmetic Progression]
+  从第二项起，每一项与其前一项的差都相等的数列称不等差数列。后一项与前一项的差称为公差。如
+  \begin{align*}
+    3,7,11,15,19,23,27,31,35,\cdots
+  \end{align*}
+\end{example}
+
+\begin{example}等差数列
+  \begin{align*}
+    a_1, a_2, a_3, a_4, a_5, \cdots, a_n
+  \end{align*}
+  其中$\forall k>1, a_k=a_1 + (k-1)d$，$d$是公差。则该数列的和为
+  \begin{align*}
+    S\equiv & a_1 + a_2 + a_3 + \cdots a_n\\
+          = & \frac{n(a_1+a_n)}{2}
+  \end{align*}
+\end{example}
+
+\begin{example}[等比数列，几何数列，Geometric Progression]
   求无穷等比数列的和，其中比例系数$q<1$：
   \begin{align*}
     S=a + aq + aq^2 + aq^3 + \cdots
