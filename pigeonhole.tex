@@ -45,7 +45,7 @@
   \end{align*}
 \end{example}
 
-\begin{proof}
+\begin{proof}[提示]
   联想公式
   \begin{align*}
     \tan(\alpha-\beta)=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}
@@ -53,13 +53,13 @@
 
   而$\tan(x)$的周期是$(-\pi/2, \pi/2]$，将区间8等份（让9个数总有两个落入其中一份）为以下8个区间
   \begin{align*}
-    (-\frac\pi2, -\frac{3\pi}8], (-\frac{3\pi}8, -\frac\pi4], \cdots, (\frac{3\pi}8, \frac\pi8]
+    (-\frac\pi2, -\frac{3\pi}8], (-\frac{3\pi}8, -\frac\pi4], \cdots, (\frac{3\pi}8, \frac\pi2]
   \end{align*}
 
   $\forall a, \exists\hat a\in(-\pi/2, \pi/2], s.t. \tan\hat a = a$，从而任意9个实数，总存在两个，记为$a,b$，存在$\hat a, \hat b$落在上述8个区间中的同一个，且有$a=\tan\hat a, b=\tan\hat b$。不妨设$a>b$，从而$0<\hat a-\hat b<\pi/8$，由$\tan(x)$在上述每个区间中均为严格单调递增，有
   \begin{align*}
              & 0 < \tan(\hat a - \hat b) < \tan\frac\pi8\\
-    \implies & 0 < \frac{a - b}{1+ab} < \sqrt2 - 1
+    \implies & 0 < \frac{a - b}{1+ab} < \sqrt2 - 1&\qedhere
   \end{align*}
 \end{proof}
 
@@ -76,8 +76,11 @@
 \begin{question}
   从$1,2,\cdots,100$中任意取11个数字，那么这11个数字组成的集合中，总存在两个不相交的非空子集，其元素之和相等。
 \end{question}
-
-\hints 11个元素组成的集合，其非空真子集总共有$2^{11}-2=2046$个，而1到100取10个数字（\think 为什么取10个而不是11个）其和最大值为$91+92+\cdots+100=955$。
+\begin{proof}[提示}
+11个元素组成的集合，其非空真子集总共有$2^{11}-2=2046$个。
+% 其中两两互补，即任意一个总有能找到一个与之互补。从而将11个元素分成两份且每份都至少有一个元素的方法共有$2046\div2=1023$个
+而1到100取10个数字（\think 为什么取10个而不是11个？取11个其和已经最大了，没有真子集的和能与其相比了。），其和最大值为$91+92+\cdots+100=955$。从而由抽屉原理，这2045个子集中，总有两个的和是相等的，且显然这两个和相等的子集，没有一个是另一个的真子集（否则其和就不相等了），在这两个子集中去掉相同的元素，就可以得到两个不相交、非空且和相等的集合。
+\end{proof}
 
 \begin{question}
   在三维空间中任意选取9个坐标都是整数的点。证明这连接9个点而形成的线段中至少包含另外一个坐标为整数的点
