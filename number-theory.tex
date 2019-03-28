@@ -475,3 +475,147 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \section{重要定理}
 \label{sec:important-thorems-of-number-theory}
 
+\section{无理数}
+\label{sec:irrational-numbers}
+
+实数中可以写成两个整数的比值的数称为有理数，否则称为无理数。有限小数是有理数，无限但循环的小数也是有理数。
+
+\begin{example}
+  将$s=2.1\dot3\dot6\dot3$化为分数。
+\end{example}
+\begin{proof}[提示]
+  关键是其中的$0.0\dot3\dot6\dot3$，其中$\dot3\dot6\dot3$是循环节，记$p=0.0\dot3\dot6\dot3$，则$s=2.1+p$，只要将$p$化为分数即可，利用类似于等比数列求和的方法，对$p$定义式两边乘以1000(循环节是3位，所以乘以1000。乘以10也可以，但最终还是会化简为类似的形式)，则有
+  \begin{align*}
+    1000p = 36.3\dot3\dot6\dot3 = 36.3 + p \quad\implies\quad p=\frac{36.3}{999}=\frac{121}{3330}
+  \end{align*}
+  代入，有
+  \begin{align*}
+    s=2.1+p = \frac{21}{10} + \frac{121}{3330} = \frac{21\times333 + 121}{3330}
+  \end{align*}
+  后面的化简就是体力活了。
+\end{proof}
+
+
+\begin{example}
+  $\sqrt2$是无理数。
+\end{example}
+\begin{proof}[提示]
+  用反证法。假设存在两个非零互质整数$p,q$，满足
+  \begin{align*}
+    \frac{p}{q}=\sqrt2
+  \end{align*}
+  对两边取平方，则有$p^2=2q^2$，因此$p$必能被2整除，所以存在整数$p_1$，使得$p=2p_1$，代入又有
+  \begin{align*}
+    2p_1^2=q^2
+  \end{align*}
+  由此，2也必定是$q$的一个因子，从而2是$p,q$的一个公约数，这与$p,q$互质的假设矛盾。
+\end{proof}
+
+\begin{question}
+  任意整数$n$，若$n$不是完全平方数，则$\sqrt n$是无理数。
+\end{question}
+\begin{proof}[提示]
+  考虑$n$的表示式
+  \begin{align*}
+    n=p_1^{a_1} p_2^{a_2} p_3^{a_3} \cdots p_k^{a_k}
+  \end{align*}
+  其中$p_1,p_2,\cdots,p_k$是互不相同的质数，$a_1,a_2,\cdots a_k$是正整数。
+\end{proof}
+
+
+\subsection{圆周率$\pi$}
+\label{sec:constant-pi}
+
+一个圆的周长与直径的比值称为圆周率，通常用$\pi$来表示。
+
+\begin{example}[$\pi$是个常数]
+  圆周率与圆的大小无关，是一个常数。即对常见的平面几何上的任意一个圆，其周长与其直径的比值都是一样的。
+\end{example}
+\begin{proof}[说明]
+  严格的证明需要用到微积分，此处用多边形逼近圆周来示意。
+  \begin{center}
+    \begin{tikzpicture}[scale=0.6]
+      \coordinate(O) at (0,0);
+      \coordinate(A1) at (0:2);
+      \coordinate(A2) at (0:4);
+      \coordinate(B1) at (30:2);
+      \coordinate(B2) at (30:4);
+      \draw(O) circle(2) circle(4);
+      \draw(O)--(A2) (O)--(B2) (A1)--(B1) node[midway,left]{$m$} (A2)--(B2) node[midway,left]{$M$};
+      \tkzDrawPoints(O,A1,A2,B1,B2);
+      % \draw[<->](0,-.2)--(2,-.2) node[midway]{$r$};
+      % \draw[<->](0,-1)--(4,-1) node[midway]{$R$};
+    \end{tikzpicture}
+  \end{center}
+  如上图，任意两个圆，若其半径相同，则圆周与直径的比值显然相同。考虑两圆半径不相同的情况，记小圆半径为$r$，圆周长为$c$；大圆半径为$R$，圆周长为$C$。将两圆圆心重叠放置，用如图中的折线逼近圆周，考虑其中一个折线段的比值，由三角形的相似性可以得到
+  \begin{align*}
+    \frac{m}{M} = \frac{r}{R}
+  \end{align*}
+  从而用折线近似的圆周比值也是
+  \begin{align*}
+    \frac{c}{C}=\frac{r}{R} \quad \implies \quad  \frac{c}{r} = \frac{C}{R}
+  \end{align*}
+  即其周长与半径的比值相同，从而其周长与直径的比值相同，其比值与圆的半径无关，是一个常数，通常记为$\pi$。并且通过下图可以估算出$\pi$的一个下界。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \draw(0,0)circle(1);
+      \draw(-1,0)--(1,0) (0,-1)--(0,1) (-1,0)--(0,-1)--(1,0)--(0,1)--(-1,0);
+    \end{tikzpicture}
+  \end{center}
+  记上图中圆的直径为1，则其周长为$2\pi$，图中正方形的周长为$4\sqrt2$。两点间直线段长度最短，从而圆4个圆弧长度都要大于正方形的一条边长，由此可知圆的周长要大于正方形的周长，从而有
+  \begin{align*}
+    \pi>2\sqrt2\approx 2.8
+  \end{align*}
+  若将正方形换为内接正六边形，则可以得到$\pi$的另一个更精确的下界即$\pi>3$，参考例~\ref{ex:pww-3-lt-pi-lt-4}。事实上，古代人就是这样通过将圆不断的切割用更小的多边形来逼近得到$\pi$的近似值。
+\end{proof}
+
+\begin{example}
+  $\pi$是无理数。但这个结论暂时还没有人能用简单或直观形象的方法得出，其多种证明无一例外都要用到更为高深的数学知识。此处不摘抄。
+\end{example}
+
+\subsection{自然对数底$e$}
+\label{sec:irrational-number-e}
+
+熟悉$e$的人都知道，$e$是自然对数的底。那么这个古怪的数是怎么来的呢？是数学家们凭空造出来提高门槛的吗？
+
+实际上，$e$的出现比微积分还要早，它的产生与复利计息相关(可见经济问题也是推动科学发展的一大动力)。曾经有个商人向外放年利率是100\%的高利贷，即借出1元，一年后利息也是1元，一年到期后连本带利商人可以拿回2元。这是一年计息周期的。也有半年为计息周期的，即半年计一次利息，其利率为100\%的一半即50\%，计完利息后利息进入到下一个计息周期，对于半年为一个计息周期的情况，其计息结果如下：
+
+第一次计息时，参与计息的本金为1元，计息利率为$100\%/2=50\%$，计算出来的利息为$1\times 100\%/2=0.5$元，利息与本金这和为$1 + 1\times 100\%/2=1.5$元。
+
+第二次计息时，参与计息的本金为上期的本金与利息之和即$1 + 1\times 100\%/2=1.5$元，计息利率仍然为$100\%/2=50\%$，计算出来的本金与利息之和为$(1 + 1\times 100\%/2)^2=2.25$元。
+
+算到这里，商人发觉如果计息周期越短，计息期数越多，最终一年后连本带利能拿到的钱越多。发现了这个之后，商人兴奋了，如果以一秒钟为计息周期，那借1元出去岂不是就发大财了？可事实上，假设一年内分为$n$个计息周期，那么一年后，那么每个计息周期内的利率为$1/n$，一年后连本带利商人能拿回的钱$M$为
+\begin{align*}
+  M=(1+1/n)^n
+\end{align*}
+如果$n$无穷大，商人真的是能拿到无穷多的钱吗？利用计算机的帮助，举几个例子：
+\begin{align*}
+  n=&1       &&\implies M=2 \\
+  n=&10      &&\implies M=2.5937424601\\
+  n=&100     &&\implies M=2.70481382942153\\
+  n=&1000    &&\implies M=2.71692393223559\\
+  n=&10000   &&\implies M=2.71814592682493\\
+  n=&100000  &&\implies M=2.7182682371923\\
+  n=&1000000 &&\implies M=2.71828046909575\\
+  n=&10000000&&\implies M=2.71828169413208
+\end{align*}
+结果可能要让商人失望了，当$n$趋于无穷大时，$M$是收敛于一个近似等于2.718的常数的，这个常数就是$e$，有时也称为欧拉数$e$(Euler数)、Napier常数。即
+\begin{align*}
+  e\equiv\lim_{n\to+\infty} \left(1+\frac1n\right)^n
+\end{align*}
+
+欧拉早在18世纪就证明了$e$是个无理数。他的证明是将$e$用形如$[2;1,2,1,1,4,1,1,6,1,\cdots,1,2n,1,\cdots]$的简单连分数表示出来。
+
+\begin{question}
+  $\pi + e$、$\dfrac{\pi}{e}$及$\dfrac{e}{\pi}$是否为无理数？这个问题，截止此文编写时(2019年)仍然未有结论。
+\end{question}
+
+\begin{theorem}[欧拉公式，Euler Formula]
+  \begin{align*}
+  e^{ix}=\cos x + i\sin x
+  \end{align*}
+  取$x=\pi$，则可以得到连接了数学几个基本数字(虚数单位$i$、圆周率$\pi$、自然对数底$e$、1和0)的极为优美的一个恒等式：
+  \begin{align*}
+    e^{i\pi} + 1 = 0
+  \end{align*}
+\end{theorem}
