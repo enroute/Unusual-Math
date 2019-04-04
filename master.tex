@@ -1,5 +1,12 @@
 \documentclass[a4paper,12pt,book]{memoir}
 
+%% To fix a bug in TeXLive 2018, ref.
+%% https://tex.stackexchange.com/questions/427451/dot-between-chapter-number-and-figure-number-disapear-after-update
+%% https://tex.stackexchange.com/questions/427995/memoir-on-tex-live-2018-breaks-figure-numbering-after-mainmatter
+\makeatletter
+\renewcommand{\counterwithin}{\@ifstar{\@csinstar}{\@csin}}
+\makeatother
+
 % comment this if don't want to show answer
 \def\withanswer{1}
 
