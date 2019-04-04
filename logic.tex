@@ -577,6 +577,8 @@
   三人三种奖牌，即三奖牌的全排列，共有$P_3^3=3!=3\times2\times1=6$种，如表~\ref{tab:permutation-of-medals}所示：
   \begin{table}[htbp]
     \centering
+    \caption{三种奖牌的全排列}
+    \label{tab:permutation-of-medals}
     \begin{tabular}{ccccc}
       \toprule
       序号 & Alvin & Brian & Carlos & David的猜测\\\midrule
@@ -587,8 +589,6 @@
       5    & 铜    & 金    & 银     &\\
       6    & 铜    & 银    & 金     &\\\bottomrule
     \end{tabular}
-    \caption{三种奖牌的全排列}
-    \label{tab:permutation-of-medals}
   \end{table}
 
   分析每一种情况。比如，假设是第一种，那么David的三句猜测的对错如表~\ref{tab:permutation-of-medals}所示。可见David猜对了两人，矛盾，可排除这种情况。其余类推。若最后只剩余一种情况无法排除，那就是它了。
