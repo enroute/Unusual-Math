@@ -30,9 +30,9 @@
 \begin{proof}
   记$g=\gcd(x,y)$，则$x'=x/g$与$y'=y/g$是互质的两个整数，代入有
   \begin{align*}
-    1=ax+by=ax'g+by'g=g'(ax'+by')
+    1=ax+by=ax'g+by'g=g(ax'+by')
   \end{align*}
-  从而$g\mid 1$，从而$g=1$。
+  从而$g\mid 1\implies g=1$。
 \end{proof}
 
 %%% $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,y$不是唯一的，可以通过扩展欧几里得算法来计算得到。
@@ -75,3 +75,53 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
   \end{align*}
   而这个方程组是有整数解$a=-2, b=3$，从而原问题得证。
 \end{proof}
+
+\begin{example}\label{ex:sum-is-negative-to-product}
+  对任意满足$a+b\ne0$，$b+c\ne0$，$c+a\ne0$的实数$a,b,c$，则以下三个数的和与积互为相反数：
+  \begin{align*}
+    \frac{a-b}{a+b},\quad \frac{b-c}{b+c},\quad \frac{c-a}{c+a}
+  \end{align*}
+  即
+  \begin{align*}
+    \frac{a-b}{a+b} + \frac{b-c}{b+c} + \frac{c-a}{c+a} 
+    + \frac{a-b}{a+b} \cdot \frac{b-c}{b+c} \cdot \frac{c-a}{c+a} = 0
+  \end{align*}
+\end{example}
+\begin{proof}
+  引入几个记号：
+  \begin{align*}
+    S_{l}\equiv&\, \frac{a-b}{a+b} + \frac{b-c}{b+c} + \frac{c-a}{c+a} \\
+    S_{r}\equiv&\,\frac{a-b}{a+b} \cdot \frac{b-c}{b+c} \cdot \frac{c-a}{c+a}\\
+    P\equiv&\,S_{r}\cdot (a+b)(b+c)(c+a) = (a-b)(b-c)(c-a)
+  \end{align*}
+  则问题中的等式等价于
+  \begin{align*}
+    S_{l}\cdot (a+b)(b+c)(c+a) + P = 0
+  \end{align*}
+  最直接的方法，是逐项展开，合并同类项。
+  \begin{align*}
+     &\, S_{l}\cdot (a+b)(b+c)(c+a)\\
+    =&\, (a-b)(b+c)(c+a) + (b-c)(c+a)(a+b) + (c-a)(a+b)(b+c)\\
+    =&\, (c+a)\left( (a-b)(b+c) + (b-c)(a+b) \right) + (c-a)(a+b)(b+c)\\
+    =&\, 2b(c+a)(a-c) + (c-a)(a+b)(b+c)\\
+    =&\, (a-c)(2bc+2ab - (ab+ac+bb+bc))\\
+    =&\, (a-c)(bc+ab - ac-bb)\\
+    =&\, (a-c)(c(b-a)+b(a-b))\\
+    =&\, (a-c)(b-a)(c-b)\\
+    =&\, -(a-b)(b-c)(c-a) = -P&&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  若$a=3,b=4,c=5$，则
+  \begin{align*}
+    \frac{a-b}{a+b} = \frac{3-4}{3+4} = -\frac17\\
+    \frac{b-c}{b+c} = \frac{4-5}{4+5} = -\frac19\\
+    \frac{c-a}{c+a} = \frac{5-3}{5+3} = \phantom{-}\frac14
+  \end{align*}
+  其和为
+  \begin{align*}
+    -\frac17 - \frac19 + \frac14 = \frac{-9\times4 - 7\times4 + 7\times9}{4\times7\times9} = -\frac1{4\times7\times9}
+  \end{align*}
+  容易看出，其和为其积的相反数。
+\end{example}

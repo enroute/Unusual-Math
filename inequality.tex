@@ -1,0 +1,239 @@
+
+\chapter{不等式}
+\label{chap:inequality}
+
+\section{排序不等式}
+\label{sec:rearrangement-inequality}
+
+\begin{theorem}[排序不等式，Rearrangement Inequality]
+  对任意两个实数序列$\{x_i|i=1,2,\cdots,n\}$及$\{y_i|i=1,2,\cdots,n\}$，若两序列都是递增排序的，即有
+  \begin{align*}
+    x_1\le x_2 \le x_3 \le \cdots \le x_n\\
+    y_1\le y_2 \le y_3 \le \cdots \le y_n
+  \end{align*}
+  则对集合$\{x_i\}$的任意一个排列组成的序列$\{x_i'|i=1,2,\cdots,n\}$，有
+  \begin{align*}
+    x_ny_1 + x_{n-1}y_2 + x_{n-2}y_3 + \cdots x_1y_n 
+    \le&
+         x_1'y_1 + x_2'y_2 + x_3'y_3 + \cdots + x_n'y_n \\
+    \le&
+    x_1y_1 + x_2y_2 + x_3y_3 + \cdots + x_ny_n
+  \end{align*}
+  即“$\text{反序和}\le \text{乱序和} \le \text{顺序和}$”。
+\end{theorem}
+\begin{proof}
+  只需证明“乱序和$\le$顺序和”即顺序和取得最大值，然后对序列
+  \begin{align*}
+    -x_n\le -x_{n-1} \le -x_{n-2} \le \cdots \le -x_1,\quad\quad
+    y_1 \le y_2 \le y_3\cdots y_n
+  \end{align*}
+  应用顺序和取得最大值即可得反序和取得最小值。
+
+  % 可用反证法，或者对$n$用数学归纳法。但数学归纳法到最后还是要用到反证。
+
+  % 用反证法证明和取到最大值的重排是递增的排列。
+
+  假设存在某个重排$\{x_i'\}$，使得其与$\{y_i\}$的乘积和取得最大值。下面分析可以将$\{x_i'\}$重新排列成递增的数列使得新数列与$\{y_i\}$的乘积和也是最大值。
+
+  对任意$1\le s < t\le n$，由$\{y_i\}$的递增性，有$y_s\le y_t$。分$y_s=y_t$与$y_s<y_t$两种情况考虑。
+
+  若$y_s<y_t$，则必有$x_s'\le x_t'$。否则若$x_s'>x_t'$，交换$x_s'$与$x_t'$后得到的新序列
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \foreach \x/\i in {0/$x_1'$, 1/$x_2'$, 2/$x_3'$, 3/$\cdots$, 4/$x_s'$, 5/$\cdots$, 6/$x_t'$, 7/$\cdots$, 8/$x_n'$}{%
+        \ifnum4=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,0)circle(.3);
+        \else\ifnum6=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,0)circle(.3);
+        \fi\fi
+        \node(N0\x) at (\x, 0) {\i};
+      }
+      \foreach \x/\i in {0/$x_1'$, 1/$x_2'$, 2/$x_3'$, 3/$\cdots$, 4/$x_t'$, 5/$\cdots$, 6/$x_s'$, 7/$\cdots$, 8/$x_n'$}{%
+        \ifnum4=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,1.5)circle(.3);
+        \else\ifnum6=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,1.5)circle(.3);
+        \fi\fi
+        \node(N1\x) at (\x, 1.5) {\i};
+      }
+      \node[left] at (-1,0) {原重排：};
+      \node[left] at (-1,1.5) {交换两数：};
+      \draw[<->](N04)--(N16);
+      \draw[<->](N06)--(N14);
+    \end{tikzpicture}
+  \end{center}
+  则此两数列与$\{y_i\}$的乘积和的差别在于
+  \begin{align*}
+    x_t'y_s+x_s'y_t - (x_s'y_s+x_t'y_t)& = (x_t'-x_s')y_s + (x_s'-x_t')y_t\\
+                                      & = (x_s'-x_t')(y_t-y_s) > 0
+  \end{align*}
+  即新构造的重排数列与$\{y_i\}$的乘积和更大，这与$\{x_i'\}$与$\{y_i\}$的乘积和为最大值矛盾。从而若$y_s<y_t$，则必有$x_s'\le x_t'$。
+
+  若$y_s=y_t$，则由$\{y_i\}$的递增性，必有$y_s=y_{s+1}=\cdots=y_t$。此时可以对$x_s', x_{s+1}', \cdots, x_{t}'$作递增重排代替原来位置上的数，得到的数列与$\{y_i\}$的乘积和不变，同样为最大值。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \foreach \x/\i in {0/$x_1'$, 1/$x_2'$, 2/$x_3'$, 3/$\cdots$, 4/$x_s'$, 5/$\cdots$, 6/$\cdots$, 7/$x_t'$, 8/$\cdots$, 9/$x_n'$}{%
+        \ifnum4=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,0)circle(.3);
+        \else\ifnum5=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,0)circle(.3);
+        \else\ifnum6=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,0)circle(.3);
+        \else\ifnum7=\x
+          %\node[draw,circle](N0\x) at (\x, 0) {\i};
+          \draw(\x,0)circle(.3);
+        \fi\fi\fi\fi
+        \node(N0\x) at (\x, 0) {\i};
+      }
+      \draw[decorate,decoration={brace,amplitude=5pt,mirror}](N04.south)--(N07.south);
+      \node[below] at (5.5,-.5) {此部分递增重排};
+    \end{tikzpicture}
+  \end{center}
+
+  综合起来，对相等的$y_i$对应的$x_i'$重新作递增排列后可得到一递增的$\{x_i\}$的重排列，其与$\{y_i\}$的乘积和取到最大值。  
+\end{proof}
+
+\begin{theorem}[排序不等式，Rearrangement Inequality]
+  类似的，若两实数数列是严格递增的，即
+  \begin{align*}
+    x_1< x_2 < x_3 < \cdots < x_n\\
+    y_1< y_2 < y_3 < \cdots < y_n
+  \end{align*}
+  则同样有“反序和$<$乱序和$<$顺序和”。
+\end{theorem}
+
+\begin{corollary}
+  对任意正数数列$(a_1,a_2,\cdots, a_n)$，记$(a_1',a_2',\cdots,a_n')$是其任一重排列，则有
+  \begin{align*}
+    \frac{a_1}{a_1'} + \frac{a_2}{a_2'} + \cdots + \frac{a_n}{a_n'}\ge n
+  \end{align*}
+\end{corollary}
+\begin{proof}[提示]
+  不妨设$a_1,a_2,\cdots,a_n$是递增。考虑两递增数列：
+  \begin{align*}
+    \begin{array}{ccccccccc}
+      a_1&\le& a_2&\le& a_3&\le&\cdots&\le& a_n\\
+      \dfrac1{a_n}&\le& \dfrac1{a_{n-1}}&\le& \dfrac1{a_{n-2}}&\le&\cdots&\le& \dfrac1{a_1}
+    \end{array}
+  \end{align*}
+  应用“反序和$\le$乱序和”可得。
+\end{proof}
+
+\begin{example}[Nesbitt's Inequality]对任意正数$a,b,c$，有
+  \begin{align*}
+    \frac{a}{b+c}+\frac{b}{c+a}+\frac{c}{a+b}\ge \frac32
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  该不等式有多种证明方法。此处使用排序不等式。由对称性，不妨设$a\le b\le c$，从而有$a+b\le a+c\le b+c$。对两个递增数列
+  \begin{align*}
+    a \le b \le c, \quad \quad \frac1{b+c}\le \frac1{a+c}\le \frac1{a+b}
+  \end{align*}
+  应用排序不等式，有
+  \begin{align*}
+    \frac{a}{b+c}+\frac{b}{a+c}+\frac{c}{a+b}\ge \frac{b}{b+c}+\frac{c}{a+c}+\frac{a}{a+b}\\
+    \frac{a}{b+c}+\frac{b}{a+c}+\frac{c}{a+b}\ge \frac{c}{b+c}+\frac{a}{a+c}+\frac{b}{a+b}
+  \end{align*}
+  其中上面两式的右边都是乱序和。两式相加，可得。
+\end{proof}
+
+% \begin{example}
+%   任意正数$a,b,c,d$，有
+%   \begin{align*}
+%     \frac{a}{b+c}+\frac{b}{c+d}+\frac{c}{d+a}+\frac{d}{a+b}
+%   \end{align*}
+% \end{example}
+% \begin{proof}[提示]
+%   先简化分母，令
+%   \begin{align*}
+%     u\equiv b+c,\quad v\equiv c+d, \quad x\equiv d+a,\quad y\equiv a+b
+%   \end{align*}
+%   则有
+%   \begin{align*}
+    
+%   \end{align*}
+% \end{proof}
+
+\begin{example}[IMO 1995]
+  $a,b,c$是正数，且$abc=1$，则
+  \begin{align*}
+    \frac1{a^3(b+c)} + \frac1{b^3(c+a)} + \frac1{c^3(a+b)}\ge\frac32
+  \end{align*}
+\end{example}
+\begin{proof}
+  要证明的不等式等价于
+  \begin{align*}
+    \frac{b^3c^3}{(b+c)} + \frac{c^3a^3}{(c+a)} + \frac{a^3b^3}{(a+b)}\ge\frac32
+  \end{align*}
+
+  由对称性，不妨设$a\le b\le c$，从而有
+  \begin{align*}
+    \begin{array}{*5{>{\displaystyle}c}}
+      ab & \le & ca & \le & bc  \\[5pt]
+      \frac1{b+c} & \le & \frac1{c+a} & \le & \frac1{a+b}
+    \end{array}
+  \end{align*}
+  如果要应用排序不等式的话，原不等式的左边对应于“反序和”，是最小的，得不到$\ge$的结果。此路不通。
+
+  关键点：做变换代换。令
+  \begin{align*}
+    x\equiv\frac1a,\quad y\equiv\frac1b,\quad z\equiv\frac1c
+  \end{align*}
+  则有$xyz=1$，且
+  \begin{align*}
+    \frac1{a^3(b+c)} + \frac1{b^3(c+a)} + \frac1{c^3(a+b)} =&
+    \frac{x^3}{\frac1y+\frac1z} + \frac{y^3}{\frac1z+\frac1x} + \frac{z^3}{\frac1x+\frac1y}\\
+    =&\frac{x^2}{y+z}+\frac{y^2}{z+x}+\frac{z^2}{x+y}
+  \end{align*}
+  由对称性，不妨设$x\le y\le z$(此处已经抛弃了前面$a\le b\le c$的假设，若仍采用的话，则应有$z\le y\le x$)，则有
+  \begin{align*}
+    \begin{array}{*5{>{\displaystyle}c}}
+      x & \le & y & \le & z\\
+      \frac{x}{y+z} & \le & \frac{y}{z+x} & \le & \frac{z}{x+y}
+    \end{array}
+  \end{align*}
+  应用排序不等式，有
+  \begin{align*}
+    \frac{x^2}{y+z}+\frac{y^2}{z+x}+\frac{z^2}{x+y} \ge & \frac{xy}{y+z}+\frac{yz}{z+x}+\frac{zx}{x+y}\\
+    \frac{x^2}{y+z}+\frac{y^2}{z+x}+\frac{z^2}{x+y} \ge & \frac{xz}{y+z}+\frac{yx}{z+x}+\frac{zy}{x+y}
+  \end{align*}
+  两式相加，有
+  \begin{align*}
+    \frac{x^2}{y+z}+\frac{y^2}{z+x}+\frac{z^2}{x+y} \ge \frac{x+y+z}{2}\ge\frac{\sqrt[3]{xyz}}{2}=\frac32&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}[切比雪夫不等式，Chebyshev's Sum Inequality]
+  若$a_i$与$b_i$是两递增数列，则
+  \begin{align*}
+    \frac1n\sum_{i=1}^n a_ib_i\ge
+    \left( \frac1n\sum_{i=1}^n a_i \right)
+    \left( \frac1n\sum_{i=1}^n b_i \right)
+  \end{align*}
+  当$a_1=a_2=\cdots a_n$或者$b_1=b_2=\cdots b_n$时等号成立。
+\end{example}
+\begin{proof}[提示]
+  应用$n$次排序不等式，有
+  \begin{align*}
+    a_1b_1 + \cdots + a_nb_n = &\,   a_1b_1 + a_2b_2 + a_3b_3 + \cdots + a_nb_n\\
+    a_1b_1 + \cdots + a_nb_n \ge&\,  a_1b_2 + a_2b_3 + a_3b_4 + \cdots + a_nb_1\\
+    a_1b_1 + \cdots + a_nb_n \ge&\,  a_1b_3 + a_2b_4 + a_3b_5 + \cdots + a_nb_2\\
+    \vdots\\
+    a_1b_1 + \cdots + a_nb_n \ge&\,  a_1b_n + a_2b_1 + a_3b_2 + \cdots + a_nb_{n-1}
+  \end{align*}
+  将此$n$个式子相加可得。
+\end{proof}
+
+\begin{example}[切比雪夫不等式的积分形式]
+  若$f,g$同为单调增函数或同为单调减函数，则有
+  \begin{align*}
+    \int f(x)g(x)\mathrm{d}x\ge\int f(x)\dx\int g(x)\dx
+  \end{align*}
+\end{example}

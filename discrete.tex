@@ -1,0 +1,75 @@
+
+\chapter{离散数学}
+\label{chap:discrete-mathematics}
+
+\section{排列组合}
+\label{sec:permutation-and-combination}
+
+从$m$个元素的集合里取$n$个组成的一个子集称为集合的一个$n-\text{组合}$。$n-\text{组合}$的个数通常记为$C_m^n$或者$\binom mn$，简称为组合数。组合是与选出来的元素的次序无关的。若每个组合中元素的排序不一样也视为不同，则其个数称为$m$取$n$的排列数，通常记为$P_m^n$。
+
+\begin{theorem}
+  \begin{align*}
+    P_m^n = n! C_m^n
+  \end{align*}
+\end{theorem}
+\begin{proof}[说明]
+  这是非常直观的。首先，每一个组合对应于$n!$个互不相同的排列，所以$P_m^n\ge n! C_m^n$。其次，按其元素组成的集合分类，则排列可分为$P_m^n/n!$类，且每类对应的集合就是两两不相同的$n-\text{组合}$，从而有$P_m^n/n!\le C_m^n$。综合可得。
+\end{proof}
+
+\begin{theorem}
+  \begin{align*}
+    C_m^n = \underbrace{m\cdot (m-1) \cdot (m-2) \cdot (m-n+1)}_{n\text{个}}
+    =\frac{m!}{n!}
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  用乘法原理，$m$个取$n$个时，取第一个时有$m$种选择，取第二个时有$m-1$种选择，$\cdots\cdots$。
+\end{proof}
+
+\section{重复排列组合}
+\label{sec:repeated-permutation-and-combination}
+
+\ref{sec:permutation-and-combination}中，在同一个排列或组合中，一个元素只能被选择一次。若在同一个排列或组合中，同一元素可以被无限制地使用，则这种问题称为重复排列组合问题。
+
+中国传统的易学当中，阴阳是最为基础的概念，其中阴爻双\yinyao 表示，阳爻以\yangyao 表示。阴阳两两组合排列就成了四象仪，如表~\ref{tab:si-xiang}。
+\begin{table}[htbp]
+  \centering
+  \caption{四象}
+  \label{tab:si-xiang}
+  \begin{tabular}{cccc}
+    \hline
+    \taiyang & \shaoyin & \shaoyang & \taiyin\\
+    太阳 & 少阴 & 少阳 & 太阴\\
+    \hline
+  \end{tabular}
+\end{table}
+
+可重复地取3个的排列，就组成了八卦，如表~\ref{tab:ba-gua}。
+\begin{table}[htbp]
+  \centering
+  \caption{八卦}
+  \label{tab:ba-gua}
+  \begin{tabular}{cccccccc}
+    \hline
+    \trigram{0} & \trigram{1} & \trigram{2} & \trigram{3} & \trigram{4} & \trigram{5} & \trigram{6} & \trigram{7}\\\hline
+  \end{tabular}
+\end{table}
+
+若是可重复地取6个作排列，则可得$2^6=$六十四卦(等价于在八卦中可重复地取两个上下重叠而成，即8取2为$8\times8=64$)，如表~\ref{tab:64-gua}。
+\begin{table}[htbp]
+  \centering
+  \caption{六十四卦}
+  \label{tab:64-gua}
+  \begin{tabular}{cccccccc}
+    \hline
+    \iching{0}  & \iching{1}  & \iching{2} & \iching{3} & \iching{4} & \iching{5} & \iching{6} & \iching{7} \\
+    \iching{8}  & \iching{9}  & \iching{10} & \iching{11} & \iching{12} & \iching{13} & \iching{14} & \iching{15} \\
+    \iching{16} & \iching{17} & \iching{18} & \iching{19} & \iching{20} & \iching{21} & \iching{22} & \iching{23} \\
+    \iching{24} & \iching{25} & \iching{26} & \iching{27} & \iching{28} & \iching{29} & \iching{30} & \iching{31} \\
+    \iching{32} & \iching{33} & \iching{34} & \iching{35} & \iching{36} & \iching{37} & \iching{38} & \iching{39} \\
+    \iching{40} & \iching{41} & \iching{42} & \iching{43} & \iching{44} & \iching{45} & \iching{46} & \iching{47} \\
+    \iching{48} & \iching{49} & \iching{50} & \iching{51} & \iching{52} & \iching{53} & \iching{54} & \iching{55} \\
+    \iching{56} & \iching{57} & \iching{58} & \iching{59} & \iching{60} & \iching{61} & \iching{62} & \iching{63} \\
+    \hline
+  \end{tabular}
+\end{table}

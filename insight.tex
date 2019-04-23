@@ -47,6 +47,59 @@
     \end{tikzpicture}
   \end{center}
 \end{example}
+\begin{proof}[提示]
+  单个格子组成的三角形：
+  \begin{center}
+    \begin{tikzpicture}[scale=.75]
+      \foreach \dx/\dy/\VA/\VB/\VC in {%
+        0/0/A/B/G,
+        4/0/A/F/G,
+        8/0/F/G/H,
+        12/0/F/H/E}{%
+          \begin{scope}[shift={(\dx,\dy)}]
+            \coordinate(A) at (0,0);
+            \coordinate(B) at (1,0);
+            \coordinate(C) at (2,0);
+            \coordinate(D) at (3,0);
+            \coordinate(F) at (1.5,2);
+            \coordinate(E) at ($.5*(D)+.5*(F)$);
+            \coordinate(G) at ($.75*(B)+.25*(F)$);
+            \coordinate(H) at ($.6*(C)+.4*(F)$);
+            \fill[color=red!20](\VA)--(\VB)--(\VC)--cycle;
+            \draw(A)--(D)--(F)--(A)--(G)--(H)--(E) (B)--(F)--(C);
+          \end{scope}
+        }
+    \end{tikzpicture}
+  \end{center}
+
+  两个格子组成的三角形：
+  \begin{center}
+    \begin{tikzpicture}[scale=.75]
+      \foreach \dx/\dy/\VA/\VB/\VC in {%
+        0/0/A/B/F,
+        4/0/B/C/F,
+        8/0/C/D/F,
+        0/-3/A/C/H,
+        4/-3/A/H/F,
+        8/-3/G/E/F}{%
+          \begin{scope}[shift={(\dx,\dy)}]
+            \coordinate(A) at (0,0);
+            \coordinate(B) at (1,0);
+            \coordinate(C) at (2,0);
+            \coordinate(D) at (3,0);
+            \coordinate(F) at (1.5,2);
+            \coordinate(E) at ($.5*(D)+.5*(F)$);
+            \coordinate(G) at ($.75*(B)+.25*(F)$);
+            \coordinate(H) at ($.6*(C)+.4*(F)$);
+            \fill[color=red!20](\VA)--(\VB)--(\VC)--cycle;
+            \draw(A)--(D)--(F)--(A)--(G)--(H)--(E) (B)--(F)--(C);
+          \end{scope}
+        }
+    \end{tikzpicture}
+  \end{center}
+
+  其余3个格子、4个格子、5个格子和6个格子组成的三角形请自行考虑。
+\end{proof}
 
 \begin{example}数一数，下面的图形中有多少个四边形？
   \begin{center}

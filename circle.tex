@@ -4,3 +4,18 @@
 
 到一点的距离是某个固定常数(即半径)的点的集合，在三维空间中就是球面，而在平面中就是圆。圆在生活中应用非常广泛，比如下水道井盖为什么是圆的，其中一个原因就是不管井盖怎么放都不会掉到井里去。
 
+\section{圆与三角形}
+\label{sec:circle-and-triangle}
+
+\begin{example}
+  以固定长度$a$为斜边作一个直角三角形，则这些三角形中，该斜边上的高的最大值是多少？
+\end{example}
+\begin{proof}[提示]\mbox{}\par
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \draw(0,0)circle(1.5);
+      \draw(80:1.5)--(-1.5,0)--(1.5,0)node[midway,below]{$a$}--cycle--($(-1.5,0)!(35:1.5)!(1.5,0)$)  node[midway, left]{$h$};
+    \end{tikzpicture}
+  \end{center}
+  另外一个顶点都是落在图中的圆上，显然高的最大值是圆的半径。
+\end{proof}

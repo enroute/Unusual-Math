@@ -394,3 +394,39 @@
     \implies & \frac{u}{v}\left(1+\frac{y}{x}\right)\cdot M = \frac{x}{y}\left(1+\frac{v}{u}\right)\cdot N\qedhere
   \end{align*}
 \end{proof}
+
+\begin{example}[正八边形]
+  若正八边形最长的对角线为$a$，最短的对角线为$b$，则正八边形的面积是$ab$。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \foreach \i in{0,1,2,3,4,5,6,7}{%
+          \coordinate(N\i) at (360/8*\i:2);
+        }
+        \draw(N0)--(N1)--(N2)--(N3)--(N4)--(N5)--(N6)--(N7)--cycle;
+        \draw[help lines](N2)--(N6)node[midway,right]{$a$};
+        \draw[help lines](N3)--(N5)node[midway,right]{$b$};
+      \end{scope}
+      \begin{scope}[shift={(5,0)}]
+        \foreach \i in{0,1,2,3,4,5,6,7}{%
+          \coordinate(N\i) at (360/8*\i:2);
+        }
+
+        \coordinate(A) at ($(N1)!(N0)!(N3)$);
+        \coordinate(B) at ($(N1)!(N4)!(N3)$);
+        \coordinate(C) at ($(N5)!(N4)!(N7)$);
+        \coordinate(D) at ($(N5)!(N0)!(N7)$);
+        % \coordinate(E) at ($(N1)!(N2)!(N3)$);
+        % \coordinate(F) at ($(N5)!(N6)!(N7)$);
+        \fill[red!20](N1)--(N2)--(N3);
+        \fill[red!20](N0)--(A)--(N1)--cycle (N3)--(B)--(N4)--cycle;
+        \fill[pattern=north west lines,pattern color=blue!20](N5)--(N6)--(N7)--cycle;
+        \fill[pattern=north west lines,pattern color=blue!20](N4)--(C)--(N5)--cycle (N7)--(D)--(N0)--cycle;
+
+        \draw[dashed](A)--(B)--(C)--(D)--cycle;
+        \draw(N0)--(N1)--(N2)--(N3)--(N4)--(N5)--(N6)--(N7)--cycle;
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+\end{example}

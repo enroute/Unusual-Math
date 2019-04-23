@@ -2,6 +2,71 @@
 \section{图}
 \label{sec:graphs}
 
+\subsection{染色}
+\begin{example}
+  有一种四个人玩的牌，两人为一组。为了公平起见，规定同一方的两人必须都曾经合作过，或者都不曾合作过。那么只要有5个人，就一定能凑齐4个人按这种约定在一起打牌。
+\end{example}
+\begin{proof}[提示]对图形染色的策略特别适合用于解决此类问题。此处为印刷后方便辩认，不用染色，而是用实线与虚线表示不同的染色。
+  
+  5个点代表5个人，两人合作过则连实线，未合作过则连虚线。则总共有$C_5^2=10$条边。
+  \begin{center}
+    \begin{tikzpicture}[scale=.5]
+      \begin{scope}
+        \foreach \i in {1,2,3,4,5}{%
+          \coordinate(N\i) at (360/5*\i:2);
+          \node at (360/5*\i:3) {$N_\i$};
+        }
+        \tkzDrawPoints(N1, N2, N3, N4, N5);
+        \node at (0,-4) {(a)};
+      \end{scope}
+      \begin{scope}[shift={(9,0)}]
+        \foreach \i in {1,2,3,4,5}{%
+          \coordinate(N\i) at (360/5*\i:2);
+          \node at (360/5*\i:3) {$N_\i$};
+        }
+        \tkzDrawPoints(N1, N2, N3, N4, N5);
+        \draw(N1)--(N2) (N3)--(N4);
+        \node at (0,-4) {(b)};
+      \end{scope}
+      \begin{scope}[shift={(18,0)}]
+        \foreach \i in {1,2,3,4,5}{%
+          \coordinate(N\i) at (360/5*\i:2);
+          \node at (360/5*\i:3) {$N_\i$};
+        }
+        \tkzDrawPoints(N1, N2, N3, N4, N5);
+        \draw(N1)--(N2);
+        \draw[dashed](N3)--(N4)--(N5)--cycle;
+        \node at (0,-4) {(c)};
+      \end{scope}
+      \begin{scope}[shift={(0,-9)}]
+        \foreach \i in {1,2,3,4,5}{%
+          \coordinate(N\i) at (360/5*\i:2);
+          \node at (360/5*\i:3) {$N_\i$};
+        }
+        \tkzDrawPoints(N1, N2, N3, N4, N5);
+        \draw(N1)--(N2);
+        \draw[dashed](N3)--(N4)--(N5)--cycle--(N1);
+        \node at (0,-4) {(d)};
+      \end{scope}
+      \begin{scope}[shift={(9,-9)}]
+        \foreach \i in {1,2,3,4,5}{%
+          \coordinate(N\i) at (360/5*\i:2);
+          \node at (360/5*\i:3) {$N_\i$};
+        }
+        \tkzDrawPoints(N1, N2, N3, N4, N5);
+        \draw(N1)--(N2)--(N3)--cycle (N4)--(N1)--(N5)--(N2)--(N4) ;
+        \draw[dashed](N3)--(N4)--(N5)--cycle;
+        \node at (0,-4) {(e)};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  原问题等价于在这样的图里总能找到两条同为实线或同为虚线的不共点的边。取定一条，不妨记为$N_1N_2$，且不妨假设此边为实线。考虑剩余三个点$N_3, N_4, N_5$，有两种情况：
+
+  若该三点组成的三角形中有一条实线边，不妨假设为$N_3N_4$，如图(b)，则连同$N_1N_2$，已经找到了两条不同顶点的实线边。
+
+  若该三点组成的三角形全是虚线边，如图(c)。考虑剩余的边，若有一条是虚线，假设为$N_1N_3$，如图(d)，则已经找到了两条不同顶点的虚线边。否则若剩余的边全是实线边，如图(e)，则也容易找到两条不共点的实线边，比如$N_1N_5$和$N_2N_4$。
+\end{proof}
+
 \subsection{正则图}
 \label{sec:regular-graph}
 

@@ -212,6 +212,9 @@
 \usepackage{tkz-euclide} % for perpendicular symbols, \tkzMarkRightAngle, \tkzDefPoint
 \usetkzobj{all}
 
+% default style
+\tikzset{every picture/.style={line join=round}}
+
 \makeatletter
 \def\calcLength(#1,#2)#3{%
   \pgfpointdiff{\pgfpointanchor{#1}{center}}%
@@ -461,6 +464,25 @@
   \node at ($1/3*(F)+1/3*(E)+1/3*(D)$) {#4};
 }
 
+%%%% 易经符号
+% \newCJKfontfamily{\symbolazh}{Symbola} % this font has the required I Ching glyphs
+\xeCJKsetcharclass{"4DC0}{"4DFF}{0} % set Yijing Hexagrams Symbols as non-CJK characters, otherwise one has to use the \symbolazh command instead
+\newfontface{\symbola}{Symbola}
+
+% 两仪
+\newcommand{\yangyao}{{\symbola\char\numexpr"268A}}
+\newcommand{\yinyao}{{\symbola\char\numexpr"268B}}
+% 四象
+\newcommand{\taiyang}{{\symbola\char\numexpr"268C}}
+\newcommand{\shaoyin}{{\symbola\char\numexpr"268D}}
+\newcommand{\shaoyang}{{\symbola\char\numexpr"268E}}
+\newcommand{\taiyin}{{\symbola\char\numexpr"268F}}
+% 八卦 0-7
+\newcommand{\trigram}[1]{{\symbola\char\numexpr"2630+#1}}
+% 六十四卦 0-63
+\newcommand{\iching}[1]{{\symbola\char\numexpr"4DC0+#1}}
+
+
 
 % comment this when compile the whole document
 % \includeonly{basic-inequalities}
@@ -492,6 +514,13 @@
 % \includeonly{game}
 % \includeonly{pattern}
 % \includeonly{insight}
+% \includeonly{inequality}
+% \includeonly{trigonometric-functions}
+% \includeonly{set}
+% \includeonly{area}
+% \includeonly{discrete}
+% \includeonly{fun}
+% \includeonly{dp}
 
 \begin{document}
 
@@ -512,9 +541,16 @@
 \include{diophantine-equation}
 \include{calendar}
 \include{golden-ratio}
+
+% 集合 -> 离散(含排列组合) -> 概率
+\include{set}
+\include{discrete}
+\include{probability}
+
 \include{tricks}
 \include{numerical-method}
 \include{induction}
+\include{trigonometric-functions}
 \include{area}
 \include{quadratic-equation}
 \include{function}
@@ -528,13 +564,16 @@
 \include{perfect_squares}
 \include{pigeonhole}
 \include{buffalo-way}
+
+\include{inequality}
 \include{basic-inequalities}
+\include{cauchy-schwarz}
+\include{geometric-inequality}
+
 \include{pythagorean_triples}
 \include{five-models}
 \include{circle}
 \include{geometry}
-\include{geometric-inequality}
-\include{cauchy-schwarz}
 \include{convex}
 \include{minkowski}
 \include{graphs-of-functions}
@@ -553,6 +592,7 @@
 \include{magic-square}
 
 \include{algorithm}
+\include{dp}
 
 \include{intuition}
 \include{traps}

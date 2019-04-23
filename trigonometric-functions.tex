@@ -1,0 +1,281 @@
+
+\chapter{三角形与三角函数}
+\label{chap:triangle-and-trigonometric-functions}
+
+\section{余弦定理}
+\label{sec:law-of-cosines}
+
+\begin{theorem}[余弦定理，Law of Cosine]
+  任意三角形，记三边边长分别是$a,b,c$，且$a$和$b$的夹角为$C$，则有$c^2=a^2+b^2-2ab\cos C$。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate (A) at (0,0);
+      \coordinate (B) at (3,0);
+      \coordinate (C) at (2, 1.5);
+      \draw(A)--(B) node[midway, below]{$c$};
+      \draw(B)--(C) node[midway,right]{$a$};
+      \draw(C)--(A) node[midway,left]{$b$};
+      \draw pic["$C$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--C--B};
+    \end{tikzpicture}
+  \end{center}
+\end{theorem}
+\begin{proof}
+  余弦定理有证明方法有很多，这里有一种直观的构造方法。分$\angle C$是锐角及钝角两种情况(直角时可直接用勾股定理)。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (3,3);
+        \coordinate(G) at (3,0);
+        \coordinate(H) at (0,3);
+        \coordinate(C) at (2.3,3.8);
+        \coordinate(D) at ($(C)!1!90:(B)$);
+        \coordinate(E) at ($(B)!1!-90:(C)$);
+        \coordinate(F) at ($(G) + (E) - (B)$);
+        % \fill[color=red!20](A)rectangle(B);
+        % \fill[color=red!20](B)--(C)--(D)--(E)--cycle;
+        \fill[color=red!20](B)--(C)--(H);
+        \fill[pattern color=red!20,pattern=north east lines](B)--(E)--(F);
+        \fill[pattern color=blue!20,pattern=north west lines](B)--(G)--(F);
+        \draw(A)rectangle(B)--(E)--(D)--(C)--(B)--(F)--(E) (C)--(H) (G)--(F) ;
+        \draw pic["$C$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=C--B--H};
+        \node[below] at ($.5*(H)+.5*(B)$) {$a$};
+        \node[above] at ($.5*(B)+.5*(C)$) {$b$};
+        \node[above left] at ($.5*(H)+.5*(C)$) {$c$};
+        \draw[dashed](B)--($(B)+(0,1)$) node(BB){};
+        \draw[dashed](E)--($(BB)!(E)!(B)$);
+      \end{scope}
+      \begin{scope}[shift={(6,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (3,3);
+        \coordinate(G) at (3,0);
+        \coordinate(H) at (0,3);
+        \coordinate(C) at (2.3,3.8);
+        \coordinate(D) at ($(C)!1!90:(B)$);
+        \coordinate(E) at ($(B)!1!-90:(C)$);
+        \coordinate(F) at ($(G) + (E) - (B)$);
+
+        \coordinate(U) at ($(H)!1!-90:(C)$);
+        \coordinate(V) at ($(C)!1!90:(H)$);
+
+        \fill[color=red!20](U)--(V)--(F)--cycle;
+        \fill[pattern color=red!20,pattern=north east lines](C)--(D)--(V)--cycle;
+        \fill[pattern color=blue!20,pattern=north west lines](H)--(A)--(U)--cycle;
+
+        % \fill[color=red!20](A)rectangle(B);
+        % \fill[color=red!20](B)--(C)--(D)--(E)--cycle;
+        % \fill[pattern color=red!20,pattern=north west lines](B)--(C)--(H);
+        % \fill[pattern color=blue!20,pattern=north east lines](B)--(G)--(F);
+        % \fill[color=red!20](B)--(E)--(F);
+        \draw(A)rectangle(B)--(E)--(D)--(C)--(B)--(F)--(E) (C)--(H) (G)--(F) ;
+        % \draw pic["$C$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=C--B--H};
+        \node[below] at ($.5*(H)+.5*(B)$) {$a$};
+        \node[above] at ($.7*(B)+.3*(C)$) {$b$};
+        \node[above left] at ($.5*(H)+.5*(C)$) {$c$};
+
+
+        \draw[line width=1pt](H)--(U)--(V)--(C)--cycle;
+        \draw[line width=1pt](A)--(H)--(U)--(A) (V)--(D)--(C)--(V);
+        \draw[line width=1pt](A)--(G)--(F)--(U) (V)--(F)--(E)--(D);
+
+        \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm]{angle=A--H--U};
+        \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm]{angle=B--H--C};
+        \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.55cm]{angle=A--H--U};
+        \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.55cm]{angle=B--H--C};
+
+        \draw pic["",draw=black,angle eccentricity=1.6,angle radius=.3cm]{angle=H--C--V};
+        \draw pic["",draw=black,angle eccentricity=1.6,angle radius=.2cm]{angle=H--C--V};
+        \draw pic["",draw=black,angle eccentricity=1.6,angle radius=.3cm]{angle=B--C--D};
+        \draw pic["",draw=black,angle eccentricity=1.6,angle radius=.2cm]{angle=B--C--D};
+        
+        \draw pic["",<->, draw=black,angle eccentricity=1.6,angle radius=.4cm]{angle=G--A--U};
+        \node[above right] at (.5,0) {$90^\circ - C$};
+      \end{scope}
+
+    \end{tikzpicture}
+  \end{center}
+  如左图，以三角形为基础，$a,b$两边向外做正方形，再以这两个正方形的两边作平行四边形。则带阴影的三个角形都是$a$为底，$b\cos C$为高，故其面积都为$\frac12ab\cos C$。
+
+  对左图换一种如右图的切割方式，以$c$为边长向内作正方形，然后连接对应的顶点。则由“边角边”可知\tikz{\fill[draw,pattern=north west lines, pattern color=blue!20](0,0)--(1,0)--(.6,.4)--cycle}与\tikz{\fill[draw,pattern=north east lines, pattern color=red!20](0,0)--(1,0)--(.6,.4)--cycle}的两个三角形都与原三角形全等。从而白色的两个是全等的平行四边形，\tikz{\filldraw[draw=black,fill=red!20](0,0)--(1,0)--(.6,.4)--cycle}也与原三角形全等。且白色平行四边形的一个内角为$90^\circ - C$，从而白色平行四边形的面积都是$ab\sin(90^\circ-C)=ab\cos C$。
+
+  左右两图白色部分面积相等，从而有
+  \begin{align*}
+    c^2 + 2ab\cos C = a^2 + b^2
+  \end{align*}
+
+  钝角的情形则可按下图方式构造。
+  \begin{center}
+    \begin{tikzpicture}[scale=.9]
+      \begin{scope}
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (3,0);
+        \coordinate(C) at (-2,1.8);
+        \coordinate(D) at ($(B)!1!90:(A)$);
+        \coordinate(E) at ($(A)!1!-90:(B)$);
+        \coordinate(F) at ($(E) + (C) - (A)$);
+        \coordinate(G) at ($(F)!1!-90:(E)$);
+        \coordinate(H) at ($(E)!1!90:(F)$);
+        \coordinate(I) at ($(H) + (B) - (A)$);
+        \fill[color=blue!20](A)--(B)--(C)--cycle (C)--(F)--(G)--cycle;
+        \draw(B)--(C)node[midway, above]{$c$};
+        \draw(A)--(B)node[midway, below]{$b$};
+        \draw(A)--(C)node[pos=.4,below left]{$a$};
+        \draw pic["$C$",<->, draw=black,angle eccentricity=1.9,angle radius=.2cm]{angle=B--A--C};
+        \draw(G)--(C)--(F)--(G)--(H)--(E)--(F) (A)--(E)--(D)--(B) (H)--(I)--(D);
+        \node at ($.25*(A)+.25*(B)+.25*(D)+.25*(E)$) {$b^2$};
+        \node at ($.25*(E)+.25*(F)+.25*(G)+.25*(H)$) {$a^2$};
+        \node at ($.25*(E)+.25*(F)+.25*(A)+.25*(C)$) {$-ab\cos C$};
+        \node at ($.25*(E)+.25*(D)+.25*(I)+.25*(H)$) {$-ab\cos C$};
+      \end{scope}
+      \begin{scope}[shift={(7.5,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (3,0);
+        \coordinate(C) at (-2,1.8);
+        \coordinate(D) at ($(B)!1!90:(A)$);
+        \coordinate(E) at ($(A)!1!-90:(B)$);
+        \coordinate(F) at ($(E) + (C) - (A)$);
+        \coordinate(G) at ($(F)!1!-90:(E)$);
+        \coordinate(H) at ($(E)!1!90:(F)$);
+        \coordinate(I) at ($(H) + (B) - (A)$);
+        \fill[color=blue!20](G)--(I)--(H)--cycle (I)--(D)--(B)--cycle;
+        \draw[help lines](B)--(A)--(C) (G)--(F)--(C);
+        \draw[help lines](H)--(E)--(F) (A)--(E)--(D)--(B);
+        \draw(B)--(C)node[midway,above]{$c$} (C)--(G)--(H)--(I)--(D)--(B) (G)--(I)--(B);
+        \node at ($.25*(B)+.25*(C)+.25*(G)+.25*(I)$) {$c^2$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  左图是先分别沿一边$a,b$向外作一正方形和平行四边形，然后再作另一正方形和平行四边形。右图是连接对应的顶点将图重新分割成边长为$c$的正方形与两个带阴影的三角形。左右两图空白面积相等，从而有
+  \begin{align*}
+    a^2+b^2-2ab\cos C=c^2&\qedhere
+  \end{align*}
+\end{proof}
+
+\section{角平分线}
+
+\subsection{角平分线的长度}
+\label{sec:length-of-angular-bisector}
+
+三角形的角平分线的长度公式有好几种形式，其中常用的有以下几种。
+
+\begin{theorem}
+  $AD$是$\triangle ABC$中$\angle A$的角平分线，则角平分线$AD$的长度$d$可由下面公式给出：
+  \begin{align*}
+    d=\frac{2 bc\cdot\cos\frac{A}{2}}{b+c}
+  \end{align*}
+\end{theorem}
+\begin{proof}如图，考虑$\triangle ABC$的面积$S_{\triangle ABC}=S_{\triangle ABD}+S_{\triangle ACD}$，有
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate[label=below left:$A$](A) at (0,0);
+      \coordinate[label=below right:$B$](B) at (3,0);
+      \coordinate[label=right:$D$](D) at (30:2.5);
+      \coordinate(C') at (60:5);
+      \tkzInterLL(A,C')(B,D)\tkzGetPoint{C}
+      \tkzLabelPoint[above](C){$C$}
+      \draw[line width=2pt](A)--(B) node[midway, below]{$c$};
+      \draw[line width=2pt](A)--(C) node[midway, left]{$b$};
+      \draw[line width=2pt](A)--(D) node[midway, above]{$d$};
+      \draw(B)--(C);
+      \draw pic["",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=B--A--C};
+    \end{tikzpicture}
+  \end{center}
+  \begin{align*}
+    S_{\triangle ABC} = \frac12 bc\cdot \sin A = \frac12 bd\cdot \sin\frac{A}2 + \frac12 cd\cdot\sin\frac{A}2
+  \end{align*}
+  将$\sin\alpha=2\sin\frac{\alpha}2\cos\frac{\alpha}2$代入可得。
+\end{proof}
+
+
+\begin{example}
+  任意正数$a,b,c$，有
+  \begin{align*}
+    \sqrt{a^2+ac+c^2}\le \sqrt{a^2-ab+b^2}+\sqrt{b^2-bc+c^2}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]利用余弦定理构造线段，如图：
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate[label=below left:$D$] (D) at (0,0);
+      \coordinate[label=below right:$C$] (C) at (3,0);
+      \coordinate[label=above left:$A$] (A) at (120:2);
+      \coordinate[label=above:$B$] (B) at (60:4);
+      \draw[line width=2pt](D)--(A)node[midway,below left]{$a$};
+      \draw[line width=2pt](D)--(C)node[midway,below left]{$c$};
+      \draw[line width=2pt](D)--(B)node[midway,above left]{$b$};
+      \draw(A)--(B)--(C)--cycle;
+      \draw pic["$60^\circ$",<->,draw=orange,angle eccentricity=1.8,angle radius=.4cm]{angle=B--D--A};
+      \draw pic["$60^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--D--B};
+    \end{tikzpicture}
+  \end{center}
+  如上图，以点$D$为起点，用长度为$a,b,c$的线段及两个$60^\circ$的夹角构造图形，其中$AD=a$，$BD=b$，$CD=c$，$\angle ADB=BDC=60^\circ$。则由余弦定理有
+  \begin{align*}
+    AC=&\,\sqrt{a^2+ac+c^2}\\
+    AB=&\,\sqrt{a^2-ab+b^2}\\
+    BC=&\,\sqrt{b^2-bc+c^2}
+  \end{align*}
+  再由三角形$ABC$的两边和大于等于(三角形退化为三顶点共线时等号成立)第三边，可知原不等式成立。当且仅当$B$落在线段$AC$上时等号成立，此时应用角平分线长度公式，有
+  \begin{align*}
+    b=\frac{2ac\cos60^\circ}{a+c}=\frac{ac}{a+c}&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}\label{ex:triangle-sides-inequality}
+  三角形的三条边边长$a,b,c$满足
+  \begin{align*}
+    (a+b-c)(b+c-a)(c+a-b)\le abc
+  \end{align*}
+\end{example}
+\begin{proof}
+  令$s=\frac12(a+b+c)$是三角形的半周长，且
+  \begin{align*}
+    x\equiv s-a, \quad y\equiv s-b, \quad z\equiv s-c
+  \end{align*}
+  由三角形的性质，可知$x,y,z$都是正的，且
+  \begin{gather*}
+    a=y+z,\quad b=z+x,\quad c=x+y\\
+    a+b-c = 2z, \quad b+c-a=2x, \quad c+a-b = 2y
+  \end{gather*}
+  代入并重新各项顺序排列，原不等式等价于$8xyz\le (x+y)(y+z)(z+x)$。对右边每项应用AM--GM不等式可得。
+\end{proof}
+
+\begin{example}\label{ex:triangle-sides-inequality-simplified}
+  $a,b,c$是三角形的三边边长，则
+  \begin{align*}
+    (a-b)(b-c)(c-a)<abc
+  \end{align*}
+\end{example}
+\begin{proof}
+  由对称性，不妨设$a\le b\le c$，从而存在非负数$u,v$，使得
+  \begin{align*}
+    b=a+u,\quad c=a+u+v
+  \end{align*}
+  由$c<a+b$可知$a+u+v<a + (a+u)\implies a>v$。从而
+  \begin{align*}
+    (a-b)(b-c)(c-a)=(-u)(-v)(u+v) = uv(u+v)\\
+    abc = a(a+u)(a+u+v) > v(v+u)(u+v) \ge uv(u+v)
+  \end{align*}
+  比较两式可得。
+\end{proof}
+
+\begin{example}
+  若$a,b,c$是一个三角形的三边边长，则
+  \begin{align*}
+    \left| \frac{a-b}{a+b} + \frac{b-c}{b+c} + \frac{c-a}{c+a}
+    \right|
+    < \frac18
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  应用例~\ref{ex:sum-is-negative-to-product}，将和化为积的形式：
+  \begin{align*}
+    \left| \frac{a-b}{a+b} + \frac{b-c}{b+c} + \frac{c-a}{c+a} \right|
+    =&\, \left| \frac{a-b}{a+b} \cdot \frac{b-c}{b+c} \cdot \frac{c-a}{c+a} \right|
+    = \frac{|a-b|\cdot|b-c|\cdot|c-a|}{(a+b)(b+c)(c+a)}\\
+    % <&\, \frac{2\sqrt{ab}\cdot 2\sqrt{bc}\cdot 2\sqrt{ca}}{(a+b)(b+c)(c+a)}\\
+    % \le&\,\frac{}{(a+b)(b+c)(c+a)}\\
+    \intertext{再由例~\ref{ex:triangle-sides-inequality-simplified}的结论，有}
+    <&\, \frac{abc}{(a+b)(b+c)(c+a)}
+    \le \frac{abc}{2\sqrt{ab} \cdot 2\sqrt{bc}\cdot 2\sqrt{ca}} = \frac18&&\qedhere
+  \end{align*}
+\end{proof}

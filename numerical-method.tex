@@ -4,6 +4,57 @@
 
 数值方法通常是指应用计算机程序求解数值问题的近似解的各种方法与工具。
 
+其中常见的是迭代法，即不断地用旧值递推出新值的过程。比如数论中的辗转相除法也是一种迭代方法。
+
+\section{迭代法}
+\label{sec:iteration-method}
+
+\subsection{韦达跳跃}
+\label{sec:vieta-jumping}
+
+\begin{example}[Putnam 1988]
+  证明：对于任意正整数$N$，方程
+  \begin{align*}
+    x_1^2+x_2^2+x_3^2+x_4^2=x_1x_2x_3+x_2x_3x_4+x_3x_4x_1 + x_4x_1x_2
+  \end{align*}
+  总有$x_1,x_2,x_3$和$x_4$全大于$N$的整数解。
+\end{example}
+\begin{proof}[提示]用迭代法，从一个特殊解开始不断地构造更大的解。首先猜一个正整数解$(x_1,x_2,x_3,x_4)=(a_1,a_2,a_3,a_4)$。容易猜出来$(x_1,x_2,x_3,x_4)=(1,1,1,1)$是一个正整数解。
+
+  其次，从$(a_1,a_2,a_3,a_4)$出发，构造另一组更大的整数解。由对称性，不妨假设$a_1\le a_2\le a_3\le a_4$。保持较大的$a_2,a_3,a_4$不动，若将$a_1$换成一个比$a_4$大的正整数$a_5$且$(a_2,a_3,a_4,a_5)$满足方程的话，则$\left(a_2, a_3,a_4, a_5\right)$就是另一组更大的解，且有
+  $a_1\le a_2\le a_3\le a_4 < a_5$。用同样的方式，可以找到$a_6, a_7, a_8, \cdots$，使得序列
+  \begin{align*}
+    a_1\le a_2\le a_3\le a_4 < a_5 < a_6 < a_7 < a_8 < \cdots
+  \end{align*}
+  中连续的四项为原方程的一组解。
+
+  下面考虑得到另一个解。对于$x_1$，原方程是一个二元方程，$a_1$是其中一个解，则由韦达定理可得到另一个关于$x_1$的解。变换形式如下：
+  \begin{align*}
+    x_1^2 - (x_2x_3+x_3x_4+x_4x_2)x_1 + x_2^2 + x_3^2 + x_4^2 - x_2x_3x_4=0
+  \end{align*}
+  关于$x_1$的方程的两个根$u, v$应满足
+  \begin{align*}
+    u + v = x_2x_3+x_3x_4+x_4x_2
+  \end{align*}
+  把其中一个根$x_1=a_1$及系数$x_2=a_2, x_3=a_3, x_4=a_4$代入，则有另一个根(记为$a_5$)为
+  \begin{align*}
+    a_5 = a_2a_3 + a_3a_4 + a_4a_2 - a_1
+  \end{align*}
+  又显然有$a_5  \ge a_3a_4 + a_4a_2 > a_4$，从而按此公式，可得到序列的下一项。
+
+  总结如下。开始项：$(1,1,1,1)$，下一项的递推公式为
+  \begin{align*}
+    a_n = %f(a_{n-1},a_{n-2},a_{n-3},a_{n-4}) =
+    a_{n-1}a_{n-2} + a_{n-2}a_{n-3} + a_{n-3}a_{n-1} - a_{n-4}
+  \end{align*}
+  这种苦力，用计算机容易得到下面的结果：
+  \begin{align*}
+    1,1,1,1,2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048,\cdots
+  \end{align*}
+  更进一步地，由上面这个结果，还能得到什么更有趣的结果？
+\end{proof}
+
+
 \section{牛顿法}
 \label{sec:Newton-method}
 
@@ -64,3 +115,31 @@
   \caption{牛顿切线法}
   \label{fig:numeric-newton-method}
 \end{figure}
+
+\section{二分迭代}
+\label{sec:bi-section-iteration-in-numerical-analysis}
+
+\begin{example}
+  用数值方法求$x^3+x^2=1$的一个实根。
+\end{example}
+\begin{proof}[提示]
+  实系数方程若有虚根，则都是成对出现的，从而3次方程至少有一个实根。令$f(x)=x^3+x^2-1$，则$f(1)=1>0$，$f(0)=-1<0$，由$f(x)$的连续性，其曲线在$[0,1]$内必穿过$x$轴，即在$[0,1]$必有一实根。利用二分法，可以不断缩小实根所在的区间。选择新区间的关键点在于函数值在两端点处符号要相反，即一正一负。
+  \begin{table}[htbp]
+    \centering
+    \caption{二分法求实根}
+    \label{tab:real-root-by-binary-section}
+    \begin{tabular}{ccccccc}
+      \hline
+      迭代 & $x_1$ & $f(x_1)$ & $x_2$ & $f(x_2)$ & $\dfrac{x_1+x_2}{2}$ & $f\left(\dfrac{x_1+x_2}{2}\right)$\\\hline
+      1 & 0 & $<0$ & 1 & $>0$ & 0.5  & $< 0$\\
+      2 & 0.5 &  & 1 &   & 0.75 & $<0$\\
+      3 & 0.75 & & 1 &   & 0.875 & $>0$\\
+      4 & 0.75 & & 0.875&& 0.8125 & $ >0$\\
+      5 & 0.75 & & 0.8125&& 0.78125 & $>0$\\
+      6 & 0.75 & & 0.78125&& 0.765625 & $>0$\\
+      7 & 0.75 & & 0.765625&& 0.7578125 & $>0$\\
+      8 & 0.75 & & 0.7578125&& $\cdots$ & $\cdots$\\
+      \hline
+    \end{tabular}
+  \end{table}
+\end{proof}
