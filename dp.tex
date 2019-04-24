@@ -29,9 +29,11 @@
   考虑其递推关系。容易知道到达一个格子，如果只能用一步的话，那有两种方法，即从其左边的格子到达，或从其下边的格子到达。
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
-      \draw(0,0)rectangle(1,1);
-      \draw[->](-1,.5)--(0,.5) node[pos=0,left]{1};
-      \draw[->](.5,-1)--(.5,0) node[pos=0,below]{2};
+      \begin{scope}[shift={(0,2)}]
+        \draw(0,0)rectangle(1,1);
+        \draw[->](-1,.5)--(0,.5) node[pos=0,left]{1};
+        \draw[->](.5,-1)--(.5,0) node[pos=0,below]{2};
+      \end{scope}
       \begin{scope}[shift={(3,0)}]
         \draw(0,0)grid(6,5);
         \draw[help lines,->](.5,.5)--(6.5,.5)node[pos=1,right]{$x$} node[pos=0,below left]{\small 0};
@@ -49,7 +51,7 @@
   \begin{align*}
     f(x,y)=f(x-1,y)+f(x,y-1)
   \end{align*}
-  由此结论，可以依次填满整个表格，如下图所示。
+  由此结论，可以依次填满整个表格，如下图所示。这种递推关系在利用计算机中编程解决时，通常直观的算法是用递归。然而在用递归时，计算$f(x+1,y)$需要计算$f(x,y)$，计算$f(x,y+1)$时同样需要再计算一次$f(x,y)$，不但浪费时间，而且还是多余的。但是利用表格记忆住$f(x,y)$，则只需计算一次，下次要用时直接拿来即可。
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
       \begin{scope}

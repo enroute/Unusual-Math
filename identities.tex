@@ -2,6 +2,23 @@
 \chapter{恒等式}
 \label{chap:identities}
 
+\section{基本恒等式}
+\label{sec:basic-identities}
+
+\begin{example}$\forall a,b\in\mathcal{R}$，有
+  \begin{align*}
+    (a + b)^2 &=& a^2 + 2ab + b^2\\
+    (a + b)^3 &=& a^3 + 3a^2b + 3ab^2 + b^3
+  \end{align*}
+\end{example}
+对于$(a-b)^2$及$(a-b)^3$这种，只要在上式中把$b$换为$-b$即可。
+
+\begin{example}[配方]$\forall a\ne 0$，有
+  \begin{align*}
+    ax^2 + bx + c = a\left(x-\frac{b}{2a}\right)^2 + \frac{4ac - b^2}{4a}
+  \end{align*}
+\end{example}
+
 \section{代数}
 \label{sec:algebra-identities}
 
@@ -125,3 +142,44 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
   \end{align*}
   容易看出，其和为其积的相反数。
 \end{example}
+
+\section{重要恒等式}
+\label{sec:important-identities}
+
+以下几个恒等式不常见，却是竞赛中的常客。虽无需记忆，但可以留点印象，知道有这么回事，对解题有大帮助。
+
+\begin{example}证明对任意$x\in\mathcal{R}$，有
+  \begin{align*}
+    x(x+1)(x+2)(x+3)+1=\left( x^2+3x+1\right )^2
+  \end{align*}
+\end{example}
+展开两边可得。
+
+\begin{theorem}[Fibonacci Identity]任意实数$a,b,c,d$，有恒等式
+  \begin{align*}
+    \left(a^2+b^2\right)\left(c^2+d^2\right)
+    = \left(ac +  bd\right)^2 + \left(ad -  bc\right)^2
+    = \left(ac -  bd\right)^2 + \left(ad +  bc\right)^2 
+  \end{align*}
+\end{theorem}
+
+\begin{example}$\forall x,y\in\mathcal{R}$，有恒等式
+  \begin{align*}
+    x^4+4y^4 = \left(x^2+2xy+2y^2\right)\left(x^2-2xy+2y^2\right)
+  \end{align*}
+\end{example}
+在上式中令$x=1$，可以得到哥德巴赫定理；令$y=1$，则可以得到吉梅茵定理。
+\begin{theorem}[哥德巴赫定理，Goldbach Theorem]\mbox{}\par
+  对任意整数$n>1$，$4n^4+1$是合数。  
+\end{theorem}
+\begin{theorem}[吉梅茵定理，Germain Theorem]\mbox{}\par
+  任意整数$n>1$，$n^4+4$是合数。
+\end{theorem}
+
+\begin{theorem}
+  若$\alpha, \beta, \gamma$均非$\pi/2$的奇数倍，则等式
+  \begin{align*}
+    \tan\alpha +\tan\beta+\tan\gamma=\tan\alpha \cdot \tan\beta \cdot \tan\gamma
+  \end{align*}
+  当且仅当$\alpha+\beta+\gamma$是$\pi$的整数倍时成立。
+\end{theorem}
