@@ -220,6 +220,9 @@
   \end{align*}
 \end{proof}
 
+\section{边长不等式}
+\label{sec:triangle-inequality}
+
 \begin{example}\label{ex:triangle-sides-inequality}
   三角形的三条边边长$a,b,c$满足
   \begin{align*}
@@ -278,4 +281,763 @@
     <&\, \frac{abc}{(a+b)(b+c)(c+a)}
     \le \frac{abc}{2\sqrt{ab} \cdot 2\sqrt{bc}\cdot 2\sqrt{ca}} = \frac18&&\qedhere
   \end{align*}
+\end{proof}
+
+\section{重要定理}
+\label{sec:important-triangle-theorems}
+
+在证明三点共线、三线共点时，经常需要用到梅涅劳斯定理及塞瓦定理。
+
+\subsection{梅涅劳斯定理}
+\label{sec:Menelaus's-theorem}
+
+\begin{theorem}[梅涅劳斯定理，Menelaus's Theorem]\label{th:Menelaus's-theorem}
+  给定三角形$\triangle ABC$，一条直线与三角形三边或其延长线分别相交于三个不同于三角形顶点的点$D$，$E$及$F$(如图所示)，则
+  \begin{align*}
+    \frac{\vec{AF}}{\vec{FB}}\cdot \frac{\vec{BD}}{\vec{DC}} \cdot \frac{\vec{CE}}{\vec{EA}} = -1
+  \end{align*}
+  其中上式的比值$\frac{\vec{AF}}{\vec{FB}}$是指两向量$\vec{AF}$与$\vec{FB}$的比值，当其方向相同时比值为正实数，当其方向相反时比值为负实数，其绝对值为两向量的长度之比。
+
+  反之，若$D$，$E$，$F$分别是三角形$\triangle ABC$三边或其延长线上一点，且
+  \begin{align*}
+    \frac{\vec{AF}}{\vec{FB}}\cdot \frac{\vec{BD}}{\vec{DC}} \cdot \frac{\vec{CE}}{\vec{EA}} = -1
+  \end{align*}
+  则$D$，$E$及$F$三点共线。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (1,1.5);
+        \coordinate (M) at (.5,1.5); \coordinate (N) at (5,-.5);
+        \tkzInterLL(A,C)(M,N)\tkzGetPoint{E}
+        \tkzInterLL(C,B)(M,N)\tkzGetPoint{D}
+        \tkzInterLL(B,A)(M,N)\tkzGetPoint{F}
+        \draw(A)--(B)--(C)--cycle;
+        \draw[dashed,help lines](B)--(6,0);
+        \draw[color=orange](M)--(N);
+        \path (E)++(-.1,-.1)node[left]{$E$};
+        \node[above right]at(D){$D$};
+        \node[below]at(F){$F$};
+    \end{tikzpicture}
+  \end{center}
+\end{theorem}
+\begin{proof}[提示]
+  首先，若$D$，$E$及$F$三点共线，则如图，$D$在$BC$内，$E$在$CA$内，$F$在$AB$外，从而
+  \begin{align*}
+   \frac{\vec{AF}}{\vec{FB}}<0,\quad \frac{\vec{BD}}{\vec{DC}}>0,\quad \frac{\vec{CE}}{\vec{EA}} >0
+  \end{align*}
+  从而其乘积是负数\footnote{若$D$，$E$，$F$均在三角形三边的延长线上，则三个比值都是负的，其乘积同样为负数。同时三个比值不会存在两负一正的情况，即两个点在三角形边的延长线上，另外一个点在三角形的边上。这是因为假设直线与三角形的一边(非延长线)有一交点，那么此直线在往另一边无限延伸的过程中必定穿过另外两条边中的一条，所以必有两个交点在三角形的边(非延长线)上。}。通过作$A$，$B$及$C$在线$DEF$上的高，记其高分别为$a,b,c$，如下图，
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below:$B$] (B) at (4.5,0);
+        \coordinate[label=above:$C$] (C) at (1.5,2.25);
+        \coordinate (M) at (-.5,1.8); \coordinate (N) at (8.5,-.3);
+        % \coordinate(F) at (6.5,0);
+        \tkzInterLL(A,C)(M,N)\tkzGetPoint{E}
+        \tkzInterLL(C,B)(M,N)\tkzGetPoint{D}
+        \tkzInterLL(B,A)(M,N)\tkzGetPoint{F'}
+        \coordinate(IA) at ($(E)!(A)!(F')$);
+        \coordinate(IB) at ($(E)!(B)!(F')$);
+        \coordinate(IC) at ($(E)!(C)!(F')$);
+        \tkzMarkRightAngle(A,IA,D)\tkzMarkRightAngle(C,IC,E)\tkzMarkRightAngle(B,IB,D)
+        \draw(A)--(B)--(C)--cycle;
+        \draw[dashed](A)--(IA)node[midway,left]{$a$} (B)--(IB)node[midway,right]{$b$} (C)--(IC)node[pos=.6,right]{$c$};
+        \draw[dashed,help lines](B)--(9,0);
+        \draw[color=orange](M)--(N);
+        \path (E)++(-.1,.1)node[above]{$E$};
+        \node[above right]at(D){$D$};
+        \node[below]at(F'){$F$};
+        % \node[below]at(F){$F$};
+        \tkzDrawPoints(D,E,F')
+    \end{tikzpicture}
+  \end{center}
+  则由相似三角形容易知道
+  \begin{align*}
+    \left|\frac{\vec{AF}}{\vec{FB}}\right|=\frac{a}{b},\quad
+    \left|\frac{\vec{BD}}{\vec{DC}}\right|=\frac{b}{c},\quad
+    \left|\frac{\vec{CE}}{\vec{EA}}\right|=\frac{c}{a}
+  \end{align*}
+  三式相乘，可知其绝对值为1，从而有
+  \begin{align*}
+    \frac{\vec{AF}}{\vec{FB}}\cdot \frac{\vec{BD}}{\vec{DC}} \cdot \frac{\vec{CE}}{\vec{EA}} = -1
+  \end{align*}
+  其余情况(如$D$，$E$及$F$均在三角形外)也是类似的。
+
+  至于其逆定理，设$DE$与$AB$相交于点$F'$，只需证明$F$与$F'$重合即可。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below:$B$] (B) at (4.5,0);
+        \coordinate[label=above:$C$] (C) at (1.5,2.25);
+        \coordinate (M) at (-.5,1.8); \coordinate (N) at (8.5,-.3);
+        \coordinate(F) at (6.5,0);
+        \tkzInterLL(A,C)(M,N)\tkzGetPoint{E}
+        \tkzInterLL(C,B)(M,N)\tkzGetPoint{D}
+        \tkzInterLL(B,A)(M,N)\tkzGetPoint{F'}
+        % \coordinate(IA) at ($(E)!(A)!(F')$);
+        % \coordinate(IB) at ($(E)!(B)!(F')$);
+        % \coordinate(IC) at ($(E)!(C)!(F')$);
+        % \tkzMarkRightAngle(A,IA,D)\tkzMarkRightAngle(C,IC,E)\tkzMarkRightAngle(B,IB,D)
+        \draw(A)--(B)--(C)--cycle;
+        % \draw[dashed](A)--(IA)node[midway,left]{$a$} (B)--(IB)node[midway,right]{$b$} (C)--(IC)node[pos=.6,right]{$c$};
+        \draw[dashed,help lines](B)--(9,0);
+        \draw[color=orange](M)--(N);
+        \path (E)++(-.1,.1)node[above]{$E$};
+        \node[above right]at(D){$D$};
+        \node[below]at(F'){$F'$};
+        \node[below]at(F){$F$};
+        \tkzDrawPoints(D,E,F,F')
+    \end{tikzpicture}
+  \end{center}
+  由前面的证明，有
+  \begin{align*}
+    \frac{\vec{AF'}}{\vec{F'B}}\cdot \frac{\vec{BD}}{\vec{DC}} \cdot \frac{\vec{CE}}{\vec{EA}} = -1
+  \end{align*}
+  又由条件
+  \begin{align*}
+    \frac{\vec{AF}}{\vec{FB}}\cdot \frac{\vec{BD}}{\vec{DC}} \cdot \frac{\vec{CE}}{\vec{EA}} = -1
+  \end{align*}
+  从而有
+  \begin{align*}
+    \frac{\vec{AF}}{\vec{FB}} = \frac{\vec{AF'}}{\vec{F'B}}
+  \end{align*}
+  两边加上$1=\frac{\vec{FB}}{\vec{FB}}=\frac{\vec{F'B}}{\vec{F'B}}$，则由向量的加法可知$\vec{AF}+\vec{FB}=\vec{AB}$及 $\vec{AF'}+\vec{F'B}=\vec{AB}$，从而有
+  \begin{align*}
+    \frac{\vec{AF} + \vec{FB}}{\vec{FB}} = \frac{\vec{AB}+\vec{F'B}}{\vec{F'B}} \,\ \implies\ \,
+    \frac{\vec{AB}}{\vec{FB}} = \frac{\vec{AB}}{\vec{F'B}} \,\ \implies\ \,
+    \vec{FB}=\vec{F'B}
+  \end{align*}
+  从而有$F'$与$F$重合。即$D$，$E$，$F$三点共线。
+\end{proof}
+
+
+\subsection{塞瓦定理}
+\label{sec:ceva-theorem}
+
+\begin{theorem}[塞瓦定理，Ceva's Theorem]
+  给定三角形$\triangle ABC$，点$O$是任意一不在三角形边上的点，且$AO$，$BO$及$CO$分别与三角形三边相交于点$D$，$E$及$F$，则
+  \begin{align*}
+    \frac{AF}{FB}\cdot\frac{BD}{DC}\cdot\frac{CE}{EA}=1
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      \begin{scope}
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below right:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (1,1.5);
+        \coordinate (O) at (1.5,.6);\path (O) ++(-.1,-.1)node[below]{$O$};
+        \tkzInterLL(A,O)(B,C)\tkzGetPoint{D}
+        \tkzInterLL(B,O)(C,A)\tkzGetPoint{E}
+        \tkzInterLL(C,O)(A,B)\tkzGetPoint{F}
+        \node[above right]at(D){$D$};
+        \node[above left]at(E){$E$};
+        \node[below]at(F){$F$};
+        \draw(A)--(B)--(C)--cycle;
+        \draw(A)--(D)--(C)--(F)--(A) (B)--(E)--(O);
+      \end{scope}
+      \begin{scope}[shift={(5,0)}]
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below right:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (1,1.5);
+        \coordinate (O) at (1.5,.6);
+        \tkzInterLL(A,O)(B,C)\tkzGetPoint{D}
+        \tkzInterLL(B,O)(C,A)\tkzGetPoint{E}
+        \tkzInterLL(C,O)(A,B)\tkzGetPoint{F}
+        \fill[color=red!20](A)--(O)--(B)--cycle;
+        \fill[pattern=bricks, pattern color=blue!20](B)--(O)--(C)--cycle;
+        \fill[pattern=north west lines,pattern color=orange!20](A)--(O)--(C)--cycle;
+        \node[above right]at(D){$D$};
+        \node[above left]at(E){$E$};
+        \node[below]at(F){$F$};
+        \draw(A)--(B)--(C)--cycle;
+        \draw(A)--(O)--(C) (B)--(O);
+        \draw[help lines](D)--(O)--(E) (F)--(O);
+        \path (O) ++(-.1,-.1)node[below]{$O$};
+    \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{theorem}
+\begin{proof}[提示]
+  用面积法，考虑三个三角形$\triangle AOB$，$\triangle BOC$及$\triangle COA$的面积比。
+
+  \begin{align*}
+    & \frac{S_{\triangle ACF}}{S_{\triangle BCF}} = \frac{AF}{FB},\quad
+      \frac{S_{\triangle AOF}}{S_{\triangle BOF}} = \frac{AF}{FB}\\
+    \implies &
+    \frac{S_{\triangle COA}}{S_{\triangle BOC}} = \frac{S_{\triangle ACF} - S_{\triangle AOF}}{S_{\triangle BCF}-S_{\triangle BOF}} = \frac{AF}{FB}
+  \end{align*}
+  以上是点$O$在三角形内部的情况。若点$O$在三角形外，则上式中的减号($-$)有可能要换为加号($+$)。同理可得
+  \begin{align*}
+    \frac{S_{\triangle BOC}}{S_{\triangle AOB}} = \frac{CE}{EA},\quad
+    \frac{S_{\triangle AOB}}{S_{\triangle COA}} = \frac{BD}{DC}
+  \end{align*}
+  三式相乘，则有
+  \begin{align*}
+    \frac{AF}{FB}\cdot\frac{BD}{DC}\cdot\frac{CE}{EA}=
+    \frac{S_{\triangle COA}}{S_{\triangle BOC}} \cdot
+    \frac{S_{\triangle BOC}}{S_{\triangle AOB}} \cdot
+    \frac{S_{\triangle AOB}}{S_{\triangle COA}} = 1
+  \end{align*}
+
+  除此之外，也可以用梅涅劳斯定理来证明。
+\end{proof}
+
+\begin{theorem}[塞瓦逆定理，Inverse of Ceva's Theorem]
+  给定三角形$\triangle ABC$，$D,E,F$分别是三边或其延长线上一点，若
+  \begin{align*}
+    \frac{AF}{FB}\cdot\frac{BD}{DC}\cdot\frac{CE}{EA}=1
+  \end{align*}
+  则$AD$，$BE$及$CF$三线共点，或者三线互相平行。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      \coordinate[label=below:$A$] (A) at (0,0);
+      \coordinate[label=below:$B$] (B) at (3,0);
+      \coordinate[label=above right:$C$] (C) at (1,1.5);
+      \coordinate[label=above left:$O$] (O) at (.2,.6);
+      \tkzInterLL(A,O)(B,C)\tkzGetPoint{D}
+      \tkzInterLL(B,O)(C,A)\tkzGetPoint{E}
+      \tkzInterLL(C,O)(A,B)\tkzGetPoint{F}
+      \node[above]at(D){$D$};
+      \node[below]at(E){$E$};
+      \node[below left]at(F){$F$};
+      \draw(A)--(B)--(C)--cycle;
+      \draw(A)--(D)--(C)--(F)--(A) (B)--(E)--(O);
+    \end{tikzpicture}
+  \end{center}
+\end{theorem}
+\begin{proof}[提示]
+  与梅涅劳斯定理的证明类似。考虑$D$，$E$，$F$均在三角形的三边内(不在延长线上)的情况，则$AD$与$BE$必有交点，记其交点为$O$，设$CO$与$AB$相交于点$F'$，只需证明$F'$与$F$重合即可。
+
+  由前面的塞瓦定理，有
+  \begin{align*}
+    \frac{AF'}{F'B}\cdot\frac{BD}{DC}\cdot\frac{CE}{EA}=1
+  \end{align*}
+  再由条件
+  \begin{align*}
+    \frac{AF}{FB}\cdot\frac{BD}{DC}\cdot\frac{CE}{EA}=1
+  \end{align*}
+  比较两式，有
+  \begin{align*}
+    \frac{AF}{FB}=\frac{AF'}{F'B} \implies
+    \frac{AF}{FB}+1=\frac{AF'}{F'B}+1 \implies
+    % \frac{AF+FB}{FB}=\frac{AF'+F'B}{F'B}\,\implies\,
+    \frac{AB}{FB}=\frac{AB}{F'B} \implies 
+    FB=F'B
+  \end{align*}
+  从而$F$与$F'$重合，即$AD$，$BE$及$CF$三线共点。
+\end{proof}
+
+\section{正三角形}
+\label{sec:equilateral-triangle}
+
+\subsection{正三角形的性质}
+\label{sec:property-of-equilateral-triangle}
+\begin{example}\label{ex:radius-of-equilateral-triangle}
+  正三角形的边长为$a$，则其内切圆半径$r$与外接圆半径$R$分别是
+  \begin{align*}
+    r= \frac a{2\sqrt3},\quad R=\frac a{\sqrt3}
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate (A) at (0,0); \coordinate (B) at (4,0); \coordinate (C) at (60:4);
+      \coordinate (O) at ($1/3*(A) + 1/3*(B) + 1/3*(C)$);
+      \coordinate (D) at (2,0);
+      \draw(A)--(B)--(C) node[pos=.55,sloped,above right]{$a$} --cycle;
+      \draw(A)--(O) node[midway,above]{$R$}--(D) node[midway,right]{$r$};
+      \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--A--O};
+      \tkzMarkRightAngle[color=blue](A,D,O)
+      \tkzDrawPoint(O)
+      \draw[|<->|](0,-.5)--(2,-.5) node[midway,below]{$a/2$};
+      \draw[|<->|](2,-.5)--(4,-.5) node[midway,below]{$a/2$};
+      % \node at (O) [circle through=(A)] {};
+      % \node at (O) [circle through=({(1.5,0)})] {};
+      \draw let \p1=($(O)-(D)$) in (O) circle({veclen(\x1,\y1)});
+      % \draw let \p1=($(O)-(A)$) in (O) circle({veclen(\x1,\y1)});
+      \draw let \p1=($(O)-(A)$) in (B) arc(-30:210:{veclen(\x1,\y1)});
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+\begin{proof}[提示]
+  如图，由三角函数有
+  \begin{gather*}
+    R\cos30^\circ = \frac a2\implies R = \frac a2 \div \frac{\sqrt3}{2} = \frac{a}{\sqrt3}\\
+    r= R\sin30^\circ = \frac{a}{\sqrt3} \cdot \frac 12 =\frac{a}{2\sqrt3}\qedhere
+  \end{gather*}
+\end{proof}
+
+\subsection{复数表示}
+\label{sec:equilateral-triangle-with-complex-number}
+
+\begin{theorem}
+  复平面上三个不同的点的$z_1, z_2, z_3$是正三角形的顶点，当且仅当
+  \begin{align*}
+  z_1^2+z_2^2+z_3^2 = z_1z_2 + z_2z_3 + z_3z_1
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  由于$z_1, z_2, z_3$两两不同，所以$z_1,z_3,z_3$三点组成正三角形，等价于两边长度相等且其夹角是$60^\circ$，即
+  \begin{align*}
+    \text{$z_1,z_2,z_3$组成正三角形}&\iff \frac{z_3-z_1}{z_2-z_1} = \cos(\pm60^\circ) + i\sin(\pm60^\circ) = \frac{1\pm\sqrt3i}{2}\\
+                                    &\iff 2z_3 - z_1 - z_2=\pm\sqrt3i\left(z_2 - z_1\right)\\
+    &\iff \left(2z_3 - z_1 - z_2\right)^2=-3\left(z_2 - z_1\right)^2\\
+    &\iff z_1^2+z_2^2+z_3^2 = z_1z_2 + z_2z_3 + z_3z_1\qedhere
+  \end{align*}
+\end{proof}
+\begin{corollary}
+  复平面内两点$x,y$与原点组成正三角形，当且仅当
+  \begin{align*}
+    x^2 + y^2 = xy
+  \end{align*}
+\end{corollary}
+
+\begin{example}
+记复平面上单位向量旋转$120^\circ$即$\frac{2\pi}{3}$后的向量为$w$，即
+\begin{align*}
+  w\equiv e^{\frac{2\pi}{3}i}=\cos\frac{2\pi}{3} + i \sin\frac{2\pi}{3} = -\frac12 + \frac{\sqrt3}{2}i
+\end{align*}
+则有
+\begin{align*}
+  1 + w + w^2 = 0
+\end{align*}
+\end{example}
+\begin{proof}[提示]可以直接计算。也可以从向量图中直观地观察到。实际上，$w$也可以看作是一个旋转$120^\circ$的运算符。
+  \begin{center}
+    \begin{tikzpicture}[scale=2.0]
+      \coordinate (A) at (1,0);
+      \coordinate (B) at (120:1);
+      \coordinate (C) at (240:1);
+      \coordinate[label=below right:$O$] (O) at (0,0);
+      \draw[help lines](0,0)circle(1);
+      \tkzDrawPoint(O);
+      \draw[->](O)--(A) node[pos=1,right]{$1$};
+      \draw[->](O)--(B) node[pos=1,above left]{$w$};
+      \draw[->](O)--(C) node[pos=1,below left]{$w^2$};
+    \end{tikzpicture}
+  \end{center}
+  如上图，容易看出三个向量$1,w,w^2$的和是零向量。
+
+  另一方面，由于$w^3=1$，从而对于任意整数$n$，$w^n, w^{n+1}, w^{n+2}$必是$1,w,w^2$这三者的某个排列，从而有
+  \begin{align*}
+    w^n + w^{n+1} + w^{n+2} = 0&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}\label{th:equilateral-triangle-x+wy=0}
+  复平面内两点$x,y$与原点组成正三角形，当且仅当
+  \begin{align*}
+    x + wy = 0
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  $x+wy=0$的含义是将$y$旋转$120^\circ$后与$x$成反向量。
+  \begin{center}
+    \begin{tikzpicture}[scale=2.0]
+      \coordinate[label=below:$O$] (O) at (0,0);
+      \coordinate (A) at (20:1);
+      \coordinate (B) at (80:1);
+      \coordinate (C) at (200:1);
+      \draw[help lines](O)circle(1) (A)--(B);
+      \draw[->](O)--(A)node[right]{$x$};
+      \draw[->](O)--(B)node[above]{$y$};
+      \draw[->,dashed](O)--(C)node[left]{$wy$};
+      \draw pic["$120^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--C};
+      \tkzDrawPoint(O);
+    \end{tikzpicture}
+  \end{center}
+  如上图，当且仅当$x$与$y$长度相等且夹角为$60^\circ$时，即当且仅当$wy=-x$时，$x,y$及原点$O$组成正三角形。
+\end{proof}
+
+\begin{theorem}\label{th:equilateral-triangle-z1+wz2+w2z3}
+  复平面内三点$z_1,z_2,z_3$组成正三角形，当且仅当
+  \begin{align*}
+    z_1 + wz_2 + w^2z_3 = 0
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  应用上一例中的记号$w$，有$1=-w-w^2$，从而
+  \begin{align*}
+    z_1 + wz_2 + w^2z_3 = 0 &\iff (-w-w^2)z_1 + wz_2 + w^2z_3 = 0 \\
+                            & \iff w\left(z_2-z_1\right) + w^2\left(z_3-z_1\right) = 0\\
+                            & \iff \left(z_2-z_1\right) + w\left(z_3-z_1\right) = 0
+  \end{align*}
+  于是将坐标原点移到$z_1$，在新坐标系下原$z_2,z_3$的坐标则变为了$z_2-z_1$及$z_3-z_1$，从而原命题变为
+  \begin{quotation}
+    复平面内两点$x,y$及原点组成正三角形，当且仅当
+    \begin{align*}
+      x + wy = 0
+    \end{align*}
+  \end{quotation}
+  而这由定理~\ref{th:equilateral-triangle-x+wy=0}可得。
+\end{proof}
+
+\section{拿破仑三角形}
+\label{sec:napoleon-triangle}
+
+通常认为拿破仑定理是法国的著名军事家拿破仑·波拿巴(Napoleon Bonaparte)提出的。
+
+\begin{theorem}[拿破仑定理，Napoleon' Theorem]\label{th:napoleon-theorem}
+  任意三角形，以其三边分别向外做三个正三角形，则这三个正三角形的重心连线组成一个正三角形。此正三角形称为外拿破仑三角形。
+
+  同样的，若以其三边分别向内做三个正三角形，则这三个正三角形的重心连线同样组成一个正三角形。此正三角形称为内拿破仑三角形。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below right:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (2,2);
+        \coordinate[label=below:$C'$] (C') at ($(B)!1!60:(A)$);
+        \coordinate[label=above left:$B'$] (B') at ($(A)!1!60:(C)$);
+        \coordinate[label=right:$A'$] (A') at ($(C)!1!60:(B)$);
+        \coordinate[label=below:$D$] (D) at ($1/3*(A) + 1/3*(B) + 1/3*(C')$);
+        \coordinate[label=right:$E$] (E) at ($1/3*(B) + 1/3*(C) + 1/3*(A')$);
+        \coordinate[label=left:$F$] (F) at ($1/3*(C) + 1/3*(A) + 1/3*(B')$);
+        \coordinate (D') at ($(A)!1!60:(D)$);
+        \coordinate (E') at ($(B)!1!60:(E)$);
+        \coordinate (F') at ($(C)!1!60:(F)$);
+        \draw[help lines,dashed] (D)--(D') (E)--(E') (F)--(F');
+        \draw[help lines,line width=2pt](A)--(C')--(B) (B)--(A')--(C) (C)--(B')--(A);
+        \draw[line width=2pt](A)--(B)--(C)--cycle;
+        \draw(D)--(E)--(F)--cycle (D')--(E')--(F')--cycle;
+      \end{scope}
+      \begin{scope}[shift={(5,0)}]
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \coordinate (C) at (2.2,.85);
+        \coordinate (C') at ($(B)!1!-60:(A)$);
+        \coordinate (B') at ($(A)!1!-60:(C)$);
+        \coordinate (A') at ($(C)!1!-60:(B)$);
+        \coordinate (D) at ($1/3*(A) + 1/3*(B) + 1/3*(C')$);
+        \coordinate (E) at ($1/3*(B) + 1/3*(C) + 1/3*(A')$);
+        \coordinate (F) at ($1/3*(C) + 1/3*(A) + 1/3*(B')$);
+        \draw[help lines,line width=2pt](A)--(C')--(B) (B)--(A')--(C) (C)--(B')--(A);
+        \draw[line width=2pt](A)--(B)--(C)--cycle;
+        \draw(D)--(E)--(F)--cycle;
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{theorem}
+\begin{proof}[提示]
+  实际上，由于作一边向外与向内作的正三角形是关于此边对称的，从而由外拿破仑三角形的顶点分别以原三角形的三边作反射得到三个反射点，则此三点就是内拿破仑三角形的三个顶点。
+
+  应用定理~\ref{th:equilateral-triangle-z1+wz2+w2z3}，记图中各点在复平面内的坐标分别是$A$，$B$，$C$，$D$，$E$，$F$，$A'$，$B'$及$C'$，则由重心是三顶点的坐标平均值，有
+  \begin{align*}
+    D = \frac13\left(A+B+C'\right)\\
+    E = \frac13\left(B+C+A'\right)\\
+    F = \frac13\left(C+A+B'\right)
+  \end{align*}
+  从而(按$A,B,C$分组，带$'$或不带$'$，且每组要有系数$1,w,w^2$)
+  \begin{align*}
+    &D + wE + w^2F \\
+    =\,& \frac13\left(A+B+C'\right)
+    + \frac13\cdot w\left(B+C+A'\right)
+       + \frac13\cdot w^2\left(C+A+B'\right)\\
+    =\,&\frac13\left( A + wC + w^2B' \right) + \frac13\left( B + wA' + w^2C \right)
+       + \frac13\left( C' + wB + w^2A \right)
+  \end{align*}
+  且对于三角正三角形$\triangle ABC'$，$\triangle BCA'$及$\triangle CAB'$，有
+    \begin{align*}
+    A + wC + w^2 B' = 0\\
+    B + wA' + w^2 C = 0\\
+    C' + wB + w^2 A = 0
+  \end{align*}
+  从而$D+wE+w^2F=0$，按定理~\ref{th:equilateral-triangle-z1+wz2+w2z3}，$\triangle DEF$是正三角形。同样的，内拿破仑三角形也是正三角形。
+\end{proof}
+
+\begin{example}
+  内外拿破仑三角形的重心与原三角形的重心重合。
+\end{example}
+\begin{proof}[提示]
+  还是用复数。如定理~\ref{th:napoleon-theorem}，有
+  \begin{align*}
+    D = \frac13\left(A+B+C'\right),\quad
+    E = \frac13\left(B+C+A'\right),\quad
+    F = \frac13\left(C+A+B'\right)
+  \end{align*}
+  同时，由于向量$BC'$是向量$BA$逆时针旋转$60^\circ$而得，从而有
+  \begin{align*}
+    C'-B=e^{\frac{\pi}6 i} (A-B) \quad\implies\quad C' = B + e^{\frac{\pi}6 i} (A-B)    
+  \end{align*}
+  同理可得
+  \begin{align*}
+    A' = C + e^{\frac{\pi}6 i} (B-C),\quad
+    B' = A + e^{\frac{\pi}6 i} (C-A)
+  \end{align*}
+  从而有$A'+B'+C' = A+B+C$，代入，则有
+  \begin{align*}
+    D + E + F & = \frac13\left(A+B+C'\right) + \frac13\left(B+C+A'\right) + \frac13\left(C+A+B'\right) \\
+              & = A + B + C
+  \end{align*}
+  从而外拿破仑三角形的重心$\frac13(D+E+F)$与原三角形的重心$\frac13(A+B+C)$重合。
+
+  同理，内拿破仑三角形的重心与原三角形的重心重合。
+\end{proof}
+
+
+\begin{example}[美国，1956]
+  在任意三角形的每边向外作顶角为$120^\circ$的等腰三角形，则这三个等腰三角形的三个顶点组成一个正三角形。
+\end{example}
+\begin{proof}[提示]
+  此问题与拿破仑三角形类似，同样可以用复数解决。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below right:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (2,2);
+        \coordinate[label=below:$C'$] (C') at ($(B)!1/sqrt(3)!30:(A)$);
+        \coordinate[label=above left:$B'$] (B') at ($(A)!1/sqrt(3)!30:(C)$);
+        \coordinate[label=right:$A'$] (A') at ($(C)!1/sqrt(3)!30:(B)$);
+        % \coordinate[label=below:$D$] (D) at ($1/3*(A) + 1/3*(B) + 1/3*(C')$);
+        % \coordinate[label=right:$E$] (E) at ($1/3*(B) + 1/3*(C) + 1/3*(A')$);
+        % \coordinate[label=left:$F$] (F) at ($1/3*(C) + 1/3*(A) + 1/3*(B')$);
+        % \coordinate (D') at ($(A)!1!60:(D)$);
+        % \coordinate (E') at ($(B)!1!60:(E)$);
+        % \coordinate (F') at ($(C)!1!60:(F)$);
+        % \draw[help lines,dashed] (D)--(D') (E)--(E') (F)--(F');
+        \draw[help lines,line width=2pt](A)--(C')--(B) (B)--(A')--(C) (C)--(B')--(A);
+        \draw[line width=2pt](A)--(B)--(C)--cycle;
+        % \draw(D)--(E)--(F)--cycle (D')--(E')--(F')--cycle;
+        \draw(A')--(B')--(C')--cycle;
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  如上图，记各点在复平面内的坐标分别为$A$，$B$，$C$，$A'$，$B'$及$C'$，则由三个顶角为$120^\circ$的等腰三角形$\triangle AC'B$，$\triangle BA'C$及$\triangle CB'A$，有
+  \begin{align*}
+    \begin{cases}
+      A-C'=w(B-C')\\
+      B-A'=w(C-A')\\
+      C-B'=w(A-B')
+    \end{cases}
+    \implies
+    \begin{cases}
+      C' = \frac{A-wB}{1-w}\\
+      A' = \frac{B-wC}{1-w}\\
+      B' = \frac{C-wA}{1-w}
+    \end{cases}
+  \end{align*}
+  上式中$A-C'=w(B-C')$是因为向量$\vec{C'A}$是向量$\vec{C'B}$逆时针旋转$120^\circ$而得，其余类似。从而
+  \begin{align*}
+    A' + wB' + w^2C' &= \frac{B-wC}{1-w} + w\cdot\frac{C-wA}{1-w} + w^2\cdot\frac{A-wB}{1-w}\\
+                     &= \frac1{1-w}\left( (B-wC) + w(C-wA) + w^2(A-wB) \right)\\
+                     &= \frac1{1-w}\left( B-wC + wC-w^2A + w^2A-w^3B \right)
+  \end{align*}
+  由$w^3=1$可知$A'+wB'+w^2C'=0$，从而$\triangle A'B'C'$是正三角形。
+\end{proof}
+
+\begin{example}[南京，1978]
+  如图，$A_1,B_1,C_1$分别是三个正角形$\triangle ABC_2$，$\triangle BCA_2$及$\triangle CAB_2$的重心，则
+  \begin{enumerate}
+  \item $AA_2=BB_2=CC_2=\sqrt3 B_1C_1$；
+  \item $\triangle A_1B_1C_1$是正三角形。
+  \end{enumerate}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[blend mode=multiply]
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below right:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (2,2);
+        \coordinate[label=below:$C_2$] (C') at ($(B)!1!60:(A)$);
+        \coordinate[label=above left:$B_2$] (B') at ($(A)!1!60:(C)$);
+        \coordinate[label=right:$A_2$] (A') at ($(C)!1!60:(B)$);
+        \coordinate[label=below left:$C_1$] (D) at ($1/3*(A) + 1/3*(B) + 1/3*(C')$);
+        \coordinate[label=right:$A_1$] (E) at ($1/3*(B) + 1/3*(C) + 1/3*(A')$);
+        \coordinate[label=left:$B_1$] (F) at ($1/3*(C) + 1/3*(A) + 1/3*(B')$);
+        \coordinate (D') at ($(A)!1!60:(D)$);
+        \coordinate (E') at ($(B)!1!60:(E)$);
+        \coordinate (F') at ($(C)!1!60:(F)$);
+
+        % \fill[color=red!20,opacity=.5](A)--(C)--(C')--cycle;
+        % \fill[color=blue!20,opacity=.5](A)--(B)--(B')--cycle;
+        
+        % \draw[help lines,dashed] (D)--(D') (E)--(E') (F)--(F');
+        \draw[help lines,line width=2pt](A)--(C')--(B) (B)--(A')--(C) (C)--(B')--(A);
+        \draw[line width=2pt](A)--(B)--(C)--cycle;
+        \draw(D)--(E)--(F)--cycle;% (D')--(E')--(F')--cycle;
+        \draw(A)--(A') (B)--(B') (C)--(C');
+      \end{scope}
+      \begin{scope}[shift={(7,0)},blend mode=multiply]
+        \coordinate[label=below left:$A$] (A) at (0,0);
+        \coordinate[label=below right:$B$] (B) at (3,0);
+        \coordinate[label=above:$C$] (C) at (2,2);
+        \coordinate[label=below:$C_2$] (C') at ($(B)!1!60:(A)$);
+        \coordinate[label=above left:$B_2$] (B') at ($(A)!1!60:(C)$);
+        \coordinate[label=right:$A_2$] (A') at ($(C)!1!60:(B)$);
+        \coordinate[label=below left:$C_1$] (D) at ($1/3*(A) + 1/3*(B) + 1/3*(C')$);
+        \coordinate[label=right:$A_1$] (E) at ($1/3*(B) + 1/3*(C) + 1/3*(A')$);
+        \coordinate[label=left:$B_1$] (F) at ($1/3*(C) + 1/3*(A) + 1/3*(B')$);
+        \coordinate (D') at ($(A)!1!60:(D)$);
+        \coordinate (E') at ($(B)!1!60:(E)$);
+        \coordinate (F') at ($(C)!1!60:(F)$);
+
+        \fill[color=red!20,opacity=.5](A)--(C)--(C')--cycle;
+        \fill[color=blue!20,opacity=.5](A)--(B)--(B')--cycle;
+        
+        % \draw[help lines,dashed] (D)--(D') (E)--(E') (F)--(F');
+        \draw[help lines,line width=2pt](A)--(C')--(B) (B)--(A')--(C) (C)--(B')--(A);
+        \draw[line width=2pt](A)--(B)--(C)--cycle;
+        \draw(D)--(E)--(F)--cycle;% (D')--(E')--(F')--cycle;
+        \draw(A)--(A') (B)--(B') (C)--(C');
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+\begin{proof}[提示]
+  $A_1B_1C_1$是三角形$\triangle ABC$的外拿破仑三角形，从而是正三角形。
+
+  将三角形$\triangle AC_2C$绕点$A$逆时针旋转$60^\circ$可得$\triangle ABB_2$，从而有$CC_2=BB_2$。同理可得$AA_2=BB_2=CC_2$。
+
+  
+  用余弦定理证明$AA_2=\sqrt3B_1C_1$。在$\triangle ACA_2$中，对角$\angle ACA_2$应用余弦定理，有
+  \begin{align*}
+    AA_2^2 &= AC^2 + A_2C^2 - 2AC\cdot A_2C\cdot\cos(C+\frac\pi6)\\
+           &= AC^2 + BC^2 - 2AC\cdot BC\cdot\cos(C+\frac\pi6)
+  \end{align*}
+  其次，在$\triangle B_1AC_1$中，对角$\angle B_1AC_1$应用余弦定理，有
+  \begin{align*}
+    B_1C_1^2 & = B_1A^2 + C_1A^2 - 2B_1A\cdot C_1A\cdot \cos(A+30^\circ + 30^\circ) \\
+             &= B_1A^2 + C_1A^2 - 2B_1A\cdot C_1A\cdot \cos(A+\frac\pi6)
+  \end{align*}
+  比较两式，一个有$\angle A$，一个有$\angle C$，不好比较。将$B_1C_1$换为$A_1B_1$，则有望将后式中的$\angle A$换为$\angle C$。对$\triangle A_1CB_1$中的$\angle C$应用余弦定理，有
+  \begin{align*}
+    A_1B_1^2 &= A_1C^2 + B_1C^2 - 2A_1C\cdot B_1C\cdot\cos(C + 30^\circ + 30^\circ)\\
+             & = A_1C^2 + B_1C^2 - 2A_1C\cdot B_1C\cdot\cos(C + \frac\pi6)
+  \end{align*}
+  再由正三角形$\triangle BCA_2$及正三角形$\triangle ACB_2$，应用例~\ref{ex:radius-of-equilateral-triangle}的结论，有
+  \begin{align*}
+    A_1C = \frac{BC}{\sqrt3},\quad B_1C = \frac{AC}{\sqrt3}
+  \end{align*}
+  代入，则有
+  \begin{align*}
+    A_1B_1^2 = \frac13\left(BC^2 + AC^2 - 2 BC\cdot AC\cdot\cos(C + \frac\pi6)\right)
+  \end{align*}
+  比较$AA_2$的表达式，可知$AA_2^2 = 3A_1B_1^2$，从而有$AA_2=\sqrt3 A_1B_1$。由于外拿破仑三角形$\triangle A_1B_1C_1$是正三角形，从而有
+  \begin{align*}
+    AA_2=BB_2=CC_2=\sqrt3 A_1B_1 = \sqrt3 B_1C_1 = \sqrt3 C_1A_1
+  \end{align*}
+\end{proof}
+
+\begin{theorem}[拿破仑点的推广]
+  如图，任意三角形$\triangle ABC$，以三边为底边分别向外(或向内)作相似的三个等腰三角形形成六边形，则三条对角线$AX$，$BY$，$CZ$共点。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate[label=left:$A$](A) at (0,0);
+        \coordinate[label=right:$B$](B) at (3,0);
+        \coordinate[label=above:$C$](C) at (2.5,2.5);
+        \coordinate[label=above right:$X$](X) at ($(C)!.5/cos(30)!30:(B)$);
+        \coordinate[label=above left:$Y$](Y) at ($(A)!.5/cos(30)!30:(C)$);
+        \coordinate[label=below:$Z$](Z) at ($(B)!.5/cos(30)!30:(A)$);
+        % \fill[color=red!20](A)--(B)--(Z)--cycle;
+        % \fill[color=blue!20](B)--(C)--(X)--cycle;
+        % \fill[color=yellow!20](C)--(A)--(Y)--cycle;
+        \draw(A)--(B)--(Z)--cycle (B)--(C)--(X)--cycle (C)--(A)--(Y)--cycle;
+        \draw(A)--(X) (B)--(Y) (C)--(Z);
+      \end{scope}
+      \begin{scope}[shift={(5,0)}]
+        \coordinate[label=left:$A$](A) at (0,0);
+        \coordinate[label=right:$B$](B) at (3,0);
+        \coordinate[label=above:$C$](C) at (2.5,2.5);
+        \coordinate[label=above right:$X$](X) at ($(C)!.5/cos(30)!30:(B)$);
+        \coordinate[label=above left:$Y$](Y) at ($(A)!.5/cos(30)!30:(C)$);
+        \coordinate[label=below:$Z$](Z) at ($(B)!.5/cos(30)!30:(A)$);
+        \fill[color=red!20](A)--(B)--(Z)--cycle;
+        \fill[color=blue!20](B)--(C)--(X)--cycle;
+        \fill[color=yellow!20](C)--(A)--(Y)--cycle;
+        \draw(A)--(B)--(Z)--cycle (B)--(C)--(X)--cycle (C)--(A)--(Y)--cycle;
+        \draw(A)--(X) (B)--(Y);% (C)--(Z);
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=B--C--X};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=X--B--C};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=Z--A--B};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=A--B--Z};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=C--A--Y};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=Y--C--A};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  当$\theta=\pi/6$时，三线的交点即为first Napoleon point，也称为Fermat点；当$\theta=-\pi/6$时(即等腰三角形是向内的)，三线的交点即为second Napoleon point。
+\end{theorem}
+% \begin{proof}[提示]
+%   此定理的证明并不平凡，若有兴趣，可以参考Eddy, R. H.; Fritsch, R. (June 1994). "The Conics of Ludwig Kiepert: A Comprehensive Lesson in the Geometry of the Triangle". Mathematics Magazine. 67 (3): 188--205.
+% \end{proof}
+
+拿破仑点可以更进一步地推广如下，上面定理是下面定理的一种特殊情形。
+\begin{theorem}[推广]
+  给定任意三角形，如图在其三边向外作三个三角形$\triangle XBC$，$\triangle AYC$及$\triangle ABZ$，使得相邻的两个角相等，即
+  \begin{align*}
+    \angle YAC = \angle ZAB = \alpha,\quad
+    \angle ZBA = \angle XBC = \beta,\quad
+    \angle XCB = \angle YCA = \gamma
+  \end{align*}
+  则$AX$，$BY$及$CZ$三线共点，该点称为Jacobi点。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate[label=left:$B$] (B) at (0,0);
+      \coordinate[label=right:$C$] (C) at (4,0);
+      \coordinate[label=above:$A$] (A) at (3,2);
+      % \coordinate[label=below:$X$] (X) at ($(C)!.8!30:(B)$);
+      % \coordinate[label=below:$X$] (Y) at ($(C)!.8!-30:(A)$);
+      % \tkzInterLL(A,X)(B,Y)\tkzGetPoint{N}
+      % \tkzInterLL(C,N)(
+      \coordinate(X1) at ($(B)!.5!-80:(C)$);\coordinate(X2) at ($(C)!.5!30:(B)$);\tkzInterLL(B,X1)(C,X2)\tkzGetPoint{X}
+      \coordinate(Y1) at ($(A)!.5!60:(C)$);\coordinate(Y2) at ($(C)!.5!-30:(A)$);\tkzInterLL(A,Y1)(C,Y2)\tkzGetPoint{Y}
+      \coordinate(Z1) at ($(A)!.5!-60:(B)$);\coordinate(Z2) at ($(B)!.5!80:(A)$);\tkzInterLL(A,Z1)(B,Z2)\tkzGetPoint{Z}
+      \tkzInterLL(A,X)(B,C)\tkzGetPoint{X'}
+      \tkzInterLL(B,Y)(C,A)\tkzGetPoint{Y'}
+      \tkzInterLL(C,Z)(A,B)\tkzGetPoint{Z'}
+
+      \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.8,angle radius=.3cm,fill=orange!20]{angle=X--B--C};
+      \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.8,angle radius=.3cm,fill=orange!20]{angle=A--B--Z};
+
+      \draw pic["$\gamma$",<->,draw=blue,angle eccentricity=1.6,angle radius=.5cm,fill=blue!20]{angle=B--C--X};
+      \draw pic["$\gamma$",<->,draw=blue,angle eccentricity=1.6,angle radius=.5cm,fill=blue!20]{angle=Y--C--A};
+
+      \draw pic["$\alpha$",<->,draw=red,angle eccentricity=1.6,angle radius=.3cm,fill=red!20]{angle=C--A--Y};
+      \draw pic["$\alpha$",<->,draw=red,angle eccentricity=1.8,angle radius=.3cm,fill=red!20]{angle=Z--A--B};
+
+      % \draw[help lines](X)--(Y)--(Z)--cycle;
+
+      \draw(A)--(B)--(C)--cycle (B)--(X)--(C) (C)--(Y)--(A) (A)--(Z)--(B);
+      \node[below] at (X) {$X$}; \node[above right] at (Y) {$Y$}; \node[above left] at (Z) {$Z$};
+      \draw(A)--(X) (B)--(Y) (C)--(Z);
+      \tkzInterLL(A,X)(B,Y)\tkzGetPoint{N}\tkzDrawPoint(N)
+      % \node[label={[label distance=3pt]280:$N$}] at (N) {};
+      \path (N) ++(.1,-.2) node[below]{$N$};
+      \tkzDrawPoints(X',Y',Z')
+      \path (X')++(.2,-.1)node[below]{$X'$};
+      \path (Y')++(-.1,-.1)node[below]{$Y'$};
+      \path (Z')++(-.1,0)node[left]{$Z'$};
+    \end{tikzpicture}
+  \end{center}
+  $\triangle XYZ$称为$\triangle ABC$的一个Jacobi三角形。
+\end{theorem}
+\begin{proof}[提示]利用正弦定理及塞瓦定理。记三角形的三个顶角分别是$A,B,C$，对应的三条边长分别是$a,b,c$。
+
+  考虑$\triangle AYY'$及$\triangle CYY'$，利用正弦定理，有
+  \begin{align*}
+    &\frac{\sin\angle AYY'}{AY'} = \frac{\sin\alpha}{YY'}, \quad
+      \frac{\sin\angle CYY'}{Y'C} = \frac{\sin\gamma}{YY'}\\
+    \implies& \frac{AY'}{Y'C} = \frac{\sin\alpha\cdot \sin\angle CYY'}{\sin\gamma\cdot\sin\angle AYY'}
+  \end{align*}
+  再对$\triangle AYB$和$\triangle CYB$应用正弦定理，有
+  \begin{align*}
+    &\frac{\sin\angle AYB}{c}=\frac{\sin(A+\alpha)}{BY},\quad
+      \frac{\sin\angle CYB}{a}=\frac{\sin(C+\gamma)}{BY}\\
+    \implies& \frac{\sin\angle AYB}{\sin\angle CYB}=\frac{a\sin(A+\alpha)}{c\sin(C+\gamma)}
+  \end{align*}
+  再由$\angle AYY' = \angle AYB$及$\angle CYY'=\angle CYB$，结合上面两式，有
+  \begin{align*}
+    \frac{AY'}{Y'C} = \frac{\sin\alpha\cdot c\cdot\sin(C+\gamma)}{\sin\gamma\cdot a\cdot\sin(A+\alpha)}
+  \end{align*}
+  同理可得出
+  \begin{align*}
+    \frac{CX'}{X'B}=\frac{\sin\gamma\cdot b\cdot\sin(B+\beta)}{\sin\beta\cdot c\cdot\sin(C+\gamma)},\quad
+    \frac{BZ'}{Z'A}=\frac{\sin\beta\cdot a\cdot\sin(A+\alpha)}{\sin\alpha\cdot b\cdot\sin(B+\beta)}
+  \end{align*}
+  三式相乘，则有
+  \begin{align*}
+    \frac{AY'}{Y'C}\cdot\frac{CX'}{X'B}\cdot\frac{BZ'}{Z'A}=1
+  \end{align*}
+  由塞瓦定理，可知$AX'$，$BY'$，$CZ'$三线共点。
 \end{proof}

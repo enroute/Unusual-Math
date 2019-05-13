@@ -5,13 +5,47 @@
 \section{基本恒等式}
 \label{sec:basic-identities}
 
-\begin{example}$\forall a,b\in\mathcal{R}$，有
+\begin{example}[两数和的幂]$\forall a,b\in\mathcal{R}$，有
   \begin{align*}
-    (a + b)^2 &=& a^2 + 2ab + b^2\\
-    (a + b)^3 &=& a^3 + 3a^2b + 3ab^2 + b^3
+    (a + b)^2 &= a^2 + 2ab + b^2\\
+    (a + b)^3 &= a^3 + 3a^2b + 3ab^2 + b^3\\
+    (a + b)^4 &= a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4
   \end{align*}
 \end{example}
-对于$(a-b)^2$及$(a-b)^3$这种，只要在上式中把$b$换为$-b$即可。
+对于$(a-b)^2$及$(a-b)^3$这种，只要在上式中把$b$换为$-b$即可。观察上述$(a+b)^n$的系数，可以发现其与下面的杨辉三角是一致的：
+\begin{center}
+  \begin{tikzpicture}[scale=1.0]
+    \begin{scope}[shift={(.5,1)}]
+      \foreach \x/\v in {1/1,2/1}{%
+        \node at (\x,0) {\v};
+      }
+    \end{scope}
+    \begin{scope}[shift={(0,0)}]
+      \foreach \x/\v in {1/1,2/2,3/1}{%
+        \node at (\x,0) {\v};
+      }
+    \end{scope}
+    \begin{scope}[shift={(-.5,-1)}]
+      \foreach \x/\v in {1/1,2/3,3/3,4/1}{%
+        \node at (\x,0) {\v};
+      }
+    \end{scope}
+    \begin{scope}[shift={(-1,-2)}]
+      \foreach \x/\v in {1/1,2/4,3/6,4/4,5/1}{%
+        \node at (\x,0) {\v};
+      }
+    \end{scope}
+    \begin{scope}[shift={(-1.5,-3)}]
+      \foreach \x/\v in {1/1,2/5,3/10,4/10,5/5,6/1}{%
+        \node at (\x,0) {\v};
+      }
+    \end{scope}
+    \foreach \y in{1,2,3,4,5}{%
+      \node[left] at (-2,2-\y){$n=\y$};
+    }
+  \end{tikzpicture}
+\end{center}
+
 
 \begin{example}[配方]$\forall a\ne 0$，有
   \begin{align*}
@@ -27,11 +61,15 @@
   \begin{align*}
     x^4 + 4y^4 = (x^2 + 2xy + 2y^2)(x^2 - 2xy + 2y^2)
   \end{align*}
-  在上式中令$y=1$，则有
-  \begin{align*}
-    x^4 + 4 = (x^2 + 2x + 2)(x^2 - 2x + 2)
-  \end{align*}
 \end{theorem}
+在上式中令$x=1$，可以得到哥德巴赫定理；令$y=1$，则可以得到吉梅茵定理。
+\begin{theorem}[哥德巴赫定理，Goldbach Theorem]\mbox{}\par
+  对任意整数$n>1$，$4n^4+1=(1+2n+2n^2)(1-2n+2n^2)$是合数。  
+\end{theorem}
+\begin{theorem}[吉梅茵定理，Germain Theorem]\mbox{}\par
+  任意整数$n>1$，$n^4+4=(n^2+2n+2)(n^2-2n+2)$是合数。
+\end{theorem}
+
 
 \begin{theorem}[贝祖定理，B\'ezout's identity]\label{th:Bezout}
   $\forall a,b\in\mathcal{Z},\exists x,y\in\mathcal{Z}$使得
@@ -148,12 +186,24 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
 
 以下几个恒等式不常见，却是竞赛中的常客。虽无需记忆，但可以留点印象，知道有这么回事，对解题有大帮助。
 
-\begin{example}证明对任意$x\in\mathcal{R}$，有
+\begin{example}\label{ex:product-of-four-continuous-integer}
+  证明对任意$x\in\mathcal{R}$，有
   \begin{align*}
     x(x+1)(x+2)(x+3)+1=\left( x^2+3x+1\right )^2
   \end{align*}
 \end{example}
-展开两边可得。
+展开两边可得。换一个形式，则有
+\begin{align*}
+  \sqrt{x(x+1)(x+2)(x+3)+1}= x^2+3x+1 = (x + 1)^2 + x
+\end{align*}
+
+
+\begin{example}
+  求$\sqrt{2019\times2020\times2021\times2022+1}-2020^2$。
+
+  在恒等式$\sqrt{x(x+1)(x+2)(x+3)+1}= x^2+3x+1 = (x + 1)^2 + x$中令$x=2019$，则有
+  $\sqrt{2019\times2020\times2021\times2022+1}-2020^2=2019$。
+\end{example}
 
 \begin{theorem}[Fibonacci Identity]任意实数$a,b,c,d$，有恒等式
   \begin{align*}
@@ -163,18 +213,6 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
   \end{align*}
 \end{theorem}
 
-\begin{example}$\forall x,y\in\mathcal{R}$，有恒等式
-  \begin{align*}
-    x^4+4y^4 = \left(x^2+2xy+2y^2\right)\left(x^2-2xy+2y^2\right)
-  \end{align*}
-\end{example}
-在上式中令$x=1$，可以得到哥德巴赫定理；令$y=1$，则可以得到吉梅茵定理。
-\begin{theorem}[哥德巴赫定理，Goldbach Theorem]\mbox{}\par
-  对任意整数$n>1$，$4n^4+1$是合数。  
-\end{theorem}
-\begin{theorem}[吉梅茵定理，Germain Theorem]\mbox{}\par
-  任意整数$n>1$，$n^4+4$是合数。
-\end{theorem}
 
 \begin{theorem}
   若$\alpha, \beta, \gamma$均非$\pi/2$的奇数倍，则等式
