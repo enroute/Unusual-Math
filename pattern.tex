@@ -33,10 +33,11 @@
   显然，从第二项开始，这是一等比数列。丢提斯数列在天文学上大名鼎鼎。直到1776年前，天文学家知道的太阳系行星只有水星、金星、地球、火星、木星和土星这六颗行星，其与太阳的距离如下表所示：
   \begin{center}
     \begin{tabular}{ccccccc}
+      \multicolumn{6}{c}{与太阳的距离(单位：天文单位)}\\
       \hline
-      & 水星 & 金星 & 地球 & 火星 & 木星 & 土星\\
+      水星 & 金星 & 地球 & 火星 & 木星 & 土星\\
       \hline
-      与太阳的距离(单位：天文单位) & 0.387 & 0.723 & 1 & 1.524 & 5.202 & 9.539\\
+      0.387 & 0.723 & 1 & 1.524 & 5.202 & 9.539\\
       \hline
     \end{tabular}
   \end{center}
@@ -1013,4 +1014,37 @@
     \end{tikzpicture}
   \end{center}
   且每一行的前三个是连续的整数，第一个是上一行第一个加1。综合这些规律，这个表格可以无限地填写下去。
+\end{proof}
+
+\begin{example}找规律填空。
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \begin{scope}
+        \draw(0,0)rectangle(2,2)node[pos=.4]{6};
+        \draw(4,0)rectangle(2,2)node[pos=.4]{6};
+        \draw(0,4)rectangle(2,2)node[pos=.4]{2};
+        \draw(4,4)rectangle(2,2)node[pos=.4]{4};
+        \draw[fill=white](1.3,1.3)rectangle(2.7,2.7)node[midway]{41};
+      \end{scope}
+      \begin{scope}[shift={(5,0)}]
+        \draw(0,0)rectangle(2,2)node[pos=.4]{7};
+        \draw(4,0)rectangle(2,2)node[pos=.4]{4};
+        \draw(0,4)rectangle(2,2)node[pos=.4]{3};
+        \draw(4,4)rectangle(2,2)node[pos=.4]{6};
+        \draw[fill=white](1.3,1.3)rectangle(2.7,2.7)node[midway]{52};
+      \end{scope}
+      \begin{scope}[shift={(10,0)}]
+        \draw(0,0)rectangle(2,2)node[pos=.4]{5};
+        \draw(4,0)rectangle(2,2)node[pos=.4]{5};
+        \draw(0,4)rectangle(2,2)node[pos=.4]{3};
+        \draw(4,4)rectangle(2,2)node[pos=.4]{7};
+        \draw[fill=white](1.3,1.3)rectangle(2.7,2.7)node[midway]{$?$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+\begin{proof}[提示]左上、右上、右下三数组合成一个三位数，除以右下，可得中间数字，即
+  \begin{align*}
+    246\div 6 = 41, \quad 364\div 7=52, \quad 375\div 5=?&\qedhere
+  \end{align*}
 \end{proof}

@@ -50,6 +50,44 @@
   有100个乒乓球，两个人轮流拿球，能拿到最后一个乒乓球的人为胜利者。条件是：每次拿球者至少要拿1个，但最多不能超过5个，那么先拿的人或者后拿的人是否能保证其必赢？
 \end{question}
 
+\begin{example}[拿平方数]
+  两人玩游戏，轮流从一堆硬币里拿若干个，规定每次只能拿$1$、$4$、$9$等平方数个，谁拿走最后一个谁赢。记开始时共有$n$个硬币，若两人都足够聪明，那么什么情况下先拿的人会赢？
+\end{example}
+\begin{proof}[提示]
+  对于先手，同样考虑W点和L点。显然，当$n$是完全平方数时，这是一个W点，因为先手可以一次性全拿完。
+  \begin{center}
+    \begin{tabular}{c|cccccccccccccc}
+      \toprule
+      $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & $\cdots$ \\\hline
+          & W &   &   & W &   &   &   &   & W &    &    &    &    & $\cdots$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  考虑先手在剩余$n$个硬币时一次操作后可剩余多少个硬币给对手，若剩余的硬币数$k$都是W点，则$n$就是L点，因为无论怎么走，都只能让对手处于W点。而若有某种操作使剩余的硬币数$k$是L点，则$n$就是W点，因为在此种操作下对手要面对L点的必输局面。
+  \begin{center}
+    \begin{tabular}{cc|cc||cc|cc}
+      \toprule
+      $n$ & $k$ & $k$的W/L & $n$的W/L & $n$ & $k$ & $k$的W/L & $n$的W/L\\\hline
+      2   & 1   & 全是W    & L        & 8   & 4,7 & 7是L     & W\\
+      3   & 2   & 全是L    & W        & 10  & 1,6,9  & 全是W    & L\\
+      5   & 1,4 & 全是W    & L        & 11  & 2,7,10 & 全是L    & W\\
+      6   & 2,5 & 全是L    & W        & 12  & 3,8,11 & 全是W    & L\\
+      7   & 3,6 & 全是W    & L        & 13  & 4,9,12 & 12是L    & W\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  按上面的分析方法，可以填充下面的表格：
+  \begin{center}
+    \begin{tabular}{c|cccccccccccccc}
+      \toprule
+      $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & $\cdots$ \\\hline
+          & W & L & W & W & L & W & L & W & W & L  & W  & L  & W  & $\cdots$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  容易发现，若$k$是L点，则任意正整数$t$，有$n=t^2+k$是W点。但除了通过前序点的W/L情况判断之外，不容易找到一个通用的模式来直接根据$n$来判断是W点还是L点，所以与前面的尼姆游戏相比，这种游戏的可玩性更强些。
+\end{proof}
+
 \section{二元尼姆游戏}
 \label{sec:two-piles-nim-game}
 

@@ -94,12 +94,28 @@
 \begin{proof}
   可以列出不定方程组。记第$i$个猴子拿走了$x_i$个果子，则有
   \begin{align*}
-    4x_1 &=& 5x_2 + 2, \quad& 4x_2 &=& 5x_3 + 3\\
-    4x_3 &=& 5x_4 + 4, \quad& 4x_4 &=& 5x_5
+    4x_1 &= 5x_2 + 2, & 4x_2 &= 5x_3 + 3\\
+    4x_3 &= 5x_4 + 4, & 4x_4 &= 5x_5
   \end{align*}
-  于是总共采到的果子数$s$为{\color{red}怎么办？？？？}
+  于是总共采到的果子数$s$为
   \begin{align*}
-    s=5x_1 + 1 = 5\times\frac14 (5x_2+2) = 5\times\frac14 (5x_2+2) = 5
+    s&=5x_1 + 1 \\
+     &=5\times\frac14 (5x_2+2) + 1 = \frac{25}{4}x_2 + \frac72\\
+     &=\frac{25}{4}\times \frac14\times (5x_3+3) + \frac72 = \frac{125}{16}x_3 + \frac{131}{16}\\
+     &=\frac{125}{16}\times \frac14 (5x_4+4) + \frac{131}{16} = \frac{625}{64}x_4 + 16\\
+     &=\frac{625}{64}\times \frac14\times5x_5 + 16 = \frac{5^5x_5}{4^4} + 16
+  \end{align*}
+  由于$\gcd(5,4)=1$，从而要使$s$是整数，必有整数$k$，使得$x_5=4^4k$，即$s=5^5k + 16$，且此时有
+  \begin{align*}
+    x_5& = 4^4 k,&\quad x_4&=\frac54\times 4^4k = 5\times4^3k \\
+    x_3&=\frac14(5x_4+4) = 5^2\times4^2k + 1,&\quad x_2 &= \frac14(5x_3+3) = 5^3\times 4k + 2\\
+    x_1&=\frac14(5x_2 + 2) = 5^4k + 3
+  \end{align*}
+  从而猴子们采摘的果子总数可能为
+  \begin{align*}
+    k&=0 \implies\  s= 5^5\times0 + 16=16\\
+    k&=1 \implies\  s= 5^5\times1 + 16=3141\\
+    k&=2 \implies\  s= 5^5\times2 + 16=6266&&\qedhere
   \end{align*}
 \end{proof}
 
@@ -120,7 +136,7 @@
   能以$n$个不同的方法表示成两个正立方数之和的最小的正整数称为第$n$个的士数，通常记为$\mathrm{Ta}(n)$。
 \end{definition}
 
-对于$\mathrm{Ta}(2)$，它实际上是不定方程$x^3+y^3=u^3+v^3$的一个正整数解的立方和。到上前为止，只找到前6个的士数。前两个如表~\ref{tab:taxicab-number}所示。$\mathrm{Ta}(5)$和$\mathrm{Ta}(6)$过于复杂，此处不列出。
+对于$\mathrm{Ta}(2)$，它实际上是不定方程$x^3+y^3=u^3+v^3$的一个正整数解的立方和。到上前为止，只找到前6个的士数。前三个如表~\ref{tab:taxicab-number}所示。$\mathrm{Ta}(4)$、$\mathrm{Ta}(5)$和$\mathrm{Ta}(6)$过于复杂，此处不列出。
 \begin{table}[htbp]
   \centering
   \begin{tabular}{cl}

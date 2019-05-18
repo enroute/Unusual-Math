@@ -60,24 +60,85 @@
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
       % \draw[help lines](0,0)grid(4,3);
-      \begin{axis}[
+      \begin{axis}[anchor=origin,
       scale only axis,
       width=0.8\textwidth,
       height=3cm,
-      xmin = -3.5,
-      xmax = 3.5,
+      xmin = -4.5,
+      xmax = 4.5,
       ymin = 0,
       ymax = 3.5, 
       axis lines = middle,
       enlargelimits = true,
       xlabel = {$\mathbf{x}$},
-      ylabel = {$\mathbf{y}$},
-      yticklabels={,,},
-      xticklabels={,,}
+      ylabel = {$\mathbf{y}$}% ,
+      % yticklabels={,,},
+      % xticklabels={,,}
       ]
       \coordinate (A) at (axis cs:40,6);
       \addplot[domain=-3.1415926:3.1415926,smooth] (\x, {sin(deg(6*\x)) + 2});
+      \draw[dashed] (-3.1415926,0)--(-3.1415926,3)node[pos=.8,left]{$x=-\pi$};
+      \draw[dashed] (3.1415926,0)--(3.1415926,3)node[pos=.8,right]{$x=\pi$};
     \end{axis}
+    \end{tikzpicture}
+  \end{center}
+  上面曲线在直角坐标系下的函数表达式为
+  \begin{align*}
+    y = \sin(6x) + 2
+  \end{align*}
+  相像一下，把$x$轴以及$x=-\pi$和$x=\pi$两直线围成的区域弯成一个圆，会是什么样呢？即将上面的函数变为极坐标形式
+  \begin{align*}
+    r = \sin(6\theta) + 2
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{polaraxis}
+        \addplot+[mark=none,domain=0:360,samples=600]{sin(6*x)+2};
+      \end{polaraxis}
+    \end{tikzpicture}
+  \end{center}
+  这就是极坐标的魔力。
+\end{example}
+
+\begin{example}
+  考虑曲线
+  \begin{align*}
+    y = \sin(2x) \cos(2x)
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      % \draw[help lines](0,0)grid(4,3);
+      \begin{axis}[anchor=origin,
+      scale only axis,
+      width=0.8\textwidth,
+      height=3cm,
+      xmin = -4.5,
+      xmax = 4.5,
+      ymin = -1,
+      ymax = 1, 
+      axis lines = middle,
+      enlargelimits = true,
+      xlabel = {$\mathbf{x}$},
+      ylabel = {$\mathbf{y}$}% ,
+      % yticklabels={,,},
+      % xticklabels={,,}
+      ]
+      \coordinate (A) at (axis cs:40,6);
+      \addplot[domain=-3.1415926:3.1415926,smooth] (\x, {sin(deg(2*\x)) * cos(deg(2*x))});
+      \draw[dashed] (-3.1415926,-1)--(-3.1415926,1)node[pos=.8,left]{$x=-\pi$};
+      \draw[dashed] (3.1415926,-1)--(3.1415926,1)node[pos=.8,right]{$x=\pi$};
+    \end{axis}
+    \end{tikzpicture}
+  \end{center}
+  弯成圆时，曲线变为
+  \begin{align*}
+    r = \sin(2\theta)\cos(2\theta)
+  \end{align*}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{polaraxis}
+        \addplot+[mark=none,domain=0:360,samples=600]{sin(2*x)*cos(2*x)};
+      \end{polaraxis}
     \end{tikzpicture}
   \end{center}
 \end{example}

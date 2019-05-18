@@ -5,7 +5,7 @@
 \section{余弦定理}
 \label{sec:law-of-cosines}
 
-\begin{theorem}[余弦定理，Law of Cosine]
+\begin{theorem}[余弦定理，Law of Cosines]
   任意三角形，记三边边长分别是$a,b,c$，且$a$和$b$的夹角为$C$，则有$c^2=a^2+b^2-2ab\cos C$。
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
@@ -58,7 +58,7 @@
         \coordinate(U) at ($(H)!1!-90:(C)$);
         \coordinate(V) at ($(C)!1!90:(H)$);
 
-        \fill[color=red!20](U)--(V)--(F)--cycle;
+        \fill[pattern=bricks, pattern color=orange](U)--(V)--(F)--cycle;
         \fill[pattern color=red!20,pattern=north east lines](C)--(D)--(V)--cycle;
         \fill[pattern color=blue!20,pattern=north west lines](H)--(A)--(U)--cycle;
 
@@ -96,7 +96,7 @@
   \end{center}
   如左图，以三角形为基础，$a,b$两边向外做正方形，再以这两个正方形的两边作平行四边形。则带阴影的三个角形都是$a$为底，$b\cos C$为高，故其面积都为$\frac12ab\cos C$。
 
-  对左图换一种如右图的切割方式，以$c$为边长向内作正方形，然后连接对应的顶点。则由“边角边”可知\tikz{\fill[draw,pattern=north west lines, pattern color=blue!20](0,0)--(1,0)--(.6,.4)--cycle}与\tikz{\fill[draw,pattern=north east lines, pattern color=red!20](0,0)--(1,0)--(.6,.4)--cycle}的两个三角形都与原三角形全等。从而白色的两个是全等的平行四边形，\tikz{\filldraw[draw=black,fill=red!20](0,0)--(1,0)--(.6,.4)--cycle}也与原三角形全等。且白色平行四边形的一个内角为$90^\circ - C$，从而白色平行四边形的面积都是$ab\sin(90^\circ-C)=ab\cos C$。
+  对左图换一种如右图的切割方式，以$c$为边长向内作正方形，然后连接对应的顶点。则由“边角边”可知\tikz{\fill[draw,pattern=north west lines, pattern color=blue!20](0,0)--(1,0)--(.6,.4)--cycle}与\tikz{\fill[draw,pattern=north east lines, pattern color=red!20](0,0)--(1,0)--(.6,.4)--cycle}的两个三角形都与原三角形\tikz{\filldraw[draw=black,fill=red!20](0,0)--(1,0)--(.6,.4)--cycle}全等。从而白色的两个是全等的平行四边形，\tikz{\filldraw[pattern=bricks, pattern color=orange,draw=black](0,0)--(1,0)--(.6,.4)--cycle}也与原三角形全等。且白色平行四边形的一个内角为$90^\circ - C$，从而白色平行四边形的面积都是$ab\sin(90^\circ-C)=ab\cos C$。
 
   左右两图白色部分面积相等，从而有
   \begin{align*}
@@ -150,6 +150,51 @@
     a^2+b^2-2ab\cos C=c^2&\qedhere
   \end{align*}
 \end{proof}
+
+\section{正弦定理}
+\label{sec:the-law-of-sines}
+
+\begin{theorem}[正弦定理，Law of Sines，Sine Rule]
+  任意三角形，记三边边长为$a,b,$，对应的三个角为$A,B,C$，则
+  \begin{align*}
+    \frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c}
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  如下图，作高。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (3,0);
+        \coordinate(C) at (2,1.5);
+        \coordinate(D) at (2,0);
+        \draw(A)--(B)node[midway,below]{$c$} --(C)node[pos=.6,right]{$a$}--(A)node[pos=.6,above left]{$b$};
+        \draw[dashed](C)--(D)node[midway,left]{$h$};
+        \tkzMarkRightAngle(A,D,C);
+        \draw pic["$A$",<->,draw=orange,angle eccentricity=1.6,angle radius=.5cm]{angle=B--A--C};
+        \draw pic["$B$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=C--B--A};
+      \end{scope}
+      \begin{scope}[shift={(6,0)}]
+        \coordinate(A) at (0,0);
+        \coordinate(B) at (3,0);
+        \coordinate(C) at (-1,1.5);
+        \coordinate(D) at (-1,0);
+        \draw(A)--(B)node[midway,below]{$c$} --(C)node[pos=.4,above right]{$a$}--(A)node[pos=.6,below left]{$b$};
+        \draw[dashed](A)--(D)--(C)node[midway,left]{$h$};
+        \tkzMarkRightAngle(A,D,C);
+        \draw pic["$A$",<->,draw=orange,angle eccentricity=1.6,angle radius=.3cm]{angle=B--A--C};
+        \draw pic["$B$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--B--A};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  则由正弦函数$\sin$的定义，有
+  \begin{align*}
+    h = b \sin A = a \sin B \quad\implies\quad \frac{\sin A}{a} = \frac{\sin B}{b}
+  \end{align*}
+  对于顶角是钝角的情况，由$\sin A = \sin (\pi - A)$，因此也有相同的结论。
+\end{proof}
+
 
 \section{角平分线}
 
@@ -214,7 +259,7 @@
     AB=&\,\sqrt{a^2-ab+b^2}\\
     BC=&\,\sqrt{b^2-bc+c^2}
   \end{align*}
-  再由三角形$ABC$的两边和大于等于(三角形退化为三顶点共线时等号成立)第三边，可知原不等式成立。当且仅当$B$落在线段$AC$上时等号成立，此时应用角平分线长度公式，有
+  再由三角形$ABC$的两边和大于等于第三边(三角形退化为三顶点共线时等号成立)，可知原不等式成立。当且仅当$B$落在线段$AC$上时等号成立，此时应用角平分线长度公式，有
   \begin{align*}
     b=\frac{2ac\cos60^\circ}{a+c}=\frac{ac}{a+c}&\qedhere
   \end{align*}
@@ -282,6 +327,21 @@
     \le \frac{abc}{2\sqrt{ab} \cdot 2\sqrt{bc}\cdot 2\sqrt{ca}} = \frac18&&\qedhere
   \end{align*}
 \end{proof}
+
+\section{相似与全等}
+\label{sec:similar-and-congruent}
+
+\begin{definition}
+  若两个三角形$\triangle ABC$与$\triangle DEF$三个角分别相等，即
+  \begin{align*}
+    \angle A = \angle D,\quad \angle B = \angle E, \angle C = \angle F
+  \end{align*}
+  则称两个三角形相似。
+\end{definition}
+
+\begin{definition}[全等，Congruent]
+  若两个相似三角形$\triangle ABC$与$\triangle DEF$对应的边长也相等，则称两三角形全等，通常记为$\triangle ABC \cong \triangle DEF$。
+\end{definition}
 
 \section{重要定理}
 \label{sec:important-triangle-theorems}
@@ -1040,4 +1100,699 @@
     \frac{AY'}{Y'C}\cdot\frac{CX'}{X'B}\cdot\frac{BZ'}{Z'A}=1
   \end{align*}
   由塞瓦定理，可知$AX'$，$BY'$，$CZ'$三线共点。
+\end{proof}
+
+\section{三角函数}
+\label{sec:trigometric-functions}
+
+\subsection{基本性质}
+\label{sec:basic-properties-of-trigonometric-functions}
+
+下面图中的圆是单位圆，当$0<\theta<90^\circ$时可在图中找到各基本三角函数的值。
+
+\begin{center}
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate[label=below left:$O$](O)at(0,0);
+    \coordinate[label=above right:$C$](C)at(40:3);\coordinate(C1)at($(C)!.5!90:(O)$);
+    \coordinate(A1)at(1,0);\coordinate(B1)at(0,1);
+    \tkzInterLL(C,C1)(O,A1)\tkzGetPoint{A}\node[below right] at(A){$A$};
+    \tkzInterLL(C,C1)(O,B1)\tkzGetPoint{B}\node[above]at(B){$B$};
+    \coordinate[label=below:$D$](D)at($(O)!(C)!(1,0)$);
+    \coordinate(E)at($(O)!(C)!(B)$);
+    \draw[help lines](O)circle(3);
+    \draw[dashed](C)--(E)node[pos=.55,above]{$\cos\theta$};
+    \draw(A)--(D)
+            --(O)node[midway,below]{$\cos\theta$}
+            --(B)node[midway,left]{$\csc\theta$}
+            --(C)node[midway,sloped,above]{$\cot\theta$}
+            --(A)node[midway,sloped,above]{$\tan\theta$}
+         (O)--(C)node[midway,above,sloped]{1}
+            --(D)node[pos=.6,left]{$\sin\theta$};
+    \tkzMarkRightAngle(A,O,B)\tkzMarkRightAngle(C,D,A)\tkzMarkRightAngle(O,C,B)\tkzMarkRightAngle(C,E,O)
+    \tkzDrawPoints(O,A,B,C,D)
+    \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--C};
+    \draw[|<->|]($(O)-(0,1)$)--($(A)-(0,1)$)node[midway,fill=white]{$\sec\theta$};
+  \end{tikzpicture}
+\end{center}
+
+由上图，根据勾股定理容易得到到一些性质：
+\begin{gather*}
+  \sin^2\theta + \cos^2\theta = 1,\quad \csc^2\theta=\cot^2\theta+1,\quad \sec^2\theta=\tan^2\theta+1\\
+  \sec^2\theta+\csc^2\theta = (\cot\theta+\tan\theta)^2\\
+  \tan^2\theta=\sin^2\theta+(\sec\theta-\cos\theta)^2\\
+  \cot^2\theta=\cos^2\theta+(\csc\theta-\sin\theta)^2
+\end{gather*}
+
+\subsection{和差公式}
+\label{sec:sum-and-difference-formula}
+
+\begin{theorem}[和差公式，Sum and Difference Formulas]$\forall \alpha, \beta$，有
+  \begin{align*}
+    \sin(\alpha+\beta)=\sin\alpha\cos\beta + \cos\alpha\sin\beta\\
+    \cos(\alpha+\beta)=\cos\alpha\cos\beta - \sin\alpha\sin\beta
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  由下面的图，容易找到其中的关系。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate[label=below left:$O$](O)at(0,0);
+      \coordinate[label=below right:$C$](C)at(5,0);
+      \coordinate[label=right:$B$](B)at(5,1.8);
+      \coordinate[label=above:$A$](A)at($(B)!.4!-90:(O)$);
+      \coordinate[label=below:$D$](D)at($(O)!(A)!(C)$);
+      \coordinate[label=above right:$E$](E)at($(C)!(A)!(B)$);
+      \tkzMarkRightAngle(A,B,O)\tkzMarkRightAngle(B,C,O)\tkzMarkRightAngle(A,D,O)\tkzMarkRightAngle(A,E,B)
+      \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--O--B};
+      \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--A};
+      \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--B--A};
+      \draw(O)--(D)node[midway,below]{$\cos(\alpha+\beta)$}
+              --(C)--(B)--(A)--(O)node[pos=.55,sloped,above right]{$1$}--(B);
+      \draw[dashed](B)--(E)--(A)--(D);
+      \draw[help lines,|<->|,sloped,above]($(E)+(1,0)$)--($(C)+(1,0)$)node[midway,color=black]{$\sin(\alpha+\beta)$};
+      \tkzDrawPoints(O,A,B,C,D,E)
+    \end{tikzpicture}
+  \end{center}
+  \begin{align*}
+    \sin(\alpha+\beta) ={}& AD ={}& CB + BE ={}& \sin\beta\cos\alpha + \cos\beta\sin\alpha\\
+    \cos(\alpha+\beta) ={}& OD ={}& OC - AE ={}& \cos\beta\cos\alpha - \sin\beta\sin\alpha &\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  用欧拉公式$e^{i\theta} = \cos\theta + i\sin\theta$证明和差公式。
+\end{example}
+\begin{proof}[提示]由欧拉公式，有
+  \begin{align*}
+    e^{i(\alpha + \beta)} = \cos(\alpha + \beta) + i\sin(\alpha + \beta)
+  \end{align*}
+  另一方面，由$e^{i(x+y)} = e^{ix}\cdot e^{iy}$，有
+  \begin{align*}
+    e^{i(\alpha + \beta)} ={}& e^{i\alpha}\cdot e^{i\beta}
+    = \left( \cos\alpha + i\sin\alpha \right) \cdot \left( \cos\beta + i\sin\beta \right)\\
+    ={}& (\cos\alpha\cos\beta - \sin\alpha\sin\beta) + i(\sin\alpha\cos\beta + \cos\alpha\sin\beta)
+  \end{align*}
+  对比两式，由虚部及实部分别相等，则有
+  \begin{align*}
+    \sin(\alpha+\beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta\\
+    \cos(\alpha+\beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta    &\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  将和差公式中的$\beta$用$-\beta$替换，并注意到$\sin$与$\cos$的奇偶性，则有
+  \begin{align*}
+    \sin(\alpha-\beta) = \sin\alpha\cos(-\beta) + \cos\alpha\sin(-\beta) = \sin\alpha\cos\beta - \cos\alpha\sin\beta\\
+    \cos(\alpha-\beta) = \cos\alpha\cos(-\beta) - \sin\alpha\sin(-\beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta
+  \end{align*}
+\end{example}
+
+\begin{example}
+  $\forall \alpha, \beta$，有
+  \begin{align*}
+    \tan\left(\frac{\alpha + \beta}{2}\right) = \frac{\sin\alpha + \sin\beta}{\cos\alpha + \cos\beta}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  由和差公式，容易得到
+  \begin{align*}
+    \sin(\alpha + \beta) + \sin(\alpha - \beta) ={}& 2 \sin\alpha\cos\beta \\
+    \cos(\alpha + \beta) + \sin(\alpha - \beta) ={}& 2 \cos\alpha\cos\beta
+  \end{align*}
+  两式相除可得结论。
+\end{proof}
+
+\begin{theorem}
+  $\forall \alpha,\beta$，有
+  \begin{align*}
+    \tan(\alpha+\beta) = \frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  利用和差公式，有
+  \begin{align*}
+    &\begin{cases}
+      \sin(\alpha+\beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta\\
+      \cos(\alpha+\beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta
+    \end{cases}\\
+    \implies& \tan(\alpha+\beta)=\frac{\sin(\alpha+\beta)}{\cos(\alpha+\beta)}
+              =\frac{\sin\alpha\cos\beta + \cos\alpha\sin\beta}{\cos\alpha\cos\beta - \sin\alpha\sin\beta}
+  \end{align*}
+  分子分母同时除以$\cos\alpha\cos\beta$可得。此处没有考虑分母不能为零的情况。
+\end{proof}
+
+\begin{example}
+  令$\tan(\alpha+\beta)=t$，则
+  \begin{align*}
+    t\cdot\tan\alpha\tan\beta + \tan\alpha + \tan\beta = t
+  \end{align*}
+  若$\alpha+\beta=30^\circ$，则$\tan(\alpha+\beta) = \frac{\sqrt3}{3}$，从而
+  \begin{align*}
+    \frac{\sqrt3}{3}\tan\alpha\tan\beta + \tan\alpha + \tan\beta = \frac{\sqrt3}{3}
+  \end{align*}
+  即
+  \begin{align*}
+    \tan\alpha\tan\beta + \sqrt3(\tan\alpha + \tan\beta) = 1
+  \end{align*}
+  如令$\alpha = 12^\circ$，$\beta = 30^\circ - \alpha = 18^\circ$，则有
+  \begin{align*}
+    \tan12^\circ\tan18^\circ + \sqrt3(\tan12^\circ + \tan18^\circ) = 1
+  \end{align*}
+\end{example}
+
+\subsection{和差化积}
+\label{sec:product-to-sum}
+
+\begin{theorem}[和差化积，积化和差，Product-to-Sum Trigonometric Formulas]
+  $\forall \alpha, \beta$，有
+  \begin{align*}
+    2\sin\alpha\sin\beta = \cos(\alpha-\beta) - \cos(\alpha+\beta)\\
+    2\cos\alpha\cos\beta = \cos(\alpha-\beta) + \cos(\alpha+\beta)
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  利用和差公式，有
+  \begin{align*}
+    \cos(\alpha-\beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta \\
+    \cos(\alpha+\beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta
+  \end{align*}
+  两式相加及两式相减，则有
+  \begin{align*}
+    2\sin\alpha\sin\beta = \cos(\alpha-\beta) - \cos(\alpha+\beta) \\
+    2\cos\alpha\cos\beta = \cos(\alpha-\beta) + \cos(\alpha+\beta)
+  \end{align*}
+  在不同场合，需要使用不同的形式，所以这些公式既叫和差化积，反过来也叫积化和差，是两个不同的方向。
+\end{proof}
+
+\begin{example}
+  同样，利用$\sin$的和差公式，有
+  \begin{align*}
+    \sin(\alpha+\beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta \\
+    \sin(\alpha-\beta) = \sin\alpha\cos\beta - \cos\alpha\sin\beta
+  \end{align*}
+  两式相加或相减，则有
+  \begin{align*}
+    2 \sin\alpha\cos\beta = \sin(\alpha + \beta) + \sin(\alpha - \beta)\\
+    2 \cos\alpha\sin\beta = \sin(\alpha + \beta) - \sin(\alpha - \beta)&\qedhere
+  \end{align*}
+\end{example}
+
+\begin{example}[和差化积公式互推]
+  实际上，上述的和差化积公式都是可以互推的。比如，由$2\sin\alpha\sin\beta = \cos(\alpha-\beta) - \cos(\alpha+\beta)$，可得
+  \begin{align*}
+    \cos\alpha\cos\beta ={} & \sin(90^\circ - \alpha)\sin(90^\circ - \beta) \\
+                        ={} & \cos\left( (90^\circ - \alpha) - (90^\circ - \beta) \right) - 
+                              \cos\left( (90^\circ - \alpha) + (90^\circ - \beta) \right)\\
+                        ={} & \cos(\beta - \alpha) - \cos\left( 180^\circ - (\alpha + \beta) \right) \\
+                        ={} & \cos(\alpha - \beta) + \cos(\alpha + \beta)
+  \end{align*}
+  其余各式类似。可见，和差化积公式的本质还是和差公式，只要知道和差公式，和差化积公式很容易就能推导出来。
+\end{example}
+
+\begin{example}
+  令$x \equiv \alpha - \beta$，$y\equiv \alpha + \beta$，则有
+  \begin{align*}
+    \alpha = \frac{y+x}{2},\quad \beta = \frac{y-x}{2}
+  \end{align*}
+  代入和差化积公式，则可以得到和差化积的另外一种形式：
+  \begin{align*}
+    \cos x - \cos y ={}& 2 \sin\frac{y+x}{2} \sin\frac{y-x}{2}\\[5pt]
+    \cos x + \cos y ={}& 2 \cos\frac{y+x}{2} \cos\frac{y-x}{2}
+  \end{align*}
+  类似的，也有
+  \begin{align*}
+    \sin x + \sin y ={}& 2 \sin\frac{x+y}{2}\cos\frac{x-y}{2}\\[5pt]
+    \sin x - \sin y ={}& 2 \cos\frac{x+y}{2}\sin\frac{x-y}{2}
+  \end{align*}
+\end{example}
+
+\begin{example}\label{ex:sin(alpha-beta)=0}
+  若$\sin\gamma\ne0$，则
+  \begin{align*}
+    \sin(\gamma-\alpha)\sin\beta = \sin(\gamma-\beta)\sin\alpha \iff
+    \sin(\alpha - \beta) = 0
+  \end{align*}
+  若额外有$\sin\alpha\ne 0$，$\sin\beta\ne 0$，则有
+  \begin{align*}
+    \frac{\sin(\gamma-\alpha)}{\sin\alpha} = \frac{\sin(\gamma-\beta)}{\sin\beta} \iff
+    \sin(\alpha - \beta) = 0
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  应用公式$\sin(a + b) = \sin a \cos b + \sin b \cos a$，将$a= \gamma$、$b=-\alpha$及$a=\gamma$、$b=-\beta$代入，有
+  \begin{align*}
+    &&\sin(\gamma-\alpha)\sin\beta ={}& \sin(\gamma-\beta)\sin\alpha \\
+    \iff &&
+           \left(\sin\gamma\cos\alpha - \sin\alpha\cos\gamma\right) \sin\beta ={}& 
+           \left(\sin\gamma\cos\beta -  \sin\beta \cos\gamma\right) \sin\alpha\\
+    \iff&&
+          \cos\alpha\sin\beta\sin\gamma - \cancel{\sin\alpha\sin\beta\cos\gamma}={}&
+          \sin\alpha\cos\beta\sin\gamma - \cancel{\sin\alpha\sin\beta\cos\gamma}\\
+    \iff&& \sin\gamma(\sin\alpha\cos\beta - \cos\alpha\sin\beta) ={}& 0\\
+    \iff&& \sin\gamma\sin(\alpha-\beta) ={}& 0\\
+    \iff&& \sin(\alpha - \beta) ={}& 0 & \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  $\forall x$，有
+  \begin{align*}
+    \frac{\cos x-\cos 3x}{\cos x+\cos 3x} = \tan x \tan 2x
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  利用和差化积公式，有
+  \begin{align*}
+    \cos x - \cos 3x ={}& 2\sin\frac{x + 3x}{2} \sin\frac{3x-x}{2} = 2\sin2x\sin x\\
+    \cos x + \cos 3x ={}& 2\cos\frac{x + 3x}{2} \cos\frac{3x-x}{2} = 2\cos2x\cos x
+  \end{align*}
+  两式相除可得。
+\end{proof}
+
+\subsection{倍角公式}
+\label{sec:double-angle-formula}
+
+\begin{theorem}[倍角公式]$\forall \alpha$，有
+  \begin{align*}
+    \sin 2\alpha ={}& 2\sin\alpha\cos\alpha\\
+    \cos 2\alpha ={}& \cos^2\alpha - \sin^2\alpha = 2\cos^2\alpha - 1 = 1 - 2\sin^2\alpha\\[5pt]
+    \tan 2\alpha ={}& \frac{2\tan\alpha}{1 - \tan^2\alpha}
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  由和差公式可得。两式相除后分子分母同除以$\cos^2\alpha$，可得到$\tan2\alpha$关于$\tan\alpha$的表达式。
+\end{proof}
+
+\subsection{半角公式}
+\label{sec:half-angle-formula}
+
+\begin{theorem}[正弦余弦半角公式]$\forall \alpha$，有
+  \begin{align*}
+    \sin\frac\alpha2 ={} \pm\sqrt{\frac{1-\cos\alpha}2},\quad
+    \cos\frac\alpha2 ={} \pm\sqrt{\frac{1+\cos\alpha}2}
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  应用积化和差公式，有
+  \begin{align*}
+    2\sin\alpha\sin\alpha = \cos(\alpha - \alpha) - \cos(\alpha + \alpha) = 1 - \cos2\alpha
+  \end{align*}
+  化简可得$\sin$的半角公式。类似地可得$\cos$的半角公式。
+
+  或者，由$\cos$的倍角公式，有
+  \begin{align*}
+    \cos\alpha = 1 - 2\sin^2\frac\alpha2, \quad \cos\alpha = 2\cos^2\frac\alpha2 - 1
+  \end{align*}
+  化简后可$\sin$与$\cos$的半角公式。
+\end{proof}
+
+\begin{theorem}[正切半角公式]$\forall \alpha$，有
+  \begin{align*}
+    \tan\frac{\theta}{2} ={}& \frac{\sin\theta}{1 + \cos\theta} = \frac{1 - \cos\theta}{\sin\theta} = \frac{\tan\theta}{\sec\theta + 1} = \frac{\sec\theta - 1}{\tan\theta} = \frac{1}{\csc\theta + \cot\theta}\\
+                         ={}& \csc\theta - \cot\theta
+  \end{align*}  
+\end{theorem}
+\begin{proof}[提示]
+  考虑$\theta$是锐角的情况，作图，其中的圆是单位圆。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate[label=below:$O$](O)at(0,0);
+      \coordinate[label=below:$A$](A)at(-4,0);
+      \coordinate[label=below left:$B$](B)at(4,0);
+      \coordinate[label=above right:$C$](C)at(40:4);
+      \coordinate[label=below:$D$](D)at($(A)!(C)!(B)$);
+      \coordinate(E1)at(0,4);
+      \tkzInterLL(A,C)(O,E1)\tkzGetPoint{E}\node[above left]at(E){$E$};
+      \coordinate(F1)at($(C)!1!90:(O)$);
+      \tkzInterLL(C,F1)(O,E)\tkzGetPoint{F}\node[above]at(F){$F$};
+      \tkzInterLL(C,F1)(O,B)\tkzGetPoint{G}\node[below]at(G){$G$};
+      \coordinate(H1)at($(G)!.1!90:(C)$);\tkzInterLL(G,H1)(C,B)\tkzGetPoint{H}\node[below]at(H){$H$};
+
+      \coordinate(P1)at($(G)!1!-90:(B)$);\tkzInterLL(G,P1)(A,C)\tkzGetPoint{P}\node[above right]at(P){$P$};
+
+      \draw[help lines,dashed](B)arc(0:180:4);%(A)
+      \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--O--C};
+      \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--F--C};
+      \draw pic["$\theta/2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.8cm]{angle=D--A--C};
+      \draw pic["\small$\frac\theta2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.8cm]{angle=D--C--B};
+      \draw pic["\small$\frac\theta2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.8cm]{angle=B--C--G};
+      \draw pic["$\frac{\pi-\theta}2$",draw=orange,angle eccentricity=1.6,angle radius=.5cm,fill=blue!20]{angle=C--E--F};
+      \draw pic["$\frac{\pi-\theta}2$",draw=orange,angle eccentricity=1.6,angle radius=.5cm,fill=blue!20]{angle=F--C--E};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm,fill=blue!20]{angle=A--E--O};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.25cm,fill=blue!20]{angle=H--B--G};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.25cm,fill=blue!20]{angle=G--H--B};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.25cm,fill=blue!20]{angle=C--B--D};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=G--C--P};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=C--P--G};
+
+      \tkzMarkRightAngle(A,D,C)\tkzMarkRightAngle(B,C,A)\tkzMarkRightAngle(E,O,A)
+      \tkzMarkRightAngle(O,C,F)\tkzMarkRightAngle(H,G,C)\tkzMarkRightAngle(P,G,A)
+      \draw[dashed](C)--(P)--(G)node[midway,sloped]{\tiny |||};
+      \draw[dashed](B)--(H)--(G)node[midway,sloped]{\tiny |};
+      \draw[line width=1.5pt](E)--(O)node[pos=.57]{$\tan\frac\theta2$};
+      \draw(A)--(O)node[midway,below]{$1$}
+              --(D)node[midway,below]{$\cos\theta$}
+              --(B)--(C)--(E)--(A)
+           (O)--(C)node[midway,fill=white]{$1$}
+              --(D)node[pos=.6,sloped,below]{$\sin\theta$};
+      \draw(E)--(F)node[midway,sloped]{\tiny ||}
+              --(C)node[midway,sloped]{\tiny ||}node[midway,sloped,above]{$\cot\theta$}
+              --(G)node[midway,sloped,above]{$\tan\theta$} node[midway,sloped]{\tiny |||}
+              --(B)node[midway,sloped]{\tiny |};
+
+      \draw[dashed, help lines, |<->|]($(O) - (5,0)$)--($(F)-(5,0)$)node[midway,sloped,fill=white]{$\csc\theta$};
+      \draw[dashed, help lines, |<->|]($(O) - (0,1.2)$)--($(B)-(0,1.2)$)node[midway,sloped,fill=white]{$1$};
+      \draw[dashed, help lines, |<->|]($(O) - (0,2)$)--($(G)-(0,2)$)node[midway,sloped,fill=white]{$\sec\theta$};
+
+      \tkzDrawPoints(O,A,B,C,D,E,F,G,H,P)
+    \end{tikzpicture}
+  \end{center}
+  如图，有
+  \begin{align*}
+    EO = \tan\frac\theta2 = \frac{CD}{AD} = \frac{\sin\theta}{1 + \cos\theta}
+  \end{align*}
+  在上式中，分子分母同时除以$\cos\theta$，则有
+  \begin{align*}
+    \frac{\sin\theta}{1 + \cos\theta} = \frac{\tan\theta}{\sec\theta + 1}
+  \end{align*}
+  或者在$\triangle GCP$中，两底角相等均为$(\pi - \theta)/2$，从而$PG=CG=\tan\theta$，从而由$\triangle APG$可知
+  \begin{align*}
+    \tan\frac\theta2 = \frac{PG}{AG} = \frac{\tan\theta}{\sec\theta + 1}
+  \end{align*}
+  同时除以$\sin\theta$，则有
+  \begin{align*}
+    \frac{\sin\theta}{1 + \cos\theta} = \frac{1}{\csc\theta + \cot\theta}
+  \end{align*}
+  同时乘以$1-\cos\theta$并由$\sin^2\theta = (1+\cos\theta)(1-\cos\theta)$，则有
+  \begin{align*}
+    \frac{\sin\theta}{1 + \cos\theta} = \frac{1 - \cos\theta}{\sin\theta}
+  \end{align*}
+  或者由$\triangle CDB$，可知
+  \begin{align*}
+    \tan\frac\theta2 = \frac{DB}{DC} = \frac{1 - \cos\theta}{\sin\theta}
+  \end{align*}
+
+  容易知道$\triangle FEC$两底角相等均为$\frac\pi2 - \frac\theta2$，故$FE=FC=\cot\theta$，从而
+  \begin{align*}
+    \tan\frac\theta2 = EO = FO - FE = FO - FC = \csc\theta - \cot\theta
+  \end{align*}
+  同样，$\triangle GBH$中两底角相等均为$\frac\pi2 - \frac\theta2$，故$GH=GB=\sec\theta - 1$，从而
+  \begin{align*}
+    \tan\frac\theta2 = \frac{GH}{GC} = \frac{\sec\theta - 1}{\tan\theta}&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}证明：
+  \begin{align*}
+    \left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+    \frac{1 - \sin\theta}{1+\sin\theta}, \quad
+    \left( \tan\frac\theta2 \right)^2 = \frac{1-\cos\theta}{1+\cos\theta}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+由
+  \begin{align*}
+    &\tan\frac\theta2 = \frac{1-\cos\theta}{\sin\theta}\\
+    \implies&
+    1 - \tan\frac\theta2 = \frac{\sin\theta - 1+\cos\theta}{\sin\theta},\quad
+    1 + \tan\frac\theta2 = \frac{\sin\theta + 1-\cos\theta}{\sin\theta}
+  \end{align*}
+  两式相除，则有
+  \begin{align*}
+    \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} = 
+    \frac{\sin\theta - 1+\cos\theta}{\sin\theta + 1-\cos\theta}
+  \end{align*}
+  两边平方，则有
+  \begin{align*}
+    &\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+     \left( \frac{\sin\theta - 1+\cos\theta}{\sin\theta + 1-\cos\theta} \right)^2\\
+    \implies&\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+             \frac{2(1 - \sin\theta - \cos\theta + \sin\theta\cos\theta)}{2(1+\sin\theta-\cos\theta-\sin\theta\cos\theta)}\\
+    \implies&\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+             \frac{(1 - \sin\theta)(1 - \cos\theta)}{(1+\sin\theta)(1-\cos\theta)}\\
+    \implies&\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+             \frac{1 - \sin\theta}{1+\sin\theta}
+  \end{align*}
+
+  而由
+  \begin{align*}
+    \tan\frac\theta2 = \frac{\sin\theta}{1+\cos\theta} = \frac{1-\cos\theta}{\sin\theta}
+  \end{align*}
+  两式相乘，可得
+  \begin{align*}
+    \left(\tan\frac\theta2\right)^2 = \frac{1-\cos\theta}{1+\cos\theta}&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}[万能公式]$\forall \alpha$，有
+  \begin{align*}
+    \sin\alpha = \frac{2\tan\frac\alpha2}{1+\tan^2\frac\alpha2}, \quad
+    \cos\alpha = \frac{1-\tan^2\frac\alpha2}{1+\tan^2\frac\alpha2},\quad
+    \tan\alpha = \frac{2\tan\frac\alpha2}{1-\tan^2\frac\alpha2}
+  \end{align*}  
+\end{theorem}
+\begin{proof}[提示]
+  利用倍角公式(和差公式的特殊情形)，有
+  \begin{align*}
+    \sin\alpha ={}& 2\sin\frac\alpha2\cos\frac\alpha2
+                    = \frac{2\sin\frac\alpha2\cos\frac\alpha2}{\cos^2\frac\alpha2 + \sin^2\frac\alpha2}
+                    = \frac{2\tan\frac\alpha2}{1 + \tan^2\frac\alpha2}\\
+    \cos\alpha={}& \cos^2\frac\alpha2 - \sin^2\frac\alpha2
+                   =\frac{\cos^2\frac\alpha2 - \sin^2\frac\alpha2}{\cos^2\frac\alpha2 + \sin^2\frac\alpha2}
+                   =\frac{1-\tan^2\frac\alpha2}{1+\tan^2\frac\alpha2}    
+  \end{align*}
+  两式相除，可得$\tan\alpha$关于$\tan\frac\alpha2$的表达式。
+\end{proof}
+
+\section{解三角形}
+\label{sec:solving-triangle}
+
+\begin{example}如图，求$\angle\alpha$。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate(B) at (0,0);
+        \coordinate(C) at (4,0);
+        \coordinate(D1) at ($(B)!1!20:(C)$); \coordinate(D2) at ($(C)!1!-110:(B)$);\tkzInterLL(B,D1)(C,D2)\tkzGetPoint{D}
+        \coordinate(P1)at($(C)!1!-40:(B)$);\coordinate(P2)at($(D)!1!-80:(C)$);\tkzInterLL(C,P1)(D,P2)\tkzGetPoint{P}
+        \coordinate(A1)at($(B)!1!30:(P)$);\tkzInterLL(B,A1)(D,P)\tkzGetPoint{A}
+        \coordinate(E1)at($(D)!1!-50:(P)$);\tkzInterLL(B,P)(D,E1)\tkzGetPoint{E}
+        \tkzInterLL(C,P)(B,D)\tkzGetPoint{Q}
+        \draw(A)--(B)--(C)--(D)--(E)--cycle;
+        \draw(A)--(D) (D)--(B)--(E) (C)--(P);
+        \tkzDrawPoints(A,B,C,D,E,P,Q)
+        \node[left]at(A){$A$};
+        \node[below left]at(B){$B$};
+        \node[below right]at(C){$C$};
+        \node[right]at(D){$D$};
+        \node[above]at(E){$E$};
+        \path (P)++(-.1,-.2)node[left]{$P$};
+        \node[above]at(Q){$Q$};
+        \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--B--A};
+        \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--B--P};
+        \draw pic["$20^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.8cm]{angle=C--B--D};
+        \draw pic["$40^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--C--B};
+        \draw pic["$70^\circ$",<->,draw=orange,angle eccentricity=1.7,angle radius=.3cm]{angle=D--C--P};
+        \draw pic["$50^\circ$",<->,draw=orange,angle eccentricity=1.8,angle radius=.4cm]{angle=B--D--C};
+        \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--D--B};
+        \draw pic["$50^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--D--P};
+        \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--P--D};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--A--E};
+      \end{scope}
+      \begin{scope}[shift={(8,0)}]
+        \coordinate(B) at (0,0);
+        \coordinate(C) at (4,0);
+        \coordinate(D1) at ($(B)!1!20:(C)$); \coordinate(D2) at ($(C)!1!-110:(B)$);\tkzInterLL(B,D1)(C,D2)\tkzGetPoint{D}
+        \coordinate(P1)at($(C)!1!-40:(B)$);\coordinate(P2)at($(D)!1!-80:(C)$);\tkzInterLL(C,P1)(D,P2)\tkzGetPoint{P}
+        \coordinate(A1)at($(B)!1!30:(P)$);\tkzInterLL(B,A1)(D,P)\tkzGetPoint{A}
+        \coordinate(E1)at($(D)!1!-50:(P)$);\tkzInterLL(B,P)(D,E1)\tkzGetPoint{E}
+        \tkzInterLL(C,P)(B,D)\tkzGetPoint{Q}
+
+        \coordinate[label=below:$F$](F) at ($(D)!1!60:(P)$);
+
+        \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--B--A};
+        \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--B--P};
+        \draw pic["$20^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.8cm]{angle=C--B--D};
+        \draw pic["$40^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--C--B};
+        \draw pic["$70^\circ$",<->,draw=orange,angle eccentricity=1.7,angle radius=.3cm]{angle=D--C--P};
+        \draw pic["$50^\circ$",<->,draw=orange,angle eccentricity=1.8,angle radius=.4cm]{angle=B--D--C};
+        \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--D--B};
+        \draw pic["$50^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--D--P};
+        \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--P--D};
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--A--E};
+
+        \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.3cm]{angle=F--D--C};
+        \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.5cm]{angle=C--F--D};
+        \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.4cm]{angle=F--B--C};
+        \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.4cm]{angle=C--B--D};
+
+        \draw(A)--(B)--(C)--(D)--(E)--cycle;
+        \draw(A)--(D) (D)--(B)--(E) (C)--(P);
+        \tkzDrawPoints(A,B,C,D,E,P,Q)
+        \node[left]at(A){$A$};
+        \node[below left]at(B){$B$};
+        \node[below right]at(C){$C$};
+        \node[right]at(D){$D$};
+        \node[above]at(E){$E$};
+        \path (P)++(-.1,-.2)node[left]{$P$};
+        \node[above]at(Q){$Q$};
+
+        \draw[help lines, dashed](P)--(F)--(D) (C)--(F)--(B);
+        \tkzDrawPoints(F)
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+\begin{proof}[提示]
+  首先，三角形$\triangle BCD$和$\triangle CDP$是固定的，从而四边形$BCDP$是固定的，即$\angle\alpha$是固定的，从而$\triangle BDA$及$\triangle BDE$也是固定的，即图形若有解的话，其解是唯一的。
+
+  可以应用三角函数。容易知道$\angle BQP = 60^\circ$，$\angle BPQ = 120^\circ - \alpha$，从而应用正弦定理，有
+  \begin{align*}
+    \frac{\sin (120^\circ - \alpha)}{\sin\alpha} ={} &\frac{BQ}{PQ} = \frac{BQ}{CQ}\cdot\frac{CQ}{DQ}\cdot\frac{DQ}{PQ}\\
+    ={}& \frac{\sin40^\circ}{\sin20^\circ}\cdot \frac{\sin50^\circ}{\sin70^\circ}\cdot \frac{\sin30^\circ}{\sin30^\circ}\\
+    ={}& \frac{\sin40^\circ \sin50^\circ}{\sin20^\circ\sin70^\circ} = \frac{2\sin40^\circ \cos40^\circ}{2\sin20^\circ\cos20^\circ} = \frac{\sin80^\circ }{\sin40^\circ} \\
+  \end{align*}
+  比较两边，分子与分母的角度和都是$120^\circ$，可猜测$\alpha = 40^\circ$。事实上，由例~\ref{ex:sin(alpha-beta)=0}，有
+  \begin{align*}
+    \sin(\alpha - 40^\circ) = 0
+  \end{align*}
+  从而$\alpha = 40^\circ + k\pi, k\in\mathcal{Z}$。又由$0 < \alpha < \pi$，可知$\alpha = 40^\circ$。
+
+  或者用三角形全等来做。以$PD$为边，向$BC$方向做等边三角形$PDF$。如题图中的右图，可以找到几个全等的三角形：$\triangle PCF \cong \triangle PCD$(SAS，Side-Angle-Side，边角边)，从而
+  \begin{align*}
+    &FC=DC\\
+    \implies & \angle CFD = \angle CDF = 30^\circ + 50^\circ - 60^\circ = 20^\circ = CBD\\
+    \implies & \text{从而$CFBD$四点共圆}\\
+    \implies & \angle FBC = \angle FDC = 20^\circ\\
+    \implies & \angle FBD = 20^\circ + 20^\circ = 40^\circ    
+  \end{align*}
+  此外，$\triangle BDP \cong \triangle BDF$(以$D$为顶点的SAS)，从而
+  \begin{align*}
+    \alpha = \angle PBD = \angle FBD = 40^\circ &\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}
+  上题中，$B$，$C$，$D$，$F$其实是正18边形的其中四个顶点。
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate[label=below left:$O$](O) at (0,0);
+      \foreach \x in{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17}{%
+        \coordinate(V\x)at(360/18*\x:4.5);
+        \tkzDrawPoint(V\x)
+      }
+      \foreach \x in{1,2,3,5,6,7,8,9,10,12,13,15,17}{%
+        \node at(360/18*\x:5){$V_{\x}$};
+      }
+      \foreach \x in{0,11,14,16}{%
+        \node at(360/18*\x:5.5){$(V_{\x})$};
+      }
+      \node[below right]at(V4){$V_4$};
+      \draw[dashed, help lines](0,0)circle(4.5);
+      \tkzDrawPoint(O)
+      % \node[above right]at(V3){$V_3$};
+
+      % \coordinate(B) at (0,0);
+      % \coordinate(C) at (4,0);
+      \coordinate(B) at (V11);\coordinate(C)at(V16);
+      \coordinate(D1) at ($(B)!1!20:(C)$); \coordinate(D2) at ($(C)!1!-110:(B)$);\tkzInterLL(B,D1)(C,D2)\tkzGetPoint{D}
+      \coordinate(P1)at($(C)!1!-40:(B)$);\coordinate(P2)at($(D)!1!-80:(C)$);\tkzInterLL(C,P1)(D,P2)\tkzGetPoint{P}
+      \coordinate(A1)at($(B)!1!30:(P)$);\tkzInterLL(B,A1)(D,P)\tkzGetPoint{A}
+      \coordinate(E1)at($(D)!1!-50:(P)$);\tkzInterLL(B,P)(D,E1)\tkzGetPoint{E}
+      \tkzInterLL(C,P)(B,D)\tkzGetPoint{Q}
+
+      \coordinate[label=below:$F$](F) at ($(D)!1!60:(P)$);
+
+      \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--B--A};
+      \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--B--P};
+      \draw pic["$20^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.8cm]{angle=C--B--D};
+      \draw pic["$40^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--C--B};
+      \draw pic["$70^\circ$",<->,draw=orange,angle eccentricity=1.7,angle radius=.3cm]{angle=D--C--P};
+      \draw pic["$50^\circ$",<->,draw=orange,angle eccentricity=1.8,angle radius=.4cm]{angle=B--D--C};
+      \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=P--D--B};
+      \draw pic["$50^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--D--P};
+      \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--P--D};
+      \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--A--E};
+
+      \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.3cm]{angle=F--D--C};
+      \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.5cm]{angle=C--F--D};
+      \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.4cm]{angle=F--B--C};
+      \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.4cm]{angle=C--B--D};
+      \draw pic["",draw=blue,fill=blue!20,angle eccentricity=1.6,angle radius=.4cm]{angle=O--D--B};
+
+      \draw(A)--(B)--(C)--(D)--(E)--cycle;
+      \draw(A)--(D) (D)--(B)--(E) (C)--(P);
+      \tkzDrawPoints(A,B,C,D,E,P,Q)
+      \node[below left]at(A){$A$};
+      \node[below left]at(B){$B$};
+      \node[below right]at(C){$C$};
+      \node[right]at(D){$D$};
+      \node[above]at(E){$E$};
+      \path (P)++(-.1,-.2)node[left]{$P$};
+      \node[above]at(Q){$Q$};
+
+      \draw[help lines, dashed](P)--(F)--(D) (C)--(F)--(B);
+      \tkzDrawPoints(F)
+
+      \draw[dashed,help lines](V9)--(O)--(D) (V6)--(P)--(V7)--(A)--(V8);
+
+      \tkzInterLL(C,P)(F,D)\tkzGetPoint{X}\tkzMarkRightAngle(Q,X,D)
+    \end{tikzpicture}
+    
+    \caption{$BFCD$与正18边形}
+    \label{fig:bfcd-and-18-polygon}
+  \end{figure}
+
+  如图~\ref{fig:bfcd-and-18-polygon}，做$BFCD$的外接圆，不妨设此圆为单位圆。以$D$为第一个顶点$V_0$，逆时针找出外接圆上正18边形的其余17个顶点$V_i$，其中$(i=1,2,\cdots,17)$，则
+  \begin{enumerate}
+  \item $\angle DCB = 70^\circ + 40^\circ = 110^\circ\implies B$与$V_{11}$重合。
+  \item $\angle FCD = 180^\circ - 20^\circ - 20^\circ = 140^\circ \implies F$与$V_{14}$重合。
+  \item $\angle FCD = 140^\circ$且$FC=DC\implies C$与$V_{16}$重合。
+  \item $\angle DCP = 70^\circ\implies CP$与圆相交于$V_7$。
+  \item $DV_9$与$CV_7$都过圆心$\implies DV_0$与$CP$相交于外接圆的圆心$O$。
+  \item 根据$\angle BDE=80^\circ$，可知$DE$与圆相交于$V_3$。
+  \item 根据$\angle CBE=60^\circ$，可知$BE$与圆相交于$V_4$。
+  \item 根据$\angle BDP=30^\circ$，可知$DP$与圆相交于$V_8$。
+  \end{enumerate}
+  其余性质不一一列举，有兴趣的可自行再去挖掘。
+\end{example}
+
+\begin{example}
+  求上题中的$\angle\theta$。
+\end{example}
+\begin{proof}[提示]
+  $\theta=50^\circ$，类似求$\alpha$，用三角函数求解。
+
+  在$\triangle APE$中，由于$\angle APE = \angle BPD = 180^\circ - \alpha - 30^\circ = 110^\circ$，从而$\angle AEP = 70^\circ - \theta$。由正弦定理，有
+  \begin{align*}
+    &\frac{\sin\theta}{\sin\angle APE} = \frac{EP}{AP}\\[3pt]
+    \implies&
+        \frac{\sin\theta}{\sin(70^\circ -\theta)} =
+        \frac{EP}{DP} \cdot \frac{DP}{BP} \cdot \frac{BP}{AP}\\
+    \implies &
+        \frac{\sin\theta}{\sin(70^\circ -\theta)} =
+        \frac{\sin50^\circ}{\sin60^\circ} \cdot \frac{\sin40^\circ}{\sin30^\circ} \cdot \frac{\sin80^\circ}{\sin30^\circ}\\
+    \implies &
+        \sin60^\circ \sin30^\circ \sin30^\circ \sin\theta = \sin50^\circ\sin40^\circ\sin80^\circ\sin(70^\circ-\theta)\\
+    \implies &
+        \sqrt3\sin\theta = 8\cos40^\circ\sin40^\circ\sin80^\circ\sin(70^\circ-\theta)\\
+    &\text{利用$\sin$的倍角公式}\\
+    \implies & \sqrt3\sin\theta = 2\sin^280^\circ\sin(70^\circ-\theta)\\
+    &\text{积化和差，} \sin\alpha\sin\alpha = \cos(\alpha-\alpha)-\cos(\alpha+\alpha) = 1-\cos2\alpha\\
+    \implies & \sqrt3\sin\theta = 2(1-\cos160^\circ)\sin(70^\circ-\theta)\\
+    \implies & \sqrt3\sin\theta = 2(1+\cos20^\circ)\sin(70^\circ-\theta)\\
+    \implies & \sqrt3\sin\theta = 2\sin(70^\circ-\theta)+2\cos20^\circ\sin(70^\circ-\theta)\\
+    \implies & \sqrt3\sin\theta = 2\sin(70^\circ-\theta)+\sin(20^\circ+70^\circ-\theta)-\sin(20^\circ-70^\circ+\theta)\\
+    \implies & \sqrt3\sin\theta = 2\sin(70^\circ-\theta)+\cos\theta-\sin(\theta-50^\circ)\\
+    \implies & \sqrt3\sin\theta -\cos\theta  = 2\sin(70^\circ-\theta)-\sin(\theta-50^\circ)\\
+    &\text{和差公式}\\
+    \implies & 2\sin(\theta-30^\circ) = 2\sin(70^\circ-\theta)-\sin(\theta-50^\circ)\\
+    \implies & 2\left(\sin(\theta-30^\circ) -\sin(70^\circ-\theta)\right) + \sin(\theta-50^\circ) = 0\\
+    &\text{和差化积}\\
+    \implies & 4\cos20^\circ\sin(\theta-50^\circ) + \sin(\theta-50^\circ) = 0 \\
+    \implies & \sin(\theta-50^\circ) = 0\\
+    \implies & \theta = 50^\circ + k\pi,\quad k\in\mathcal{Z}
+  \end{align*}
+  又$0<\theta<\pi$，可知$\theta = 50^\circ$，即$AE=DE$。
 \end{proof}

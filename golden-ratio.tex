@@ -51,7 +51,7 @@
   \end{align}
 \end{example}
 \begin{proof}
-  利用$\phi=1+\dfrac1\phi$，设连分数为$x$，则
+  利用$\phi=1+\dfrac1\phi$，不断地代入右边，可得上面的连分线形式。下面是严格的证明。设连分数为$x$，则
   \begin{align*}
     \frac1{x-1}=x\implies x^2-x-1=0\implies x=\frac{1\pm\sqrt5}2
   \end{align*}
@@ -79,7 +79,7 @@
   \end{align}
 \end{example}
 \begin{proof}
-  记等号右边为$x$，则$x^2 = 1 + x$，余下与题~\ref{ex:phi-of-continued-fraction}相同，略。
+  记等号右边为$x$，则$x^2 = 1 + x$，余下与例~\ref{ex:phi-of-continued-fraction}相同，略。
 \end{proof}
 
 \begin{example}[三角函数表示]
@@ -95,7 +95,7 @@
   可得
   \begin{align*}
     &2\sin x\cos x = 4\cos^3x-3\cos x\\
-    \implies& \cos x(2\sin x - 4\cos^2 x + 3) = 0  & (cos x\ne 0)\\
+    \implies& \cos x(2\sin x - 4\cos^2 x + 3) = 0  & (\cos x\ne 0)\\
     %\overset{\cos x\ne 0}{\implies} & 2\sin x + 4\sin^2 x - 1 = 0
     \implies & 2\sin x + 4\sin^2 x - 1 = 0 
   \end{align*}
@@ -147,7 +147,7 @@
     % \draw(B) arc(270:200:1);
     \drawArc(C,B,D);
     \tkzDrawPoints(A,B,C,O,D,S);
-
+    \node[above right]at(D){$D$};
     \clip(-1,0)rectangle(3,1);
   \end{tikzpicture}
 %}
@@ -204,7 +204,7 @@
 \end{definition}
 
 \begin{theorem}
-  一个等腰三角形是黄金三角形的充要条件是其顶角是$\dfrac\pi5(36^\circ)$。
+  一个等腰三角形是黄金三角形的充要条件是其顶角是$\dfrac\pi5$即$36^\circ$。
 \end{theorem}
 \begin{proof}
   必要性：由图，$5\theta=\pi$，从而$\theta=\dfrac\pi5$。

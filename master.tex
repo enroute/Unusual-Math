@@ -244,8 +244,13 @@
 { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
 \makeatother
 
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.8}
+\usepackage{pgfplots}           % for polor plot
+\usepgfplotslibrary{polar}
+% Change to 1.16, since the following output from xelate:
+% Package pgfplots notification 'compat/show suggested version=true': you might b
+% enefit from \pgfplotsset{compat=1.16} (current compat level: 1.8).
+\pgfplotsset{compat=1.16}
+
 
 \makeatletter % For spaces in paths
     \patchcmd\Gread@eps{\@inputcheck#1 }{\@inputcheck"#1"\relax}{}{}
@@ -369,8 +374,10 @@
 % Make proof environemtn skip the first line
 \makeatletter
 \renewenvironment{proof}[1][证明]{\par
+  % \vspace{-\topsep}% remove the space after the theorem, HOWEVER A PROOF ENVIRONMENT NOT PRECEDED BY A THEOREM WILL BE TYPESET WRONGLY.
   \pushQED{\qed}%
-  \normalfont \topsep6\p@\@plus6\p@\relax
+  \normalfont %\topsep6\p@\@plus6\p@\relax
+  \topsep0pt \partopsep0pt % no space before
   \trivlist
   \item[\hskip\labelsep
     \bfseries \kai%\itshape
@@ -516,13 +523,15 @@
 % \includeonly{pattern}
 % \includeonly{insight}
 % \includeonly{inequality}
-% \includeonly{trigonometric-functions}
+\includeonly{trigonometric-functions}
 % \includeonly{set}
 % \includeonly{area}
 % \includeonly{discrete}
 % \includeonly{fun}
 % \includeonly{dp}
 
+% allow page break inside align environment
+\allowdisplaybreaks
 \begin{document}
 
 \frontmatter
