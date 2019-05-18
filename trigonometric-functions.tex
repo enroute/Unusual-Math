@@ -1152,30 +1152,50 @@
     \cos(\alpha+\beta)=\cos\alpha\cos\beta - \sin\alpha\sin\beta
   \end{align*}
 \end{theorem}
-\begin{proof}[提示]
-  由下面的图，容易找到其中的关系。
+\begin{proof}[提示]\mbox{}\par
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
       \coordinate[label=below left:$O$](O)at(0,0);
       \coordinate[label=below right:$C$](C)at(5,0);
-      \coordinate[label=right:$B$](B)at(5,1.8);
-      \coordinate[label=above:$A$](A)at($(B)!.4!-90:(O)$);
-      \coordinate[label=below:$D$](D)at($(O)!(A)!(C)$);
+      \coordinate[label=right:$B$](B)at(5,3);
+      \coordinate[label=above:$A$](A)at($(B)!.8!-90:(O)$);
+      % \coordinate[label=below:$D$](D)at($(O)!(A)!(C)$);
+      \coordinate(D)at($(O)!(A)!(C)$);
       \coordinate[label=above right:$E$](E)at($(C)!(A)!(B)$);
-      \tkzMarkRightAngle(A,B,O)\tkzMarkRightAngle(B,C,O)\tkzMarkRightAngle(A,D,O)\tkzMarkRightAngle(A,E,B)
-      \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--O--B};
-      \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--A};
-      \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--B--A};
-      \draw(O)--(D)node[midway,below]{$\cos(\alpha+\beta)$}
-              --(C)--(B)--(A)--(O)node[pos=.55,sloped,above right]{$1$}--(B);
-      \draw[dashed](B)--(E)--(A)--(D);
-      \draw[help lines,|<->|,sloped,above]($(E)+(1,0)$)--($(C)+(1,0)$)node[midway,color=black]{$\sin(\alpha+\beta)$};
-      \tkzDrawPoints(O,A,B,C,D,E)
+
+      \coordinate[label=above left:$D$](F)at($(E)!(O)!(A)$);
+
+      \fill[color=blue!20](A)--(O)--(B)--cycle;
+      \fill[color=red!20](B)--(O)--(C)--cycle;
+      \tkzMarkRightAngle(A,B,O)\tkzMarkRightAngle(B,C,O)%\tkzMarkRightAngle(A,D,O)
+      \tkzMarkRightAngle(A,E,B)\tkzMarkRightAngle(O,F,A)
+
+      \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--O--B};
+      \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--A};
+      \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=E--B--A};
+      \draw pic["$\alpha+\beta$",<->,draw=orange,angle eccentricity=2.0,angle radius=.6cm]{angle=F--A--O};
+
+      \draw(O)--(D)%node[midway,below]{$\cos(\alpha+\beta)$}
+              --(C)--(B)node[midway,right]{$\cos\alpha\sin\beta$}
+              --(A)node[midway,sloped,above]{$\sin\alpha$}
+           (O)--(B)node[midway,sloped,above]{$\cos\alpha$};
+      \draw[line width=2pt](A)--(O)node[pos=.55,sloped,above right]{\bfseries 1};
+      \draw[dashed](B)--(E)node[midway,right]{$\sin\alpha\cos\beta$}
+                      --(A);%node[midway,above]{\small $\sin\alpha\sin\beta$}
+                      %--(D);
+      % \draw[help lines,|<->|,sloped,above]($(E)+(1,0)$)--($(C)+(1,0)$)node[midway,color=black]{$\sin(\alpha+\beta)$};
+      \tkzDrawPoints(O,A,B,C,E,F)
+      \draw[dashed,help lines](O)--(F)node[midway,left,color=black]{$\sin(\alpha + \beta)$}
+                                 --(A);%node[midway,above,color=black]{\small $\cos(\alpha + \beta)$};
+      \draw[help lines,|<->|]($(O)-(0,.8)$)--($(C)-(0,.8)$)node[midway,below,color=black]{$\cos\alpha\cos\beta$};
+      \draw[help lines,|<->|]($(F)+(0,.8)$)--($(A)+(0,.8)$)node[midway,above,color=black]{$\cos(\alpha+\beta)$};
+      \draw[help lines,|<->|]($(A)+(0,.8)$)--($(E)+(0,.8)$)node[midway,above,color=black]{$\sin\alpha\sin\beta$};
     \end{tikzpicture}
   \end{center}
+  根据上面的图，由$OA=1$及两个角度$\alpha$和$\beta$出发，可以算出图中各线段的长度。从而有
   \begin{align*}
-    \sin(\alpha+\beta) ={}& AD ={}& CB + BE ={}& \sin\beta\cos\alpha + \cos\beta\sin\alpha\\
-    \cos(\alpha+\beta) ={}& OD ={}& OC - AE ={}& \cos\beta\cos\alpha - \sin\beta\sin\alpha &\qedhere
+    \sin(\alpha+\beta) ={}& AD = CB + BE = \cos\alpha\sin\beta + \sin\alpha\cos\beta\\
+    \cos(\alpha+\beta) ={}& OD = OC - AE = \cos\alpha\cos\beta - \sin\alpha\sin\beta &&\qedhere
   \end{align*}
 \end{proof}
 
@@ -1206,21 +1226,6 @@
     \cos(\alpha-\beta) = \cos\alpha\cos(-\beta) - \sin\alpha\sin(-\beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta
   \end{align*}
 \end{example}
-
-\begin{example}
-  $\forall \alpha, \beta$，有
-  \begin{align*}
-    \tan\left(\frac{\alpha + \beta}{2}\right) = \frac{\sin\alpha + \sin\beta}{\cos\alpha + \cos\beta}
-  \end{align*}
-\end{example}
-\begin{proof}[提示]
-  由和差公式，容易得到
-  \begin{align*}
-    \sin(\alpha + \beta) + \sin(\alpha - \beta) ={}& 2 \sin\alpha\cos\beta \\
-    \cos(\alpha + \beta) + \sin(\alpha - \beta) ={}& 2 \cos\alpha\cos\beta
-  \end{align*}
-  两式相除可得结论。
-\end{proof}
 
 \begin{theorem}
   $\forall \alpha,\beta$，有
@@ -1326,6 +1331,21 @@
   \end{align*}
 \end{example}
 
+\begin{example}
+  $\forall \alpha, \beta$，有
+  \begin{align*}
+    \tan\left(\frac{\alpha + \beta}{2}\right) = \frac{\sin\alpha + \sin\beta}{\cos\alpha + \cos\beta}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  由和差公式，容易得到
+  \begin{align*}
+    \sin\alpha + \sin\beta ={}& 2 \sin\frac{\alpha+\beta}2 \cos\frac{\alpha-\beta}2 \\[3pt]
+    \cos\alpha + \sin\beta ={}& 2 \cos\frac{\beta+\alpha}2 \cos\frac{\beta-\alpha}2
+  \end{align*}
+  两式相除并注意到$\cos$是偶函数可得结论。
+\end{proof}
+
 \begin{example}\label{ex:sin(alpha-beta)=0}
   若$\sin\gamma\ne0$，则
   \begin{align*}
@@ -1363,7 +1383,7 @@
 \begin{proof}[提示]
   利用和差化积公式，有
   \begin{align*}
-    \cos x - \cos 3x ={}& 2\sin\frac{x + 3x}{2} \sin\frac{3x-x}{2} = 2\sin2x\sin x\\
+    \cos x - \cos 3x ={}& 2\sin\frac{x + 3x}{2} \sin\frac{3x-x}{2} = 2\sin2x\sin x\\[3pt]
     \cos x + \cos 3x ={}& 2\cos\frac{x + 3x}{2} \cos\frac{3x-x}{2} = 2\cos2x\cos x
   \end{align*}
   两式相除可得。
@@ -1375,7 +1395,7 @@
 \begin{theorem}[倍角公式]$\forall \alpha$，有
   \begin{align*}
     \sin 2\alpha ={}& 2\sin\alpha\cos\alpha\\
-    \cos 2\alpha ={}& \cos^2\alpha - \sin^2\alpha = 2\cos^2\alpha - 1 = 1 - 2\sin^2\alpha\\[5pt]
+    \cos 2\alpha ={}& \cos^2\alpha - \sin^2\alpha = 2\cos^2\alpha - 1 = 1 - 2\sin^2\alpha\\[3pt]
     \tan 2\alpha ={}& \frac{2\tan\alpha}{1 - \tan^2\alpha}
   \end{align*}
 \end{theorem}
@@ -1599,7 +1619,7 @@
         \draw pic["$30^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--P--D};
         \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--A--E};
       \end{scope}
-      \begin{scope}[shift={(8,0)}]
+      \begin{scope}[shift={(7.3,0)}]
         \coordinate(B) at (0,0);
         \coordinate(C) at (4,0);
         \coordinate(D1) at ($(B)!1!20:(C)$); \coordinate(D2) at ($(C)!1!-110:(B)$);\tkzInterLL(B,D1)(C,D2)\tkzGetPoint{D}
@@ -1751,9 +1771,9 @@
   \item $\angle FCD = 140^\circ$且$FC=DC\implies C$与$V_{16}$重合。
   \item $\angle DCP = 70^\circ\implies CP$与圆相交于$V_7$。
   \item $DV_9$与$CV_7$都过圆心$\implies DV_0$与$CP$相交于外接圆的圆心$O$。
-  \item 根据$\angle BDE=80^\circ$，可知$DE$与圆相交于$V_3$。
-  \item 根据$\angle CBE=60^\circ$，可知$BE$与圆相交于$V_4$。
-  \item 根据$\angle BDP=30^\circ$，可知$DP$与圆相交于$V_8$。
+  \item 根据$\angle BDE=80^\circ\implies DE$与圆相交于$V_3$。
+  \item 根据$\angle CBE=60^\circ\implies BE$与圆相交于$V_4$。
+  \item 根据$\angle BDP=30^\circ\implies DP$与圆相交于$V_8$。
   \end{enumerate}
   其余性质不一一列举，有兴趣的可自行再去挖掘。
 \end{example}
@@ -1766,7 +1786,7 @@
 
   在$\triangle APE$中，由于$\angle APE = \angle BPD = 180^\circ - \alpha - 30^\circ = 110^\circ$，从而$\angle AEP = 70^\circ - \theta$。由正弦定理，有
   \begin{align*}
-    &\frac{\sin\theta}{\sin\angle APE} = \frac{EP}{AP}\\[3pt]
+    &\frac{\sin\theta}{\sin\angle AEP} = \frac{EP}{AP}\\[3pt]
     \implies&
         \frac{\sin\theta}{\sin(70^\circ -\theta)} =
         \frac{EP}{DP} \cdot \frac{DP}{BP} \cdot \frac{BP}{AP}\\
