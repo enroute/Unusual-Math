@@ -6,7 +6,10 @@
 \label{sec:law-of-cosines}
 
 \begin{theorem}[余弦定理，Law of Cosines]
-  任意三角形，记三边边长分别是$a,b,c$，且$a$和$b$的夹角为$C$，则有$c^2=a^2+b^2-2ab\cos C$。
+  任意三角形，记三边边长分别是$a,b,c$，且$a$和$b$的夹角为$C$，则有
+  \begin{align*}
+    c^2=a^2+b^2-2ab\cos C
+  \end{align*}
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
       \coordinate (A) at (0,0);
@@ -201,7 +204,7 @@
 \subsection{角平分线的长度}
 \label{sec:length-of-angular-bisector}
 
-三角形的角平分线的长度公式有好几种形式，其中常用的有以下几种。
+三角形的角平分线的长度公式有好几种形式，下面定理给出的是其中比较常用的一种。
 
 \begin{theorem}
   $AD$是$\triangle ABC$中$\angle A$的角平分线，则角平分线$AD$的长度$d$可由下面公式给出：
@@ -663,16 +666,18 @@
 \end{example}
 \begin{proof}[提示]可以直接计算。也可以从向量图中直观地观察到。实际上，$w$也可以看作是一个旋转$120^\circ$的运算符。
   \begin{center}
-    \begin{tikzpicture}[scale=2.0]
-      \coordinate (A) at (1,0);
-      \coordinate (B) at (120:1);
-      \coordinate (C) at (240:1);
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate (A) at (2,0);
+      \coordinate (B) at (120:2);
+      \coordinate (C) at (240:2);
       \coordinate[label=below right:$O$] (O) at (0,0);
-      \draw[help lines](0,0)circle(1);
+      \draw[help lines](0,0)circle(2);
       \tkzDrawPoint(O);
       \draw[->](O)--(A) node[pos=1,right]{$1$};
       \draw[->](O)--(B) node[pos=1,above left]{$w$};
       \draw[->](O)--(C) node[pos=1,below left]{$w^2$};
+      \draw pic["$120^\circ$",<->,draw=orange,angle eccentricity=2.0,angle radius=.4cm]{angle=A--O--B};
+      \draw pic["$120^\circ$",<->,draw=orange,angle eccentricity=2.0,angle radius=.4cm]{angle=B--O--C};
     \end{tikzpicture}
   \end{center}
   如上图，容易看出三个向量$1,w,w^2$的和是零向量。
@@ -686,26 +691,40 @@
 \begin{theorem}\label{th:equilateral-triangle-x+wy=0}
   复平面内两点$x,y$与原点组成正三角形，当且仅当
   \begin{align*}
-    x + wy = 0
+    x + wy = 0,\quad \text{或者}\quad x + w^2y = 0 
   \end{align*}
 \end{theorem}
 \begin{proof}[提示]
-  $x+wy=0$的含义是将$y$旋转$120^\circ$后与$x$成反向量。
+  $x+wy=0$与$x+w^2y=0$的含义分别是将$y$绕原点$O$旋转$120^\circ$及旋转$-120^\circ$后与$x$成反向量。
   \begin{center}
     \begin{tikzpicture}[scale=2.0]
-      \coordinate[label=below:$O$] (O) at (0,0);
-      \coordinate (A) at (20:1);
-      \coordinate (B) at (80:1);
-      \coordinate (C) at (200:1);
-      \draw[help lines](O)circle(1) (A)--(B);
-      \draw[->](O)--(A)node[right]{$x$};
-      \draw[->](O)--(B)node[above]{$y$};
-      \draw[->,dashed](O)--(C)node[left]{$wy$};
-      \draw pic["$120^\circ$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--C};
-      \tkzDrawPoint(O);
+      \begin{scope}
+        \coordinate[label=below:$O$] (O) at (0,0);
+        \coordinate (A) at (20:1);
+        \coordinate (B) at (80:1);
+        \coordinate (C) at (200:1);
+        \draw[help lines](O)circle(1) (A)--(B);
+        \draw[->](O)--(A)node[right]{$x$};
+        \draw[->](O)--(B)node[above]{$y$};
+        \draw[->,dashed](O)--(C)node[left]{$wy$};
+        \draw pic["$120^\circ$",->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--C};
+        \tkzDrawPoint(O);
+      \end{scope}
+      \begin{scope}[shift={(3.5,0)}]
+        \coordinate[label=left:$O$] (O) at (0,0);
+        \coordinate (A) at (20:1);
+        \coordinate (B) at (80:1);
+        \coordinate (C) at (260:1);
+        \draw[help lines](O)circle(1) (A)--(B);
+        \draw[->](O)--(A)node[right]{$y$};
+        \draw[->](O)--(B)node[above]{$x$};
+        \draw[->,dashed](O)--(C)node[below]{$\dfrac{y}{w} = w^2y$};
+        \draw pic["$120^\circ$",<-,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=C--O--A};
+        \tkzDrawPoint(O);
+      \end{scope}
     \end{tikzpicture}
   \end{center}
-  如上图，当且仅当$x$与$y$长度相等且夹角为$60^\circ$时，即当且仅当$wy=-x$时，$x,y$及原点$O$组成正三角形。
+  如上图，分两种情况，分别对应于$y$顺时针及逆时针旋转$120^\circ$后与$x$成反向量。当且仅当$x$与$y$长度相等且夹角为$60^\circ$时，即当且仅当$wy=-x$或者$w^2y=-x$时，$x,y$及原点$O$组成正三角形。
 \end{proof}
 
 \begin{theorem}\label{th:equilateral-triangle-z1+wz2+w2z3}
@@ -974,7 +993,7 @@
   \end{align*}
   比较$AA_2$的表达式，可知$AA_2^2 = 3A_1B_1^2$，从而有$AA_2=\sqrt3 A_1B_1$。由于外拿破仑三角形$\triangle A_1B_1C_1$是正三角形，从而有
   \begin{align*}
-    AA_2=BB_2=CC_2=\sqrt3 A_1B_1 = \sqrt3 B_1C_1 = \sqrt3 C_1A_1
+    AA_2=BB_2=CC_2=\sqrt3 A_1B_1 = \sqrt3 B_1C_1 = \sqrt3 C_1A_1 &\qedhere
   \end{align*}
 \end{proof}
 
@@ -1030,7 +1049,7 @@
     \angle ZBA = \angle XBC = \beta,\quad
     \angle XCB = \angle YCA = \gamma
   \end{align*}
-  则$AX$，$BY$及$CZ$三线共点，该点称为Jacobi点。
+  则$AX$，$BY$及$CZ$三线共点，该点称为Jacobi点。$\triangle XYZ$称为$\triangle ABC$的一个Jacobi三角形。
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
       \coordinate[label=left:$B$] (B) at (0,0);
@@ -1070,15 +1089,15 @@
       \path (Z')++(-.1,0)node[left]{$Z'$};
     \end{tikzpicture}
   \end{center}
-  $\triangle XYZ$称为$\triangle ABC$的一个Jacobi三角形。
 \end{theorem}
 \begin{proof}[提示]利用正弦定理及塞瓦定理。记三角形的三个顶角分别是$A,B,C$，对应的三条边长分别是$a,b,c$。
 
   考虑$\triangle AYY'$及$\triangle CYY'$，利用正弦定理，有
   \begin{align*}
     &\frac{\sin\angle AYY'}{AY'} = \frac{\sin\alpha}{YY'}, \quad
-      \frac{\sin\angle CYY'}{Y'C} = \frac{\sin\gamma}{YY'}\\
+      \frac{\sin\angle CYY'}{Y'C} = \frac{\sin\gamma}{YY'}\\[3pt]
     \implies& \frac{AY'}{Y'C} = \frac{\sin\alpha\cdot \sin\angle CYY'}{\sin\gamma\cdot\sin\angle AYY'}
+              = \frac{\sin\alpha\cdot \sin\angle CYB}{\sin\gamma\cdot\sin\angle AYB}
   \end{align*}
   再对$\triangle AYB$和$\triangle CYB$应用正弦定理，有
   \begin{align*}
@@ -1108,9 +1127,11 @@
 \subsection{基本性质}
 \label{sec:basic-properties-of-trigonometric-functions}
 
-下面图中的圆是单位圆，当$0<\theta<90^\circ$时可在图中找到各基本三角函数的值。
+\mbox{}\par\normalfont
+% \mbox{}\par%prevent bold font if figure right after section command
 
-\begin{center}
+\begin{figure}[htbp]
+  \centering
   \begin{tikzpicture}[scale=1.0]
     \coordinate[label=below left:$O$](O)at(0,0);
     \coordinate[label=above right:$C$](C)at(40:3);\coordinate(C1)at($(C)!.5!90:(O)$);
@@ -1126,16 +1147,18 @@
             --(B)node[midway,left]{$\csc\theta$}
             --(C)node[midway,sloped,above]{$\cot\theta$}
             --(A)node[midway,sloped,above]{$\tan\theta$}
-         (O)--(C)node[midway,above,sloped]{1}
-            --(D)node[pos=.6,left]{$\sin\theta$};
+         (O)--(C)node[midway,above,sloped]{1};
+    \draw(D)--(C)node[pos=.4,sloped,above]{$\sin\theta$};
     \tkzMarkRightAngle(A,O,B)\tkzMarkRightAngle(C,D,A)\tkzMarkRightAngle(O,C,B)\tkzMarkRightAngle(C,E,O)
     \tkzDrawPoints(O,A,B,C,D)
     \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--C};
     \draw[|<->|]($(O)-(0,1)$)--($(A)-(0,1)$)node[midway,fill=white]{$\sec\theta$};
   \end{tikzpicture}
-\end{center}
+  \caption{三角函数在单位圆上的表示}
+  \label{fig:trigonometric-funtion-on-unit-circle}
+\end{figure}
 
-由上图，根据勾股定理容易得到到一些性质：
+图~\ref{fig:trigonometric-funtion-on-unit-circle}中的圆是单位圆，当$0<\theta<90^\circ$时可在图中找到各基本三角函数的值。由图，根据勾股定理容易得到到一些性质：
 \begin{gather*}
   \sin^2\theta + \cos^2\theta = 1,\quad \csc^2\theta=\cot^2\theta+1,\quad \sec^2\theta=\tan^2\theta+1\\
   \sec^2\theta+\csc^2\theta = (\cot\theta+\tan\theta)^2\\

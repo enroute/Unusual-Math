@@ -152,10 +152,21 @@
 % For Chinese fonts
 % \usepackage{fontspec}
 % \setmainfont{SimSun}
-\usepackage[AutoFakeBold,SlantFont]{xeCJK}
-% \usepackage[SlantFont]{xeCJK}   %AutoFakeBold=true makes CJK characters in the generated PDF can't be copied
+% \usepackage[AutoFakeBold,SlantFont]{xeCJK}
+% % \usepackage[SlantFont]{xeCJK}   %AutoFakeBold=true makes CJK characters in the generated PDF can't be copied
 
-\setCJKmainfont{SimSun}
+% \setCJKmainfont{SimSun}
+
+%%% DON'T USE AutoFakeBold, or issues will arise:
+%%% https://tex.stackexchange.com/questions/266894/titlesec-autofakebold-making-pdf-figures-bold
+%%% https://stackoverflow.com/questions/4422054/why-is-latex-making-my-caption-bold
+%%% Use the following font setting instead:
+%%% https://www.jianshu.com/p/b1751078e28e
+\usepackage{xeCJK}
+\setCJKmainfont[ItalicFont={楷体}, BoldFont={黑体}]{宋体}%衬线字体 缺省中文字体为
+\setCJKsansfont{黑体}
+\setCJKmonofont{仿宋_GB2312}%中文等宽字体
+
 
 \usepackage{multicol}
 \usepackage{multirow}
@@ -523,7 +534,7 @@
 % \includeonly{pattern}
 % \includeonly{insight}
 % \includeonly{inequality}
-\includeonly{trigonometric-functions}
+% \includeonly{trigonometric-functions}
 % \includeonly{set}
 % \includeonly{area}
 % \includeonly{discrete}

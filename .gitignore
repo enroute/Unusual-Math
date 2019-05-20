@@ -243,3 +243,7 @@ TSWLatexianTemp*
 *.spl
 
 _region_.tex
+
+# temporary files for this project
+temp.tex
+temp.pdf

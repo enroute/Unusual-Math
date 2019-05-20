@@ -143,27 +143,25 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
   \end{align*}
 \end{example}
 \begin{proof}
-  引入几个记号：
+  记
   \begin{align*}
-    S_{l}\equiv&\, \frac{a-b}{a+b} + \frac{b-c}{b+c} + \frac{c-a}{c+a} \\
-    S_{r}\equiv&\,\frac{a-b}{a+b} \cdot \frac{b-c}{b+c} \cdot \frac{c-a}{c+a}\\
-    P\equiv&\,S_{r}\cdot (a+b)(b+c)(c+a) = (a-b)(b-c)(c-a)
+    S\equiv \frac{a-b}{a+b} + \frac{b-c}{b+c} + \frac{c-a}{c+a}
   \end{align*}
-  则问题中的等式等价于
+  问题中的等式等价于
   \begin{align*}
-    S_{l}\cdot (a+b)(b+c)(c+a) + P = 0
+    S \cdot (a+b)(b+c)(c+a) = -(a-b)(b-c)(c-a)
   \end{align*}
   最直接的方法，是逐项展开，合并同类项。
   \begin{align*}
-     &\, S_{l}\cdot (a+b)(b+c)(c+a)\\
-    =&\, (a-b)(b+c)(c+a) + (b-c)(c+a)(a+b) + (c-a)(a+b)(b+c)\\
-    =&\, (c+a)\left( (a-b)(b+c) + (b-c)(a+b) \right) + (c-a)(a+b)(b+c)\\
-    =&\, 2b(c+a)(a-c) + (c-a)(a+b)(b+c)\\
-    =&\, (a-c)(2bc+2ab - (ab+ac+bb+bc))\\
-    =&\, (a-c)(bc+ab - ac-bb)\\
-    =&\, (a-c)(c(b-a)+b(a-b))\\
-    =&\, (a-c)(b-a)(c-b)\\
-    =&\, -(a-b)(b-c)(c-a) = -P&&\qedhere
+       & S\cdot (a+b)(b+c)(c+a)\\
+    ={}& \underline{(a-b)(b+c)(c+a)} + \underline{(b-c)(c+a)(a+b)} + (c-a)(a+b)(b+c)\\
+    ={}& (c+a)\left( (a-b)(b+c) + (b-c)(a+b) \right) + (c-a)(a+b)(b+c)\\
+    ={}& 2b(c+a)(a-c) + (c-a)(a+b)(b+c)\\
+    ={}& (a-c)(2bc+2ab - (ab+ac+bb+bc))\\
+    ={}& (a-c)(bc+ab - ac-bb)\\
+    ={}& (a-c)(c(b-a)+b(a-b))\\
+    ={}& (a-c)(b-a)(c-b)\\
+    ={}& -(a-b)(b-c)(c-a) &&\qedhere
   \end{align*}
 \end{proof}
 
@@ -187,21 +185,20 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
 以下几个恒等式不常见，却是竞赛中的常客。虽无需记忆，但可以留点印象，知道有这么回事，对解题有大帮助。
 
 \begin{example}\label{ex:product-of-four-continuous-integer}
-  证明对任意$x\in\mathcal{R}$，有
+  直接两展开，可知对任意$x\in\mathcal{R}$，有
   \begin{align*}
     x(x+1)(x+2)(x+3)+1=\left( x^2+3x+1\right )^2
   \end{align*}
+  从而连续4个整数的积再加1是个完全平方数。换一个形式，则有
+  \begin{align*}
+    \sqrt{x(x+1)(x+2)(x+3)+1}= x^2+3x+1 = (x + 1)^2 + x
+  \end{align*}
 \end{example}
-展开两边可得。换一个形式，则有
-\begin{align*}
-  \sqrt{x(x+1)(x+2)(x+3)+1}= x^2+3x+1 = (x + 1)^2 + x
-\end{align*}
-
 
 \begin{example}
   求$\sqrt{2019\times2020\times2021\times2022+1}-2020^2$。
 
-  在恒等式$\sqrt{x(x+1)(x+2)(x+3)+1}= x^2+3x+1 = (x + 1)^2 + x$中令$x=2019$，则有
+  在恒等式$\sqrt{x(x+1)(x+2)(x+3)+1}= (x + 1)^2 + x$中令$x=2019$，则有
   $\sqrt{2019\times2020\times2021\times2022+1}-2020^2=2019$。
 \end{example}
 
@@ -221,3 +218,108 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
   \end{align*}
   当且仅当$\alpha+\beta+\gamma$是$\pi$的整数倍时成立。
 \end{theorem}
+\begin{proof}[提示]
+  利用欧拉定理$e^{ix} = \cos x + i \sin x$，有
+  \begin{align*}
+    e^{i(\alpha + \beta + \gamma)} ={}& e^{i\alpha}\cdot e^{i\beta}\cdot e^{i\gamma} =\\
+    ={}& (\cos\alpha + i\sin\alpha) \cdot (\cos\beta + i\sin\beta) \cdot (\cos\gamma + i\sin\gamma)
+  \end{align*}
+  由此可以得到其虚部
+  \begin{align*}
+    &\mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) \\
+    ={}& \sin\alpha\cos\beta\cos\gamma + \cos\alpha\sin\beta\cos\gamma + \cos\alpha\cos\beta\sin\gamma - \sin\alpha\sin\beta\sin\gamma
+  \end{align*}
+  由$\alpha,\beta,\gamma$不是$\pi/2$的奇数倍，可知
+  \begin{align*}
+    \cos\alpha\ne0,\quad \cos\beta\ne0,\quad \cos\gamma\ne0
+  \end{align*}
+  从而有
+  \begin{align*}
+    \frac{\mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right)}{\cos\alpha\cos\beta\cos\gamma}
+    = \tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma
+  \end{align*}
+
+  若$\alpha + \beta + \gamma = k\pi$，则
+  \begin{align*}
+    e^{i(\alpha + \beta + \gamma)} = -1 \implies & \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0\\
+    \iff & \tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma = 0
+  \end{align*}
+
+  反之，若$\tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma = 0$，则
+  \begin{align*}
+    \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0
+    \iff & \sin(\alpha + \beta + \gamma) = 0\\
+    \iff & \alpha + \beta + \gamma = k\pi,\quad(k\in\mathcal{Z})&&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}[几何证明]若$\alpha,\beta,\gamma$是锐角且$\alpha+\beta+\gamma=\pi$，则
+  \begin{align*}
+    \tan\alpha + \tan\beta + \tan\gamma = \tan\alpha \tan\beta \tan\gamma
+  \end{align*}
+
+  如图，作出$\alpha,\beta,\gamma$，并通过其中一条垂线作出长方形，令长方形的底长度为$\tan\alpha\tan\beta\tan\gamma$。依次求解图中4个三角形，则可以求出图中各线段长度，再由上下底边相等可得。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      % \begin{scope}
+      %   \coordinate(O)at(0,0);\coordinate(A)at(1,0);\coordinate(B)at(60:2);\coordinate(C)at(130:2);\coordinate(D)at(-1,0);
+      %   \draw(-2,0)--(2,0) (B)--(O)--(C);
+      %   \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=A--O--B};
+      %   \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=B--O--C};
+      %   \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=C--O--D};
+      % \end{scope}
+
+      \begin{scope}[shift={(0,0)}]
+        \coordinate(O)at(0,0);\coordinate(A)at(1,0);\coordinate(B)at(60:4);\coordinate(C)at(130:2);\coordinate(D)at(-1,0);
+        \coordinate(E)at($(O)!(B)!(C)$);\coordinate(F)at($(D)!(E)!(O)$);
+        \coordinate(G)at($(A)!(B)!(O)$);\coordinate(H)at($(F)!(B)!(E)$);
+        
+        \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=A--O--B};
+        \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=B--O--C};
+        \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=C--O--D};
+        \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=B--E--H};
+
+        \foreach \x/\y/\z in{B/E/O,E/F/O,B/G/O,B/H/E}{
+          \tkzMarkRightAngle[help lines](\x,\y,\z)
+        }
+        \tkzDrawPoints(E,F,G,B,H,E)
+
+        % \draw(-.9,0)--(1.4,0) (B)--(O)--(C);
+        \draw(E)--(F)--(O)
+                --(G)
+                --(B)--(H)node[midway,above]{\tiny $\tan\alpha\tan\beta\tan\gamma$}
+                --(E)--(B);
+        \draw(F)--($(F)-(.5,0)$) (G)--($(G)+(.5,0)$) ($1.1*(B)$)--(O)--(C);
+      \end{scope}
+
+      \begin{scope}[shift={(4.5,0)}]
+        \coordinate(O)at(0,0);\coordinate(A)at(1,0);\coordinate(B)at(60:4);\coordinate(C)at(130:2);\coordinate(D)at(-1,0);
+        \coordinate(E)at($(O)!(B)!(C)$);\coordinate(F)at($(D)!(E)!(O)$);
+        \coordinate(G)at($(A)!(B)!(O)$);\coordinate(H)at($(F)!(B)!(E)$);
+        
+        \draw pic["$\alpha$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=A--O--B};
+        % \draw pic["$\beta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm]{angle=B--O--C};
+        \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=C--O--D};
+        \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=B--E--H};
+
+        \foreach \x/\y/\z in{B/E/C,E/F/O,B/G/O,B/H/E}{
+          \tkzMarkRightAngle[help lines](\x,\y,\z)
+        }
+        \tkzDrawPoints(E,F,G,B,H,E)
+
+        % \draw(-.9,0)--(1.4,0) (B)--(O)--(C);
+        \draw(E)--(F)node[midway,left]{\tiny $\tan\alpha\tan\gamma$}
+                --(O)node[midway,below]{\tiny $\tan\alpha$}
+                --(G)node[midway,below]{\tiny $\tan\beta+\tan\gamma$}
+                --(B)node[midway,sloped,below]{\tiny $\tan\alpha(\tan\beta+\tan\gamma)$}
+                --(H)node[midway,above]{\tiny $\tan\alpha\tan\beta\tan\gamma$}
+                --(E)node[midway,left]{\tiny $\tan\alpha\tan\beta$}
+                --(B)node[pos=.55,sloped,above]{\tiny $\tan\alpha\tan\beta\sec\gamma$};
+        % \draw(F)--($(F)-(1,0)$) (G)--($(G)+(1,0)$) ($1.1*(B)$)--(O);
+        \draw(C)--(E)--(O)node[midway,sloped,above]{\tiny $\tan\alpha\sec\gamma$} --(B);
+
+        % \draw[help lines,->]($.5*(E)$)--(0,-1);\node[below]at(0,-1){\tiny $\tan\alpha\sec\gamma$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
