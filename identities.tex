@@ -210,13 +210,16 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
   \end{align*}
 \end{theorem}
 
+\section{三角函数恒等式}
+\label{sec:trigonometric-identities}
 
-\begin{theorem}
+\begin{theorem}\label{th:tan-x+y+z=k.pi}
   若$\alpha, \beta, \gamma$均非$\pi/2$的奇数倍，则等式
   \begin{align*}
+    \alpha+\beta+\gamma = k\pi,(k\in\mathcal{Z}) \iff
     \tan\alpha +\tan\beta+\tan\gamma=\tan\alpha \cdot \tan\beta \cdot \tan\gamma
   \end{align*}
-  当且仅当$\alpha+\beta+\gamma$是$\pi$的整数倍时成立。
+  % 当且仅当$$是$\pi$的整数倍时成立。
 \end{theorem}
 \begin{proof}[提示]
   利用欧拉定理$e^{ix} = \cos x + i \sin x$，有
@@ -238,20 +241,62 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
     \frac{\mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right)}{\cos\alpha\cos\beta\cos\gamma}
     = \tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma
   \end{align*}
-
-  若$\alpha + \beta + \gamma = k\pi$，则
+  由$\left| e^{i(\alpha + \beta + \gamma)} \right| = 1$，可得
   \begin{align*}
-    e^{i(\alpha + \beta + \gamma)} = -1 \implies & \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0\\
-    \iff & \tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma = 0
+    \alpha + \beta + \gamma = k\pi \iff &
+    e^{i(\alpha + \beta + \gamma)} = \pm 1 
+    \iff \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0\\
+    \iff & \tan\alpha + \tan\beta + \tan\gamma = \tan\alpha\tan\beta\tan\gamma\qedhere
   \end{align*}
 
-  反之，若$\tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma = 0$，则
-  \begin{align*}
-    \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0
-    \iff & \sin(\alpha + \beta + \gamma) = 0\\
-    \iff & \alpha + \beta + \gamma = k\pi,\quad(k\in\mathcal{Z})&&\qedhere
-  \end{align*}
+  % 若$\alpha + \beta + \gamma = k\pi$，则
+  % \begin{align*}
+  %   e^{i(\alpha + \beta + \gamma)} = -1 \implies & \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0\\
+  %   \iff & \tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma = 0
+  % \end{align*}
+
+  % 反之，若$\tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma = 0$，则
+  % \begin{align*}
+  %   \mathrm{Im}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0
+  %   \iff & \sin(\alpha + \beta + \gamma) = 0\\
+  %   \iff & \alpha + \beta + \gamma = k\pi,\quad(k\in\mathcal{Z})&&\qedhere
+  % \end{align*}
 \end{proof}
+
+\begin{example}
+  在定理~\ref{th:tan-x+y+z=k.pi}中，用了复平面单位圆上的两个特殊点，即单位圆与实轴的两个交点。若利用单位圆与虚轴上的两个交点，则可以得到类似的结论。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate(O) at (0,0);
+      \coordinate(X1)at(-1,0);\coordinate(X2)at(1,0);
+      \coordinate(Y1)at(0,-1);\coordinate(Y2)at(0,1);
+      \tkzDrawPoints(O,X1,X2,Y1,Y2)\node[below left]at(O){$O$};
+      \draw(O)circle(1);
+      \draw[->](-1.5,0)--(1.5,0);
+      \draw[->](0,-1.5)--(0,1.5);
+    \end{tikzpicture}
+  \end{center}
+  容易得到单位圆上点的实部的表达式为
+  \begin{align*}
+        & \mathrm{Re}\left( e^{i(\alpha + \beta + \gamma)}\right) \\
+    ={} & \cos\alpha\cos\beta\cos\gamma - \cos\alpha\sin\beta\sin\gamma
+          - \sin\alpha\cos\beta\sin\gamma - \sin\alpha\sin\beta\cos\gamma\\
+  \end{align*}
+  类似定理~\ref{th:tan-x+y+z=k}，若$\cos\alpha, \cos\beta, \cos\gamma$均不为0，即$\alpha, \beta, \gamma$均不为$\pi/2$的奇数倍时，有
+  \begin{align*}
+    \frac{\mathrm{Re}\left( e^{i(\alpha + \beta + \gamma)}\right)}{\cos\alpha\cos\beta\cos\gamma}
+    ={} 1 - \tan\alpha\tan\beta - \tan\beta\tan\gamma - \tan\gamma\tan\alpha
+  \end{align*}
+  取单位圆与虚轴的两个交点，即$\alpha + \beta + \gamma$是$\pi/2$的奇数倍，此两点的实部为0，从而
+  \begin{align*}
+    \alpha + \beta + \gamma = (2k + 1)\frac\pi2
+    \iff & e^{i(\alpha + \beta + \gamma)} = \pm i 
+    \iff \mathrm{Re}\left(e^{i(\alpha + \beta + \gamma)}\right) = 0\\
+    % \iff & 1 - \tan\alpha\tan\beta - \tan\beta\tan\gamma - \tan\gamma\tan\alpha = 0\\
+    \iff & \tan\alpha\tan\beta + \tan\beta\tan\gamma + \tan\gamma\tan\alpha = 1\qedhere\\
+  \end{align*}
+\end{example}
 
 \begin{example}[几何证明]若$\alpha,\beta,\gamma$是锐角且$\alpha+\beta+\gamma=\pi$，则
   \begin{align*}
@@ -302,7 +347,8 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
         \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=C--O--D};
         \draw pic["$\gamma$",<->,draw=orange,angle eccentricity=1.6,angle radius=.4cm,fill=blue!20]{angle=B--E--H};
 
-        \foreach \x/\y/\z in{B/E/C,E/F/O,B/G/O,B/H/E}{
+        \foreach \x/\y/\z in{% B/E/C,
+          E/F/O,B/G/O,B/H/E}{
           \tkzMarkRightAngle[help lines](\x,\y,\z)
         }
         \tkzDrawPoints(E,F,G,B,H,E)
@@ -316,7 +362,7 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
                 --(E)node[midway,left]{\tiny $\tan\alpha\tan\beta$}
                 --(B)node[pos=.55,sloped,above]{\tiny $\tan\alpha\tan\beta\sec\gamma$};
         % \draw(F)--($(F)-(1,0)$) (G)--($(G)+(1,0)$) ($1.1*(B)$)--(O);
-        \draw(C)--(E)--(O)node[midway,sloped,above]{\tiny $\tan\alpha\sec\gamma$} --(B);
+        \draw(E)--(O)node[midway,sloped,above]{\tiny $\tan\alpha\sec\gamma$} --(B);
 
         % \draw[help lines,->]($.5*(E)$)--(0,-1);\node[below]at(0,-1){\tiny $\tan\alpha\sec\gamma$};
       \end{scope}
