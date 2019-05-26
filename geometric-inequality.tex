@@ -170,7 +170,7 @@
 
   如图\ref{fig:in/circumcircle}，延长$CI$得$L$，延长$LG$得$M$，延长$GI$得$P$和$Q$，则$\triangle CID\sim\triangle MLA$，且$LA=LI$，从而
   \begin{align*}
-    (R+d)(R-d)&=IP\cdot IQ=IC\cdot IL=IC\cdot LA=ID\cdot LM=2Rr&\qedhere
+    (R+d)(R-d)&=IP\cdot IQ=IC\cdot IL=IC\cdot LA=ID\cdot LM=2Rr&&\qedhere
   \end{align*}
 \end{proof}
 
@@ -293,6 +293,147 @@
   从而可算出$R$。
 \end{proof}
 
+\begin{theorem}
+  $\triangle ABC$中三个顶点分别为$A,B,C$，则
+  \begin{align*}
+    \sin A \sin B \sin C \le{}& \left(\frac{\sin A + \sin B + \sin C}3\right)^3\\
+                         \le{}& \sin^3\frac{A+B+C}3\\
+                             =& \left(\frac{\sqrt3}{2}\right)^3 = \frac{3\sqrt3}{8}
+  \end{align*}
+  当且仅当$\triangle ABC$是正三角形时等号成立。
+\end{theorem}
+\begin{proof}
+  三角形中任一顶点的正弦值是正的，从而由AM--GM不等式，有
+  \begin{align*}
+    \sqrt[3]{\sin A \sin B \sin C} \le \frac{\sin A + \sin B + \sin C}{3} 
+  \end{align*}
+  当且仅当$\sin A=\sin B=\sin C$时等号成立。而对于三个角的正弦值的和，考虑$\sin$在$(0,\pi)$上是凸的，利用Jensen不等式，有
+  \begin{align*}
+         && \frac{\sin A + \sin B + \sin C}{3} \le \sin \frac{A + B + C}{3} = \sin \frac{\pi}{3}
+  \end{align*}
+  当且仅当$A = B = C$时等号成立。代入，有
+  \begin{align*}
+    \sin A \sin B \sin C \le \left( \frac{\sin A + \sin B + \sin C}{3} \right)^3 \le \left( \frac{\sqrt3}{2} \right)^3
+  \end{align*}
+  当且仅当$A=B=C$即三角形是正三角形时等号成立。
+
+  关于$\sin A + \sin B + \sin C \le 3 \sin \frac\pi3$，也可由下面的图直观的看出来。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{axis}[anchor=origin,
+        scale only axis,
+        width=0.8\textwidth,
+        height=5cm,
+        xmin = -.5,
+        xmax = 4,
+        ymin = -.5,
+        ymax = 1.5, 
+        axis lines = middle,
+        enlargelimits = true,
+        xlabel = {$\mathbf{x}$},
+        ylabel = {$\mathbf{y}$},
+        yticklabels={,,},
+        xticklabels={,,}
+        ]
+        % \coordinate (A) at (axis cs:40,6);
+        \addplot[domain=0:3.1415926,smooth] (\x, {sin(deg(\x))});
+        \coordinate (A) at (.2, 0.198669330795061);  % sin(.2) = 0.198669330795061
+        \coordinate (B) at (1.0, 0.841470984807897); % sin(1 ) = 0.841470984807897
+        \coordinate (C) at (3.1415926-1.2, 0.932039105385902); % sin(1.91415926) = 0.932039105385902
+        % \tkzDrawPoints(A,B,C)
+        % \draw[dashed] (-3.1415926,0)--(-3.1415926,3)node[pos=.8,left]{$x=-\pi$};
+        \draw[help lines] (3.1415926,0)--(3.1415926,.1)node[pos=0,below]{$\pi$};
+        \draw[help lines] (3.1415926/3,0)--(3.1415926/3,.1)node[pos=0,below]{$\frac\pi3$};
+        \draw(A)--(B)--(C)--(A);
+        \coordinate(G)at($1/3*(A) + 1/3*(B) + 1/3*(C)$);
+        % \tkzDrawPoints(A,B,C);
+        \draw(A)circle(1pt);
+        \draw(B)circle(1pt);
+        \draw(C)circle(1pt);
+        \draw(G)circle(1pt);
+      \end{axis}
+    \end{tikzpicture}
+  \end{center}
+  在直角坐标系下作出$\sin$在$(0,\pi)$区间的函数图像，同时以曲线上的三点$(A, \sin A)$，$(B, \sin B)$，$(C, \sin C)$为顶点做三角形，则三角形在曲线下，其重心坐标为
+  \begin{align*}
+    \left( \frac{A+B+C}3, \frac{\sin A+\sin B+\sin C}3 \right) = \left( \frac\pi3, \frac{\sin A+\sin B+\sin C}3 \right)
+  \end{align*}
+  重心坐标在三角形内从而也在曲线之下，从而有
+  \begin{align*}
+    \frac{\sin A+\sin B+\sin C}3 \le \sin\frac\pi3
+  \end{align*}
+  上式左边是重心的$y$坐标，右边是曲线在$x=\frac\pi3$(也是重心的$x$坐标)上的$y$坐标。本质在于$\sin$是凸函数。
+\end{proof}
+
+
+\begin{theorem}
+  单位圆的所有内接三角形中，正三角形的面积最大，周长最大。
+\end{theorem}
+\begin{proof}[提示]
+  % 此命题中面积最大与周长最大是等价的。记$p\equiv a+b+c$是三角形的周长，根据
+  % \begin{align*}
+  %   S=\frac12r(a+b+c), \quad r = \frac{R^2 - d^2}{2R}
+  % \end{align*}
+  % 有
+  % \begin{align*}
+  %   S = \frac{(R^2-d^2)(a+b+c)}{4R} = \frac{(R^2-d^2)p}{4R}
+  % \end{align*}
+  % 其中$r$是三角形内接圆的半径，$d$是三角形外接圆与内接圆圆心的距离。
+  
+  % \begin{enumerate}
+  % \item 若正三角形的面积最大，则由于正三角形中$d=0$
+  %   \begin{align*}
+  %     p = \frac{4RS}{R^2-d^2} = \frac{4S}{R}
+  %   \end{align*}
+  %   也最得最大值。
+    
+  % \item 若正三角形的周长最大，则正三角形的面积
+  %   \begin{align*}
+  %     S = \frac{(R^2-d^2)p}{4R} = \frac{Rp}{4}
+  %   \end{align*}
+  %   也取得最大值。
+  % \end{enumerate}
+
+  可以由下面的图看出圆内接三角形中正三角形面积最大的直观说明。先固定两个顶点$A,B$，第三个顶点$C$在圆上游动，要使$\triangle ABC$的面积最大则$C$必在$AB$的中垂线上。同样$A$必在$BC$的中垂线上，$B$在$CA$的中垂线上，从而面积最大的三角形必是正三角形。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate(O) at (0,0); \coordinate[label=below left:$A$](A) at (210:2); \coordinate[label=below right:$B$](B) at (340:2);
+        \coordinate[label=above:$C$](C) at (95:2); \coordinate[label=above:$C'$](C')at(130:2);
+        \coordinate(D)at($.5*(A)+.5*(B)$);
+        \tkzMarkRightAngle(C,D,A)
+        \tkzDrawPoints(A,B,C,C',O)
+        \draw(O)circle(2);
+        \draw(A)--(B)--(C)--(A);
+        \draw[help lines, dashed](C)--(D) (A)--(C')--(B);
+      \end{scope}
+      \begin{scope}[shift={(6,0)}]
+        \coordinate(O) at (0,0); \coordinate[label=below left:$A$](A) at (210:2); \coordinate[label=below right:$B$](B) at (340:2);
+        \coordinate[label=above:$C$](C) at (95:2); \coordinate(D)at(275:2);
+        \tkzDrawPoints(A,B,C,D,O)
+        \tkzMarkRightAngle(C,B,D)
+        \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.6cm,fill=blue!20] {angle=B--A--C};
+        \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.6cm,fill=blue!20] {angle=B--D--C};
+        \draw(O)circle(2);
+        \draw(A)--(B)--(C)node[midway,sloped,above]{$a$}--(A);
+        \draw[help lines, dashed](C)--(D)--(B);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  下面利用三角函数严格证明。由上面右图，容易知道$a = 2R\sin A$。记三角形的面积为$S$，周长为$p$，则
+  \begin{align*}
+    2S ={}& ab \sin C = (R\sin A)(R\sin B)\sin C\\
+       ={}& R^2 \sin A\sin B\sin C \le R^2 \cdot \frac{3\sqrt3}{8}     
+  \end{align*}
+  当且仅当$A=B=C$时等号成立，从而当且仅当三角形是正三角形时其面积$S$取得最大值。同样，对于周长$p$，有
+  \begin{align*}
+    p ={}& a + b + c = 2R\sin A + 2R\sin B + 2R\sin C\\
+      ={}& 2R(\sin A + \sin B + \sin C) \le 3\sqrt3 R
+  \end{align*}
+  当且仅当$A=B=C$时等号成立，从而当且仅当三角形是正三角形时其周长$p$取得最大值。
+\end{proof}
 
 \begin{theorem}
   任意$\triangle ABC$，记$a,b,c$是其三边边长，$r,R$分别是其内切圆与外接圆半径，则
@@ -304,26 +445,342 @@
   在定理~\ref{th:R-of-circumcircle}，将$r=\dfrac{S}{s}$及$a+b+c=2s$代入可得。
 \end{proof}
 
+\begin{theorem}
+  记凸四边形的四边分别为$a,b,c,d$，四个顶角依次为$A,B,C,D$，两条对角线为$m,n$，则
+  \begin{align*}
+    (mn)^2 ={}& (ac)^2 + (bd)^2 - 2abcd\cos(A+C)\\
+           ={}& (ac)^2 + (bd)^2 - 2abcd\cos(B+D)
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate(A) at (0,0); \coordinate(B) at (3,0);
+      \coordinate(C) at (4,2); \coordinate(D) at (1,3);
+      \draw(A)--(B)node[midway,below]{$a$}
+              --(C)node[midway,sloped,below]{$b$}
+              --(D)node[midway,sloped,above]{$c$}
+              --(A)node[midway,sloped,above]{$d$};
+      \draw(A)--(C)node[pos=.4,sloped,below]{$m$};
+      \draw(B)--(D)node[pos=.6,sloped,below]{$n$};
+      \tkzDrawPoints(A,B,C,D)
+      \draw pic["$A$",draw=orange,<->,angle eccentricity=1.6,angle radius=.6cm] {angle=B--A--D};
+      \draw pic["$C$",draw=orange,<->,angle eccentricity=1.6,angle radius=.6cm] {angle=D--C--B};
+    \end{tikzpicture}
+  \end{center}
+\end{theorem}
+\begin{proof}[提示]
+  由于$A+C = 2\pi - (B+D)$，所以后两式是等价的。考虑左边的等式，其形式与余弦定理相似，可以考虑应用余弦定理。然而等式中的项的量纲是长度的4次方，而余弦定理中每项的量纲是长度的2次方，不能直接应用。将其变化为如下的等价形式：
+  \begin{align*}
+    n^2 = \left(\frac{ac}{m}\right)^2 + \left(\frac{bd}{m}\right)^2 - 2\cdot\frac{ac}{m}\cdot\frac{bd}{m}\cdot\cos(A+C)
+  \end{align*}
+  从量纲而言，上式有望应用余弦定理，为此需要构造角度$A+C$及长度$\nicefrac{ac}{m}$和$\nicefrac{bd}{m}$，这种形式的长度，可以考虑相似三角形。
 
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      \coordinate(A) at (0,0); \coordinate(B) at (3,0);
+      \coordinate(C) at (5,2); \coordinate(D) at (1,2.5);
+      % \draw pic["$A$",draw=orange,<->,angle eccentricity=1.6,angle radius=.6cm] {angle=B--A--D};
+      % \draw pic["$C$",draw=orange,<->,angle eccentricity=1.6,angle radius=.6cm] {angle=D--C--B};
 
+      % from tkz-euclide packge, to get angle
+      \tkzFindAngle(D,C,A) \tkzGetAngle{angleDCA}
+      \tkzFindAngle(C,A,D) \tkzGetAngle{angleCAD}
+      \coordinate(E1)at($(A)!.5!-\angleDCA:(B)$);\coordinate(E2)at($(B)!.5!\angleCAD:(A)$);
+      \tkzInterLL(A,E1)(B,E2)\tkzGetPoint{E}
 
-\begin{theorem}[托勒密不等式，Ptolemy's Inequality]
+      \tkzFindAngle(A,C,B) \tkzGetAngle{angleACB}
+      \tkzFindAngle(B,A,C) \tkzGetAngle{angleBAC}
+      \coordinate(F1)at($(A)!.5!\angleACB:(D)$);\coordinate(F2)at($(D)!.5!-\angleBAC:(A)$);
+      \tkzInterLL(A,F1)(D,F2)\tkzGetPoint{F}
+
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.3cm,fill=blue!20] {angle=E--A--B};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.3cm,fill=blue!20] {angle=D--C--A};
+
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.4cm,pattern color=red!20,pattern=north west lines] {angle=A--C--B};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.4cm,pattern color=red!20,pattern=north west lines] {angle=D--A--F};
+
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.7cm,pattern color=orange!20,pattern=crosshatch] {angle=B--A--C};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.7cm,pattern color=orange!20,pattern=crosshatch] {angle=F--D--A};
+
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.7cm,pattern color=red!20,pattern=crosshatch] {angle=B--A--C};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.7cm,pattern color=red!20,pattern=crosshatch] {angle=F--D--A};
+      
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm,fill=green!20] {angle=C--A--D};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm,fill=green!20] {angle=A--B--E};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm,pattern=north east lines] {angle=C--A--D};
+      \draw pic["",draw=orange,angle eccentricity=1.6,angle radius=.5cm,pattern=north east lines] {angle=A--B--E};
+
+      \draw[help lines,line width=2pt](E)--(F)
+                                      (A)--(E)node[midway,sloped,below]{$\nicefrac{ac}{m}$}
+                                      (A)--(F)node[midway,sloped,below]{$\nicefrac{bd}{m}$};
+      \draw[dashed,help lines](E)--(B)node[midway,sloped,below]{$\nicefrac{ad}{m}$}
+                              (D)--(F)node[midway,sloped,above]{$\nicefrac{ad}{m}$};
+
+      \draw(A)--(B)node[midway,below]{$a$}
+              --(C)node[midway,sloped,below]{$b$}
+              --(D)node[midway,sloped,above]{$c$}
+              --(A)node[midway,sloped,above]{$d$};
+      \draw(A)--(C)node[pos=.3,sloped,below]{$m$};
+      \draw(B)--(D)node[pos=.6,sloped,below]{$n$};
+      \tkzDrawPoints(A,B,C,D,E,F)
+    \end{tikzpicture}
+  \end{center}
+  如上图，沿$a$边和$d$边向外作出两个辅助的三角形，然后连接两个三角形的另外两个顶点，由两条虚线边平行(同旁内角和等于$\pi$)且相等，可得一个平行四边形，再对浅粗线三角形应用余弦定理可得。
+
+  上图是$A+C\le\pi$的情况。当$\pi<A+C<2\pi$的情况类似。
+\end{proof}
+
+由上面的例子，有
+\begin{align*}
+  (mn)^2 \le (ac)^2 + (bd)^2 + 2abcd = (ac + bd)^2 \iff mn \le ac + bd
+\end{align*}
+当且仅当$\cos(A+C) = -1$即$A+C=\pi$时等号成立。从而可得下面的托勒密定理。其实由图中的浅粗线三角形及“一边小于两边的和”也得可得到
+\begin{align*}
+  n\le \frac{ac}{m} + \frac{bd}{m} \iff mn\le ac + bd
+\end{align*}
+当且仅当三角形退化成线段且$n$边为最长边时等号成立。这就是下面的托勒密定理。
+
+% 同样的，也可得到以下的不等式：
+% \begin{align*}
+%   \left| ac - bd \right| \le mn
+% \end{align*}
+% 当且仅当$\cos(A+C) = 1$即$A+C=2k\pi$时等号成立，此时四边形退化为线段。
+
+\begin{theorem}[托勒密定理，托勒密不等式，Ptolemy's Inequality]
   任意凸四边形$ABCD$，有
   \begin{align}
     AB\cdot CD + AD\cdot BC\ge AC\cdot BD
   \end{align}
   当且仅当$ABCD$是圆内接四边形等号成立。
 \end{theorem}
-\begin{proof}
-  \color{red}不会呢。
+
+\begin{lemma}\label{lem:ax>bn+cm}
+  如图，$P$是三角形内任意一点，三角形的三边分别为$a,b,c$，$P$到三角形三边的距离为$l,m,n$，到三个顶点的距离分别是$x,y,z$，则
+  \begin{align*}
+    ax \ge{} & bn + cm  &  by \ge{} & an + cl &  cz \ge{} & am + bl
+  \end{align*}
+  当且仅当$P$是三角形的外心时等号成立。
+
+  类似的，有
+  \begin{align*}
+    ax \ge{}& bm + cn  &  by \ge{}& al + cn &  cz \ge{}& al + bm
+  \end{align*}
+  当且仅当$P$是三角形的垂心时等号成立。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.8]
+      \begin{scope}
+        \coordinate(B)at(0,0);\coordinate(C)at(6,0);\coordinate(A)at(5,5);\coordinate(P)at(3,1);
+        \coordinate(P3)at($(A)!(P)!(B)$);\coordinate(P1)at($(B)!(P)!(C)$);\coordinate(P2)at($(C)!(P)!(A)$);
+
+        \draw pic["$\alpha_1$",draw=orange,angle eccentricity=1.6,angle radius=.7cm,fill=blue!20] {angle=B--A--P};
+        \draw pic["$\alpha_2$",draw=orange,angle eccentricity=1.6,angle radius=.5cm,pattern=crosshatch] {angle=P--A--C};
+
+        \foreach \u/\v/\w in{A/P3/P,C/P1/P,C/P2/P}{
+          \tkzMarkRightAngle(\u,\v,\w)
+        }
+        \draw(A)--(B)node[midway,sloped,above]{$c$}
+             (A)--(C)node[midway,sloped,above]{$b$}
+                --(B)node[midway,below]{$a$};
+        \foreach \u/\p/\l in{A/above/x,B/above/y,C/above/z,P3/below/n,P2/above/m}{
+          \draw(P)--(\u)node[midway,sloped,\p]{$\l$};
+        }
+        \draw(P)--(P1)node[midway,left]{$l$};
+        \tkzDrawPoints(A,B,C,P,P1,P2,P3)
+        \node[above]at(A){$A$};
+        \node[below left]at(B){$B$};
+        \node[below right]at(C){$C$};
+        \path(P)++(-.025,.1)node[above]{$P$};
+        \node[above right]at(P2){$M$};
+        \node[above left]at(P3){$N$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{lemma}
+\begin{proof}[提示]
+  对于第一个不等式，作出$ax,bn,cm$这三个长度。但按量纲来看，这些项都是长度的平方，先变换为
+  \begin{align*}
+    a \ge \frac{bn}{x} + \frac{cm}{x}
+  \end{align*}
+  或者更简单的，把$x,n,m$看成是不带量纲的常数。若是使用$\nicefrac{bn}{x}$的形式，则可以画到原图上。若是使用放大形式，则需要新画一图，把原三角形的边长放大$x$倍得出一新三角形，则三角形的三边分别是$ax,bx,cx$，然后根据下面的图作出$bn,cm$。
+
+    \begin{center}
+    \begin{tikzpicture}[scale=.75]
+      \begin{scope}[shift={(0,0)}]
+        \coordinate(B)at(0,0);\coordinate(C)at(6,0);\coordinate(A)at(5,5);\coordinate(P)at(3,1);
+        \tkzFindAngle(B,A,P) \tkzGetAngle{angleBAP}
+        \tkzFindAngle(P,A,C) \tkzGetAngle{anglePAC}
+        \coordinate(D1)at($(B)!.5!\anglePAC:(A)$);\coordinate(D)at($(B)!(A)!(D1)$);
+        \coordinate(E1)at($(C)!.5!-\angleBAP:(A)$);\coordinate(E)at($(C)!(A)!(E1)$);
+
+        \draw pic["$\alpha_2$",draw=orange,angle eccentricity=1.6,angle radius=.7cm,pattern=crosshatch] {angle=A--B--D};
+        \draw pic["$\alpha_1$",draw=orange,angle eccentricity=2.0,angle radius=.7cm,fill=blue!20] {angle=E--C--A};
+        \tkzMarkRightAngle(A,D,B)\tkzMarkRightAngle(A,E,C)
+
+        \coordinate(P3)at($(A)!(P)!(B)$);\coordinate(P1)at($(B)!(P)!(C)$);\coordinate(P2)at($(C)!(P)!(A)$);
+
+        % \foreach \u/\v/\w in{A/P3/P,C/P1/P,C/P2/P}{
+        %   \tkzMarkRightAngle(\u,\v,\w)
+        % }
+        \draw(A)--(B)node[midway,sloped,above]{$cx$}
+             (A)--(C)node[pos=.4,sloped,above]{$bx$}
+                --(B)node[midway,below]{$ax$};
+        % \foreach \u/\p/\l in{A/above/x,B/above/y,C/above/z,P3/below/r,P2/above/q}{
+        %   \draw(P)--(\u)node[midway,sloped,\p]{$\l$};
+        % }
+        % \draw(P)--(P1)node[midway,left]{$p$};
+        \draw[help lines](A)--(P) (B)--(P) (C)--(P);
+        \tkzDrawPoints(A,B,C,P)%,P1,P2,P3)
+        \node[above left]at(A){$A'$};
+        \node[below left]at(B){$B'$};
+        \node[below right]at(C){$C'$};
+        \path(P)++(-.025,.1)node[above]{$P'$};
+
+        \draw[dashed,help lines](B)--(D)
+                                   --(A)node[midway,above]{$cm$}
+                                   --(E)node[midway,above]{$bn$}
+                                   --(C);
+        \node[below]at(3,-.7){$ax\ge bn + cm$};
+      \end{scope}
+      \begin{scope}[shift={(8,0)}]
+        \coordinate(B)at(0,0);\coordinate(C)at(6,0);\coordinate(A)at(5,5);\coordinate(P)at(3,1);
+        \tkzFindAngle(B,A,P) \tkzGetAngle{angleBAP}
+        \tkzFindAngle(P,A,C) \tkzGetAngle{anglePAC}
+        \coordinate(D1)at($(B)!.5!\angleBAP:(A)$);\coordinate(D)at($(B)!(A)!(D1)$);
+        \coordinate(E1)at($(C)!.5!-\anglePAC:(A)$);\coordinate(E)at($(C)!(A)!(E1)$);
+
+        \draw pic["$\alpha_1$",draw=orange,angle eccentricity=1.6,angle radius=.7cm,fill=blue!20] {angle=A--B--D};
+        \draw pic["$\alpha_2$",draw=orange,angle eccentricity=1.6,angle radius=.5cm,pattern=crosshatch] {angle=E--C--A};
+        \tkzMarkRightAngle(A,D,B)\tkzMarkRightAngle(A,E,C)
+        \coordinate(P3)at($(A)!(P)!(B)$);\coordinate(P1)at($(B)!(P)!(C)$);\coordinate(P2)at($(C)!(P)!(A)$);
+        % \foreach \u/\v/\w in{A/P3/P,C/P1/P,C/P2/P}{
+        %   \tkzMarkRightAngle(\u,\v,\w)
+        % }
+        \draw(A)--(B)node[midway,sloped,above]{$cx$}
+             (A)--(C)node[midway,sloped,above]{$bx$}
+                --(B)node[midway,below]{$ax$};
+        % \foreach \u/\p/\l in{A/above/x,B/above/y,C/above/z,P3/below/r,P2/above/q}{
+        %   \draw(P)--(\u)node[midway,sloped,\p]{$\l$};
+        % }
+        % \draw(P)--(P1)node[midway,left]{$p$};
+        \draw[help lines](A)--(P) (B)--(P) (C)--(P);
+        \tkzDrawPoints(A,B,C,P)%,P1,P2,P3)
+        \node[above right]at(A){$A'$};
+        \node[below left]at(B){$B'$};
+        \node[below right]at(C){$C'$};
+        \path(P)++(-.025,.1)node[above]{$P'$};
+
+        \draw[dashed,help lines](B)--(D)
+                                   --(A)node[midway,above]{$cn$}
+                                   --(E)node[midway,above]{$bm$}
+                                   --(C);
+        \node[below]at(3,-.7){$ax\ge bm + cn$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+
+  如上面左图，先做一个放大的三角形$\triangle A'B'C'$，然后在$B',C'$上向$A'$一侧按图中的角度作射线，由同旁内角和为$\pi$可知两线平行。再由$A'$作两线的垂线可得两三角形分别与题中原图两个含角度$\alpha_1$和$\alpha_2$的直角三角形相似，由此可算得左图中$A'$到两虚线的距离。类似地可作出右图。
+
+  由左图的直角梯形，可知$ax\ge bn+cm$，当且仅当梯形为矩形时成立。$P$是$\triangle ABC$的外心$\iff P'$是$\triangle A'B'C'$的外心。若$P'$是外心，则$P'$到$A', B', C'$的距离相等，容易知道$B'C'$与虚线的夹角是直角。反之，若梯形是矩形，则
+  \begin{align*}
+    \angle B = \frac\pi2 - \alpha_2 = \angle APM,\quad
+    \angle C = \frac\pi2 - \alpha_1 = \angle APN
+  \end{align*}
+  同样的，若在顶点$C'$的两边向外做三角形，同样可以得到$\angle B = \angle CPM$，从而$\triangle APC$是等腰三角形，$x=z$。类似的就可以推出
+  \begin{align*}
+    x = y = z
+  \end{align*}
+  即$P$为三角形$\triangle ABC$的外心。
+  
+  由右图的直角梯形，可知$ax \ge bm + cn$，又$A'P'$与两虚线平行，因此当且仅当$\alpha_1 + B = 90^\circ$时等号成立，即当且仅当$AP\perp BC$时等号成立。从而三式的等号都成立等价于$P$是垂心。也可用面积法得到此结论。作$BC$边上的高$AD$，记其长度为$h_a$，则$x\ge h_a - l$，当且仅当$P$在$AD$上时等号成立。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.8]
+      \begin{scope}
+        \coordinate(B)at(0,0);\coordinate(C)at(6,0);\coordinate(A)at(5,5);\coordinate(P)at(3,1);
+        \coordinate(P3)at($(A)!(P)!(B)$);\coordinate(P1)at($(B)!(P)!(C)$);\coordinate(P2)at($(C)!(P)!(A)$);
+
+        \fill[color=red!10](A)--(B)--(P)--(C)--(A);
+
+        \draw pic["$\alpha_1$",draw=orange,angle eccentricity=1.6,angle radius=.7cm,fill=blue!20] {angle=B--A--P};
+        \draw pic["$\alpha_2$",draw=orange,angle eccentricity=1.6,angle radius=.5cm,pattern=crosshatch] {angle=P--A--C};
+
+        \foreach \u/\v/\w in{A/P3/P,C/P1/P,C/P2/P}{
+          \tkzMarkRightAngle(\u,\v,\w)
+        }
+        \draw(A)--(B)node[midway,sloped,above]{$c$}
+             (A)--(C)node[midway,sloped,above]{$b$}
+                --(B)node[midway,below]{$a$};
+        \foreach \u/\p/\l in{A/above/x,B/above/y,C/above/z,P3/below/n,P2/above/m}{
+          \draw(P)--(\u)node[midway,sloped,\p]{$\l$};
+        }
+        \draw(P)--(P1)node[midway,left]{$l$};
+        \tkzDrawPoints(A,B,C,P,P1,P2,P3)
+        \node[above]at(A){$A$};
+        \node[below left]at(B){$B$};
+        \node[below right]at(C){$C$};
+        \path(P)++(-.025,.1)node[above]{$P$};
+        \node[above right]at(P2){$M$};
+        \node[above left]at(P3){$N$};
+
+        \coordinate[label=below:$D$](D)at($(B)!(A)!(C)$);
+        \draw[help lines,dashed](A)--(D)node[midway,left]{$h_a$};
+        \tkzMarkRightAngle(A,D,C)
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  记燕尾$ABPC$的面积为$S_{ABPC}$，则有
+  \begin{align*}
+    \begin{cases}
+      S_{ABPC} = \frac12 bm + \frac12 cn\\
+      S_{ABPC} = \frac12 ah_a - \frac12 al = \frac12 a(h_a- l) \le \frac12 ax
+    \end{cases}
+    \implies  ax \ge bm + cn &\qedhere
+  \end{align*}
 \end{proof}
 
+\begin{lemma}
+  在上面的图中，有
+  \begin{align*}
+    xyz\ge 8 lmn
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  对每项使A—G不等式然后三式相乘，有
+  \begin{align*}
+    ax\cdot by\cdot cz \ge 2\sqrt{bqcr} \cdot 2\sqrt{crap} \cdot 2\sqrt{apbq}
+    = 8abc \cdot lmn
+  \end{align*}
+  两边同除$abc$可得。
+\end{proof}
+
+
 \begin{theorem}[鄂尔多斯—门德尔不等式，Erdos-Mordell Inequality，E-M不等式]
-  $P$是三角形$ABC$内任意一点，$P$到三角形三边的距离分别为$p,q,r$，到三顶点的距离分别是$x,y,z$，则
+  $P$是三角形$ABC$内任意一点，$P$到三角形三边的距离分别为$l,m,n$，到三顶点的距离分别是$x,y,z$，则
   \begin{align}
-    x+y+z\ge 2(p+q+r)
+    x+y+z\ge 2(l+m+n)
   \end{align}
 \end{theorem}
-\begin{proof}
-  \color{red}不会呢。
+\begin{proof}[提示]
+  利用引理~\ref{lem:ax>bn+cm}，有
+  \begin{align*}
+    x \ge \frac{bn + cm}{a}, \quad y \ge \frac{an + cl}{b}, \quad z \ge \frac{am + bl}{c}
+  \end{align*}
+  三式相加并由AM--GM不等式可得
+  \begin{align*}
+    x + y + z ={}& l\left(\frac bc + \frac cb\right) + m\left(\frac ac + \frac ca\right) + n\left(\frac ab + \frac ba\right)\\
+    \ge{}& 2(l + m + n)
+  \end{align*}
+  当且仅当$a=b=c$且$P$为三角形的外心时等号成立。
+\end{proof}
+
+\begin{theorem}
+  记三角形的外接圆与内切圆的半径分别为$R,r$，则
+  \begin{align*}
+    l + m + n = R + r
+  \end{align*}
+\end{theorem}
+\begin{proof}定理~\ref{ex:vivianis-theorem}是此定理的特例。
+
+  \color{red}等补充，还没有思路。
 \end{proof}

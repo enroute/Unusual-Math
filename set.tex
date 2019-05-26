@@ -52,6 +52,73 @@
   两个圆加起来的部分共有$50-15=35$人，从而可以填入两圆共同的部分$28+26-35=19$人，只有哥哥的$28-19=9$人，只有弟弟的$26-19=7$人。
 \end{proof}
 
+\section{容斥原理}
+\label{sec:inclusion-exclusion-principle}
+
+\begin{definition}[计数]
+  对任意集合$A$，用$|A|$表示集合中元素的个数。
+\end{definition}
+
+\begin{theorem}[容斥原理，Inclusion-Exclusion Principle]
+  任意集合$A,B,C$，有
+  \begin{align*}
+    |A\cup B| ={}&       |A| + |B| - |A\cap B|\\
+    |A\cup B\cup C| ={}& |A| + |B| + |C| - |A\cap B| - |B\cap C| - |C\cap A| + |A\cap B\cap C|
+  \end{align*}
+  更普遍的形式是，对任意集合$A_1,A_2,\cdots,A_n$，有
+  \begin{align*}
+    \left|\bigcup_{i=1}^n A_i\right| ={}& \sum_{i=1}^n\left|A_i\right|
+    - \sum_{1\le i<j\le n}\left|A_i\cap A_j\right| + \sum_{1\le i<j<k\le n}\left|A_i\cap A_j\cap A_k\right| - \cdots\\
+    & + (-1)^{n-1}\left|A_1\cap A_2\cap \cdots \cap A_n\right|
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]用文氏图，可以直观地看出$n=2,3$时的情况。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[blend mode=multiply]
+        \filldraw[fill=red!20,opacity=.5](1.5,1.5)circle(1);
+        \filldraw[fill=blue!20,opacity=.5](2.5,1.5)circle(1);
+        \node at (1.1,1.5){$A$};
+        \node at (2.9,1.5){$B$};
+        \node[below] at (2,.3){$n=2$};
+      \end{scope}
+      \begin{scope}[blend mode=multiply,shift={(5,0)}]
+        \filldraw[fill=red!20,opacity=.5](1.5,1.5)circle(1);
+        \filldraw[fill=blue!20,opacity=.5](2.5,1.5)circle(1);
+        \filldraw[fill=green!20,opacity=.5](2,2.5)circle(1);
+        \node at ($(1.5,1.5)+(210:1.4)$){$A$};
+        \node at ($(2.5,1.5)+(330:1.4)$){$B$};
+        \node at ($(2,2.5)+(90:1.4)$){$C$};
+        \node[below] at (2,.3){$n=3$};
+        \foreach \x/\y/\v in{1.1/1.1/1, 2.9/1.1/2, 2/2.9/3,
+          2/1.15/4, 1.375/2.1/6, 2.625/2.1/5, 2/1.9/7}{
+          \node at(\x,\y){$S_{\v}$};
+        }
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  如上图，当$n=2$时，$|A| + |B|$比$|A\cup B|$多加了一个$|A\cap B|$，所以有
+  \begin{align*}
+    |A\cup B| = |A| + |B| - |A\cap B|    
+  \end{align*}
+  当$n=3$时，如图将$A\cup B\cup C$分割成若干个不相交的部分，有
+  \begin{align*}
+    |A\cup B\cup C| ={}&
+    %                    \left(A-(B\cup C)\right) \cup \left(B - (C\cup A)\right) \cup \left(C - (A\cup B)\right)\\
+    % &\cup \left((A\cap B) - C\right) \cup \left((B\cap C) - A\right) \cup \left((C\cap A) - B\right)\\
+    % &\cup (A\cap B\cap C)
+        \left| S_1\cup S_2 \cup S_3 \cup S_4 \cup S_5 \cup S_6 \cup S_7 \right| \\
+    ={}& \left| S_1 \right| + \left| S_2 \right| + \left| S_3 \right| + \left| S_4 \right| + \left| S_5 \right| + \left| S_6 \right| + \left| S_7 \right|
+  \end{align*}
+  再由图，可以直观地得到$S_i$与$A,B,C$之间的关系：
+  \begin{align*}
+    |A\cap B| ={}& |S_4\cup S_7| = |S_4| + |S_7|\\
+    |B\cap C| ={}& |S_5\cup S_7| = |S_5| + |S_7|\\
+    |C\cap A| ={}& |S_6\cup S_7| = |S_6| + |S_7|\\
+    |A\cap B\cap C| ={}& |S_7|
+  \end{align*}
+  代入展开后可得。
+\end{proof}
 
 \section{极坐标}
 \label{sec:polar-coordinate}

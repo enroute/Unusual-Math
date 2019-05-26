@@ -53,7 +53,7 @@
         \draw(1,0)rectangle(5,1) node[midway]{$A$};
         \filldraw[fill=red!20](2.6,1)rectangle(5,2) node[midway]{$B$};
         \filldraw[pattern=north west lines, pattern color=blue!20, draw=black](0,0)rectangle(1,1) node[midway]{$C$};
-        \draw[|<->|](0,1.5)--(2.6,1.5)node[midway,fill=white]{$24$cm};
+        \draw[|<->|](0,1.5)--(2.6,1.5)node[midway,fill=white]{$26$cm};
         \draw[|<->|](1,-.5)--(9,-.5)node[midway,fill=white]{$2A$};
       \end{scope}
     \end{tikzpicture}
@@ -108,10 +108,52 @@
   \end{center}
   由上面右图，可知$\Delta$处为$B-C$，从而左边$\Delta$处也为$B-C$，从而把$\Delta$代入
   \begin{align*}
-    26 + B + \Delta = 54 + C\\
+    26 + B + \Delta = 54 + C,\quad\implies\quad
     26 + B + (B-C) = 54 + C
   \end{align*}
-  有$B-C= (54-26)\div2=14$cm。
+  有$B-C= (54-26)\div2=14$cm。如果早猜测到这个结论，也可以很容易地构造图形来解决。
+  \begin{center}
+    \begin{tikzpicture}[scale=.8]
+      \def\A[#1,#2,#3]{\begin{scope}[shift={(#1,#2)}]
+          \draw(0,0)rectangle(4,1) node[midway]{#3};
+        \end{scope}
+      }
+      \def\B[#1,#2]{\begin{scope}[shift={(#1,#2)}]
+          \filldraw[fill=red!20](0,0)rectangle(2.4,1) node[midway]{$B$};
+        \end{scope}
+      }
+      \def\C[#1,#2]{\begin{scope}[shift={(#1,#2)}]
+          \filldraw[pattern=north west lines, pattern color=blue!20, draw=black](0,0)rectangle(1,1) node[midway]{$C$};
+        \end{scope}
+      }
+      \begin{scope}
+        \A[1,0,]
+        \B[2.6,1]
+        \C[0,0]\C[2.6,0]
+        \draw[|<->|](0,1.5)--(2.6,1.5)node[midway,fill=white]{$26$cm};
+        \begin{scope}[dashed,shift={(0,2.2)}]
+          \B[0,0]\A[2.4,0,$A$]\C[5.4,1]
+          \draw[|<->|](0,1.5)--(5.4,1.5)node[midway,fill=white]{$54$cm};
+        \end{scope}
+        \draw[|<->|](5,.5)--(6.4,.5)node[midway,fill=white]{\small $\Delta$};
+        \draw[|<->|](3.6,.5)--(5,.5)node[midway,fill=white]{\small $\Delta$};
+        \draw[|<->|](2.6,-.5)--(5.4,-.5)node[midway,fill=white]{\small $2\Delta$};
+        \draw[dashed,help lines](5.4,-1)--(5.4,4);
+
+        % \draw(0,-.5)--(0,-1.5);
+        % \draw[->](1,-.83)--(0,-.83);
+        % \draw[->](1,-1.13)--(0,-1.13);
+        % \node[right] at (1.5,-1){左对齐};
+
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}  
+  将两个$\Delta$往左平移一个$C$的长度，则其对齐情况如上图，从而
+  \begin{align*}
+    2\Delta = 54 - 26 \quad\implies\quad \Delta = \frac{54-26}{2} = 14\text{cm}
+  \end{align*}
+
+  
 
   更通用一点，记图中$54,26$分别是$x,y$，则有
   \begin{align*}

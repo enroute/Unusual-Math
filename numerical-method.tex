@@ -12,6 +12,8 @@
 \subsection{韦达跳跃}
 \label{sec:vieta-jumping}
 
+韦达跳跃(Vieta Jumping)的其中一种方法，是利用韦达定理构造新点，从而问题跳转到新获得的点上。
+
 \begin{example}[Putnam 1988]
   证明：对于任意正整数$N$，方程
   \begin{align*}
@@ -52,6 +54,35 @@
     1,1,1,1,2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048,\cdots
   \end{align*}
   更进一步地，由上面这个结果，还能得到什么更有趣的结果？
+\end{proof}
+
+\begin{example}[IMO 1988]
+  $a,b$是正整数，且$ab + 1|a^2+b^2$，证明$\frac{a^2+b^2}{ab+1}$是完全平方数。
+\end{example}
+\begin{proof}[提示]
+  这是一道非常有名的题目。即使是当年的金牌获得者，13岁的陶哲轩(Terrence Tao，最年轻的金牌获得者，后面于2006年获得了fields medal)在此题上也只是拿到了7分中的1分。当时只有11名学生完美地解决了这个问题。
+
+  用韦达跳跃及反证，即从最小的$(a,b)$出发，通过韦达跳跃跳到一个比$(a,b)$更小的点上，从而导致矛盾。
+
+  \begin{enumerate}
+  \item 记 $S\equiv \{(a,b)|a,b\text{是正整数且}\dfrac{a^2+b^2}{ab+1}\text{是正整数但不是完全平方数}\}$。
+  \item 若$S$非空，找出其中一个$(A,B)$使得$A+B$最小，即记$(A,B)\in S$，且有$\forall (a,b)\in S$，有
+    \begin{align*}
+      A + B \le a + b
+    \end{align*}
+    由对称性不妨设$A\ge B$。下面由韦达跳跃找到一个更小的来导出矛盾。
+  \item 固定$B$，若能找到$C$，使$(B,C)\in S$且$C<A$，则$B+C<A+B$与$(A,B)$的定义矛盾。设$k = \frac{A^2+B^2}{AB+1}$，若同时有$k = \frac{C^2+B^2}{CB+1}$，则$A,C$都是以下方程的解：
+    \begin{align*}
+      \frac{x^2 + B^2}{Bx + 1} = 0 \implies x^2 - kxB + B^2 - k = 0
+    \end{align*}
+    即若$A,C$是这个方程的角，则由韦达定理，有
+    \begin{align*}
+      C = kB - A, \quad\text{且}\quad C = \frac{B^2 - k}{A}
+    \end{align*}
+
+  \item 由$C=kB - A$知$C$是整数；由$C = \frac{B^2 - k}{A}$且$k$不是完全平方数知$C\ne 0$；再由$\frac{C^2 + B^2}{CB + 1}=k>0 \implies CB+1>0 \implies C>0$。从而$C$是正整数，且$(C,B)\in S$且$C+B = \frac{B^2-k}{A} + B < A + B$。
+  \end{enumerate}
+  由此矛盾可知$S$中不存在最小的$(A,B)$，从而$S$只能是空集。
 \end{proof}
 
 

@@ -43,7 +43,7 @@ Kronecker是德国数学家与逻辑学家，主要研究代数和数论，特�
   下面是欧拉提出的方法，用反证。假设只有有限个质数$p_1,p_2,\cdots,p_n$，那么对于正整数$p_{n+1}=p_1p_2p_3\cdots p_n + 1$，显然有$p_{n+1}$不被$p_1,p_2,\cdots,p_n$整除，从而找到一个$p_1,p_2,\cdots,p_n$之外且比它们都大的质数$p_{n+1}$，矛盾。
 \end{proof}
 
-可以用欧拉的反证法构造质数数列。从质数数列$p_1,p_2,\cdots,p_n$出发，则$p_1p_2\cdots p_n+1$要不是质数，要不就含有一个不同于$p_1,p_2,\cdots,p_n$的质因子，从而可找到下一个质数$p_{n+1}$。
+可以用欧拉的反证法构造质数数列。从质数数列$p_1,p_2,\cdots,p_n$出发，则$p_1p_2\cdots p_n+1$要么是质数，要么就含有一个不同于$p_1,p_2,\cdots,p_n$的质因子，从而可找到下一个质数$p_{n+1}$。
 
 \begin{example}
   从$41$出发，按欧拉方法找出$5$个不同的质数。
@@ -75,7 +75,7 @@ Kronecker是德国数学家与逻辑学家，主要研究代数和数论，特�
 
   显然，$2,3,4,\cdots,k+1$已经能分别被$2,3,4,\cdots,k+1$整除，如果$2,3,4,\cdots,k+1$分别是它们的真因子的话，则这些数都是合数。要使$2,3,4,\cdots,k+1$是它们的真因子的话，往后作一个平移，可以考虑都加一个能被$2,3,4,\cdots,k+1$所有这些数整除的数，比如$(k+1)!$。从而以下$k$个连续的自然数：
   \begin{align*}
-    (k+1)!+2, (k+1)!+3, (k+1)!+4, \cdots, (k+1)!+(k+1)
+    (k+1)!+2,\ \ (k+1)!+3,\ \ (k+1)!+4,\ \ \cdots,\ \ (k+1)!+(k+1)
   \end{align*}
   分别拥有真因子$2,3,4,\cdots,k+1$，从而都是合数。
 \end{proof}
@@ -168,16 +168,37 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \begin{theorem}
   若正整数$n$是质数，则$\varphi(n)=n-1$，若正整数$n$是合数，且其质因数分解式为
   \begin{align*}
-    n=p_1^{a_1} p_2^{a_2} p_3^{a_3} \cdots p_k^{a_k}
+    n=p_1^{a_1} p_2^{a_2} p_3^{a_3} \cdots p_m^{a_m}
   \end{align*}
-  其中$p_1,p_2,p_3,\cdots,p_k$是互不相等的质数，则
+  其中$p_1,p_2,p_3,\cdots,p_m$是互不相等的质数，则
   \begin{align*}
-    \varphi(n)=n\left(1-\frac1{p_1}\right) \left(1-\frac1{p_2}\right) \left(1-\frac1{p_3}\right) \cdots \left(1-\frac1{p_k}\right)
+    \varphi(n)=n\left(1-\frac1{p_1}\right) \left(1-\frac1{p_2}\right) \left(1-\frac1{p_3}\right) \cdots \left(1-\frac1{p_m}\right)
   \end{align*}
 \end{theorem}
+\begin{proof}[提示]可以用\ref{sec:inclusion-exclusion-principle}~节中的容斥原理。记$A_i$是$1,2,\cdots,n$中是$p_i$倍数的数字组成的集合，则
+  {\small
+  \begin{align*}
+    \varphi(n) ={}& n - \left|\bigcup_{i=1}^m A_i\right| \\
+    ={}& n - \sum_{i=1}^m\left|A_i\right|
+         + \sum_{1\le i<j\le m}\left|A_i\cap A_j\right| - \sum_{1\le i<j<k\le m}\left|A_i\cap A_j\cap A_k\right| + \cdots\\
+       & + (-1)^{m}\left|A_1\cap A_2\cap \cdots \cap A_m\right|\\
+    ={}& n - \sum_{i=1}^m \frac{n}{p_i}
+         + \sum_{1\le i<j\le m}\frac{n}{p_ip_j}
+         - \sum_{1\le i<j<k\le m}\frac{n}{p_ip_jp_k} + \cdots
+         + (-1)^{m}\frac{n}{p_1p_2\cdots p_m}\\
+    ={}& n\left( 1 - \sum_{i=1}^m \frac{1}{p_i}
+         + \sum_{1\le i<j\le m}\frac{1}{p_ip_j}
+         - \sum_{1\le i<j<k\le m}\frac{1}{p_ip_jp_k} + \cdots
+         + (-1)^{m}\frac{1}{p_1p_2\cdots p_m}\right)\\
+    ={}& n\left(1-\frac1{p_1}\right) \left(1-\frac1{p_2}\right) \cdots \left(1-\frac1{p_m}\right)
+  \end{align*}
+  }
+  其中$|A_i|$的个数是$p_i$的倍数的个数，即$|A_i| = \nicefrac{n}{p_i}$，$|A_iA_j|$是既是$p_i$的倍数也是$p_j$的倍数的数字的个数，从而$|A_iA_j| = \nicefrac{n}{p_ip_j}$，其余类推。
+\end{proof}
 
-\begin{example}[求$\varphi(15)$]
-  由于$15=3\times 5$，在$1,2,3,\cdots,15$中，不是$3$的倍数的占$1-1/3=2/3$，不是$5$的倍数的占$1-1/5=4/5$。
+\begin{example}求$\varphi(15)$。
+
+  由于$15=3\times 5$，在$1,2,3,\cdots,15$中，是$3$的倍数的占$\nicefrac13$，是$5$的倍数的占$\nicefrac15$。
   \begin{align*}\setlength\arraycolsep{3pt}\renewcommand*{\arraystretch}{.9}
     \begin{array}{cccccccccccccccc}
                          & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
@@ -185,7 +206,6 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
     \text{排除$5x$}\quad & 1 & 2 & 3 & 4 & \xcancel5 & 6 & 7 & 8 & 9 & \xcancel{10} & 11 & 12 & 13 & 14 & \xcancel{15}
     \end{array}
   \end{align*}
-  从而
   \begin{align*}
     \varphi(15)=15\times\left(1-\frac13\right)\times\left(1-\frac15\right)
     =15\times\frac23\times\frac45=8
@@ -795,3 +815,120 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \end{example}
 
 \hints 反证。令$d=2n^2/k$，若$n^2+d=n^2+2n^2/k=m^2$，则$(mk)^2=n^2(k^2+2k)$，从而$k^2+2k$也是一个完全平方数。然而$k^2<k^2+2k<k^2+2k+1=(k+1)^2$，即$k^2+2k$位于两个相邻的完全平方数之间，从而不能是完全平方数，矛盾。
+
+\begin{example}\label{ex:3k+2-not-square}
+  若$n$是完全平方数，则必有$n\equiv 0\pmod3$或者$n\equiv 1\pmod3$。从而$3k+2$(其中$k\in\mathcal{Z}$)形式的整数必定不是完全平方数。
+
+\end{example}
+\begin{proof}[提示]
+  % 类似于韦达跳跃，从最小的$k$开始找到一个更小的$k$导致矛盾。
+
+  % 显然，当$k\le 0$时，$2+3k$不是完全平方数。假设存在$k$使得$2+3k$是完全平方数，取其中最小的一个，记为$K$，则存在正整数$m$，使得
+  % \begin{align*}
+  %   2+3K = m^2
+  % \end{align*}
+  % \begin{enumerate}
+  % \item 若$K$是偶数，则存在正整数$u$使得$K=2u$，从而$2+6u = m^2$，从而$1+3u$是正偶数，$u$是正奇数，存在正整数$v$，使得$u=2v+1$，代入有
+  %   \begin{align*}
+  %     2 + 6(2v + 1) = m^2 \implies 2^2\times (2+3v)=m^2
+  %   \end{align*}
+  %   由此$2+3v$也是一个完全平方数，且$v<u<K$，与$K$的最小性假设矛盾。
+
+  % \item 若$K$是奇数，则存在非负整数$u$使得$K=2u+1$，从而$5 + 3u = m^2$。
+  % \end{enumerate}
+
+  对整数按模3作分类。$\forall a\in \mathcal{Z}$，则下面三式必有且仅有一个成立：
+  \begin{align*}
+    a\equiv0\pmod3,\quad a\equiv1\pmod3,\quad a\equiv2\pmod3
+  \end{align*}
+
+  \begin{enumerate}
+  \item 若$a\equiv0\pmod3$，则$\exists k\in\mathcal{Z}$，使得$a=3k$，从而
+    \begin{align*}
+      a^2=(3k)^2=3(3k^2) \implies a^2\equiv 0\pmod3
+    \end{align*}
+    
+  \item 若$a\equiv1\pmod3$，则$\exists k\in\mathcal{Z}$，使得$a=3k+1$，从而
+    \begin{align*}
+      a^2 = (3k+1)^2 = 3(3k^2 + 2k) + 1 \implies a^2\equiv 1\pmod3
+    \end{align*}
+
+  \item 若$a\equiv2\pmod3$，则$\exists k\in\mathcal{Z}$，使得$a=3k+2$，从而
+    \begin{align*}
+      a^2=(3k+2)^2=3(3k^2+4k+1)+1 \implies a^2\equiv 1\pmod3 &\qedhere
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+
+\begin{example}[IMO 2017]
+  对于每个正整数$a_0>1$，定义对于$n\ge0$的数列$a_0,a_1,a_2,\cdots$为
+  \begin{align*}
+    a_{n+1} = 
+    \begin{cases}
+      \sqrt{a_n} & a_n\text{是完全平方数}\\
+      a_n + 3    & a_n\text{不是完全平方数}
+    \end{cases}
+  \end{align*}
+  求所有的$a_0$，使得存在数$A$，有无穷多个$n$满足$a_n=A$。
+\end{example}
+\begin{proof}[提示]
+  先列举几个，观察规律。
+
+  \begin{enumerate}
+  \item $a_0 = 2$，则数列为
+    \begin{align*}
+      2,\ 5,\ 8,\ 11,\ 14,\ 17,\ 20,\ \cdots
+    \end{align*}
+    由例~\ref{ex:3k+2-not-square}，$2+3k$不是完全平方数，从而数列为$a_n = 2 + 3n$。即对于$2+3n$形式的$a_0$，数列都是公差为3的等差数列，不会出现重复的值。
+
+  \item $a_0=3$，则数列为
+    \begin{align*}
+      3,\ 6,\ 9,\ 3,\ 6,\ 9,\ 3,\ 6,\ 9,\ \cdots
+    \end{align*}
+    这是一个按$3,6,9$重复的数列。即$a_0=3,6,9$都满足要求。
+
+  \item $a_0=4$，则数列为
+    \begin{align*}
+      4,\ 2,\ 5,\ 8,\ 11,\ 14,\ 17,\ 20,\ \cdots
+    \end{align*}
+    数列后面已经变成了第一种公差为3的情况。
+    
+  \item $a_0=7$，则数列为
+    \begin{align*}
+      7,\ 10,\ 13,\ 16,\ 4,\ 2,\ 5,\ 8,\ 11,\ 14,\ 17,\ 20,\ \cdots
+    \end{align*}
+    数列后面已经变成了第一种公差为3的情况。
+  \end{enumerate}
+
+  综上，猜测当且仅当$a_0 = 3k$时都满足要求。
+
+  \begin{enumerate}
+  \item $a_0\equiv2\pmod3$，由上面的分析已知$a_0$不满足要求。
+    
+  \item $a_0\equiv1\pmod3$，数学归纳法证明$a_0$不满足要求。已知$k=1,a_0=4$时不满足要求。假设当$k\le m(m\ge1)$时$a_0$不满足要求，则当$k=m+1, a_0=3(m +1)+1$时，令$b_N=s^2$是数列$b_t = a_0+3t(t=1,2,\cdots)$中的第一个完全平方数，由例~\ref{ex:3k+2-not-square}，有
+    \begin{align*}
+      s\equiv1\pmod3,\quad\text{或者}\quad s\equiv2\pmod3
+    \end{align*}
+    \begin{enumerate}
+    \item 若$s\equiv2\pmod3$，则由上面已经证明的$a_0\equiv2\pmod3$的情形可知以$s$开始的数列不满足要求，从而$a_0=3(m+1)+1$不满足要求($a_0$开始的数列从第$N$个开始便是以$s$开始的数列)。
+    \item 若$s\equiv1\pmod3$，则由
+      \begin{align*}
+        (3m+1)^2 - a_0 = (3m+1)^2 - 3(m+1) - 1 = 3(3m^2 + m - 1) > 0
+      \end{align*}
+      即$(3m+1)^2 > a_0$且两者的差是3的倍数，从而$(3m+1)^2$是数列$b_t$中的一项，由$s$的最小性有$s\le 3m+1$，由假设
+      \begin{quotation}
+        $k\le m$时$a_0=3k+1$不满足要求
+      \end{quotation}
+      从而$a_0=s$开始的数列不满足要求，从而当$k=m+1$时以$a_0=3(m+1)+1$开始的数列(此数列的第$N$个是$s$)不满足要求。
+    \end{enumerate}
+    
+  \item $a_0\equiv0\pmod3$，数学归纳法证明$a_0$满足要求。由上面的分析，已有$k=1,2,3$，即$a_0=3,6,9$时满足要求。
+
+    假设当$m\ge3$时，$k\le m, a_0=3k$都满足要求。则当$k=m+1$时，取数列$b_t = 3(m+1) + 3t(t=0,1,2,\cdots)$中的第一个完全平方数，记为$b_N = s^2$，则$a_N = s$。下面估算$s$的大小。由
+    \begin{align*}
+      (3m)^2 - 3(m+1) = (3m)^2 - 2(3m) + 1 + 3m - 4 = (3m-1)^2 + 3(m - 2) + 2 > 0
+    \end{align*}
+    所以$(3m)^2$在数列$b_t$中，即$s\le 3m$，即从此项开始，数列跳到了一个更小的$a_0=3k$开始数列，而按假设以此$a_0$开始的数列是满足要求的，从而$a_0=3(m+1)$开始的数列也是满足要求的。
+  \end{enumerate}
+\end{proof}

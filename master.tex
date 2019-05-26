@@ -407,6 +407,9 @@
 \setitemize{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=3.75em,align=left}
 \setenumerate{labelindent=\parindent,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=3.75em,align=left}
 
+\setitemize[2]{labelindent=\parindent+2em,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=5.75em,align=left}
+\setenumerate[2]{labelindent=\parindent+2em,leftmargin=*,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em,itemindent=5.75em,align=left}
+
 
 \renewcommand{\baselinestretch}{1.1}
 \renewcommand*{\arraystretch}{1.5}
@@ -454,6 +457,7 @@
 %     \newcounter{X}
 %     \whiledo{\value{X}<10}{\value{X},\stepcounter{X}}
 
+\usepackage{units}              % for \nicefrac command, a slashed fraction
 
 % 3 counters for loops
 \newcounter{X}
@@ -583,20 +587,21 @@
 \include{fixed-point}
 \include{identities}
 % \include{perfect_squares}
-\include{pigeonhole}
-\include{buffalo-way}
 
 \include{inequality}
 \include{basic-inequalities}
 \include{cauchy-schwarz}
+\include{minkowski}
 \include{geometric-inequality}
+
+\include{pigeonhole}
+\include{buffalo-way}
 
 \include{pythagorean_triples}
 \include{five-models}
 \include{circle}
 \include{geometry}
 \include{convex}
-\include{minkowski}
 \include{graphs-of-functions}
 
 \include{proofs-without-words}

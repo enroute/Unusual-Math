@@ -2,6 +2,56 @@
 \chapter{方法与策略}
 \label{chap:methods}
 
+\section{归纳}
+\label{sec:induction}
+
+\begin{definition}
+  一个命题，若满足以下条件：
+  \begin{enumerate}
+  \item 存在非负整数$k_0$，命题在$n=k_0$时成立；
+  \item 假设命题在$n\le k$时成立可以推出命题在$n=k+1$时成立。
+  \end{enumerate}
+  则该命题对任意整数$n\ge k_0$都成立。此证明方法称为数学归纳法。
+\end{definition}
+
+\begin{example}[求和]
+  \begin{align*}
+    \frac1{1\times2}+\frac1{2\times3}+\frac1{3\times4}+\cdots+\frac1{n\times (n+1)}
+  \end{align*}
+\end{example}
+
+可以利用拆项，由$\dfrac1{k\times (k+1)}=\dfrac1k-\dfrac1{k+1}$，从而有
+\begin{align*}
+  &\frac1{1\times2}+\frac1{2\times3}+\frac1{3\times4}+\cdots+\frac1{(n-1)\times n}\\
+  =&\left(\frac11-\frac13\right) + \left(\frac13-\frac14\right) + \cdots + \left(\frac1n-\frac1{n+1}\right)\\
+  =&\frac11-\frac1{n+1}\\
+  =&\frac{n}{n+1}
+\end{align*}
+
+若观察不到拆项的规律，可以考虑一下数学归纳法。记当$n=k$时的和为$S_k$，则
+\begin{enumerate}
+\item 当$n=1$时，有$S_1=\dfrac12$；
+\item 当$n=2$时，有$S_2=\dfrac23$；
+\item 当$n=3$时，有$S_3=\dfrac34$；
+\item $\cdots$
+\end{enumerate}
+猜测，$\forall n$，有$S_n=\dfrac{n}{n+1}$。
+\begin{proof}
+  当$n=1$时，显然成立。
+
+  设当$n\le k$时成立，考虑$n=k+1$的情况。
+  \begin{align*}
+    S_{k+1}&=S_k + \frac1{(k+1)\times(k+2)}\\
+           &=\frac{k}{k+1}+\frac1{(k+1)\times(k+2)}\\
+           &=\frac{k(k+2)+1}{(k+1)(k+2)}\\
+           &=\frac{k^2+2k+1}{(k+1)(k+2)}\\
+           &=\frac{k+1}{k+2}
+  \end{align*}
+  从而对任意整数$n\ge1$，猜测成立。
+\end{proof}
+
+
+
 \section{特殊点方法}
 \label{sec:special-point-method}
 
@@ -186,3 +236,17 @@
 \begin{example}
   在区间$(1,\sqrt2)$内任取$n$个点，按大小顺序记为$x_1,x_2,\cdots,x_n$，再加上$x_0=1$，$x_{n+1}=\sqrt2$
 \end{example}
+
+\section{假设}
+\label{sec:assumption}
+
+\begin{example}[鸡兔同笼]
+  一个笼子里着好多鸡和兔子。上面看去，可以数到有10个头，从下面看去，可以数到有28只脚。问笼子里有几只鸡几只兔子？
+\end{example}
+\begin{proof}[提示]
+  这个用方程来说显然是非常简单的。若用假设法的话，则更直观。
+
+  假设笼子里的全是鸡，那10个头就是10个鸡，总共应该有$10\times2=20$只脚。现在多了$28-20=8$只脚，只能是假设的10个鸡里有几个应该要换成兔子。而每1个鸡换成1个兔子，脚的总数就会多$4-2=2$只，所以应该是$8\div 2=4$只鸡要换成兔子。即兔子有$4$只，鸡有$10-4=6$只。
+
+  若假设全是兔子，也可以用类似的分析方法得到相同的答案。
+\end{proof}

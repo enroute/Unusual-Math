@@ -73,3 +73,20 @@
     \hline
   \end{tabular}
 \end{table}
+
+
+\begin{example}[IMO 2009]
+  $a_1,a_2,\cdots,a_n$是$n$个互不相同的正整数，$M$是$n-1$个正整数组成的集合且不含$a_1+a_2+\cdots a_n$这个数字。一个蚱蜢在实数轴上的0点开始往右跳$n$次，$n$次跳的长度分别是$a_1,a_2,\cdots,a_n$的某个排列。证明总有一种跳法可以让蚱蜢不落到$M$中任何一个数字上。
+\end{example}
+\begin{proof}[提示]
+  可以对$n$作归纳法。不妨将条件加强为$M$中的点都是不同的。不妨记$M$中的点为$b_1<b_2<\cdots<b_{n-1}$，且$a_1<a_2<\cdots<a_n$。可以把$b_i$当成地雷，蚱蜢要做的就是不能踩到地雷安全地跳完$n$步。
+
+  \begin{enumerate}
+  \item 当$n=2$时，有$b_1\ne a_1 + a_2$，由于$a_1\ne a_2$，$a_1,a_2$中总有一个不等于$b_1$，从而蚱蜢先跳不等于$b_1$的那个长度，然后再跳另一个长度，它就可以安全地跳完$n$步而不会踩到地雷。
+  \item 假设当$n=k$时，总有一种跳法是安全的。当$n=k+1$时，若存在$i,j$使得$a_i= b_j$，那么考虑去掉$a_i$和$b_j$的情况，这是一个$n=k$的情况，从而存在某种跳法使得
+  \end{enumerate}
+\end{proof}
+
+\begin{example}[IMO 2017 P3]
+  
+\end{example}
