@@ -2,8 +2,17 @@
 \chapter{凸函数}
 \label{chap:convex-functions}
 
-\begin{definition}[凸函数]
+一般英文中用Convex function和Concave function来表示凸函数与凹函数。此概念刚传入国内时，convex function被翻译为“下凹函数”，concave function被翻译成“上凸函数”，后来有些作者将其中的“下”与“上”去掉了，convex function就变成了“凹函数”，concave function就变成了“凸函数”，概念完全相反了。这就导致了有相当多的书籍中的凹凸性与concave/convex两字的含议完全相反。若阅读到此类书籍，务必要小心其定义。
 
+%%% 未考证：
+% 若你接触到经济学中的凹凸性，则可能又与数学上的定义有差别，这是因为其考虑方向不一样。数学的凹凸性是相对于$x$轴，经济学的凹凸性是相对于原点。
+
+这里取convex/concave两词的本义，即将文献中convex function对应的称为凸函数，concave function对应的称为凹函数。
+
+\section{凸函数的定义}
+\label{sec:definition-of-convexity}
+
+\begin{definition}[凸函数，Convex]
   \begin{enumerate}
   \item 函数$f(x)$被称为域$\mathcal{D}$上的凸函数，若$\forall x1,x2\in\mathcal{D}, t\in[0,1]$，下面不等式成立：
     \begin{align}\label{eq:convex-defintion}

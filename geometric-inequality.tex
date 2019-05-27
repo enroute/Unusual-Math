@@ -78,13 +78,160 @@
 \begin{theorem}[三角不等式，Trigonometric Inequality]
   记三角形的三个角分别为$A,B,C$，则
   \begin{align*}
-    \sin A +\sin B + \sin C&\le\frac{3\sqrt3}{2}\\
-    \cos A +\cos B + \cos C&\le\phantom{3}\,\frac{3}{2}
+    \sin A +\sin B + \sin C \le\frac{3\sqrt3}{2}
   \end{align*}
 \end{theorem}
 \begin{proof}
-  由$\sin(x)$及$\cos(x)$在$[0,\pi]$上是凹函数，利用Jensen不等式可得。
+  由$\sin(x)$在$[0,\pi]$上是凹函数，利用Jensen不等式可得
+  \begin{align*}
+    \sin A + \sin B + \sin C \le 3\sin\frac{A+B+C}3 =\frac{3\sqrt3}{2}&\qedhere
+  \end{align*}
 \end{proof}
+
+\begin{theorem}\label{th:cosA+cosB+cosC<=3/2}
+  记三角形的三个角分别为$A,B,C$，则
+  \begin{align*}
+    \cos A +\cos B + \cos C = 1 + 4\sin\frac A2 \sin\frac B2 \sin\frac C2
+  \end{align*}
+  从而
+  \begin{align*}
+    1 < \cos A +\cos B + \cos C \le \frac32
+  \end{align*}
+  当且仅当$A=B=C=\pi/3$时右边的等号成立。
+\end{theorem}
+\begin{proof}$\cos$在$[0,\pi/2]$上是凹函数，但在$[0,\pi]$上不是凹函数，不能直接应用Jensen不等式。
+  \begin{align*}
+    \cos A +\cos B + \cos C ={}& 2\cos\frac{A+B}{2}\cos\frac{A-B}{2} - \cos(A+B)\\
+    ={}& 2\cos\frac{A+B}{2}\cos\frac{A-B}{2} - \left(2\cos^2\frac{A+B}2 - 1\right)\\
+    ={}& 1 + 2\cos\frac{A+B}{2}\left(\cos\frac{A-B}{2} - \cos\frac{A+B}2\right)\\
+    ={}& 1 + 2\cos\frac{\pi-C}{2} \left( 2\sin \frac A2\sin\frac B2 \right)\\
+    ={}& 1 + 4\sin\frac A2\sin\frac B2\sin\frac C2
+  \end{align*}
+  由此可得左边的不等式。又由AM--GM不等式及$\sin$在$[0,\pi]$上是凹函数性质，有
+  \begin{align*}
+    \sin\frac A2\sin\frac B2\sin\frac C2 \le{}&
+    \left( \frac{\sin\frac A2 + \sin\frac B2 + \sin\frac C2}{3} \right)^3\\
+    \le{}& \left( \sin\frac{\frac A2 + \frac B2 + \frac C2}{3} \right)^3
+      = \left( \sin\frac\pi6 \right)^3 = \left(\frac12\right)^3    
+  \end{align*}
+  等号当且仅当$A=B=C$时成立。从而有原不等式的右边。
+\end{proof}
+
+\begin{example}
+  $\forall \triangle ABC$，有
+  \begin{align*}
+    a\cos A + b\cos B + c\cos C \le \frac{a+b+c}{2}
+  \end{align*}
+  当且仅当$\triangle ABC$是正三角形时成立。
+\end{example}
+\begin{proof}
+  由对称性，不妨设$a\le b \le c$，从而
+  \begin{align*}
+    A\le B \le C, \quad \cos A \ge \cos B \ge \cos C
+  \end{align*}
+  首先，过顶点作三角形的高将对边分成两份，由此可得
+  \begin{align*}
+    a = b\cos C + c\cos B, \quad b = c\cos A + a\cos C,\quad c = a\cos B + b\cos A
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate(B)at(0,0);\coordinate(C)at(3,0);\coordinate(A)at(2,1.5);\coordinate(D)at(2,0);
+        \tkzMarkRightAngle[help lines](B,D,A)
+        \tkzDrawPoints(A,B,C,D)
+        \draw[dashed, help lines](A)--(D);
+        \draw(A)--(B)node[midway,sloped,above]{$c$}
+                --(C)node[midway,sloped,below]{$a$}
+                --(A)node[midway,sloped,above]{$b$};
+        \draw pic["$B$",draw=orange,<->,angle eccentricity=1.7,angle radius=.3cm] {angle=C--B--A};
+        \draw pic["$C$",draw=orange,<->,angle eccentricity=1.6,angle radius=.3cm] {angle=A--C--B};
+      \end{scope}
+      \begin{scope}[shift={(5,0)}]
+        \coordinate(B)at(0,0);\coordinate(C)at(3,0);\coordinate(A)at(5,1.5);\coordinate(D)at($(C)!(A)!(B)$);
+        \tkzMarkRightAngle[help lines](B,D,A)
+        \tkzDrawPoints(A,B,C,D)
+        \draw[dashed, help lines](A)--(D)--(B);
+        \draw(A)--(B)node[midway,sloped,above]{$c$}
+                --(C)node[midway,sloped,below]{$a$}
+                --(A)node[midway,sloped,below]{$b$};
+        \draw pic["$B$",draw=orange,<->,angle eccentricity=2.0,angle radius=.5cm] {angle=C--B--A};
+        \draw pic["$C$",draw=orange,<->,angle eccentricity=1.6,angle radius=.2cm] {angle=A--C--B};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  由排序不等式，有
+  \begin{align*}
+    a ={}& b\cos C + c\cos B \ge b\cos B + c\cos C\\
+    b ={}& c\cos A + a\cos C \ge c\cos C + a\cos A\\
+    c ={}& a\cos B + b\cos A \ge a\cos A + b\cos B
+  \end{align*}
+  三式相加，则有
+  \begin{align*}
+    a + b + c \ge 2(a\cos A + b\cos B + c\cos C)
+  \end{align*}
+  等号成立，当且仅当
+  \begin{align*}
+    b\cos C + c \cos B ={}& b\cos B + c\cos C \iff& (b-c)(\cos B-\cos C)=0\\
+    \iff& b=c
+  \end{align*}
+  同理可知等号成立当且仅当$a=b=c$。
+\end{proof}
+
+% \begin{question}
+%   上例是否可以推广到任意三角形？
+% \end{question}
+
+\begin{example}
+  $\triangle ABC$，若
+  \begin{align*}
+    \cos A + \cos B + \cos C = \frac32
+  \end{align*}
+  则此三角形是等边三角形。
+\end{example}
+\begin{proof}利用定理~\ref{th:cosA+cosB+cosC<=3/2}马上可得结论。这里提供另外两种方法。
+
+  利用$a=b\cos C + c\cos B$等三个公式，有
+  \begin{align*}
+    (a+b+c) \times \frac32 ={}& (a+b+c)(\cos A + \cos B + \cos C)\\
+                           ={}& a\cos A + b\cos B + c\cos C + a + b + c
+  \end{align*}
+  即
+  \begin{align*}
+    \frac{a+b+c}2 = a\cos A + b\cos B + c\cos C
+  \end{align*}
+  对上式右边应用切比雪夫不等式，则有
+  \begin{align*}
+    %\frac{a+b+c}2 = 
+      a\cos A + b\cos B + c\cos C \le{}& \frac{(a+b+c)(\cos A + \cos B + \cos C)}{3} \\
+    \iff \cos A + \cos B + \cos C \ge{}& \frac32
+  \end{align*}
+  由切比雪夫不等等号成立的充要条件，可知当且仅当$a=b=c$或者$\cos A = \cos B = \cos C$时等号成立。由于$\cos$在$[0,\pi]$上是严格单调函数，从而不管是$a=b=c$还是$\cos A=\cos B=\cos C$都等价于$A=B=C$。
+\end{proof}
+
+\begin{proof}[另一种方法]
+  通常可以令
+  \begin{align*}
+    \begin{cases}
+      A\equiv x+y\\
+      B\equiv x-y
+    \end{cases}\quad\text{即\ }
+    \begin{cases}
+      x = \frac{A+B}{2}\\
+      y = \frac{A-B}{2}
+    \end{cases}
+  \end{align*}
+  然后证明$y=0$就有$A=B$。把$C=\pi - (A+B) = \pi - 2x$代入，有
+  \begin{align*}
+    \cos(x+y) + \cos(x-y) + \cos(\pi - 2x) = \frac32 \\
+    \iff 4\cos^2x -4\cos x\cos y + 1 = 0
+  \end{align*}
+  即$\cos x$是$4t^2 - 4t\cos y + 1=0$的根，从而必有
+  \begin{align*}
+    \Delta = 16\cos^2y - 16 \ge 0 \iff \cos y = \pm 1 \iff y=k\pi
+  \end{align*}
+  若$k\ne 0$，则$|A-B| = 2k\pi\ge 2\pi$，这与$A,B$是三角形的两个顶角矛盾，从而必有$k=0\implies y=0\implies A=B$。同理可得$A=B=C$。
+\end{proof}
+
 
 \begin{theorem}[相交弦定理，Intersecting Chords Theorem]
   圆内的两条相交弦，被交点分成的两条线段长的积相等。
@@ -297,8 +444,7 @@
   $\triangle ABC$中三个顶点分别为$A,B,C$，则
   \begin{align*}
     \sin A \sin B \sin C \le{}& \left(\frac{\sin A + \sin B + \sin C}3\right)^3\\
-                         \le{}& \sin^3\frac{A+B+C}3\\
-                             =& \left(\frac{\sqrt3}{2}\right)^3 = \frac{3\sqrt3}{8}
+                         \le{}& \sin^3\frac{A+B+C}3 = \left(\frac{\sqrt3}{2}\right)^3 = \frac{3\sqrt3}{8}    
   \end{align*}
   当且仅当$\triangle ABC$是正三角形时等号成立。
 \end{theorem}
@@ -362,7 +508,7 @@
   \begin{align*}
     \frac{\sin A+\sin B+\sin C}3 \le \sin\frac\pi3
   \end{align*}
-  上式左边是重心的$y$坐标，右边是曲线在$x=\frac\pi3$(也是重心的$x$坐标)上的$y$坐标。本质在于$\sin$是凸函数。
+  上式左边是重心的$y$坐标，右边是曲线在$x=\frac\pi3$(也是重心的$x$坐标)上的$y$坐标。本质在于$\sin$在$[0,\pi]$上是凹函数。
 \end{proof}
 
 
@@ -748,7 +894,7 @@
 \begin{proof}
   对每项使A—G不等式然后三式相乘，有
   \begin{align*}
-    ax\cdot by\cdot cz \ge 2\sqrt{bqcr} \cdot 2\sqrt{crap} \cdot 2\sqrt{apbq}
+    ax\cdot by\cdot cz \ge 2\sqrt{bm\cdot cn} \cdot 2\sqrt{cn\cdot al} \cdot 2\sqrt{al\cdot bm}
     = 8abc \cdot lmn
   \end{align*}
   两边同除$abc$可得。
