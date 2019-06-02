@@ -273,7 +273,8 @@
     }
     \def\th@definition{%
       \thm@notefont{}% same as heading font
-      \bfseries \kai % body font
+      % \bfseries \kai % body font
+      \bfseries \hei % body font
     }
 \makeatother
 
@@ -292,6 +293,7 @@
 \setCJKfamilyfont{kai}{KaiTi}
 \setCJKmonofont{NSimSun}
 \newcommand{\kai}{\CJKfamily{kai}}
+\newcommand{\hei}{\CJKfamily{hei}}
 
 %% chapter style
 % \usepackage{titlesec, blindtext, color}
@@ -348,19 +350,19 @@
   {}%          Space below
   {\kai}%     Body font
   {}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
+  {\bfseries\hei}% Thm head font
   {.}%        Punctuation after thm head
   %{\newline\hspace*{\parindent}}% Space after thm head: \newline = linebreak
   {5pt plus 1pt minus 1pt}% Space after thm head: \newline = linebreak
   {}%         Thm head spec
 \theoremstyle{break}
-\newtheorem{theorem}{\kai 定理}[section]
-\newtheorem{example}[theorem]{\kai 例} % Use the same counter as theorem
-\newtheorem{property}[theorem]{\kai 性质} % Use the same counter as theorem
-\newtheorem{question}[theorem]{\kai 题} % Use the same counter as theorem
-\newtheorem{definition}[theorem]{\kai 定义} % Use the same counter as theorem
-\newtheorem{corollary}{\kai 推论}[theorem]  % Reset after every theorem
-\newtheorem{lemma}[theorem]{\kai 引理}  % Use the same counter as theorem
+\newtheorem{theorem}{\hei 定理}[section]
+\newtheorem{example}[theorem]{\hei 例} % Use the same counter as theorem
+\newtheorem{property}[theorem]{\hei 性质} % Use the same counter as theorem
+\newtheorem{question}[theorem]{\hei 题} % Use the same counter as theorem
+\newtheorem{definition}[theorem]{\hei 定义} % Use the same counter as theorem
+\newtheorem{corollary}{\hei 推论}[theorem]  % Reset after every theorem
+\newtheorem{lemma}[theorem]{\hei 引理}  % Use the same counter as theorem
 
 % \renewcommand*{\proofname}{证明}
 \newcommand{\note}{\begingroup\bfseries\kai 注：\endgroup}
@@ -577,6 +579,9 @@
 % \include{induction}
 \include{trigonometric-functions}
 \include{area}
+
+\include{matrix}
+
 \include{quadratic-equation}
 \include{function}
 \include{symetric}

@@ -32,6 +32,13 @@ Kronecker是德国数学家与逻辑学家，主要研究代数和数论，特�
   \end{tabular}
 \end{table}
 
+下面是一些非常有趣的质数：
+\begin{align*}
+  & 31 && 331 && 3331 && 33331\\
+  & 333331 && 3333331 && 33333331
+\end{align*}
+然而，这个序列的下一个$333333331 = 17 \times 19607843$却是个合数。
+
 \begin{property}
   $2$是唯一的一个偶数质数。
 \end{property}
@@ -345,6 +352,74 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \end{align*}
 分别表示$a$和$b$模$d$同余、$a$和$b$模$d$不同余。
 
+\begin{example}[余6的魔术]
+  柳如是给岳怜花表演魔术。柳如是先让岳怜花在大于等于5的质数中任意选一个，然后将这个质数平方后再加17，将结果除以12，然后将余数记下来。在这个过程中，柳如是对岳怜花说不要将过程中涉及到的任何数字说出来，他有办法能读到岳怜花算出来余数是什么。
+\end{example}
+\begin{proof}[提示]
+  先算几个，看看规律。
+  \begin{align*}
+    5,\ 5^2 = 25,\ 25 + 17\equiv 1+5\equiv 6 \pmod{12}\\
+    7,\ 7^2 = 49,\ 49 + 17\equiv 1+5\equiv 6 \pmod{12}\\
+    11,\ 11^2=121,\ 121 + 17\equiv 1+5\equiv 6\pmod{12}
+  \end{align*}
+  难道柳如是只要猜最后的余数是6就可以了？
+
+  事实上，大于等于5的质数，必是$2k+1$的形式，其中$k\ge 2$是整数。从而
+  \begin{align*}
+    (2k+1)^2 + 17\equiv 4k^2 + 4k + 18\equiv 4k(k+1) + 6\pmod{12}
+  \end{align*}
+  \begin{enumerate}
+  \item 若$k\equiv 0\pmod{3}$，则存在正整数$t$，使得$k=3t$，从而$4k(k+1)\equiv 0\pmod{12}$，原结果为6。
+  \item 若$k\equiv 1\pmod{3}$，则存在正整数$t$，使得$k=3t+1$，从而
+    \begin{align*}
+      2k + 1 = 2(3t + 1) + 1 = 6t + 3 = 3(2t+1)
+    \end{align*}
+    这是个合数，与$2k+1$是质数矛盾，所以不可能。
+  \item 若$k\equiv 2\pmod{3}$，则存在正整数$t$，使得$k=3t+2$，从而
+    \begin{align*}
+      4k(k+1) + 6 \equiv 4(3t+2)(3t+2+1) + 6 \equiv 12(3t+2)(t+1) + 6\equiv 6\pmod{12}&\qedhere
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+  求$23456789 \pmod{27}$。
+\end{example}
+\begin{proof}[提示]
+  由于$999 = 27\times 37$，所以$1000\equiv 1\pmod{27}$，从而
+  \begin{align*}
+    23456789 ={}& 23\times 1000 \times 1000 + 456 \times 1000 + 789 \\
+    \equiv{}& 23 \times 1\times 1 + 456\times 1 + 789\\
+    \equiv{}& 23 + 456 + 789 \\
+    \equiv{}& 23 + 186 + 519 \\
+    \equiv{}& 23 + 105 + 249 &\text{减去27的若干倍数}\\
+    \equiv{}& 377 \equiv 107 \equiv 26\pmod{12}    \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{example}[数字37]
+  同样的，由于$999 = 27 \times 37$，$1000\equiv1\pmod{37}$，所以对模37也可以用这种方法。数字37还有一个很有趣的性质。由
+  \begin{align*}
+    999 = 37\times 27 \implies 111 = 37\times 3
+  \end{align*}
+  而$222=111\times2$，$333=111\times 3$，$\cdots\cdots$，有
+  \begin{align*}
+    37 \times 3\phantom{\times9} ={}& 111 & 37\times 3\times 2 ={} & 222, 37\times 3\times 3 ={}& 333\\
+    37 \times 3\times4           ={}& 444 & 37\times 3\times 5 ={} & 555, 37\times 3\times 6 ={}& 666\\
+    37 \times 3\times7           ={}& 777 & 37\times 3\times 8 ={} & 888, 37\times 3\times 9 ={}& 999
+  \end{align*}
+  此外，37与其各位数字和的乘积等于其各位数字的立方和；37与其各位数字乘积的和等于其各位数字的平方和，即
+  \begin{align*}
+    37\times(3+7) = 3^3 + 7^3,\quad 37 + 3\times 7 = 3^2 + 7^2
+  \end{align*}
+\end{example}
+
+\begin{example}[数字101]
+  类似的，由于$9999 = 9\times 11\times 101$，所以对$101$也可用类似的方法，只要将数字按4位一组划分求和。
+\end{example}
+
+
+
 \subsection{整除的性质}
 \begin{example}[被$7$整除]\label{ex:divided-by-7}
   任意一个整数$n$，可以唯一地用若干个正整数$a_i$表示为
@@ -510,6 +585,15 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
     6x+3=&3\times(2x+1) & 6x+4=&2\times(3x+2)
   \end{align*}
   所以当$x>1$时(等价于$n>6$)上述4类不是质数。从而大于6的质数只能是$6x+1$或者$6x+5$的形式，而$6x+5=6(x+1)-1$与$6x-1$是同一类的(模6)，从而对于大于6的质数必为$6a\pm1$的形式。显然$5$也是满足这个条件的，从而原命题得证。
+\end{proof}
+
+\begin{question}
+  $\forall p>3$是质数，则$p^2 - 1 \mid 24$。 
+\end{question}
+\begin{proof}[提示]
+  \begin{align*}
+    (6n\pm1)^2 - 1 = 12n(3n\pm1)&\qedhere
+  \end{align*}
 \end{proof}
 
 \section{重要定理}
@@ -810,6 +894,16 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \section{完全平方数}
 \label{sec:perfect-squares}
 
+\begin{example}[5结尾的两位数的平方]
+  记数字$a$为$1,2,\cdots,9$中的一个，则两位数$\bar{a5}\equiv 10a + 5$的平方为$a(a+1)$与$25$拼接的结果。如
+  \begin{align*}
+    3\times(3+1) = 12, \implies 35^2 = 1225\\
+    4\times(4+1) = 20, \implies 45^2 = 2025
+  \end{align*}
+
+  事实上，$(10a + 5)^2 = 100a^2 + 100a + 25 = 100a(a+1) + 25$，所以结果模100为25，除100取整为$a(a+1)$。
+\end{example}
+
 \begin{example}[1953 \kurschak]
   $\forall n\in\mathcal{Z}^+$，若正整数$d$整除$2n^2$，则$n^2+d$不是完全平方数。
 \end{example}
@@ -932,3 +1026,416 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
     所以$(3m)^2$在数列$b_t$中，即$s\le 3m$，即从此项开始，数列跳到了一个更小的$a_0=3k$开始数列，而按假设以此$a_0$开始的数列是满足要求的，从而$a_0=3(m+1)$开始的数列也是满足要求的。
   \end{enumerate}
 \end{proof}
+
+\begin{example}[6组成的数字的平方]
+  由$n$个6组成的整数的平方可由如下公式给出：
+  \begin{align*}
+    \left( \underbrace{6666\cdots 66}_{n\text{个}} \right)^2 =
+    \underbrace{444\cdots 4}_{n-1\text{个}}3\underbrace{555\cdots 5}_{n-1\text{个}}6
+  \end{align*}
+\end{example}
+\begin{proof}
+  先看几个例子验证一下：
+  \begin{align*}
+    6^2 ={}& 36 & 66^2 ={}& 4356 & 666^2={}& 443556 & 6666^2={}& 44435556
+  \end{align*}
+  可以对$n$用数学归纳法。记
+  \begin{align*}
+    a_k \equiv{}& \underbrace{666\cdots 6}_{k\text{个}}      & a_{k+1}   ={}& 10a_k + 6\\
+    F_{4,k} \equiv{}& \underbrace{444\cdots 4}_{k-1\text{个}} & F_{4,k+1} ={}& 10F_{4,k} + 4 \\
+    F_{5,k} \equiv{}& \underbrace{555\cdots 5}_{k-1\text{个}} & F_{5,k+1} ={}& 10F_{5,k} + 5
+  \end{align*}
+  这样的话，符号太多，化简时不能合并。观察这3个符号，其实都与$1111\cdots1$相关，可令
+  \begin{align*}
+    F_k \equiv \underbrace{1111\cdots1}_{k\text{个}}, \quad F_{k+1} = 10F_k + 1
+  \end{align*}
+  由此可得题中式子里左边(记为$L_k$)与右边(记为$R_k$)关于$F_k$的表达式，令
+  \begin{align*}
+    L_k \equiv{}& 6F_k\\
+    R_k \equiv{}& 4F_k\times10^{k+2} + 3\times10^{k+1} + 5F_k\times10 + 6\\
+             ={}& F_k\left(4\times10^{k+2} + 50\right) + 3\times 10^{k+1} + 6
+  \end{align*}
+  则前面已经验证的前个数，有
+  \begin{align*}
+    L_1^2 = R_0, \quad L_2^2 = R_1, \quad L_3^2 = R_2, \quad L_4^2 = R_3
+  \end{align*}
+
+  假设当整数$k\in[1, m]$时都有$L_k^2 = R_{k-1}$，则当$k=m+1$时，有
+  \begin{align*}
+    L_{m+1}^2 ={}& \left(6F_{m+1}\right)^2 = \left(6(10F_m+1) \right)^2 = \left( 10\times 6F_m + 6 \right)^2 = \left( 10L_m + 6 )\right)^2 \\
+             ={}& 100L_m^2 + 120L_m + 36\\
+             ={}& 100R_{m-1} + 720F_m + 36
+  \end{align*}
+  目标是将上式变为$R_m$，先要找到$R_m$与$R_{m-1}$的关系，而$R_m$是由$F_m$表示的，故寻找$100R_{m-1}$关于$F_m$的表达式。由$R_m$的定义，有
+  \begin{align*}
+    R_{m-1} ={}& F_{m-1}\left(4\times10^{m+1} + 50\right) + 3\times 10^{m} + 6\\
+    100R_{m-1} ={}& 10F_{m-1} \left( 4\times10^{m+2} + 500\right) + 3\times10^{m+2} + 600\\
+              ={}& (F_m-1) \left( 4\times10^{m+2} + 500\right) + 3\times10^{m+2} + 600\\
+              ={}& F_m\left( 4\times10^{m+2} + 500\right) - 4\times10^{m+2} - 500 + 3\times10^{m+2} + 600\\
+              ={}& F_m\left( 4\times10^{m+2} + 500\right) - 10^{m+2} + 100
+  \end{align*}
+  代入$L_{m+1}^2$的表达式，则有
+  \begin{align*}
+    L_{m+1}^2 ={}& F_m\left( 4\times10^{m+2} + 500\right) - 10^{m+2} + 100 + 720F_m + 36\\
+             ={}& F_m\left( 4\times10^{m+2} + 50 \right) + (450 + 720)F_m - 10^{m+2} + 136
+  \end{align*}
+  观察上式右边与$R_m$的区别，若有
+  \begin{align*}
+    (450 + 720)F_m - 10^{m+2} + 136 = 3\times10^{m+1} + 6
+  \end{align*}
+  则有$L_{m+1}^2 = R_m$。事实上
+  \begin{align*}
+         &&(450 + 720)F_m - 10^{m+2} + 136 ={}& 3\times10^{m+1} + 6\\
+    \iff && 1170F_m - 130\times(10^m - 1) ={}& 0 \quad\text{(注意到$1170\div130=9)$}\\
+    \iff &&           9F_m - (10^{m} - 1) ={}& 0
+  \end{align*}
+  容易验证$9F_m = 10^m - 1$是成立的，从而一步步倒推，有$L_{m+1}^2 = R_m$。
+\end{proof}
+
+
+\begin{question}[9组成的数字的平方]
+  类似的，由$n$个9组成的整数的平方可由如下公式给出：
+  \begin{align*}
+    {\underbrace{9999\cdots 99}_{n\text{个}}}^2 =
+    \underbrace{999\cdots 9}_{n-1\text{个}}8\underbrace{000\cdots 0}_{n-1\text{个}}1
+  \end{align*}
+\end{question}
+\begin{proof}[提示]
+  可以用数学归纳法，也可直接用恒等式：
+  \begin{align*}
+    {\underbrace{9999\cdots 99}_{n\text{个}}}^2 ={}&
+    ( 1\underbrace{0000\cdots 00}_{n\text{个}} - 1 )^2\\
+    ={}& 1\underbrace{0000\cdots 00}_{2n\text{个}} - 2\underbrace{0000\cdots 00}_{n\text{个}} + 1 &&\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{question}
+  任意正整数$n$，有
+  \begin{align*}
+    \underbrace{66\cdots66}_{n\text{个}} \times (\underbrace{66\cdots66}_{n\text{个}} + 1) =
+    \underbrace{44\cdots44}_{n\text{个}} \underbrace{22\cdots22}_{n\text{个}}
+  \end{align*}
+  \begin{align*}
+    6\times 7 = 42, \quad\quad 66\times 67=4422,\quad\quad 666\times 667=444222
+  \end{align*}
+\end{question}
+
+\section{有趣的数字}
+\label{sec:interesting-numbers}
+
+\begin{example}
+  在下面空格处填写1到9中某个数字使等式成立。要求
+  \begin{enumerate}
+  \item 每个空格只能填一个数字；
+  \item 每行的9个空格中必须包含1到9中的所有数字。
+  \end{enumerate}
+  % \begin{center}
+  %   \begin{tikzpicture}[scale=1.0]
+  %     \foreach \y in {2,3,4,5,6,7,8,9}{
+  %       \foreach \x in{0,1,2,3,7,8,9,10,11}{
+  %         \draw(\x,-\y)rectangle(\x+.5,-\y-.5);
+  %       }
+  %     }
+  %   \end{tikzpicture}
+  % \end{center}
+  {
+  \def\squarebox{\fbox{\phantom{9}}}
+  \begin{align*}
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 2 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 3 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 4 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 5 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 6 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 7 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 8 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox\\
+    \squarebox\,\squarebox\,\squarebox\,\squarebox\,\times 9 ={}& \squarebox\,\squarebox\,\squarebox\,\squarebox\,\squarebox    
+  \end{align*}
+  }
+\end{example}
+\begin{proof}[提示]
+  9个数的全排列总共有$9!=362880$，这个量级用计算机作枚举是非常快的，可以轻松找到所有解的。
+\end{proof}
+
+
+\subsection{2519}
+\label{sec:number-2519}
+
+\begin{align*}
+  2519 \equiv{}& 1\pmod2,\quad & 2519 \equiv{}& 2\pmod3,\quad & 2519 \equiv{}& 3\pmod4 \\
+  2519 \equiv{}& 4\pmod5,\quad & 2519 \equiv{}& 5\pmod6,\quad & 2519 \equiv{}& 6\pmod7 \\
+  2519 \equiv{}& 7\pmod8,\quad & 2519 \equiv{}& 8\pmod9,\quad & 2519 \equiv{}& 9\pmod{10}
+\end{align*}
+
+记$x$是满足下面9个条件的最小的正整数：
+\begin{align*}
+  x\equiv k-1\pmod k, \quad \text{整数}k\in[2,3,\cdots,10]
+\end{align*}
+若有兴趣，可以用中国剩余定理，验证2519是否是非负的$x$中最小的一个。
+
+\subsection{1089与2178}
+\label{sec:number-1089}
+
+\begin{example}
+  求所有的四位数$\overline{abcd}$，其中$a,b,c,d$两两互不相等，$\overline{dcba}$仍然是四位数且是$\overline{abcd}$的整数倍。
+\end{example}
+用计算机穷举，可以知道这样的四位数只有两个：1089和2178。
+\begin{align*}
+  \frac{9801}{1089} = 9, \quad\quad \frac{8712}{2178} = 4
+\end{align*}
+另外一个有趣的现象是
+\begin{align*}
+  1089 \times 2 = 2178
+\end{align*}
+
+\begin{align*}
+  & 1089\times 1 = 1089, \quad 9801 = 9\times 1089\\
+  & 1089\times 2 = 2178, \quad 8712 = 8\times 1089\\
+  & 1089\times 3 = 3267, \quad 7623 = 7\times 1089\\
+  & 1089\times 4 = 4356, \quad 6534 = 6\times 1089\\
+  & 1089\times 5 = 5445
+\end{align*}
+
+\begin{align*}
+   4\times 2178 = 8712,\quad 4\times 21978 = 87912,\quad 4\times 219978 = 879912
+\end{align*}
+更一般的，有
+\begin{align*}
+  4\times21\underbrace{99\cdots99}_{n\text{个}9}78 = 87\underbrace{99\cdots99}_{n\text{个}9}12
+\end{align*}
+
+
+\subsection{142857}
+\label{sec:number-142857}
+
+
+
+\subsection{有趣的算式}
+\label{sec:interesting-equations}
+
+\begin{example}
+  \begin{alignat*}{2}
+    1^2 &{}= 1\\
+    11^2 &{}= 121\\
+    111^2 &{}= 12321\\
+    1111^2 &{}= 1234321\\
+    11111^2 &{}= 123454321\\
+    111111^2 &{}= 12345654321\\
+    1111111^2 &{}= 1234567654321\\
+    11111111^2 &{}= 123456787654321\\
+    111111111^2 &{}= 12345678987654321
+  \end{alignat*}
+\end{example}
+
+\begin{example}
+  \begin{alignat*}{2}
+    &1 + 8\times 1 &{}&{}= 9\\
+    &2 + 8\times 12 &{}&{}= 98\\
+    &3 + 8\times 123 &{}&{}= 987\\
+    &4 + 8\times 1234 &{}&{}= 9876\\
+    &5 + 8\times 12345 &{}&{}= 98765\\
+    &6 + 8\times 123456 &{}&{}= 987654\\
+    &7 + 8\times 1234567 &{}&{}= 9876543\\
+    &8 + 8\times 12345678 &{}&{}= 98765432\\
+    &9 + 8\times 123456789 &{}&{}= 987654321
+  \end{alignat*}
+\end{example}
+
+\begin{example}
+  % alignat won't add space between columns
+  \begin{alignat*}{3}
+    2 &{}+ 9 \times 1 &&{}= 11\\
+    3 &{}+ 9 \times 12 &&{}= 111\\
+    4 &{}+ 9 \times 123 &&{}= 1111\\
+    5 &{}+ 9 \times 1234 &&{}= 11111\\
+    6 &{}+ 9 \times 12345 &&{}= 111111\\
+    7 &{}+ 9 \times 123456 &&{}= 1111111\\
+    8 &{}+ 9 \times 1234567 &&{}= 11111111\\
+    9 &{}+ 9 \times 12345678 &&{}= 111111111\\
+    10&{}+ 9 \times 123456789 &&{}= 1111111111
+  \end{alignat*}
+\end{example}
+
+\begin{example}
+  \begin{alignat*}{3}
+    7 &+ 9\times 9 &&{}= 88\\
+    6 &+ 9\times 98 &&{}= 888\\
+    5 &+ 9\times 987 &&{}= 8888\\
+    4 &+ 9\times 9876 &&{}= 88888\\
+    3 &+ 9\times 98765 &&{}= 888888\\
+    2 &+ 9\times 987654 &&{}= 8888888\\
+    1 &+ 9\times 9876543 &&{}= 88888888\\
+    0 &+ 9\times 98765432 &&{}= 888888888\\
+    -1& + 9\times 987654321 &&{}= 8888888888\\
+  \end{alignat*}
+\end{example}
+
+\begin{example}
+  \begin{alignat*}{3}
+    22^2={}&121&&\times(1+2+1)\\
+    333^2={}&12321&&\times(1+2+3+2+1)\\
+    4444^2={}&1234321&&\times(1+2+3+4+3+2+1)\\
+    55555^2={}&123454321&&\times(1+2+3+4+5+4+3+2+1)\\
+    666666^2={}&12345654321&&\times(1+2+3+4+5+6+5+4+3+2+1)
+  \end{alignat*}
+\end{example}
+
+\begin{example}[缺8数]
+  \begin{alignat*}{4}
+    &12345679\times9\times1 &&{}=111111111 &\quad\quad 12345679\times9\times2 &&{}=222222222\\
+    &12345679\times9\times3 &&{}=333333333 &\quad\quad 12345679\times9\times4 &&{}=444444444
+  \end{alignat*}
+\end{example}
+
+\begin{example}[$\frac17$]
+  \begin{align*}
+    \frac17 = 0.142857142857142857142857\cdots
+  \end{align*}
+  142857是个有如下循环规律数字：
+  \begin{align*}
+    142857\times 2 = 285714\\
+    142857\times 3 = 428571\\
+    142857\times 4 = 571428\\
+    142857\times 5 = 714285\\
+    142857\times 6 = 857142
+  \end{align*}
+  猜猜$142857\times 7$等于多少？除了硬算之外，可以利用上面$\frac17$来巧妙地得到答案\footnote{$7000000\times\frac17=142857.142857142857\cdots\times7$，从而$1000000=142857\times7 + 7\times0.142857\cdots=142857\times7+7\times\frac17$。答案是999999。}。
+\end{example}
+
+\section{完全数}
+\label{sec:perfect-number}
+
+\begin{definition}
+  一个正整数若等于其所有正的真因子之和，则称其为完全数。
+\end{definition}
+前3个完全数为6，28和496。
+\begin{align*}
+  6   ={} & 1 + 2 + 3\\
+  28  ={} & 1 + 2 + 4 + 7 + 14\\
+  496 ={} & 1 + 2 + 4 + 8 + 16 + 31 + 62 + 124 + 248
+\end{align*}
+
+\begin{definition}[梅森质数，Mersenne Prime]
+  梅森质数是指形如$2^n - 1$的质数。
+\end{definition}
+
+前3个梅森数为3，7，31。
+
+\begin{theorem}\label{th:mersenne-prime-q(q+1)/2-is-perfect}
+  偶数$n$是完全数，等价于存在是梅森质数$q$，使得$n=q(q+1)/2$。
+\end{theorem}
+
+Euler在给出定理~\ref{th:mersenne-prime-q(q+1)/2-is-perfect}的证明时用到了除数函数是积性函数的结论。下面先给出除数函数与积性函数的相关介绍。
+
+\begin{definition}[除数函数，Divisor Function，Sum of Divisors]
+  除数函数$\sigma_x(n)$是$n$的所有正约数的$x$次幂之和，即
+  \begin{align*}
+    \sigma_x(n)=\sum_{d\mid n} d^x
+  \end{align*}
+  除数函数也被称为因子函数。
+\end{definition}
+有时为简便，$\sigma_1(n)$通常也会记为$\sigma(n)$。
+
+由除数函数的定义，显然$\sigma_0(n)$是$n$的正约数的个数，$\sigma_1(n)$是$n$的正约数之和。且有
+\begin{align*}
+  p\text{是质数} \iff \sigma_0(p) = 2 \iff \sigma_0(p^n) = n + 1 \iff \sigma_1(p) = p + 1
+\end{align*}
+
+\begin{definition}[算术函数，Arithmetic Function]
+  $\forall f:\mathbb{Z^+}\to\mathbb{C}$，称$f$为算术函数。每个算术函数都可视为一个复数序列。
+\end{definition}
+
+\begin{definition}[积性函数，Multiplicative Function]
+  若算术函数$f:\mathbb{Z^+}\to \mathbb{C}$有以下性质：
+  \begin{enumerate}
+  \item $f(1) = 1$。
+  \item 任意互质的正整数$a,b$，有$f(ab) = f(a)f(b)$。
+  \end{enumerate}
+  则称$f$是积性函数。
+\end{definition}
+
+\begin{definition}[完全积性函数]
+  若积性函数$f$对任意正整数$a,b$都有$f(ab)=f(a)f(b)$\footnote{即在积性函数中去除$\gcd(a,b)$的限制}，则称$f$为完全积性函数。
+\end{definition}
+
+\begin{lemma}\label{lem:sigma(a^k1*b^k2)=sigma(a^k1)sigma(b^k2)}
+  任意正整数$n$，若$p_1,p_2,\cdots,p_n$是$n$个互不相同的质数，$k_1, k_2,\cdots,k_n$是任意$n$个正整数，则
+  \begin{align*}
+    \sigma\left(p_1^{k_1} p_2^{k_2} \cdots p_n^{k_n}\right) = \prod_{i=1}^n \left(\sum_{j=0}^{k_i} p_i^j\right) 
+    = \prod_{i=1}^n \sigma\left(p_i^{k_i}\right)
+  \end{align*}
+\end{lemma}
+\begin{proof}[提示]
+  $p_1^{k_1} p_2^{k_2}\cdots p_n^{k_n}$的因数都是$p_1^{a_1} p_2^{a_2}\cdots p_n^{a_n}$的形式，其中$\forall 1\le i\le n$，有$0\le a_i\le k_i$。而展开
+  \begin{align*}
+    \prod_{i=1}^n \left(\sum_{j=0}^{k_i} p_i^j\right)
+  \end{align*}
+  知道其中每一项都是$p_1^{a_1} p_2^{a_2}\cdots p_n^{a_n}$的形式，与$p_1^{k_1} p_2^{k_2}\cdots p_n^{k_n}$的每一个约数一一对应，从而有
+  \begin{align*}
+    \sigma\left(p_1^{k_1} p_2^{k_2} \cdots p_n^{k_n}\right) = \prod_{i=1}^n \left(\sum_{j=0}^{k_i} p_i^j\right) 
+  \end{align*}
+
+
+  其次，容易知道$p_i^{k_i}$的因子是$1,p_i, p_i^2,\cdots, p_i^{k_i}$，其和为
+  \begin{align*}
+    \sigma\left(p_i^{k_i}\right) = 1 + p_i + p_i^2 + \cdots + p_i^{k_i}
+  \end{align*}
+  将上面$i=1,2,\cdots,n$这$n$个式子相乘相乘可得
+  \begin{align*}
+    \prod_{i=1}^n \sigma\left(p_i^{k_i}\right) = \prod_{i=1}^n \left(\sum_{j=0}^{k_i} p_i^j\right)
+  \end{align*}
+
+  同样的分析也适用于$\sigma_x(n)$。
+\end{proof}
+
+\begin{theorem}
+  除数函数是积性函数，但不是完全积性函数。
+\end{theorem}
+\begin{proof}[提示]
+  由上面的引理，除数函数显然是积性函数。另一方面，由
+  \begin{align*}
+    \sigma(2) = 1 + 2 = 3, \quad \sigma(4) = 1 + 2 + 4 = 7, \quad \sigma(8) = 1 + 2 + 4 + 8 = 15
+  \end{align*}
+  可知$\sigma(2\times 4) \ne \sigma(2) \times \sigma(4)$，即除数函数不是完全积性函数。
+\end{proof}
+
+\begin{proof}[定理~\ref{th:mersenne-prime-q(q+1)/2-is-perfect}的证明]
+  由$\sigma(n)$的定义，显然有
+  \begin{align*}
+    p\text{是完全数} \iff \sigma(p) = 2p
+  \end{align*}
+
+  \begin{enumerate}
+  \item 充分性。若$q$是梅森质数，则$\exists p\in\mathbb{Z^+}$，使得$q=2^p-1$，从而
+    \begin{align*}
+      \sigma(n) = \sigma\left(\frac{q(q+1)}{2}\right) = \sigma\left( 2^{p-1}(2^p -1)\right) = \sigma\left( 2^{p-1}\right) \sigma\left( 2^p -1\right) 
+    \end{align*}
+    再由
+    \begin{align*}
+      \sigma\left(2^{p-1}\right) ={}& 1 + 2 + 2^2 + 2^3 + \cdots + 2^{p-1} = 2^p - 1\\
+      \sigma\left(2^p - 1\right) ={}& 1 + (2^p -1) = 2^p\quad(\text{因为$q=2^p - 1$是质数})
+    \end{align*}
+    代入，有
+    \begin{align*}
+      \sigma(n) = (2^p - 1) \cdot 2^p = 2n
+    \end{align*}
+    从而$n$是完全数。
+    
+  \item 必要性。若偶数$n$是完全数，则存在正整数$k$及奇数$x$，使得$n=2^k x$。
+    \begin{align*}
+      n\text{是完全数} \iff&&    \sigma(n) = 2n\\
+                      \iff&& \sigma(2^kx) = \sigma(2^k)\sigma(x) = (2^{k+1} - 1) \sigma(x) = 2n = 2^{k+1} x
+    \end{align*}
+    从而必有$2^{k+1} - 1 \mid x$，记
+    \begin{align*}
+      y\equiv \frac{x}{2^{k+1} - 1}
+    \end{align*}
+    由$2^{k+1}-1\ge 3$，正整数$y<x$，是$x$的真因数，两边同除$2^{k+1}-1$，可得
+    \begin{align*}
+      2^{k+1} y ={}& \sigma(x) = x + y + \text{其他因数的和}\\
+      ={}& (2^{k+1} - 1)y + y + \text{其他因数的和}\\
+      ={}& 2^{k+1} y + \text{其他因数的和}
+    \end{align*}
+    从而其他因数的和为零，也就是$x$只有两个因数，从而$y=1$，且$x=2^{k+1}-1$，而且是个质数(因为$\sigma(x)=x+y=x+1$)。\qedhere
+  \end{enumerate}
+\end{proof}
+

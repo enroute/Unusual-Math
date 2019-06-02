@@ -557,6 +557,58 @@
   \end{tikzpicture}
 \end{example}
 
+\begin{example}
+  \begin{align*}
+    (a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \foreach \i/\x in {0/0, 1/.5, 2/1.5, 3/2.2}{
+        \foreach \j/\y in {0/0, 1/.5, 2/1.5, 3/2.2}{
+          \coordinate(N\i\j)at(\x,\y);
+        }
+      }
+      \draw(N00)--(N10)node[midway,below]{$a$}
+                --(N20)node[midway,below]{$b$}
+                --(N30)node[midway,below]{$c$}
+                --(N33)--(N03)
+                --(N02)node[midway,left]{$c$}
+                --(N01)node[midway,left]{$b$}
+                --(N00)node[midway,left]{$a$}
+           (N10)--(N13) (N20)--(N23)
+           (N01)--(N31) (N02)--(N32);
+      \foreach \x/\y/\t in {%
+        N00/N11/$a^2$, N10/N21/$ab$, N20/N31/$ca$,
+        N01/N12/$ab$, N11/N22/$b^2$, N21/N32/$bc$,
+        N02/N13/$ca$, N12/N23/$bc$, N22/N33/$c^2$%
+      }{
+        \node at($.5*(\x)+.5*(\y)$){\t};
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\pagebreak
+\begin{example}
+  \begin{align*}
+    a^2 - b^2 = (a+b)(a-b)
+  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=.5]
+      \fill[color=blue!10](4,4)rectangle(6,6);
+      \fill[pattern=crosshatch, pattern color=red!20](0,4)rectangle(4,6);
+      \fill[pattern=crosshatch, pattern color=red!10](6,0)rectangle(8,4);
+      \draw(0,0)grid(6,6) (6,0)grid(8,4);
+      \draw[|<->|](0,-.5)--(6,-.5)node[midway,below]{$a$};
+      \draw[|<->|](6,-.5)--(8,-.5)node[midway,below]{$b$};
+      \draw[|<->|](4,6.5)--(6,6.5)node[midway,above]{$b$};
+      \draw[|<->|](-.5,0)--(-.5,6)node[midway,left]{$a$};
+      \draw[|<->|](8.5,0)--(8.5,4)node[midway,right]{$a-b$};
+      \draw[|<->|](8.5,4)--(8.5,6)node[midway,right]{$b$};
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
 \pagebreak
 \begin{example}[半角正切公式]\mbox{}\par\nopagebreak %to mandatorily make it break line
   \centering

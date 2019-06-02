@@ -594,6 +594,64 @@
 \section{正三角形}
 \label{sec:equilateral-triangle}
 
+\begin{example}
+  用一张A4纸折出一个正三角形。关键是第二步，对折找到中线上的点。
+  \begin{center}
+    \begin{tikzpicture}[scale=.75]
+      \begin{scope}
+        \coordinate(A)at(0,0);\coordinate(B)at(2,0);\coordinate(C)at(2,3);\coordinate(D)at(0,3);
+        \draw(A)--(B)--(C)--(D)--(A);
+        \draw[dashed]($.5*(A)+.5*(B)$)--($.5*(C)+.5*(D)$);
+      \end{scope}
+      \begin{scope}[shift={(3,0)}]
+        \coordinate(A)at(0,0);\coordinate(B)at(2,0);\coordinate(C)at(2,3);\coordinate(D)at(0,3);
+        \coordinate(E')at(30:1);\tkzInterLL(A,E')(B,C)\tkzGetPoint{E}
+        \coordinate(F)at($(A)!1!60:(B)$);
+        \coordinate(G)at($.5*(A)+.5*(B)$);\coordinate(H)at($.5*(C)+.5*(D)$);
+        \coordinate(I)at($.5*(A)+.5*(E)$);\coordinate(J)at($.5*(A)+.5*(F)$);
+        \draw(A)--(F)--(E)--(A)--(D)--(C)--(E);
+        \draw[dashed](A)--(B)--(E) (H)--(G) (I)--(J);
+        \tkzDrawPoint(F)
+      \end{scope}
+      \begin{scope}[shift={(6,0)}]
+        \coordinate(A)at(0,0);\coordinate(B)at(2,0);\coordinate(C)at(2,3);\coordinate(D)at(0,3);
+        \coordinate(E')at(30:1);\tkzInterLL(A,E')(B,C)\tkzGetPoint{E}
+        \coordinate(F)at($(A)!1!60:(B)$);
+        \coordinate(G)at($.5*(A)+.5*(B)$);\coordinate(H)at($.5*(C)+.5*(D)$);
+        \coordinate(I)at($.5*(A)+.5*(E)$);\coordinate(J)at($.5*(A)+.5*(F)$);
+        \tkzInterLL(A,F)(C,D)\tkzGetPoint{L}
+        \tkzInterLL(E,F)(A,D)\tkzGetPoint{M}
+        \draw(A)--(F)--(E)--(A)--(D)--(C)--(E);
+        \draw[dashed](A)--(B)--(E) (H)--(G) (I)--(J) (L)--(F)--(M);
+      \end{scope}
+      \begin{scope}[shift={(9,0)}]
+        \coordinate(A)at(0,0);\coordinate(B)at(2,0);\coordinate(C)at(2,3);\coordinate(D)at(0,3);
+        \coordinate(E')at(30:1);\tkzInterLL(A,E')(B,C)\tkzGetPoint{E}
+        \coordinate(F)at($(A)!1!60:(B)$);
+        \coordinate(G)at($.5*(A)+.5*(B)$);\coordinate(H)at($.5*(C)+.5*(D)$);
+        \coordinate(I)at($.5*(A)+.5*(E)$);\coordinate(J)at($.5*(A)+.5*(F)$);
+        \tkzInterLL(A,F)(C,D)\tkzGetPoint{L}
+        \tkzInterLL(E,F)(A,D)\tkzGetPoint{M}
+        \fill[color=red!10](A)--(E)--(M)--cycle;
+        \draw(A)--(B)--(C)--(D)--(A);
+        \draw[dashed](E)--(A)--(L) (M)--(E) (H)--(G);
+      \end{scope}
+      \begin{scope}[shift={(12,0)}]
+        \coordinate(A)at(0,0);\coordinate(B)at(2,0);\coordinate(C)at(2,3);\coordinate(D)at(0,3);
+        \coordinate(E')at(30:1);\tkzInterLL(A,E')(B,C)\tkzGetPoint{E}
+        \coordinate(F)at($(A)!1!60:(B)$);
+        \coordinate(G)at($.5*(A)+.5*(B)$);\coordinate(H)at($.5*(C)+.5*(D)$);
+        \coordinate(I)at($.5*(A)+.5*(E)$);\coordinate(J)at($.5*(A)+.5*(F)$);
+        \tkzInterLL(A,F)(C,D)\tkzGetPoint{L}
+        \tkzInterLL(E,F)(A,D)\tkzGetPoint{M}
+        \fill[color=red!10](A)--(F)--(B)--cycle;
+        \draw(A)--(B)--(C)--(D)--(A);
+        \draw[dashed](E)--(A)--(L) (M)--(E) (H)--(G) (B)--(F);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
 \subsection{正三角形的性质}
 \label{sec:property-of-equilateral-triangle}
 \begin{example}\label{ex:radius-of-equilateral-triangle}
@@ -648,7 +706,7 @@
   \end{align*}
 \end{proof}
 \begin{corollary}
-  复平面内两点$x,y$与原点组成正三角形，当且仅当
+  复平面内两点$x,y$与原点组成正三角形，当且仅当$x,y$与原点互不相同且
   \begin{align*}
     x^2 + y^2 = xy
   \end{align*}

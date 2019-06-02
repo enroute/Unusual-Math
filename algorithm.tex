@@ -2,6 +2,151 @@
 \chapter{算法}
 \label{chap:algorithm}
 
+\section{递归}
+\label{sec:recursive}
+
+\begin{example}
+  给定常数$0<\lambda<1$及三角形$\triangle ABC$，选定任意一顶点出发，在相邻的边上找到比例为$\lambda$的分割点，连接顶点与分割点。再从此分割点出发，在新的三角形上做上述动作。
+  \begin{center}
+    \begin{tikzpicture}[scale=.5]
+      \begin{scope}
+        \coordinate (A) at (0,0); \coordinate(B) at (4,0); \coordinate(C) at (3,3);
+        \draw(A)--(B)node[below right]{$V_1$}
+                --(C)node[above]{$V_2$}
+                --(A)node[below left]{$V_3$};
+        \setcounter{X}{0}
+        \whiledo{\value{X}<1}{%
+          \coordinate(D) at ($.8*(B)+.2*(C)$);
+          \draw(A)--(D);
+          \coordinate(E)at(A);\coordinate(A)at(D);\coordinate(B)at(C);\coordinate(C)at(E);
+          \stepcounter{X}
+        }
+      \end{scope}
+      \begin{scope}[shift={(7,0)}]
+        \coordinate (A) at (0,0); \coordinate(B) at (4,0); \coordinate(C) at (3,3);
+        \draw(A)--(B)--(C)--cycle;
+        \setcounter{X}{0}
+        \whiledo{\value{X}<2}{%
+          \coordinate(D) at ($.8*(B)+.2*(C)$);
+          \draw(A)--(D);
+          \coordinate(E)at(A);\coordinate(A)at(D);\coordinate(B)at(C);\coordinate(C)at(E);
+          \stepcounter{X}
+        }
+      \end{scope}
+      \begin{scope}[shift={(14,0)}]
+        \coordinate (A) at (0,0); \coordinate(B) at (4,0); \coordinate(C) at (3,3);
+        \draw(A)--(B)--(C)--cycle;
+        \setcounter{X}{0}
+        \whiledo{\value{X}<18}{%
+          \coordinate(D) at ($.8*(B)+.2*(C)$);
+          \draw(A)--(D);
+          \coordinate(E)at(A);\coordinate(A)at(D);\coordinate(B)at(C);\coordinate(C)at(E);
+          \stepcounter{X}
+        }
+    \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  递归本质上也是一种迭代。以上图为例，记初始顶点为$V_1, V_2, V_3$，则
+  \begin{align*}
+    V_n = \lambda V_{n-3} + (1-\lambda)V_{n-2},\quad (3<n\in\mathbb{Z})
+  \end{align*}
+  新加的边为$V_{n-1}V_n$。
+\end{example}
+
+\begin{example}
+  对长方形划分为若干的三角形，在每个三角形中作上例中的操作，可以得到一个神奇的图形。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(-7,0)}]
+        \foreach \i/\x in {0/0,1/1.5,2/3,3/4.5,4/6}{
+          \foreach \j/\y in{0/0,1/1,2/2,3/3,4/4}{
+            \coordinate(N\i\j)at(\x,\y);
+          }
+        }
+        \draw(N00)rectangle(N44);
+        \foreach \A/\B in{%
+          N01/N41, N02/N42, N03/N43,
+          N10/N14, N20/N24, N30/N34,
+          % N00/N44, 
+          % N10/N43, N20/N42, N30/N41,
+          % N01/N34, N02/N24, N03/N14,%
+          N10/N01, N20/N02, N30/N03, N40/N04, N41/N14, N42/N24, N43/N34%
+        }{%
+          \draw(\A)--(\B);
+        }
+      \end{scope}
+      \def\RecursiveTriangle[#1,#2,#3,#4]{ %#1:N1, #2:N2, #3:N3, #4:\lambda
+        \coordinate (A) at (#1); \coordinate(B) at (#2); \coordinate(C) at (#3);
+        \draw(A)--(B)--(C)--cycle;
+        \setcounter{X}{0}
+        \whiledo{\value{X}<18}{%
+          \coordinate(D) at ($#4*(B)+(C)-#4*(C)$);
+          \draw(A)--(D);
+          \coordinate(E)at(A);\coordinate(A)at(D);\coordinate(B)at(C);\coordinate(C)at(E);
+          \stepcounter{X}
+        }
+      }
+      \draw(0,0)rectangle(6,4);
+      \foreach \i/\x in {0/0,1/1.5,2/3,3/4.5,4/6}{
+        \foreach \j/\y in{0/0,1/1,2/2,3/3,4/4}{
+          \coordinate(N\i\j)at(\x,\y);
+        }
+      }
+      \foreach \A/\B/\C/\lambda in{%
+        N00/N10/N01/.8, N10/N20/N11/.8,N20/N30/N21/.8,N30/N40/N31/.8,
+        N11/N10/N01/.8, N21/N20/N11/.8,N31/N30/N21/.8,N41/N40/N31/.8,
+        % 
+        N01/N11/N02/.8, N11/N21/N12/.8,N21/N31/N22/.8,N31/N41/N32/.8,
+        N12/N11/N02/.8, N22/N21/N12/.8,N32/N31/N22/.8,N42/N41/N32/.8,
+        % 
+        N02/N12/N03/.8, N12/N22/N13/.8,N22/N32/N23/.8,N32/N42/N33/.8,
+        N13/N12/N03/.8, N23/N22/N13/.8,N33/N32/N23/.8,N43/N42/N33/.8,
+        % 
+        N03/N13/N04/.8, N13/N23/N14/.8,N23/N33/N24/.8,N33/N43/N34/.8,
+        N14/N13/N04/.8, N24/N23/N14/.8,N34/N33/N24/.8,N44/N43/N34/.8        
+      }{
+        \RecursiveTriangle[\A,\B,\C,\lambda]
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}对四边形作类似的操作。
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{scope}
+        \def\RecursiveTetragon[#1,#2,#3,#4,#5]{ %#1:N1, #2:N2, #3:N3, #4:\lambda
+          \coordinate (A) at (#1); \coordinate(B) at (#2); \coordinate(C) at (#3); \coordinate(D) at(#4);
+          %\draw(A)--(B)--(C)--(D)--cycle;
+          \setcounter{X}{0}
+          \whiledo{\value{X}<50}{%
+            \coordinate(E) at ($#5*(B)+(C)-#5*(C)$);
+            \draw(A)--(D);
+            \coordinate(F)at(A);\coordinate(A)at(E);\coordinate(B)at(C);\coordinate(C)at(D);\coordinate(D)at(F);
+            \stepcounter{X}
+          }
+        }
+
+        \foreach \i/\x in {0/0,1/3,2/6}{
+          \foreach \j/\y in{0/0,1/2,2/4}{
+            \coordinate(N\i\j)at(\x,\y);
+          }
+        }
+
+        \foreach \A/\B/\C/\D/\lambda in{%
+          N01/N11/N10/N00/.8, N10/N20/N21/N11/.8,
+          N01/N11/N12/N02/.8, N21/N11/N12/N22/.8%
+        }{
+          \RecursiveTetragon[\A,\B,\C,\D,\lambda]
+        }
+        \draw(N00)--(N20)--(N21)--(N01) (N11)--(N12) (N02)--(N22);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  
+\end{example}
+
 \section{二进制}
 \label{sec:binary-system}
 

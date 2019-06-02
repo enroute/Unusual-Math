@@ -232,6 +232,23 @@
   若$k\ne 0$，则$|A-B| = 2k\pi\ge 2\pi$，这与$A,B$是三角形的两个顶角矛盾，从而必有$k=0\implies y=0\implies A=B$。同理可得$A=B=C$。
 \end{proof}
 
+\begin{example}
+  $\forall \triangle ABC$，有
+  \begin{align*}
+    a\cos A + b\cos B + c\cos C = 2a\sin B\sin C = 2b\sin C\sin A=2c\sin A\sin B
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  关键要用到$b = a\cos C + c\cos A$及$c = a\cos B + b\cos A$，代入有
+  \begin{align*}
+    a\cos A + b\cos B + c\cos C ={}& a\cos A + (a\cos C+c\cos A)\cos B + (a\cos B+b\cos A)\cos C \\
+    ={}& a\cos A + \cos A(c\cos B + b\cos C) + 2a\cos B\cos C\\
+    ={}& a\cos A + a\cos A + 2a\cos B\cos C = 2a(\cos A + \cos B\cos C)\\
+    ={}& 2a(-\cos(B+C) + \cos B\cos C) = 2a\sin B\sin C
+  \end{align*}
+  同理或由对称性，可得其余等式。
+\end{proof}
+
 
 \begin{theorem}[相交弦定理，Intersecting Chords Theorem]
   圆内的两条相交弦，被交点分成的两条线段长的积相等。
