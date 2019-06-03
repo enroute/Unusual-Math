@@ -557,17 +557,16 @@
   \end{tikzpicture}
 \end{example}
 
-\begin{example}
-  \begin{align*}
-    (a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca
-  \end{align*}
-  \begin{center}
+\begin{example}\mbox{}\par
+  \centering
     \begin{tikzpicture}[scale=1.0]
-      \foreach \i/\x in {0/0, 1/.5, 2/1.5, 3/2.2}{
-        \foreach \j/\y in {0/0, 1/.5, 2/1.5, 3/2.2}{
+      \node[left] at (-1.5,1.5){$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca$};
+      \foreach \i/\x in {0/0, 1/.5, 2/1.5, 3/3}{
+        \foreach \j/\y in {0/0, 1/.5, 2/1.5, 3/3}{
           \coordinate(N\i\j)at(\x,\y);
         }
       }
+      \fill[color=blue!10](N00)rectangle(N11)rectangle(N22)rectangle(N33);
       \draw(N00)--(N10)node[midway,below]{$a$}
                 --(N20)node[midway,below]{$b$}
                 --(N30)node[midway,below]{$c$}
@@ -585,52 +584,49 @@
         \node at($.5*(\x)+.5*(\y)$){\t};
       }
     \end{tikzpicture}
-  \end{center}
 \end{example}
 
 \pagebreak
-\begin{example}
-  \begin{align*}
-    a^2 - b^2 = (a+b)(a-b)
-  \end{align*}
-  \begin{center}
-    \begin{tikzpicture}[scale=.5]
-      \fill[color=blue!10](4,4)rectangle(6,6);
-      \fill[pattern=crosshatch, pattern color=red!20](0,4)rectangle(4,6);
-      \fill[pattern=crosshatch, pattern color=red!10](6,0)rectangle(8,4);
-      \draw(0,0)grid(6,6) (6,0)grid(8,4);
-      \draw[|<->|](0,-.5)--(6,-.5)node[midway,below]{$a$};
-      \draw[|<->|](6,-.5)--(8,-.5)node[midway,below]{$b$};
-      \draw[|<->|](4,6.5)--(6,6.5)node[midway,above]{$b$};
-      \draw[|<->|](-.5,0)--(-.5,6)node[midway,left]{$a$};
-      \draw[|<->|](8.5,0)--(8.5,4)node[midway,right]{$a-b$};
-      \draw[|<->|](8.5,4)--(8.5,6)node[midway,right]{$b$};
-    \end{tikzpicture}
-  \end{center}
+\begin{example}\mbox{}\par
+  \centering
+  \begin{tikzpicture}[scale=.5]
+    \node[left] at (-3,3){$a^2 - b^2 = (a+b)(a-b)$};
+    \fill[color=blue!10](4,4)rectangle(6,6);
+    \fill[pattern=crosshatch, pattern color=red!20](0,4)rectangle(4,6);
+    \fill[pattern=crosshatch, pattern color=red!20](6,0)rectangle(8,4);
+    \draw(0,0)grid(6,6) (6,0)grid(8,4);
+    \draw[|<->|](0,-.5)--(6,-.5)node[midway,below]{$a$};
+    \draw[|<->|](6,-.5)--(8,-.5)node[midway,below]{$b$};
+    \draw[|<->|](4,6.5)--(6,6.5)node[midway,above]{$b$};
+    \draw[|<->|](-.5,0)--(-.5,6)node[midway,left]{$a$};
+    \draw[|<->|](8.5,0)--(8.5,4)node[midway,right]{$a-b$};
+    \draw[|<->|](8.5,4)--(8.5,6)node[midway,right]{$b$};
+  \end{tikzpicture}
 \end{example}
 
-\pagebreak
+% \pagebreak
 \begin{example}[半角正切公式]\mbox{}\par\nopagebreak %to mandatorily make it break line
   \centering
     \begin{tikzpicture}[scale=.9]
       \coordinate (A) at (-4,0);
-      \coordinate (O) at (0,0);
+      \coordinate[label=below:$O$] (O) at (0,0);
       \coordinate (B) at (4,0);
       \coordinate (C) at ($4*(.5, {sqrt(3)*.5})$);
       \coordinate (D) at ($(A)!(C)!(B)$);
       \tkzMarkRightAngle(B,C,A)\tkzMarkRightAngle(C,D,A)
       \draw(O)--(A) node[midway,below]{1};
       \draw[very thick](O)--(C) node[pos=.45,above]{1};
-      \draw[very thick](C)--(D) node[pos=.55,fill=white]{$\sin\theta$};
+      \draw[very thick](C)--(D) node[pos=.6,fill=white]{$\sin\theta$};
       \draw[very thick](O)--(D) node[midway,below]{$\cos\theta$};
       \draw(D)--(B) node[midway,below]{$1-\cos\theta$};
       \draw(A)--(C)--(B);
       \draw(B)arc(0:180:4);
       \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=D--O--C};
       \draw pic["$\frac\theta2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.7cm]{angle=O--A--C};
-      \draw pic["$\frac\theta2$",<->,draw=orange,angle eccentricity=1.8,angle radius=.7cm]{angle=D--C--B};
+      \draw pic["$\frac\theta2$",<->,draw=orange,angle eccentricity=1.6,angle radius=.7cm]{angle=D--C--B};
       % \draw (C)--(A)--(B)--cycle--(D);
       \node[left] at (-4,2){$\tan\dfrac\theta2=\dfrac{\sin\theta}{1+\cos\theta}=\dfrac{1-\cos\theta}{\sin\theta}$};
+      \tkzDrawPoint(O)
     \end{tikzpicture}
 \end{example}
 
