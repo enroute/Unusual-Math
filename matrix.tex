@@ -2,19 +2,7 @@
 \chapter{矩阵}
 \label{chap:matrix}
 
-\section{向量}
-\label{sec:vector}
-
-通常$1\times n$的敌阵称为行向量，$n\times 1$的矩阵称为列向量，行向量与列向量都是向量，通常在上下文能确定是行向量还是列向量时，行列两字会省略。三维欧氏空间中的向量的点积与叉积按下式定义：
-\begin{align*}
-  \vec{a}\times\vec{b}\equiv
-  \begin{vmatrix}
-    \vec i & \vec j & \vec k\\
-    a_1    & a_2    & a_3\\
-    b_1    & b_2    & b_3
-  \end{vmatrix}
-\end{align*}
-
+通俗地讲，矩阵就是$n\times m$个东西排列成一个$n\times m$的矩形阵列。在数学上，阵列里的东西通常是各种各样的“数”，实数、复数、函数等。
 
 \section{行列式}
 \label{sec:determinant}
@@ -39,6 +27,8 @@
   -a_{21}\begin{vmatrix} a_{12} & a_{13}\\ a_{32} & a_{33} \end{vmatrix}
   +a_{31}\begin{vmatrix} a_{12} & a_{13}\\ a_{22} & a_{23} \end{vmatrix}
 \end{align*}
+
+同样可以递归地用$n$阶方阵的行列式定义$n+1$阶方阵的行列式。若要深入系统地学习了解高阶矩阵的，请移步参考高等代数、矩阵分析等相关教材。
 
 \begin{example}[萨吕法则，Sarrus' Rule，Sarrus' Scheme]
   将$3\times 3$的矩阵
@@ -71,14 +61,13 @@
     \label{fig:Sarrus'-rule}
   \end{figure}
   
-
-
   则按实线三数乘积取正，虚线三数乘积取负，然后求和，可得$\det(M)$为
   \begin{align*}
     \det(M) ={}& +a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}\\
                & -a_{31}a_{22}a_{13} + a_{32}a_{23}a_{11} - a_{33}a_{21}a_{12}
   \end{align*}
 \end{example}
+
 \begin{theorem}[三角形面积的行列式公式]
   记平面直角坐标系下三角形的3个顶点的坐标分别为$(x_1, y_1)$，$(x_2,y_2)$和$(x_3,y_3)$，则三角形的面积为
   \begin{align*}
@@ -90,3 +79,138 @@
     \end{pmatrix}\right|
   \end{align*}
 \end{theorem}
+
+
+\section{向量}
+\label{sec:vector}
+
+通常$1\times n$的敌阵称为行向量，$n\times 1$的矩阵称为列向量，行向量与列向量都是向量，通常在上下文能确定是行向量还是列向量时，行列两字会省略。
+
+\subsection{点积}
+\label{sec:dot-product-of-vector}
+\begin{definition}
+  两个向量对应分量的积之和称为点积(dot product)，也称为数量积，通常记为$\vec a\cdot\vec b$或者$(\vec a,\vec b)$，即
+  \begin{align*}
+    \vec{a}\cdot \vec b\equiv\sum_i a_ib_i
+  \end{align*}
+\end{definition}
+
+显然，点积是满足交换律与分配律的，即
+\begin{align*}
+  \vec a\cdot \vec b={}&\vec b\cdot \vec a\\
+  (\vec a + \vec b)\cdot \vec c ={}& \vec a\cdot \vec c + \vec b\cdot \vec c
+\end{align*}
+
+\begin{theorem}
+  三维欧氏空间中任意两向量，有
+  \begin{align*}
+    \vec{a}\cdot \vec b=\left|\vec a\right| \cdot \left|\vec b\right| \cos\theta
+  \end{align*}
+  其中$\theta$是两向量之间的夹角，从而两向量之间夹角的余弦为
+  \begin{align*}
+    \cos\theta = \frac{\vec a\cdot \vec b}{\left|\vec a\right| \cdot \left|\vec b\right|}
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  利用余弦定理。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate(O)at(0,0);
+      \coordinate(A)at(3,0);
+      \coordinate(B)at(2,2);
+      \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--B};
+      \draw[->](O)--(A)node[midway,below]{$\vec a$};
+      \draw[->](O)--(B)node[midway,sloped,above]{$\vec b$};
+      \draw[->](B)--(A)node[midway,sloped,above]{$\vec a - \vec b$};
+    \end{tikzpicture}
+  \end{center}
+  由余弦定理，有
+  \begin{align*}
+    (\vec a-\vec b)\cdot(\vec a-\vec b) = \vec a\cdot \vec a + \vec b\cdot\vec b
+    - 2\left|\vec a\right|\cdot\left|\vec b\right|\cos\theta
+  \end{align*}
+  展开可得。
+\end{proof}
+
+\begin{example}[平面向量的旋转]
+  记$\vec a$是平面上二维向量，其在直角坐标系下的两分量为$a_x$与$a_y$，即
+  \begin{align*}
+    \vec a\equiv
+    \begin{pmatrix}
+      a_x\\ a_y
+    \end{pmatrix}
+  \end{align*}
+  现将向量沿坐标原点逆时针旋转$\theta$度，记旋转后得到的向量为$\vec a'$。若分别用复数$z$与$z'$表示向量$\vec a$和$\vec a'$，则有
+  \begin{align*}
+    z' ={}& z\cdot e^{i\theta} = (\cos\theta + i\sin\theta)\cdot (a_x + i a_y)\\
+       ={}& \cos\theta a_x - \sin\theta a_y + i(\sin\theta a_x + \cos\theta a_y)\\
+       ={}& (\cos\theta,\ -\sin\theta)\begin{pmatrix}a_x\\a_y\end{pmatrix} + i
+            (\sin\theta,\  \cos\theta)\begin{pmatrix}a_x\\a_y\end{pmatrix}
+  \end{align*}
+  写成矩阵的形式，就有
+  \begin{align*}
+    \begin{pmatrix}
+      a_x'\\ a_y'
+    \end{pmatrix}=
+    \begin{pmatrix}
+      \cos\theta & -\sin\theta\\
+      \sin\theta & \phantom{-}\cos\theta
+    \end{pmatrix}
+    \begin{pmatrix}
+      a_x\\ a_y
+    \end{pmatrix}
+  \end{align*}
+  上式中的矩阵称为旋转矩阵(Rotate Matrix)。
+\end{example}
+
+\begin{example}[垂直向量]
+  逆时针旋转$90^\circ$，即旋转矩阵中$\theta$取为$\pi/2$。记旋转后的向量为$\vec a^\perp$，则有
+  \begin{align*}
+    \vec a^\perp = 
+    \begin{pmatrix}
+      a_x^\perp\\ a_y^\perp
+    \end{pmatrix}=
+    \begin{pmatrix}
+      0 & -1\\
+      1 & \phantom{-}0
+    \end{pmatrix}
+    \begin{pmatrix}
+      a_x\\ a_y
+    \end{pmatrix}=
+    \begin{pmatrix}
+      -a_y\\ a_x
+    \end{pmatrix}
+  \end{align*}
+  若是顺时针旋转$90^\circ$，则可以得到另一个垂直向量$(a_y,\ -a_x)^T$，其中$^T$表示转置。
+\end{example}
+
+\begin{definition}[Perp Dot Product]
+  
+\end{definition}
+
+
+\subsection{叉积}
+\label{sec:cross-product-of-vector}
+\begin{definition}[叉积，外积，法向量，Cross Product]
+  三维欧氏空间中的向量的叉积按下式定义：
+  \begin{align*}
+    \vec{a}\times\vec{b}\equiv
+    \begin{vmatrix}
+      \vec i & \vec j & \vec k\\
+      a_1    & a_2    & a_3\\
+      b_1    & b_2    & b_3
+    \end{vmatrix}
+  \end{align*}
+\end{definition}
+
+\begin{theorem}
+  记$\vec p\equiv\vec a\times \vec b$，则$\vec a$，$\vec b$和$\vec p$满足右手法则，且$\vec p$同时垂直于$\vec a$和$\vec b$，且外积$\vec p$的模为$\left|\vec a\right|\cdot\left|\vec b\right|\sin\theta$，其中$\theta$是$\vec a$与$\vec b$的夹角。即
+  \begin{gather*}
+    (\vec a\times \vec b)\cdot \vec a = (\vec a\times \vec b)\cdot \vec b = 0\\
+    \left| \vec a\times \vec b\right| = \left| \vec a\right| \cdot \left| \vec b\right| \sin\theta
+  \end{gather*}
+\end{theorem}
+
+
+
+
