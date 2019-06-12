@@ -591,6 +591,72 @@
   从而$F$与$F'$重合，即$AD$，$BE$及$CF$三线共点。
 \end{proof}
 
+\subsection{西姆松定理}
+\label{sec:simsons-theorem}
+
+\begin{theorem}[西姆松定理，Simson's Theorem]
+  给定三角形，从一点向三角形的三边所引垂线的垂足共线的充要条件是该点落在三角形的外接圆上。当共线时，此线称为西姆松线(Simson's Line)。
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \def\r{2}
+    \begin{scope}
+      \coordinate(O)at(0,0);
+      \coordinate(A)at(210:\r);
+      \coordinate(B)at(330:\r);
+      \coordinate(C)at(70:\r);
+      \coordinate(P)at(290:\r);
+      \coordinate(D)at($(A)!(P)!(B)$);
+      \coordinate(E)at($(B)!(P)!(C)$);
+      \coordinate(F)at($(C)!(P)!(A)$);
+      \tkzMarkRightAngle(P,D,A)\tkzMarkRightAngle(P,E,B)\tkzMarkRightAngle(P,F,C)
+      \tkzDrawPoints(D,E,F)
+      \draw(O)circle(\r) (A)--(B)--(C)--cycle (P)--(D) (P)--(E) (P)--(F)
+      ($(F)+.3*(F)-.3*(E)$)--($(E)+.2*(E)-.2*(F)$);
+      \draw[dashed](B)--(E);% (A)--(P)--(B);
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+      \coordinate(O)at(0,0);
+      \coordinate[label=below left:$A$](A)at(210:\r);
+      \coordinate[label=right:$B$](B)at(330:\r);
+      \coordinate[label=above:$C$](C)at(70:\r);
+      \coordinate[label=below:$P$](P)at(290:\r);
+      \coordinate[label=above:$D$](D)at($(A)!(P)!(B)$);
+      \coordinate[label=below:$E$](E)at($(B)!(P)!(C)$);
+      \coordinate[label=above:$F$](F)at($(C)!(P)!(A)$);
+      \draw pic["\tiny 1",fill=blue!20,draw=orange,angle eccentricity=1.4,angle radius=.5cm]{angle=F--D--A};
+      \draw pic["\tiny 2",fill=red!20,draw=orange,angle eccentricity=1.4,angle radius=.5cm]{angle=E--D--B};
+      \tkzMarkRightAngle(P,D,A)\tkzMarkRightAngle(P,E,B)\tkzMarkRightAngle(P,F,C)
+      \tkzDrawPoints(D,E,F)
+      \draw(O)circle(\r) (A)--(B)--(C)--cycle (P)--(D) (P)--(E) (P)--(F) (F)--(E);
+      %($(F)+.3*(F)-.3*(E)$)--($(E)+.2*(E)-.2*(F)$);
+      \draw[dashed](B)--(E) (A)--(P)--(B);
+    \end{scope}
+  \end{tikzpicture}
+\end{theorem}
+\begin{proof}[提示]
+  三点共线，可用梅涅劳斯定理。考虑$\triangle APD$和$\triangle BPD$，容易知道
+  \begin{align*}
+    \frac{AD}{DB} = \frac{\cot\angle PBD}{\cot\angle PAD} = \frac{\cot\angle PBA}{\cot\angle PAB}
+  \end{align*}
+  同理可得另外两个比例，然后三式相乘，并注意到
+  \begin{align*}
+    \angle PAB=\angle PCB,\quad \angle PAC\angle PBC,\quad \angle PBC=\pi - \angle PAC
+  \end{align*}
+  就有
+  \begin{align*}
+    \frac{AD}{DB}\cdot \frac{BE}{EC}\cdot \frac{CF}{FA} = -1
+  \end{align*}
+  这是充分性。
+
+  也可以利用四点共圆直接计算角度。连接$DE$和$DF$，则
+  \begin{align*}
+    D,E,F\text{三点共线}\iff{}& \angle 1=\angle 2 \iff \angle APF\angle BPE \\
+    \iff{}& \angle APB + \angle C = \pi \quad(\text{因为}\angle FPE + \angle C=\pi)\\
+    \iff{}& A,P,B,C\text{四点共圆}\qedhere
+  \end{align*}
+\end{proof}
+
 \section{正三角形}
 \label{sec:equilateral-triangle}
 
