@@ -231,7 +231,40 @@
     s=(\vec a,\vec c),\quad
     t=-(\vec a,\vec b)
   \end{align*}
-  是上式的其中一组解。\color{red}但不一定是原待定系数方程的解。
+  是上式的其中一组解。{\color{red}但不一定是原待定系数方程的解。需要换一个思路。}
+
+  考虑满足右手法则的单位正交基
+  \begin{align*}
+    \ihat \equiv \frac{\vec b}{\left|\vec b\right|},\quad
+    \jhat \equiv \frac{\vec b^\perp}{\left|\vec b^\perp\right|},\quad
+    \khat \equiv \frac{\vec b\times \vec c}{\left|\vec b\times\vec c\right|}
+  \end{align*}
+  其中$\vec b^\perp$是$\vec b$和$\vec c$张成的平面内$\vec b$向$\vec c$方向旋转$90^\circ$而成的向量。对$\vec a,\vec b,\vec c$按此正交基作正交分解，记分解结果为
+  \begin{align*}
+    \vec a=(a_1, a_2, a_3)\begin{pmatrix}\ihat\\ \jhat\\ \khat\end{pmatrix}, \quad
+    \vec b=(b_1,   0,   0)\begin{pmatrix}\ihat\\ \jhat\\ \khat\end{pmatrix}, \quad
+    \vec c=(c_1, c_2,   0)\begin{pmatrix}\ihat\\ \jhat\\ \khat\end{pmatrix}
+  \end{align*}
+  其中有不少的零，计算可大大简化。代入左边，有
+  \begin{align*}
+    \vec a\times(\vec b\times\vec c) ={}& (a_1\ihat + a_2\jhat)\times(b_1\ihat \times c_2\jhat)\\
+    ={}& (a_1\ihat + a_2\jhat)\times(bc_2\khat) = a_2bc_2\ihat - a_1bc_2\jhat
+  \end{align*}
+  同样的，考虑右手边则有
+  \begin{align*}
+    \vec b(\vec a,\vec c) - \vec c(\vec a,\vec b) = (\underline{a_1c_1} + a_2c_2) b_1\ihat  - (a_1b_1)(\underline{c_1\ihat} + c_2\jhat)
+    =a_2b_1c_2\ihat - a_1b_1c_2\jhat
+  \end{align*}
+  从而左右相等。\footnote{这里应用到了点积、叉积是坐标系变换下的不变量，需要补充一下。}
+  % 将$\vec c$作按$\vec b$和$\vec b^\perp$两个方向作正交分解，记为
+  % \begin{align*}
+  %   \vec c={\vec c}_b + {\vec c}_\perp
+  % \end{align*}
+  % 其中$\vec c_b \parallel \vec b$，$\vec c_\perp \perp \vec b$。同样对$\vec a$作按$\vec b\times \vec c$方向，与$\vec b$和$\vec c$张成的平面这两个方向作正交分解，记其在$\vec b$和$\vec c$张成的平面内的分量为$\vec a_{bc}$，则  
+  % \begin{align*}
+  %   \vec a\times(\vec b\times \vec c) = \vec a_{bc}\times(\vec b\times \vec c_\perp) \\
+  %   s
+  % \end{align*}
 \end{proof}
 
 \begin{theorem}
