@@ -89,7 +89,7 @@
 \subsection{点积}
 \label{sec:dot-product-of-vector}
 \begin{definition}
-  两个向量对应分量的积之和称为点积(dot product)，也称为数量积，通常记为$\vec a\cdot\vec b$或者$(\vec a,\vec b)$，即
+  两个向量对应分量的积之和称为点积(dot product)，也称为数量积，通常记为$\vec a\cdot\vec b$或者$(\vec a,\vec b)$，或者$\langle\vec a,\vec b\rangle$，即
   \begin{align*}
     \vec{a}\cdot \vec b\equiv\sum_i a_ib_i
   \end{align*}
@@ -196,12 +196,43 @@
   \begin{align*}
     \vec{a}\times\vec{b}\equiv
     \begin{vmatrix}
-      \vec i & \vec j & \vec k\\
+      \ihat  & \jhat  & \khat\\
       a_1    & a_2    & a_3\\
       b_1    & b_2    & b_3
     \end{vmatrix}
   \end{align*}
+  其中$\ihat, \jhat, \khat$是三维欧氏空间中正交坐标下的三个单位正交向量。
 \end{definition}
+
+\begin{lemma}[bac--cab Rule\footnote{有个简便的记忆方法：发音为BACK--CAB，意为“后面的出租车”。}]
+  $\forall \vec a,\vec b,\vec c\in\mathbb{R}^3$，有
+  \begin{align*}
+    \vec a\times(\vec b\times \vec c)=\vec b(\vec a,\vec c) - \vec c(\vec a,\vec b)
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  最直观的证明是直接展开，对比三个分量。这里不再加以描述。
+
+  另一种方法，是待定系数法。不妨设$\vec b\not\parallel\vec c$，否则显然两边都为零向量。由
+  \begin{align*}
+    \vec b\times\vec c\perp \vec b,\quad \vec b\times\vec c\perp \vec c,\quad
+    \vec a\times(\vec b\times\vec c)\perp \vec b\times \vec c
+  \end{align*}
+  可知$\vec a\times(\vec b\times\vec c)$必在$\vec b$和$\vec c$张成的空间(在这里是一个平面)里\footnote{因为垂直于向量$\vec b\times\vec c$的平面就是$\vec b$和$\vec c$张成的平面。\color{red}补充一下张成空间的概念？}，从而$\exists s,t\in\mathbb{R}$，使得
+  \begin{align*}
+    \vec a\times(\vec b\times\vec c) = s\vec b +t\vec c
+  \end{align*}
+  两边与$\vec a$作点积，则有
+  \begin{align*}
+    s(\vec a,\vec b)+t(\vec a,\vec c)=(\vec a, \vec a\times(\vec b\times\vec c))=0
+  \end{align*}
+  显然
+  \begin{align*}
+    s=(\vec a,\vec c),\quad
+    t=-(\vec a,\vec b)
+  \end{align*}
+  是上式的其中一组解。\color{red}但不一定是原待定系数方程的解。
+\end{proof}
 
 \begin{theorem}
   记$\vec p\equiv\vec a\times \vec b$，则$\vec a$，$\vec b$和$\vec p$满足右手法则，且$\vec p$同时垂直于$\vec a$和$\vec b$，且外积$\vec p$的模为$\left|\vec a\right|\cdot\left|\vec b\right|\sin\theta$，其中$\theta$是$\vec a$与$\vec b$的夹角。即
@@ -268,6 +299,31 @@
 \end{proof}
 
 
+\begin{example}[反射点，对称点]
+  $\forall a, b, c\in\mathbb{R}^3$，求点$c$关于直线$\overline{ab}$的对称点$d$。
+\end{example}
+\begin{proof}[提示]
+  先求垂足$u$，再由$c,d$关于$u$对称可得。
+  \begin{align*}
+    \vec u ={}& \vec a + ((\vec c -\vec a)\cdot \vec w) \vec w\\
+    \vec d ={}& \vec u + \text{\overrightharp{$\vec{ud}$}} = \vec u + \text{\overrightharp{$\vec{cu}$}} = \vec u + (\vec u - \vec c) = 2\vec u - \vec c\\
+           ={}& 2(\vec a + ((\vec c -\vec a)\cdot \vec w) \vec w) - \vec c \qedhere
+  \end{align*}
+\end{proof}
 
+\begin{example}[角平分线]
+  $\triangle ABC$，记三顶点坐标为$a,b,c$，求顶点$C$的角平分线与对边交点$D$的坐标$d$。
 
-
+  由角平分线性质，有
+  \begin{align*}
+    \frac{AD}{DB}=\frac{AC}{BC}=\frac{\left|\vec a-\vec c\right|}{\left|\vec b-\vec c\right|}
+    \implies
+    \frac{AD}{AB} = \frac{\left|\vec a-\vec c\right|}{\left|\vec a-\vec c\right| + \left|\vec b-\vec c\right|}
+  \end{align*}
+  从而
+  \begin{align*}
+    \vec d={}\vec a + \text{\overrightharp{$\vec{ad}$}} = \vec a + \frac{\left|\vec a-\vec c\right|}{\left|\vec a-\vec c\right| + \left|\vec b-\vec c\right|}(\vec b - \vec a)
+    ={} \frac{\left|\vec b-\vec c\right|\cdot \vec a + \left|\vec a-\vec c\right|\cdot \vec b}
+              {\left|\vec a-\vec c\right| + \left|\vec b-\vec c\right|}
+  \end{align*}
+\end{example}
