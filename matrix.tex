@@ -233,6 +233,35 @@
   \end{align*}
   是上式的其中一组解。{\color{red}但不一定是原待定系数方程的解。需要换一个思路。}
 
+  % Here's an alternate proof, assuming you know that AxB is always
+  % orthogonal to both A and B, and a few more facts. It may or may not be
+  % helpful.
+
+  % We know [imath]A \times (B \times C)[/imath] is orthogonal to [imath]B
+  % \times C[/imath], which is orthogonal to the plane containing
+  % [imath]B[/imath] and [imath]C[/imath], so [imath]A \times (B \times
+  % C)[/imath] is in the plane spanned by [imath]B[/imath] and
+  % [imath]C[/imath] and is orthogonal to [imath]A[/imath]. Furthermore,
+  % if you take the dot product of [imath]A[/imath] with [imath]B(A\cdot
+  % C)-C(A\cdot B)[/imath] you get [math](A\cdot B)(A\cdot C)-(A \cdot
+  % C)(A\cdot B)=0,[/math] so [imath]B(A\cdot C)-C(A\cdot B)[/imath] is in
+  % the plane spanned by [imath]B[/imath] and [imath]C[/imath], and is
+  % orthogonal to [imath]A[/imath]. Thus we have [math]A\times (B\times
+  % C)=\lambda[B (A\cdot C)-C (A\cdot B)][/math] for some scalar
+  % [imath]\lambda[/imath]. Since the scalar and dot products are both
+  % bilinear, both sides of the original expression are trilinear in
+  % [imath]A[/imath], [imath]B[/imath], and [imath]C[/imath], so the
+  % factor [imath]\lambda[/imath] cannot depend on [imath]A[/imath],
+  % [imath]B[/imath], or [imath]C[/imath]. Plugging in i, i, and j in for
+  % [imath]A, B, C[/imath] tells us that [imath]\lambda[/imath] is 1.
+
+  % It's certainly a more complicated proof than just doing the algebra,
+  % but it may give you a bit better sense of why the identity is true. At
+  % the very least you should understand why [imath]A \times (B \times
+  % C)[/imath] should be equal to something times B plus something times
+  % C, and why (and perhaps a rough idea of how) those somethings should
+  % depend on A.
+
   考虑满足右手法则的单位正交基
   \begin{align*}
     \ihat \equiv \frac{\vec b}{\left|\vec b\right|},\quad
@@ -266,6 +295,15 @@
   %   s
   % \end{align*}
 \end{proof}
+
+\begin{example}[Daniel T. Dwyer\footnote{据说可在JSTOR上找到，是1961年的一篇只有一页的论文，未确认，ref. \url{http://forums.xkcd.com/viewtopic.php?t=24061}}]
+  $\forall \vec a,\vec b,\vec c,\vec d\in\mathbb{R}^3$，有
+  \begin{align*}
+    (\vec a\times \vec b) \cdot (\vec c\times \vec d) =
+    (\vec a\cdot \vec c)(\vec b\cdot \vec d) - (\vec a\cdot \vec d)(\vec b\cdot \vec c)
+  \end{align*}
+\verb+  A quick googling for "proof Lagrange vector triple product" returned a number of articles. Someone named Robert C. Wrede apparently gave a proof which utilized tensor notation, but the one I actually bothered to login to JSTOR for (by Daniel T. Dwyer) proves a related identity instead: [math](A\times B)\cdot (C\times D)=(A\cdot C)(B\cdot D)-(A\cdot D)(B\cdot C)[/math] The article says that the BAC CAB identity follows directly from this, though I'm not seeing it at the moment... Anyway, for the proof of that identity he uses the determinant representations of the triple scalar product to show that [math](A\times B)\cdot (C\times D)=A\cdot (B\times (C\times D))=((A\times B)\times C)\cdot D[/math] Then he again uses the determinant representation, along with the rule for multiplying determinants, to obtain [math][(A\times B)\cdot (C\times D)]^2=[(C\times D)\cdot (A\times B)][(A\cdot C)(B\cdot D)-(A\cdot D)(B\cdot C)][/math] The article's identity follows pretty easily from there... \verb+
+\end{example}
 
 \begin{theorem}
   记$\vec p\equiv\vec a\times \vec b$，则$\vec a$，$\vec b$和$\vec p$满足右手法则，且$\vec p$同时垂直于$\vec a$和$\vec b$，且外积$\vec p$的模为$\left|\vec a\right|\cdot\left|\vec b\right|\sin\theta$，其中$\theta$是$\vec a$与$\vec b$的夹角。即
