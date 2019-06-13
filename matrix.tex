@@ -68,15 +68,58 @@
   \end{align*}
 \end{example}
 
+\begin{lemma}
+  平面上两起点为原点的向量$\vec a$和$\vec b$，其终点与原点组成的三角形的面积$S_{\triangle AOB}$为
+  \begin{align*}
+    S_{\triangle AOB} = \frac12\left| \det(M) \right|
+  \end{align*}
+  其中
+  \begin{align*}\renewcommand{\arraystretch}{.9}
+    M\equiv\begin{pmatrix}a_x & a_y\\ b_x & b_y\end{pmatrix}
+  \end{align*}
+\end{lemma}
+\begin{proof}[提示]
+  \begin{align*}
+    S_{\triangle AOB} = \frac12 |\vec a| \cdot |\vec b| \cdot \sin\theta
+  \end{align*}
+  由叉积的定义及性质，有
+  \begin{align*}\renewcommand{\arraystretch}{.9}
+    \vec a\times \vec b = 
+    \begin{pmatrix}
+      \ihat & \jhat & \khat\\
+      a_x   & a_y   & 0\\
+      b_x   & b_y   & 0
+    \end{pmatrix} =
+    \begin{vmatrix}
+      a_x   & a_y\\
+      b_x   & b_y
+    \end{vmatrix}\khat
+  \end{align*}
+  由
+  \begin{align*}
+    \left|\vec a\times \vec b\right| = |\vec a|\cdot|\vec b|\cdot\sin\theta
+  \end{align*}
+  代入，有
+  \begin{align*}
+    S_{\triangle AOB} = \frac12 |\det(M)|&\qedhere
+  \end{align*}
+\end{proof}
+
+
+
 \begin{theorem}[三角形面积的行列式公式]
   记平面直角坐标系下三角形的3个顶点的坐标分别为$(x_1, y_1)$，$(x_2,y_2)$和$(x_3,y_3)$，则三角形的面积为
   \begin{align*}
-    S =\left| \det
+    S =\frac12 \left| \det(M) \right|
+  \end{align*}
+  其中
+  \begin{align*}\renewcommand{\arraystretch}{.9}
+    M\equiv
     \begin{pmatrix}
       x_1 & y_1 & 1\\
       x_2 & y_2 & 1\\
       x_3 & y_3 & 1
-    \end{pmatrix}\right|
+    \end{pmatrix}
   \end{align*}
 \end{theorem}
 
@@ -132,6 +175,31 @@
   展开可得。
 \end{proof}
 
+\begin{example}[点积就是投影]
+  将上例中的式子改写成如下形式：
+  \begin{align*}
+    \vec a \cdot \frac{\vec b}{\left|\vec b\right|} = \left|\vec a\right|\cos\theta
+  \end{align*}
+  按此式及下图，可知$\vec a$与一个单位向量的点积为$\vec a$在此单位向量方向上投影长度，夹角为锐角时为正，钝角时为负，直角时为零。
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate(O)at(0,0);\coordinate(B)at(4,0);\coordinate(A)at(3,3);\coordinate(C)at(3,0);
+    \draw[->](O)--(B)node[below]{$\vec b$};
+    \draw[->](O)--(A)node[above]{$\vec a$};
+    \draw[help lines](A)--(C);
+    \draw(C)--(O)node[midway,below]{$\vec a\cdot\frac{\vec b}{\left|\vec b\right|}$};
+    \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--A};
+    \tkzDrawPoints(O,C);
+  \end{tikzpicture}
+\end{example}
+
+\begin{example}[Gram-Schmidt正交化]
+  点积(投影)在物理和工程上经常被用于分解向量，即将向量分解为两个或多个互相垂直的分量。常见的Gram-Schmidt正交化过程就用了点积(投影)的思想。
+
+  \color{red}待补充。The geometry of the Gram-Schmidt orthogonalization process
+\end{example}
+
 \begin{example}[平面向量的旋转]
   记$\vec a$是平面上二维向量，其在直角坐标系下的两分量为$a_x$与$a_y$，即
   \begin{align*}
@@ -143,7 +211,7 @@
   现将向量沿坐标原点逆时针旋转$\theta$度，记旋转后得到的向量为$\vec a'$。若分别用复数$z$与$z'$表示向量$\vec a$和$\vec a'$，则有
   \begin{align*}
     z' ={}& z\cdot e^{i\theta} = (\cos\theta + i\sin\theta)\cdot (a_x + i a_y)\\
-       ={}& \cos\theta a_x - \sin\theta a_y + i(\sin\theta a_x + \cos\theta a_y)\\
+       ={}& a_x \cos\theta - a_y \sin\theta + i(a_x \sin\theta + a_y \cos\theta)\\
        ={}& (\cos\theta,\ -\sin\theta)\begin{pmatrix}a_x\\a_y\end{pmatrix} + i
             (\sin\theta,\  \cos\theta)\begin{pmatrix}a_x\\a_y\end{pmatrix}
   \end{align*}
@@ -185,8 +253,39 @@
 \end{example}
 
 \begin{definition}[Perp Dot Product]
-  
+  平面欧氏空间中的向量$\vec a$逆时针旋转$90^\circ$后得到的向量与向量$\vec b$的点积，称为向量$\vec a$与$\vec b$的Perp Dot Product，即
+  \begin{align*}
+    \vec a^\perp \cdot \vec b =
+    \begin{pmatrix}
+      -a_y\\ a_x
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+      b_x\\ b_y
+    \end{pmatrix} =
+    \begin{pmatrix}
+      -a_y & a_x
+    \end{pmatrix}
+    \begin{pmatrix}
+      b_x\\ b_y
+    \end{pmatrix} =
+    a_xb_y - a_yb_x
+  \end{align*}
 \end{definition}
+
+\begin{theorem}
+  平面欧氏空间中任意两向量$\vec a$和$\vec b$，有
+  \begin{align*}
+    \vec a^\perp\cdot \vec b={}&\pm \left|\vec a\right|\cdot\left|\vec b\right|\sin\theta\\
+    \left(\vec a^\perp\cdot \vec b\right)^2 + \left(\vec a\cdot\vec b\right)^2 ={}& \left|\vec a\right|^2 \cdot \left|\vec b\right|^2
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  由$\vec a^\perp$与$\vec b$的夹角为$\pi/2 \pm \theta$，且
+  \begin{align*}
+    \cos\left(\frac\pi2\pm\theta\right)=\mp\sin\theta
+  \end{align*}
+  可得。
+\end{proof}
 
 
 \subsection{叉积}
@@ -203,6 +302,162 @@
   \end{align*}
   其中$\ihat, \jhat, \khat$是三维欧氏空间中正交坐标下的三个单位正交向量。
 \end{definition}
+其中的$\vec i$，$\vec j$和$\vec k$是三维欧氏空间中的一个满足右手法则的单位正交基\footnote{\color{red}需要介绍一下右手法则和正交基吗？}。显然，叉积是满足负交换律和分配律的，即
+\begin{align*}
+  \vec a\times \vec b ={}& - \vec b\times \vec a\\
+  (\vec a + \vec b)\times \vec c ={}& \vec a\times \vec c + \vec b\times \vec c
+\end{align*}
+
+\begin{example}
+  在叉积的定义中，分别令$\vec a$和$\vec b$为$\vec i$，$\vec j$和$\vec k$，容易知道
+  \begin{gather*}
+    \vec i \times \vec i = \vec j\times \vec j=\vec k\times \vec k = 0\\
+    \vec i\times \vec j = \vec k,\quad \vec j\times \vec k = \vec i,\quad \vec k\times \vec i = \vec j
+  \end{gather*}
+
+  同样，对于点积，有
+  \begin{gather*}\setlength\arraycolsep{2pt}\renewcommand*{\arraystretch}{1.0}
+    \begin{array}{cccccccccccc}
+      \vec i & \cdot & \vec i & = & \vec j & \cdot & \vec j & = & \vec k & \cdot & \vec k & = 1\\
+      \vec i & \cdot & \vec j & = & \vec j & \cdot & \vec k & = & \vec k & \cdot & \vec i & = 0
+    \end{array}
+  \end{gather*}
+\end{example}
+
+\begin{theorem}若$\vec a$，$\vec b$，$\vec c$是$\vec i$，$\vec j$和$\vec k$的任一排列，则有
+  \begin{align*}
+    (\vec a\times \vec b)\cdot \vec c = \pm 1
+  \end{align*}
+  正负号取决于$\vec a$，$\vec b$，$\vec c$是满足右手法则还是左手法则。特别的，有
+  \begin{align*}
+    (\vec i\times \vec j)\cdot \vec k =
+    (\vec j\times \vec k)\cdot \vec i =
+    (\vec k\times \vec i)\cdot \vec j = 1
+  \end{align*}
+\end{theorem}
+
+\begin{theorem}三维欧氏空间中任意两非零向量$\vec a$和$\vec b$，有
+  % \begin{align*}\setlength\arraycolsep{2pt}\renewcommand*{\arraystretch}{1.0}
+  %   \begin{array}{cccccc}
+  %     \vec a & \perp     &\vec b &\quad \iff\quad \vec a & \cdot  &\vec b = 0\\
+  %     \vec a & \parallel &\vec b &\quad \iff\quad \vec a & \times &\vec b = 0
+  %   \end{array}
+  % \end{align*}
+  \begin{align*}
+    \vec a \perp     \vec b \iff \vec a \cdot  \vec b = 0,\quad\quad
+    \vec a \parallel \vec b \iff \vec a \times \vec b = 0
+  \end{align*}
+\end{theorem}
+
+\begin{lemma}
+  $\vec a$，$\vec b$，$\vec c$是三维欧氏空间中的三个向量，则
+  \begin{align*}
+    \vec a\cdot (\vec b\times \vec c) =
+    \begin{vmatrix}
+      a_1 & a_2 & a_3\\
+      b_1 & b_2 & b_3\\
+      c_1 & c_2 & c_3
+    \end{vmatrix}
+  \end{align*}
+\end{lemma}
+\begin{proof}[提示]
+  直接计算，有
+  \begin{align*}
+    \vec a\cdot (\vec b\times \vec c) ={}& (a_1\vec i + a_2\vec j + a_3\vec k) \cdot
+    \begin{vmatrix}
+      \vec i & \vec j & \vec k\\
+      b_1 & b_2 & b_3\\
+      c_1 & c_2 & c_3
+    \end{vmatrix}\\
+    ={}& a_1 \begin{vmatrix} b_2 & b_3\\ c_2 & c_3  \end{vmatrix}
+       - a_2 \begin{vmatrix} b_1 & b_3\\ c_1 & c_3  \end{vmatrix}
+       + a_3 \begin{vmatrix} b_1 & b_2\\ c_1 & c_2  \end{vmatrix}
+      =
+      \begin{vmatrix}
+        a_1 & a_2 & a_3\\
+        b_1 & b_2 & b_3\\
+        c_1 & c_2 & c_3
+      \end{vmatrix}
+  \end{align*}
+
+  由此可知，$\forall \vec a, \vec b\in\mathbb{R}^3$，有
+  \begin{align*}
+    \vec a\cdot (\vec a\times \vec b) = \vec b\cdot(\vec a\times \vec b) = 0
+  \end{align*}
+  即叉积与原两向量均垂直。
+\end{proof}
+
+\begin{definition}[右手系]
+  $\mathbb{R}^3$中三个正交向量$\vec u$，$\vec v$和$\vec w$若满足
+  \begin{align*}
+    \vec u \cdot (\vec v\times \vec w) > 0
+  \end{align*}
+  则称此三个正交向量为右手系。反之，若$<0$，则称为左手系。
+\end{definition}
+
+\begin{lemma}
+  $\mathbb{R}^3$中两个非零不平行的向量$\vec a$，$\vec b$，则$(\vec a\times \vec b, \vec a, \vec b)$是右手系统。
+\end{lemma}
+\begin{proof}
+  由$\vec a\not\parallel\vec b$，有$\vec a \times \vec b$为非零向量。由右手系统的定义，有
+  \begin{align*}
+    (\vec a\times \vec b) \cdot (\vec a\times \vec b) = \left| \vec a\times \vec b \right|^2 > 0
+  \end{align*}
+  从而$(\vec a\times \vec b, \vec a, \vec b)$是右手系统。
+\end{proof}
+
+\begin{lemma}
+  $\forall \vec a, \vec b\in\mathbb{R}^3$，有
+  \begin{align*}
+    \left|\vec a\times \vec b\right|^2 + (\vec a\cdot \vec b)^2 =
+    \left|\vec a\right|^2 + \left|\vec b\right|^2
+  \end{align*}
+\end{lemma}
+\begin{proof}[提示]
+  直观但繁琐的方法，是直接展开两边对比可得。
+\end{proof}
+
+
+\begin{theorem}
+  记$\vec p\equiv\vec a\times \vec b$，则$\vec a$，$\vec b$和$\vec p$满足右手法则，且$\vec p$同时垂直于$\vec a$和$\vec b$，且外积$\vec p$的模为$\left|\vec a\right|\cdot\left|\vec b\right|\sin\theta$，其中$\theta$是$\vec a$与$\vec b$的夹角。即
+  \begin{gather*}
+    (\vec a\times \vec b)\cdot \vec a = (\vec a\times \vec b)\cdot \vec b = 0\\
+    \left| \vec a\times \vec b\right| = \left| \vec a\right| \cdot \left| \vec b\right| \sin\theta
+  \end{gather*}
+\end{theorem}
+% \begin{proof}[提示]
+%   直接代入，有
+%   \begin{align*}
+%     (\vec a\times \vec b)\cdot \vec a ={}&
+%     \begin{vmatrix}
+%       \vec i & \vec j & \vec k\\
+%       a_1    & a_2    & a_3\\
+%       b_1    & b_2    & b_3
+%     \end{vmatrix}\cdot (a_1\vec i + a_2\vec j + a_3\vec k)\\
+%     ={}& \left[(a_2b_3 - a_3b_2)\vec i + (a_3b_1 - a_1b_3)\vec j + (a_1b_2 - a_2b_1)\vec k\right] \\
+%        & \cdot (a_1\vec i + a_2\vec j + a_3\vec k)\\
+%     ={}& a_1(\underline{a_2b_3} - \cancel{a_3b_2}) + a_2(a_3b_1 - \underline{a_1b_3}) + a_3(\cancel{a_1b_2} - a_2b_1) = 0
+%   \end{align*}
+%   同理有$(\vec a\times \vec b)\cdot \vec b = 0$。
+% \end{proof}
+\begin{proof}
+  综合上面各个引理的，并由$\vec a\cdot\vec b=\left|\vec a\right|\cdot\left|\vec b\right|\cos\theta$可得。
+\end{proof}
+
+由此定理可知，$\left|\vec a\times \vec b\right|$是由两向量为邻边组成的平行四边形的面积，或等价地，是两向量组成的三角形的面积的2倍，如下图所示。
+\begin{center}
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate(O)at(0,0);
+    \coordinate(A)at(4,0);
+    \coordinate(B)at(1.5,2);
+    \coordinate(C)at($(A)+(B)-(O)$);
+    \draw[dashed,help lines](B)--(A)--(C)--(B)--($(O)!(B)!(A)$)node[midway,right,black]{$\left|\vec b\right|\sin\theta$};
+    \draw[->](O)--(A)node[pos=.8,below]{$\vec a$};
+    \draw[->](O)--(B)node[pos=.8,sloped,above]{$\vec b$};
+    \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--B};
+  \end{tikzpicture}
+\end{center}
+
 
 \begin{lemma}[bac--cab Rule\footnote{有个简便的记忆方法：发音为BACK--CAB，意为“后面的出租车”。}]
   $\forall \vec a,\vec b,\vec c\in\mathbb{R}^3$，有
@@ -231,7 +486,20 @@
     s=(\vec a,\vec c),\quad
     t=-(\vec a,\vec b)
   \end{align*}
-  是上式的其中一组解。{\color{red}但不一定是原待定系数方程的解。需要换一个思路。}
+  是上式的其中一组解。{\color{red}但不一定是原待定系数方程的解。需要换一个思路。}对上述的$s,t$，考虑向量$\vec u$
+  \begin{align*}
+    \vec u\equiv \vec b(\vec a,\vec c) - \vec c(\vec a, \vec b)
+  \end{align*}
+  容易验证$\vec u\cdot \vec a=0$，从而$\vec u\perp\vec a$，且$\vec u\perp\vec (\vec b\times\vec c)$，从而存在$\lambda\in\mathbb{R}$，使得
+  \begin{align*}
+    \lambda \vec u = \vec a\times(\vec b\times\vec c)
+  \end{align*}
+  即
+  \begin{align*}
+    \lambda(\vec b(\vec a,\vec c) - \vec c(\vec a, \vec b)) = \vec a\times(\vec b\times\vec c)
+  \end{align*}
+  {\color{red}若$\lambda$是与$\vec a,\vec b,\vec c$无关的常数，则直接将$\ihat, \jhat, \khat$代入可得$\lambda=1$。}
+
 
   % Here's an alternate proof, assuming you know that AxB is always
   % orthogonal to both A and B, and a few more facts. It may or may not be
@@ -262,7 +530,7 @@
   % C, and why (and perhaps a rough idea of how) those somethings should
   % depend on A.
 
-  考虑满足右手法则的单位正交基
+  下面是另外一种方法。考虑满足右手法则的单位正交基
   \begin{align*}
     \ihat \equiv \frac{\vec b}{\left|\vec b\right|},\quad
     \jhat \equiv \frac{\vec b^\perp}{\left|\vec b^\perp\right|},\quad
@@ -304,15 +572,6 @@
   \end{align*}
 \verb+  A quick googling for "proof Lagrange vector triple product" returned a number of articles. Someone named Robert C. Wrede apparently gave a proof which utilized tensor notation, but the one I actually bothered to login to JSTOR for (by Daniel T. Dwyer) proves a related identity instead: [math](A\times B)\cdot (C\times D)=(A\cdot C)(B\cdot D)-(A\cdot D)(B\cdot C)[/math] The article says that the BAC CAB identity follows directly from this, though I'm not seeing it at the moment... Anyway, for the proof of that identity he uses the determinant representations of the triple scalar product to show that [math](A\times B)\cdot (C\times D)=A\cdot (B\times (C\times D))=((A\times B)\times C)\cdot D[/math] Then he again uses the determinant representation, along with the rule for multiplying determinants, to obtain [math][(A\times B)\cdot (C\times D)]^2=[(C\times D)\cdot (A\times B)][(A\cdot C)(B\cdot D)-(A\cdot D)(B\cdot C)][/math] The article's identity follows pretty easily from there... \verb+
 \end{example}
-
-\begin{theorem}
-  记$\vec p\equiv\vec a\times \vec b$，则$\vec a$，$\vec b$和$\vec p$满足右手法则，且$\vec p$同时垂直于$\vec a$和$\vec b$，且外积$\vec p$的模为$\left|\vec a\right|\cdot\left|\vec b\right|\sin\theta$，其中$\theta$是$\vec a$与$\vec b$的夹角。即
-  \begin{gather*}
-    (\vec a\times \vec b)\cdot \vec a = (\vec a\times \vec b)\cdot \vec b = 0\\
-    \left| \vec a\times \vec b\right| = \left| \vec a\right| \cdot \left| \vec b\right| \sin\theta
-  \end{gather*}
-\end{theorem}
-
 
 \begin{example}[垂足坐标]
   $\mathbb{R}^3$不共线的三点$a$，$b$和$c$，求点$c$到过点$a$和$b$的直线的垂足的坐标。
@@ -380,6 +639,16 @@
     \vec d ={}& \vec u + \text{\overrightharp{$\vec{ud}$}} = \vec u + \text{\overrightharp{$\vec{cu}$}} = \vec u + (\vec u - \vec c) = 2\vec u - \vec c\\
            ={}& 2(\vec a + ((\vec c -\vec a)\cdot \vec w) \vec w) - \vec c \qedhere
   \end{align*}
+\end{proof}
+
+\subsection{坐标变换}
+\label{sec:coordinate-transform}
+
+\begin{theorem}[点积与叉积是坐标变换下的不变量]
+  欧氏空间中向量的点积与叉积与坐标系的选择无关，在任意坐标下其点积(或叉积)都为同一个值(或向量)。
+\end{theorem}
+\begin{proof}[提示]
+  \color{red}待补充。
 \end{proof}
 
 \begin{example}[角平分线]
