@@ -212,5 +212,62 @@
 \end{theorem}
 
 
+\begin{example}[垂足坐标]
+  $\mathbb{R}^3$不共线的三点$a$，$b$和$c$，求点$c$到过点$a$和$b$的直线的垂足的坐标。
+\end{example}
+\begin{proof}[提示]
+  记各点对应在的向量为$\vec a$，$\vec b$和$\vec c$。则过点$a$和$b$的直线上的任一点$u$对应的向量$\vec u$都可以写为
+  \begin{align*}
+    \vec u=\vec a + s\cdot(\vec b-\vec a)
+  \end{align*}
+  其中$s\in\mathbb{R}$，表示该点与$a$的有向距离与$a$、$b$两点间距离的比值，与点$b$同侧为正，异侧为负。由此，要确定$c$在$\overline{ab}$上的投影的坐标，只要确定其投影的长度即可。由点积，可知其投影长度$L_{proj,c}$为
+  \begin{alignat*}{3}
+    &&L_{proj,c} ={}& (\vec c-\vec a)\cdot \frac{\vec b - \vec a}{\left| \vec b - \vec a \right|}\\
+    \implies&& s ={}& \frac{L_{proj,c}}{\left| \vec b - \vec a \right|} =
+    \frac{(\vec c-\vec a)\cdot(\vec b - \vec a)}{\left| \vec b - \vec a \right|^2}
+  \end{alignat*}
+  若记$\vec w$为$\vec b-\vec a$方向的单位向量，即
+  \begin{align*}
+    \vec w\equiv \frac{\vec b - \vec a}{\left| \vec b - \vec a \right|}
+  \end{align*}
+  则$c$在$\overline{ab}$上的投影点$u_{proj,c}$对应的向量$\vec u_{proj,c}$可按下式计算得到：
+  \begin{align*}
+    L_{proj,c} ={}& (\vec c-\vec a)\cdot \vec w, \quad
+             s ={} \frac{L_{proj,c}}{\left| \vec b - \vec a \right|}\\
+    \vec u_{proj,c}={}& \vec a + \frac{((\vec c-\vec a)\cdot\vec w)(\vec b-\vec a)}{\left| \vec b - \vec a \right|}
+                        =\vec a + ((\vec c-\vec a)\cdot\vec w)\vec w
+  \end{align*}
+  这是从线的方程出发，步骤较多，事实上若由下图出发，则可直接得到结论。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      % \coordinate(O)at(-2,-3);
+      \coordinate[label=below left:$a$](A)at(0,0);
+      \coordinate[label=right:$b$](B)at(4,0);
+      \coordinate[label=above:$c$](C)at(3,2);
+      \coordinate[label=below:$u$](U)at($(A)!(C)!(B)$);
+      % \draw[help lines,->](O)--(A)node[midway,black]{$\vec a$};
+      % \draw[help lines,->](O)--(B)node[midway,black]{$\vec b$};
+      % \draw[help lines,->](O)--(C)node[midway,black]{$\vec c$};
+      \draw[->](A)--(C)node[midway,sloped,above]{$\vec c - \vec a$};
+      \draw[->](U)--(B);%node[midway,below,pos=1]{$\vec b - \vec a$};
+      \draw(A)--(U)node[midway,above]{$\vec w$} node[midway,below]{$(\vec c-\vec a)\cdot \vec w$};
+      \draw[dashed,help lines](C)--(U);
+      \tkzDrawPoints(A,U);
+    \end{tikzpicture}
+  \end{center}
+  图中点$u$为$c$在$\overline{ab}$上的投影点，则\overrightharp{$\vec{au}$}的长度为
+  \begin{align*}
+    \left|\text{\overrightharp{$\vec{au}$}}\right| = (\vec c - \vec a)\cdot \vec w \implies
+    \text{\overrightharp{$\vec{au}$}} = ((\vec c - \vec a)\cdot \vec w) \vec w
+  \end{align*}
+  从而
+  \begin{align*}
+    \vec u = \vec a + \text{\overrightharp{$\vec{au}$}} = \vec a + ((\vec c -\vec a)\cdot \vec w) \vec w
+  \end{align*}
+  此公式除了在计算\overrightharp{$\vec{ab}$}的单位向量$\vec w$时有一次开方运算外，其余都是加减乘除四则运算。
+\end{proof}
+
+
+
 
 
