@@ -421,6 +421,15 @@
 \renewcommand{\baselinestretch}{1.1}
 \renewcommand*{\arraystretch}{1.5}
 
+% make \arraystrech in pmatrix/vmatrix/bmatrix in amsmath default to .9
+\makeatletter
+\renewcommand*\env@matrix[1][.9]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
 \usepackage{graphicx}%\resizebox
 \graphicspath{{images/}} %Setting the graphicspath
 
