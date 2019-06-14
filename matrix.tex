@@ -1,5 +1,5 @@
 
-\chapter{矩阵}
+\chapter{矩阵与向量}
 \label{chap:matrix}
 
 通俗地讲，矩阵就是$n\times m$个东西排列成一个$n\times m$的矩形阵列。在数学上，阵列里的东西通常是各种各样的“数”，实数、复数、函数等。
@@ -88,6 +88,63 @@
   \vec a\cdot \vec b={}&\vec b\cdot \vec a\\
   (\vec a + \vec b)\cdot \vec c ={}& \vec a\cdot \vec c + \vec b\cdot \vec c
 \end{align*}
+点积经过抽象又发展成了内积，由于点积与内积的相似性，内积空间理论中有很多与平面几何类似的结论。
+
+\begin{example}[向量空间，线性空间，Vector Space，Linear Space]
+  一条直线是一个一维的线性空间，一个平面是一个二维的线性空间，通常的三维欧氏空间是一个三维的线性空间。
+
+  线性空间的定义涉及到线性组合。$n$个向量$\vec a_i$与$n$个实数系数$\alpha_i$的加权和，即
+  \begin{align*}
+    \sum_i \alpha_i \vec a_i
+  \end{align*}
+  上式称为向量组$\vec a_i$的一个线性组合。根据研究的需要，通常系数也可以从实数扩展到复数。
+
+  线性空间通常是指由若干个向量$\{\vec a_i|i=1,2,\cdots,n\}$的所有线性组合而成的向量的集合，以及在这此集合中的向量上装配的向量操作(如线性组合)。单纯的线性空间一般不涉及拓扑结构。若在线性空间中再给向量赋予内积、距离等拓扑概念，线性空间就变成了巴拿赫(Banach)空间、希尔伯特(Hilbert)空间(也叫内积空间)、距离空间等。
+
+  由$\{\vec a_i|i=1,2,\cdots,n\}$线性组合而得到的线性空间也称为由这些向量生成(张成)的空间，这些向量就是此空间的一组基。
+
+  显然线性空间的基不是唯一的，因为往任意一组基里再额外添加一个该线性空间中的任意向量后仍然是该空间的一组基。因为基中向量的个数下限是0，因此存在一组基，其中的向量数量最少，此基的向量数量就是线性空间的维数。
+
+  比如直线是一维的，因为其上任意一个非零向量可以张成该直线。平面是二维的，因为只要平面上两个不平行的向量就可以张成该平面。同样，立体空间是三维的。
+
+  在没有配备点积\footnote{在内积空间中，点积又称为内积。}、距离等拓扑概念之前，线性空间是没有角度、垂直等概念的。当配备了拓扑结构后，若该空间的一组基中的向量两两垂直(也就是正交)，则称此基为正交基。
+\end{example}
+
+\begin{example}[线性相关，Linearly Dependent]
+  $n$个向量是线性相关的，是指存在不全为零的实数$\alpha_i$，使得$\sum_i\alpha_i\vec a_i$为零向量。
+
+  显然零向量与任意向量线性相关。三维欧氏空间中两向量线性相关等价于两者平行，三向量线性相关等价于三向量共面。$n$个不线性相关的非零向量可以张成一个$n$维空间。
+
+  线性空间中两组非线性相关的、非零向量基，其向量个数相等。此问题的证明一般涉及到矩阵的秩和初等变换等知识，若看不明白，就请直接跳过。假设$\{\vec a_i|i=1,2,\cdots,n\}$和$\{\vec b_i|i=1,2,\cdots,m\}$是两组由非线性相关非零向量组成的基，且$n<m$，则对于前$n$个$\vec b_i$，存在实数矩阵使得
+  \begin{align*}
+    \begin{pmatrix}\vec b_1 \\ \vec b_2 \\ \vdots \\ \vec b_n\end{pmatrix}=
+    \begin{pmatrix}
+      \alpha_{11} & \alpha_{12} & \cdots & \alpha_{1n}\\
+      \alpha_{21} & \alpha_{22} & \cdots & \alpha_{2n}\\
+      \vdots      & \vdots      & \vdots & \vdots     \\
+      \alpha_{n1} & \alpha_{n2} & \cdots & \alpha_{nn}
+    \end{pmatrix}
+    \begin{pmatrix}\vec a_1 \\ \vec a_2 \\ \vdots \\ \vec a_n\end{pmatrix}
+  \end{align*}
+  上式中的实系数矩阵必须是満秩的，也就是可逆的，否则{\color{red}怎样？某一行全变为零，又如何？矩阵变，b也在变}
+
+  由系数矩阵的可逆性，存在其逆矩阵，使得
+  \begin{align*}
+    \begin{pmatrix}\vec a_1 \\ \vec a_2 \\ \vdots \\ \vec a_n\end{pmatrix}=
+    \begin{pmatrix}
+      \beta_{11} & \beta_{12} & \cdots & \beta_{1n}\\
+      \beta_{21} & \beta_{22} & \cdots & \beta_{2n}\\
+      \vdots     & \vdots     & \vdots & \vdots    \\
+      \beta_{n1} & \beta_{n2} & \cdots & \beta_{nn}
+    \end{pmatrix}
+    \begin{pmatrix}\vec b_1 \\ \vec b_2 \\ \vdots \\ \vec b_n\end{pmatrix}
+  \end{align*}
+  即$\vec a_i$可由$\{\vec b_i|i=1,2,\cdots,n\}$生成，而对于$j>k$，$\vec b_j$可由$\vec a_i$线性组合而成，进而可由$\{\vec b_i|i=1,2,\cdots,n\}$组合而成，即存在实系数$\gamma_i$，使得
+  \begin{align*}
+    \vec b_j = \sum_{i=1}^n \gamma_i \vec b_i,\quad(j>n)
+  \end{align*}
+  这与非线性相关矛盾，从而必有$n=m$。
+\end{example}
 
 \begin{theorem}
   三维欧氏空间中任意两向量，有
@@ -142,7 +199,79 @@
 \begin{example}[Gram-Schmidt正交化]
   点积(投影)在物理和工程上经常被用于分解向量，即将向量分解为两个或多个互相垂直的分量。常见的Gram-Schmidt正交化过程就用了点积(投影)的思想。
 
-  \color{red}待补充。The geometry of the Gram-Schmidt orthogonalization process
+  %{\color{red}待补充。The geometry of the Gram-Schmidt orthogonalization process}
+
+  通过$n$个非线性相关的向量$\vec a_i$，找到一组($n$个)互相正交(就是点积为零，互相垂直)的单位向量。其过程见图~\ref{fig:Gram-Schmidt-orthogonalization-process}
+  \begin{enumerate}
+  \item 随便找一个将其单位化(normalized)，记为$\vec b_1$，比如令
+    \begin{align*}
+      \vec b_1\equiv \frac{\vec a_1}{|\vec a_1|}
+    \end{align*}
+
+  \item 假设前$k$个$\vec a_i$已经单位正交化成了$\vec b_i$，通过$\vec a_{k+1}$找出第$k+1$个$\vec b_{k+1}$。将$\vec a_{k+1}$分解，扣除其在$\vec b_i(1\le i\le k)$上的分量，剩余的分量自然就与前$k$个$\vec b_i$垂直，即令
+    \begin{align*}
+      \vec a_{k+1}^\perp = \vec a_{k+1} - \sum_{i=1}^k (\vec a_{k+1}\cdot\vec b_i)\vec b_i
+    \end{align*}
+    则
+    \begin{align*}
+      (\vec a_{k+1}^\perp \cdot \vec b_i) = 0, \quad(1\le i\le k)
+    \end{align*}
+    从而令
+    \begin{align*}
+      \vec b_{k+1} = \frac{\vec a_{k+1}^\perp}{|\vec a_{k+1}^\perp|}
+    \end{align*}
+    则$\vec b_i\ (1\le i\le k+1)$是$k+1$个互相正交的单位向量。重复此步骤直到$n$个都处理完。
+  \end{enumerate}
+
+  \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(0,0)}]
+        \coordinate[label=below left:$O$](O)at(0,0);\coordinate(A)at(3,1);\coordinate(B)at(3,4);\coordinate(C)at(2,5);
+        \coordinate(A')at($.5*(A)$);
+        \coordinate(B')at($(O)!1!90:(A')$);
+        \coordinate(PBB')at($(O)!(B)!(B')$);
+        \coordinate(PBA')at($(O)!(B)!(A')$);
+        \draw[dashed,help lines](A)--(PBA')--(B)--(PBB')--(B');
+        \draw[->,line width=1.5pt](O)--(B')node[midway,left]{$\vec b_2$};
+        \draw[->,line width=1.5pt](O)--(A')node[midway,below]{$\vec b_1$};
+        \draw[->](A')--(A)node[below]{$\vec a_1$};
+        \draw[->](O)--(B)node[above]{$\vec a_2$};
+        \draw[->](O)--(C)node[above]{$\vec a_3$};
+        \tkzMarkRightAngle[help lines,dashed](O,PBA',B)
+        \tkzMarkRightAngle[help lines,dashed](O,PBB',B)
+      \end{scope}
+      \begin{scope}[shift={(6,0)}]
+        \coordinate[label=below left:$O$](O)at(0,0);\coordinate(A)at(3,1);\coordinate(B)at(3,4);\coordinate(C)at(2,5);
+        \coordinate(A')at($.5*(A)$);
+        \coordinate(B')at($(O)!1!90:(A')$);
+        \coordinate(PBB')at($(O)!(B)!(B')$);
+        \coordinate(PBA')at($(O)!(B)!(A')$);
+        \coordinate(P)at(2,3);
+        \coordinate(CA)at($(O)!(P)!(A')$);
+        \coordinate(CB)at($(O)!(P)!(B')$);
+        \coordinate(CZ)at($(C)+(O)-(P)$);
+        \coordinate(C')at($.8*(CZ)$);
+        \draw[dashed,help lines](A)--(PBA')--(B)--(PBB')--(B')
+        (CA)--(C)--(CB)
+        (C')--(CZ)--(C)--(P)--(CA) (O)--(P)--(CB);
+        \draw[->,line width=1.5pt](O)--(C')node[right]{$\vec b_3$};
+        \draw[->,line width=1.5pt](O)--(B')node[midway,left]{$\vec b_2$};
+        \draw[->,line width=1.5pt](O)--(A')node[midway,below]{$\vec b_1$};
+        \draw[->](A')--(A)node[below]{$\vec a_1$};
+        \draw[->](O)--(B)node[above]{$\vec a_2$};
+        \draw[->](O)--(C)node[above]{$\vec a_3$};
+        \tkzMarkRightAngle[help lines,dashed](O,PBA',B)
+        \tkzMarkRightAngle[help lines,dashed](O,PBB',B)
+        \tkzMarkRightAngle[help lines,dashed](O,P,C)
+        \tkzMarkRightAngle[help lines,dashed](O,CA,P)
+        \tkzMarkRightAngle[help lines,dashed](O,CB,P)
+      \end{scope}
+    \end{tikzpicture}
+
+    \caption{Gram-Schmidt正交化过程}
+    \label{fig:Gram-Schmidt-orthogonalization-process}
+  \end{figure}
 \end{example}
 
 \begin{example}[平面向量的旋转]
@@ -372,6 +501,16 @@
   \end{align*}
   \color{red}补一个示意图。
 \end{example}
+
+\begin{question}
+  关于$\mathcal{R}^3$ 中始点在原点的三向量%$\vec a, \vec b,\vec c$
+  ，以下说法互相等价：
+  \begin{enumerate}
+  \item 三向量共面。
+  \item 三向量的混合积为零。
+  \item 三向量组成的矩阵非满秩。\color{red}要补充下矩阵的秩。
+  \end{enumerate}
+\end{question}
 
 \begin{definition}[右手系]
   $\mathbb{R}^3$中三个正交向量$\vec u$，$\vec v$和$\vec w$若满足
