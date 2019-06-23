@@ -2,6 +2,120 @@
 \chapter{三角形与三角函数}
 \label{chap:triangle-and-trigonometric-functions}
 
+\section{勾股定理}
+\label{sec:pythagorean-theorem}
+
+\begin{theorem}[勾股定理，毕达哥拉斯定理，Pythagorean Theorem]
+  直角三角形中，斜边的平方等于两直角边的平方和。
+\end{theorem}
+\begin{proof}[提示]
+  勾股定理作为平面几何上的一个非常重要的基础定理，经过多年的沉淀，人们发现了多种多样的证明方法，比如下图中的一种。
+  \begin{center}
+    \begin{tikzpicture}[scale=.4]
+      \begin{scope}
+        \coordinate(A)at(0,0);\coordinate(B)at(6,0);\coordinate(C)at(6,6);\coordinate(D)at(0,6);
+        \coordinate(A')at(4,0);\coordinate(B')at(6,4);\coordinate(C')at(2,6);\coordinate(D')at(0,2);
+        \fill[color=blue!10](A)--(A')--(D')--cycle
+                            (B)--(B')--(A')--cycle
+                            (C)--(C')--(B')--cycle
+                            (D)--(D')--(C')--cycle;
+        \draw(A) --(A')node[midway,below]{$a\vphantom{b}$}
+                 --(B) node[midway,below]{$b$}
+                 --(B')node[midway,right]{$a$}
+                 --(C) node[midway,right]{$b$}
+                 --(C')node[midway,above]{$a$}
+                 --(D) node[midway,above]{$b$}
+                 --(D')node[midway,left] {$a$}
+                 --(A) node[midway,left] {$b$}
+             (A')--(B')node[midway,sloped,above]{$c$}
+                 --(C')node[midway,sloped,below]{$c$}
+                 --(D')node[midway,sloped,below]{$c$}
+                 --(A')node[midway,sloped,above]{$c$};             
+      \end{scope}
+      \begin{scope}[shift={(9,3.5)}]
+        \node[right]at(0,0){
+          \begin{minipage}{.5\linewidth}
+            \begin{align*}
+                        &&(a + b)^2  ={}& c^2 + 4\times \frac12ab\\
+              &\implies{}& a^2 + b^2 ={}& c^2
+            \end{align*}
+          \end{minipage}};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+  将图中大正方形拆成4个小直角三角形和一个小正方形，求其面积可得。如果将上图沿边长为$c$的正方形的一条对角线切开，考虑得到的梯形的面积也能得出结论。这种切开的证明方法是第20任美国总统加菲尔德(James Abram Garfield)发现的，故也称之为“总统证法”。
+\end{proof}
+
+在西方，普遍认为这个定理是毕达哥拉斯(Pythagoras)先发现的。据说毕达哥拉斯在发现这个定理之后非常兴奋，宰了一百头牛来庆祝，所以这个定理也叫“百牛定理”。而在中国，有记载称周朝的商高发现了此定理，故在中国也称之为“商高定理”。
+
+中国古代称直角三角形为勾股形，两直角边中较小者为勾，较长者为股，斜边为弦，所以中国人也称这个定理为勾股定理。商高曾说过“勾广三，股修四，经隅五”，此即后人所说的“勾三股四弦五”的来源。
+
+\begin{question}
+  猜猜赵爽在《九章算术》中下面描述的意思：“勾股各自乘，并之为玄实。开方除之，即玄\footnote{“玄”通“弦”。}。”
+\end{question}
+
+\section{三角函数}
+\label{sec:trigometric-functions}
+
+三角函数中最基本的是正弦与余弦，其余的都可是可以通过正弦与余弦给出。实际上正弦余弦在绝对值上也是可以互相给出的，只是符号(正负号)无法通过对方得出。
+
+\begin{definition}[正弦，余弦]
+  在直角坐标系中，单位圆上给定一条半径，记$x$轴到该半径的夹角为$\theta$，则
+  \begin{enumerate}
+  \item 半径在$x$轴方向上的有向投影\footnote{投影落在$x$正半轴为正，落在负半轴为负。}称为$\theta$的正弦值；
+  \item 半径在$y$轴方向上的有向投影\footnote{投影落在$y$正半轴为正，落在负半轴为负。}称为$\theta$的余弦值。
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}[正切，余切，反正弦，反余弦]
+  \begin{align*}
+    \tan\theta\equiv{}&\frac{\sin\theta}{\cos\theta},& \cot\theta\equiv{}&\frac{\cos\theta}{\sin\theta}, &
+    \csc\theta\equiv{}&\frac{1}{\sin\theta},         & \sec\theta\equiv{}&\frac{1}{\cos\theta}
+  \end{align*}
+\end{definition}
+
+\subsection{基本性质}
+\label{sec:basic-properties-of-trigonometric-functions}
+
+\mbox{}\par\normalfont
+% \mbox{}\par%prevent bold font if figure right after section command
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate[label=below left:$O$](O)at(0,0);
+    \coordinate[label=above right:$C$](C)at(40:3);\coordinate(C1)at($(C)!.5!90:(O)$);
+    \coordinate(A1)at(1,0);\coordinate(B1)at(0,1);
+    \tkzInterLL(C,C1)(O,A1)\tkzGetPoint{A}\node[below right] at(A){$A$};
+    \tkzInterLL(C,C1)(O,B1)\tkzGetPoint{B}\node[above]at(B){$B$};
+    \coordinate[label=below:$D$](D)at($(O)!(C)!(1,0)$);
+    \coordinate(E)at($(O)!(C)!(B)$);
+    \draw[help lines](O)circle(3);
+    \draw[dashed](C)--(E)node[pos=.55,above]{$\cos\theta$};
+    \draw(A)--(D)
+            --(O)node[midway,below]{$\cos\theta$}
+            --(B)node[midway,left]{$\csc\theta$}
+            --(C)node[midway,sloped,above]{$\cot\theta$}
+            --(A)node[midway,sloped,above]{$\tan\theta$}
+         (O)--(C)node[midway,above,sloped]{1};
+    \draw(D)--(C)node[pos=.4,sloped,above]{$\sin\theta$};
+    \tkzMarkRightAngle(A,O,B)\tkzMarkRightAngle(C,D,A)\tkzMarkRightAngle(O,C,B)\tkzMarkRightAngle(C,E,O)
+    \tkzDrawPoints(O,A,B,C,D)
+    \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--C};
+    \draw[|<->|]($(O)-(0,1)$)--($(A)-(0,1)$)node[midway,fill=white]{$\sec\theta$};
+  \end{tikzpicture}
+  \caption{三角函数在单位圆上的表示}
+  \label{fig:trigonometric-funtion-on-unit-circle}
+\end{figure}
+
+图~\ref{fig:trigonometric-funtion-on-unit-circle}中的圆是单位圆，当$0<\theta<90^\circ$时可在图中找到各基本三角函数的值。由图，根据勾股定理容易得到到一些性质：
+\begin{gather*}
+  \sin^2\theta + \cos^2\theta = 1,\quad \csc^2\theta=\cot^2\theta+1,\quad \sec^2\theta=\tan^2\theta+1\\
+  \sec^2\theta+\csc^2\theta = (\cot\theta+\tan\theta)^2\\
+  \tan^2\theta=\sin^2\theta+(\sec\theta-\cos\theta)^2\\
+  \cot^2\theta=\cos^2\theta+(\csc\theta-\sin\theta)^2
+\end{gather*}
+
 \section{余弦定理}
 \label{sec:law-of-cosines}
 
@@ -1245,50 +1359,8 @@
   由塞瓦定理，可知$AX'$，$BY'$，$CZ'$三线共点。
 \end{proof}
 
-\section{三角函数}
-\label{sec:trigometric-functions}
-
-\subsection{基本性质}
-\label{sec:basic-properties-of-trigonometric-functions}
-
-\mbox{}\par\normalfont
-% \mbox{}\par%prevent bold font if figure right after section command
-
-\begin{figure}[htbp]
-  \centering
-  \begin{tikzpicture}[scale=1.0]
-    \coordinate[label=below left:$O$](O)at(0,0);
-    \coordinate[label=above right:$C$](C)at(40:3);\coordinate(C1)at($(C)!.5!90:(O)$);
-    \coordinate(A1)at(1,0);\coordinate(B1)at(0,1);
-    \tkzInterLL(C,C1)(O,A1)\tkzGetPoint{A}\node[below right] at(A){$A$};
-    \tkzInterLL(C,C1)(O,B1)\tkzGetPoint{B}\node[above]at(B){$B$};
-    \coordinate[label=below:$D$](D)at($(O)!(C)!(1,0)$);
-    \coordinate(E)at($(O)!(C)!(B)$);
-    \draw[help lines](O)circle(3);
-    \draw[dashed](C)--(E)node[pos=.55,above]{$\cos\theta$};
-    \draw(A)--(D)
-            --(O)node[midway,below]{$\cos\theta$}
-            --(B)node[midway,left]{$\csc\theta$}
-            --(C)node[midway,sloped,above]{$\cot\theta$}
-            --(A)node[midway,sloped,above]{$\tan\theta$}
-         (O)--(C)node[midway,above,sloped]{1};
-    \draw(D)--(C)node[pos=.4,sloped,above]{$\sin\theta$};
-    \tkzMarkRightAngle(A,O,B)\tkzMarkRightAngle(C,D,A)\tkzMarkRightAngle(O,C,B)\tkzMarkRightAngle(C,E,O)
-    \tkzDrawPoints(O,A,B,C,D)
-    \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--C};
-    \draw[|<->|]($(O)-(0,1)$)--($(A)-(0,1)$)node[midway,fill=white]{$\sec\theta$};
-  \end{tikzpicture}
-  \caption{三角函数在单位圆上的表示}
-  \label{fig:trigonometric-funtion-on-unit-circle}
-\end{figure}
-
-图~\ref{fig:trigonometric-funtion-on-unit-circle}中的圆是单位圆，当$0<\theta<90^\circ$时可在图中找到各基本三角函数的值。由图，根据勾股定理容易得到到一些性质：
-\begin{gather*}
-  \sin^2\theta + \cos^2\theta = 1,\quad \csc^2\theta=\cot^2\theta+1,\quad \sec^2\theta=\tan^2\theta+1\\
-  \sec^2\theta+\csc^2\theta = (\cot\theta+\tan\theta)^2\\
-  \tan^2\theta=\sin^2\theta+(\sec\theta-\cos\theta)^2\\
-  \cot^2\theta=\cos^2\theta+(\csc\theta-\sin\theta)^2
-\end{gather*}
+\section{三角函数--续}
+\label{sec:trigonometric-functions-cont.}
 
 \subsection{和差公式}
 \label{sec:sum-and-difference-formula}

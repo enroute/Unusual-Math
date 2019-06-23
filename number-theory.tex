@@ -895,7 +895,7 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \label{sec:perfect-squares}
 
 \begin{example}[5结尾的两位数的平方]
-  记数字$a$为$1,2,\cdots,9$中的一个，则两位数$\bar{a5}\equiv 10a + 5$的平方为$a(a+1)$与$25$拼接的结果。如
+  记数字$a$为$1,2,\cdots,9$中的一个，则两位数$\overline{a5}\equiv 10a + 5$的平方为$a(a+1)$与$25$拼接的结果。如
   \begin{align*}
     3\times(3+1) = 12, \implies 35^2 = 1225\\
     4\times(4+1) = 20, \implies 45^2 = 2025
@@ -1021,9 +1021,10 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 
     假设当$m\ge3$时，$k\le m, a_0=3k$都满足要求。则当$k=m+1$时，取数列$b_t = 3(m+1) + 3t(t=0,1,2,\cdots)$中的第一个完全平方数，记为$b_N = s^2$，则$a_N = s$。下面估算$s$的大小。由
     \begin{align*}
-      (3m)^2 - 3(m+1) = (3m)^2 - 2(3m) + 1 + 3m - 4 = (3m-1)^2 + 3(m - 2) + 2 > 0
+      (3m)^2 - 3(m+1) ={}& (3m)^2 - 2(3m) + 1 + 3m - 4\\
+      ={}& (3m-1)^2 + 3(m - 2) + 2 > 0
     \end{align*}
-    所以$(3m)^2$在数列$b_t$中，即$s\le 3m$，即从此项开始，数列跳到了一个更小的$a_0=3k$开始数列，而按假设以此$a_0$开始的数列是满足要求的，从而$a_0=3(m+1)$开始的数列也是满足要求的。
+    所以$(3m)^2$在数列$b_t$中，即$s\le 3m$，即从此项开始，数列跳到了一个更小的$a_0=3k$开始数列，而按假设以此$a_0$开始的数列是满足要求的，从而$a_0=3(m+1)$开始的数列也是满足要求的。\qedhere
   \end{enumerate}
 \end{proof}
 
@@ -1055,7 +1056,7 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
     R_k \equiv{}& 4F_k\times10^{k+2} + 3\times10^{k+1} + 5F_k\times10 + 6\\
              ={}& F_k\left(4\times10^{k+2} + 50\right) + 3\times 10^{k+1} + 6
   \end{align*}
-  则前面已经验证的前个数，有
+  则由前面已经验证的几个数，有
   \begin{align*}
     L_1^2 = R_0, \quad L_2^2 = R_1, \quad L_3^2 = R_2, \quad L_4^2 = R_3
   \end{align*}
@@ -1064,7 +1065,7 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
   \begin{align*}
     L_{m+1}^2 ={}& \left(6F_{m+1}\right)^2 = \left(6(10F_m+1) \right)^2 = \left( 10\times 6F_m + 6 \right)^2 = \left( 10L_m + 6 )\right)^2 \\
              ={}& 100L_m^2 + 120L_m + 36\\
-             ={}& 100R_{m-1} + 720F_m + 36
+             ={}& \underline{100R_{m-1}} + 720F_m + 36
   \end{align*}
   目标是将上式变为$R_m$，先要找到$R_m$与$R_{m-1}$的关系，而$R_m$是由$F_m$表示的，故寻找$100R_{m-1}$关于$F_m$的表达式。由$R_m$的定义，有
   \begin{align*}
@@ -1076,7 +1077,7 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
   \end{align*}
   代入$L_{m+1}^2$的表达式，则有
   \begin{align*}
-    L_{m+1}^2 ={}& F_m\left( 4\times10^{m+2} + 500\right) - 10^{m+2} + 100 + 720F_m + 36\\
+    L_{m+1}^2 ={}& \underline{F_m\left( 4\times10^{m+2} + 500\right) - 10^{m+2} + 100} + 720F_m + 36\\
              ={}& F_m\left( 4\times10^{m+2} + 50 \right) + (450 + 720)F_m - 10^{m+2} + 136
   \end{align*}
   观察上式右边与$R_m$的区别，若有
@@ -1106,6 +1107,112 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
     {\underbrace{9999\cdots 99}_{n\text{个}}}^2 ={}&
     ( 1\underbrace{0000\cdots 00}_{n\text{个}} - 1 )^2\\
     ={}& 1\underbrace{0000\cdots 00}_{2n\text{个}} - 2\underbrace{0000\cdots 00}_{n\text{个}} + 1 &&\qedhere
+  \end{align*}
+\end{proof}
+
+\subsection{$xxxayyyb$ 形式的完全平方数}
+\label{sec:square-number-hasing-form-of-xxxayyyb}
+
+上面的几例可以归结为求数字$a,b,x,y$，使得数列
+\begin{align*}
+  \overline{ab},\ \overline{xayb},\ \overline{xxayyb},\ \overline{xxxayyyb},\ \cdots
+\end{align*}
+中每一个都是某一种数，比如完全平方数。
+
+\begin{theorem}
+  当且仅当存在$r,t\in\mathbb{Z}$使得
+  \begin{align*}
+    9 \times\overline{ab} ={}& (10r+t)^2\\
+    x={}& r^2\\
+    \overline{b0}-\overline{yb}={}&t^2
+  \end{align*}
+  时，上述数列中的每一项都是完全平方数。
+\end{theorem}
+
+实际上，考虑$\overline{ab}$为完全平方数，从而$\overline{ab}$只能是以下几个：
+% \begin{gather*}
+%   \begin{array}{cccccccccc}
+%     01,& 04,& 09,& 16,& \cancel{25},& \cancel{36},& 49,& \cancel{64},& \cancel{81},& 00
+%   \end{array}
+% \end{gather*}
+% 按上面的定理，排除$x$不是完全平方数的情况，$\overline{ab}$只能是
+% \begin{gather*}
+%   \begin{array}{cccccc}
+%     01,& 04,& 09,& 16,& 49,& 00
+%   \end{array}
+% \end{gather*}
+\begin{gather*}
+  \begin{array}{cccccccccc}
+    01,& 04,& 09,& 16,& {25},& {36},& 49,& {64},& {81},& 00
+  \end{array}
+\end{gather*}
+% 按上面的定理，排除$x$不是完全平方数的情况，$\overline{ab}$只能是
+% \begin{gather*}
+%   \begin{array}{cccccc}
+%     01,& 04,& 09,& 16,& 49,& 00
+%   \end{array}
+% \end{gather*}
+
+下面是此定理的证明。
+\begin{proof}[提示]
+  \color{red}待定。
+
+  \begin{enumerate}
+  \item 充分性。
+  \end{enumerate}
+\end{proof}
+
+这个定理的证明有点复杂，可以换一个现代一点的工具。用计算机枚举，容易知道$\overline{xayb}$和$\overline{xxayyb}$同时为完全平方数的四位数$\overline{xayb}$只有以下几个：
+\begin{align*}
+  1024={}& 32^2 & 110224={}& 332^2& \quad  4225={}& 65^2 & 442225={}& 665^2\\
+  1089={}& 33^2 & 110889={}& 333^2& \quad  4356={}& 66^2 & 443556={}& 666^2\\
+  1156={}& 34^2 & 111556={}& 334^2& \quad  4489={}& 67^2 & 444889={}& 667^2\\
+  1225={}& 35^2 & 112225={}& 335^2& \quad  4624={}& 68^2 & 446224={}& 668^2\\
+  9409={}& 97^2 & 994009={}& 997^2\\
+  9604={}& 98^2 & 996004={}& 998^2\\
+  9801={}& 99^2 & 998001={}& 999^2
+\end{align*}
+从而只需要验证定理对这几个数是满足的即可。可以观察到这里的数可以分为三组，其中每组的第一个数$32,65,97$满足
+\begin{align*}
+  65=32\times 2 + 1, \quad 97=32\times 3+1
+\end{align*}
+
+
+\begin{question}[苏联，奥尔德尼基茨市，3届]
+  证明$N=\underbrace{11\cdots1}_{n\text{个}}\underbrace{22\cdots2}_{n+1\text{个}}$是完全平方数，并求$\sqrt N$。
+\end{question}
+\begin{proof}[提示]
+  观察前几个：
+  \begin{align*}
+    n=1\implies N=122
+  \end{align*}
+  \color{red}根本就不是完全平方数！
+\end{proof}
+
+\begin{question}[重庆，1983，初中]
+  %% \vphantom{\underbrace{4}_{n}} outside the argument of \sqrt{\smash[b]{}} is necessary to tell TeX what vertical space is occupied. 
+  $P=\sqrt{\smash[b]{\underbrace{11\cdots1}_{2n\text{个}} - \underbrace{22\cdots2}_{n\text{个}}}}\vphantom{\underbrace{y}_{y}},\ (n\in\mathbb{Z}^+)$，则
+  
+  \testxxfive{$P$为无理数；}
+  {$P=11\cdots 1$；}
+  {$P=22\cdots 2$；}
+  {$P=33\cdots 3$；}
+  {$P=77\cdots 7$。}
+\end{question}
+\begin{proof}[提示]
+  选择题，最简单的方法就是试。用$n=1,2,3,\cdots$去试：
+  \begin{align*}
+    n=1 & \implies P=\sqrt{11-2}=3
+    % n=2 & \implies P=\sqrt{1111-22}=33\\
+    % n=3 & \implies P=\sqrt{111111-222}=333
+  \end{align*}
+  选(D)。具体证明可用归纳法。或者
+  \begin{align*}
+    \underbrace{11\cdots1}_{2n\text{个}} - \underbrace{22\cdots2}_{n\text{个}} ={}&
+    (1\underbrace{00\cdots0}_{n-1\text{个}}1)\times \underbrace{11\cdots1}_{n\text{个}} - 2\times \underbrace{11\cdots1}_{n\text{个}}\\
+    ={}& \underbrace{99\cdots9}_{n\text{个}} \times \underbrace{11\cdots1}_{n\text{个}}\\
+    ={}& 9\times \underbrace{11\cdots1}_{n\text{个}} \times \underbrace{11\cdots1}_{n\text{个}}\\
+    ={}& (3\times \underbrace{11\cdots1}_{n\text{个}})^2 \qedhere
   \end{align*}
 \end{proof}
 
@@ -1153,7 +1260,7 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
   }
 \end{example}
 \begin{proof}[提示]
-  9个数的全排列总共有$9!=362880$，这个量级用计算机作枚举是非常快的，可以轻松找到所有解的。
+  9个数的全排列总共有$9!=362880$，这个量级用计算机作枚举是非常快的，可以轻松找到所有的解。
 \end{proof}
 
 
@@ -1202,11 +1309,6 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
 \begin{align*}
   4\times21\underbrace{99\cdots99}_{n\text{个}9}78 = 87\underbrace{99\cdots99}_{n\text{个}9}12
 \end{align*}
-
-
-\subsection{142857}
-\label{sec:number-142857}
-
 
 
 \subsection{有趣的算式}
@@ -1286,7 +1388,7 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
   \end{alignat*}
 \end{example}
 
-\begin{example}[$\frac17$]
+\begin{example}[$\frac17$，142857]
   \begin{align*}
     \frac17 = 0.142857142857142857142857\cdots
   \end{align*}
@@ -1298,8 +1400,76 @@ $\gcd(a,b)=1$是指$a,b$除了$1$之外没有其余的正的公约数。
     142857\times 5 = 714285\\
     142857\times 6 = 857142
   \end{align*}
-  猜猜$142857\times 7$等于多少？除了硬算之外，可以利用上面$\frac17$来巧妙地得到答案\footnote{$7000000\times\frac17=142857.142857142857\cdots\times7$，从而$1000000=142857\times7 + 7\times0.142857\cdots=142857\times7+7\times\frac17$。答案是999999。}。
+  猜猜$142857\times 7$等于多少？除了硬算之外，可以利用上面$\frac17$来巧妙地得到答案\footnote{$\frac17\times7\times10^6=142857.142857142857\cdots\times7$，从而$10^6=142857\times7 + 7\times0.142857\cdots=142857\times7+7\times\frac17$。答案是$10^6-1$。}。
 \end{example}
+
+\section{阶乘}
+\label{sec:factorial}
+
+\begin{definition}
+  $\forall n\in\mathbb{Z}^+$，1到$n$的所有正整数的连乘积称为其阶乘，通常记为$n!$，即
+  \begin{align*}
+    n!\equiv 1\times 2\times 3\times \cdots\times n
+  \end{align*}
+  整数0的阶乘定义为$0!=1$。
+\end{definition}
+
+等价的，阶乘也可以通过数列来定义。定义数列
+\begin{align*}
+  F_0=1, \quad F_{n} = n\times F_{n-1}\ (\forall 1<n\in\mathbb{Z}^+)
+\end{align*}
+并称$F_k$为非负整数$k$的阶乘。特别注意的是，$0!=1$，这通常与部分人的直觉有出入。
+
+\begin{table}[htbp]
+  \centering
+  \caption{前几个整数的阶乘}
+  \label{tab:factorial-of-first-n-numbers}
+  \begin{tabular}{c|ccccccccccc}
+    \hline
+    n   & 0 & 1 & 2 & 3 & 4  & 5    & 6   & 7 &    8 & 9 & 10\\ \hline
+    阶乘 & 1 & 1 & 2 & 6 & 24 & 120 & 720 & 5040 & 40320 & 362880 & 3628800\\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{example}
+  求所有满足其数位的阶乘之和等于其本身的正整数。
+\end{example}
+\begin{proof}[提示]
+  由表~\ref{tab:factorial-of-first-n-numbers}，可知1位数里，只有$1,2$是其数位的阶乘之和。
+
+  应用“剪枝”的思想\footnote{剪枝通常是指在枚举、递归等过程中，若已能判断该状态不能满足要求，则果断放弃此状态及其往下的路径。剪枝是算法里一种非常重要的手段。}可以知道2位数里没有满足要求的数。首先由表~\ref{tab:factorial-of-first-n-numbers}，先剪掉含数字5，6，7，8，9的。其次考虑十位为4的，因为如果10位为4，由数位阶乘和，个位可以剪掉0，1，2，3，从而只剩44这个两位数，而44也是不满足的。十位为1，2，3的类似。
+
+  对于3，4，5，6位数，可以应用枚举。这种量级，计算机可以很快给出答案，即对于3，4，5，6位数，只有以下两个数字满足：
+  \begin{align*}
+      145 ={}& 1! + 4! + 5!\\
+    40585 ={}& 4! + 0! + 5! + 8! + 5!
+  \end{align*}
+  比较神奇的是，40585这个数是一个叫R.~S.~Dougherty的中学生在1964年的时候首先发现的，而这时他显然还没有计算机来帮忙。而对于是否还有其他的自然数也满足这个条件，尚是个未解决的问题。若有人有超级计算中心或许可以试一试，但这种超级计算中心的资源都是异常稀缺的，通常会被用于计算优先级别更高的问题。
+\end{proof}
+
+\begin{question}[莫斯科，1940]
+  不借助计算机，找出上例中满足条件的所有3位数。
+\end{question}
+\begin{proof}[提示]
+  剪枝。
+  \begin{enumerate}
+  \item 首先排除数字7，8，9。
+
+  \item 其次排队数字6。因为$6!=720$已经大于$0,1,2,3,4,5,6$这几个数字组成的所有3位数。
+
+  \item 至少有一个5。否则$0,1,2,3,4$里取3个数字的阶乘之和最大也不会超过3个$4!$即$3\times 4!=72$不是3位数，不可能与原数相等。
+
+  \item 不能有三个5。显然。
+
+  \item 不能有两个5。否则$2\times 5!=240$，剩余一个数字，最接近\footnote{指$|\overline{abc}-(a!+b!+c!)|$最小。}要求的是与2组成的$\overline{255}\ne 2!+5!+5!=242$。
+
+  \item 个位必是1。因为有且只有一个5，从而且数位阶乘之和只能是$\overline{1xx}$，即百位为1。
+    
+  \item 剩余一个数字，直接枚举吧。\qedhere
+  \end{enumerate}
+\end{proof}
+
 
 \section{完全数}
 \label{sec:perfect-number}

@@ -35,3 +35,44 @@
 \begin{proof}[提示]
   这个问题也许是没有标准答案的，其中的一种分析方法是应用37法则，按37法则，$10\times 0.37\approx 4$，取前四层的钻石作为参考，从第五层开始，只要出现比前四层钻石都要大的钻石就选此层的钻石，若一直走到最后的十楼都没有发现有比前四层楼中钻石都要大的钻石，就取最后一层第十层的钻石。
 \end{proof}
+
+
+\section{后验公式}
+\label{sec:bayes-theorem}
+
+\begin{theorem}[贝叶斯定理，Bayes' Theorem]
+  \begin{align*}
+    \mathrm{Pr}(A|B)=\frac{\mathrm{Pr}(B|A)\times \mathrm{Pr}(A)}{\mathrm{Pr}(B)}
+  \end{align*}
+\end{theorem}
+
+\section{问题的本质}
+\label{sec:equivalent-problem}
+
+\begin{example}
+  草地上有一群兔子，数量无穷多，但体重各不相同。如果从中选出10只兔子，记其中最重的重量为$A$。然后在剩余的兔子中选20只兔子，记其中最重的重量为$B$，问$A>B$的概率是多少？
+\end{example}
+\begin{proof}[提示]
+  其实兔子无限多这个条件并不影响结果。原问题等价于：
+  \begin{quotation}
+    把30只重量各不同的兔子随机中分两份，第一份10只，第二份20只。重量最大的在第一份中的概率是多少？
+  \end{quotation}
+  等价于最重的兔子在前10个中，概率显然是$10/30=1/3$。理解不了的，可以写代码模拟来验证一下。
+\end{proof}
+
+\begin{example}
+  柳如是问岳怜花，你有兄弟姐妹吗？岳怜花说他们家两个小孩，你说我们家是两姐妹的概率有多大呢？
+\end{example}
+\begin{proof}[提示]
+  既然岳怜花说两姐妹，那肯定她自己是女孩子，既而等价为问另一个小孩是女孩子的概率。在很多人的直觉中，生男生女这个生物命题是随机的，另一个孩子是男是女跟岳怜花是男孩子还是女孩子完全没有关系，所以概率应该是1/2。
+
+  然而事实情况是，一个家庭若有两个小孩，则以下四种情况的概率都是1/4：
+  \begin{align*}
+    \text{(男，男)}\quad \text{(男，女)}\quad \text{(女，男)}\quad \text{(女，女)}
+  \end{align*}
+  又已知其中一个是女孩子，所以排除上面两个都是男孩子的情况(后验)，就只剩下下面三种等概率的情况：
+  \begin{align*}
+    \text{(男，女)}\quad \text{(女，男)}\quad \text{(女，女)}
+  \end{align*}
+  也就是(女，女)的概率只有1/3。
+\end{proof}

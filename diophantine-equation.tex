@@ -171,11 +171,11 @@
 \begin{proof}[提示]
   与二元线性不方程类似，只要找到一组特解$x$，则所有的整数解都可以表达为$x+t\cdot\lcm(3,5,7)=x+105t$。
 
-  三人同行七十稀。对$3,5,7$，先找一个数$a$，满足$a\equiv 1\pmod3, a\equiv0\pmod5, a\equiv0\pmod7$，由后两个，有$a=5\cdot7\cdot x$，取$x$为$5\cdot 7$为模$3$的模反元素，即$35x\equiv1\pmod3$，可取$x=2$，此时$a=70$。
+  三人同行七十稀，就是求模3余1的数。对$3,5,7$，先找一个数$a$，满足$a\equiv 1\pmod3, a\equiv0\pmod5, a\equiv0\pmod7$，由后两个，有$a=5\cdot7\cdot x$，取$x$为$5\cdot 7$为模$3$的模反元素，即$35x\equiv1\pmod3$，可取$x=2$，此时$a=70$。
 
-  五树梅花廿一枝。对$3,5,7$，找一个数$b$，满足$b\equiv0\pmod3, b\equiv1\pmod5,b\equiv0\pmod7$，由模3模7为0，有$b=21y$，取$y$为21模5的模反元素，即$21y\equiv1\pmod5$，可取$y=1$，此时$b=21$。
+  五树梅花廿一枝，就是求模5余1的数。对$3,5,7$，找一个数$b$，满足$b\equiv0\pmod3, b\equiv1\pmod5,b\equiv0\pmod7$，由模3模7为0，有$b=21y$，取$y$为21模5的模反元素，即$21y\equiv1\pmod5$，可取$y=1$，此时$b=21$。
 
-  七子团圆正半月。对$3,5,7$，找一个数$c$，满足$b\equiv0\pmod3, b\equiv0\pmod5,b\equiv1\pmod7$，由模3模5为0，有$c=15z$，取$z$为15模7的模反元素，即$15z\equiv1\pmod7$，可取$z=1$，此时$c=15$。
+  七子团圆正半月，就是求模7余1的数。对$3,5,7$，找一个数$c$，满足$b\equiv0\pmod3, b\equiv0\pmod5,b\equiv1\pmod7$，由模3模5为0，有$c=15z$，取$z$为15模7的模反元素，即$15z\equiv1\pmod7$，可取$z=1$，此时$c=15$。
 
   由此可得到一个特解$2\times 70+3\times 21+2\times 15=233$。其所有正整数解为$23,128,233,338,\cdots$。
 \end{proof}

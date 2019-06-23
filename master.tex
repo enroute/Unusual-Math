@@ -206,6 +206,7 @@
 \usetikzlibrary{3d}
 \usetikzlibrary{decorations.markings} %for decorate, arrow in the middle of a line
 \usetikzlibrary{through}              %for [circle through] in \node
+\usetikzlibrary{arrows.meta}          %for arrow options
 
 \newcommand{\tikzmark}[2]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {$#2$};}
 
@@ -484,6 +485,15 @@
 
 % \include{myconfig}
 
+% 选择题
+\usepackage{multiplechoice}
+
+\usepackage[chapter]{algorithm}          % the float environment
+\usepackage{algorithmic} % algorithmic (NOT algorithmicx) package is suggested for IEEE journals
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
 \newcommand{\dx}{\mathrm{d}x}
 \newcommand{\dy}{\mathrm{d}y}
 % \newcommand{\dz}{\mathrm{d}z}
@@ -562,11 +572,13 @@
 % \includeonly{discrete}
 % \includeonly{fun}
 % \includeonly{dp}
-\includeonly{matrix}
+% \includeonly{matrix}
 
 % allow page break inside align environment
 \allowdisplaybreaks
 \begin{document}
+
+%\hypersetup{CJKbookmarks=true}  %for \overline in section, NOT WORK!!
 
 \frontmatter
 \include{cover}

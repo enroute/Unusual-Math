@@ -64,8 +64,8 @@
   \item[\underline{其余}] 请画出状态路径图计算后选者策略的获胜概率。
   \end{enumerate}
   \begin{figure}[htbp]
-    \centering
-    \begin{tikzpicture}[scale=2.0]
+    \centering\scalebox{.8}{
+    \begin{tikzpicture}[scale=1.5, every node/.style={font=\normalfont\selectfont}]
       \begin{scope}[shift={(0,0)}]
         \node[draw,circle,fill=red!20](O) at(0,0) {000};
         \node[draw,circle](O2) at(1,0) {0001};
@@ -111,7 +111,8 @@
         \draw[->](N1111)edge[bend left=20](N111);
       \end{scope}
     \end{tikzpicture}
-    \caption{先选者选择001时的状态路径}
+    }
+    \caption{先选者选择001且后选者的对策是选择100时的状态路径}
     \label{fig:path-of-001}
   \end{figure}
 
@@ -156,9 +157,98 @@
 
   还有一种看法是，当主持人开启一扇门后，更换选择的话，相当于二选一，能赢得汽车的概率为1/2，而不更换的话，概率不会改变，还是初始的1/3。所以更好的策略还是更换选择。
 
-  2008年的美国电影《决胜21点》(英文就叫21)也有这个故事。
+  还可以用计算机来模拟一下选择了“换门”的策略后获得汽车的概率。算法~\ref{alg:code-for-three-gates}是根据题中各种假设而写成的伪代码(Pseudocode)，有兴趣的可以自行试验一下。
+  \begin{algorithm}[htbp]
+    \centering
+    \caption{三门问题模拟算法}
+    \label{alg:code-for-three-gates}
+    \begin{algorithmic}[2]
+      \REQUIRE $n > 0$
+      \STATE $n_{simno}\leftarrow 0$
+      \STATE $w_{stay}\leftarrow 0$
+      \STATE $w_{switch}\leftarrow 0$
+      \WHILE{$n_{simno} < n$}
+          \STATE $n_{simno}\leftarrow n_{simno}+1$
+          \STATE $d_{car}\leftarrow \mathrm{random}(1,2,3)$
+          \STATE $d_{choice}\leftarrow \mathrm{random}(1,2,3)$
+          \REPEAT
+              \STATE $d_{open}\leftarrow\mathrm{random}(1,2,3)$
+          \UNTIL{$d_{open} \ne d_{car}$ \AND $d_{open}\ne d_{choice}$}
+          \IF{$d_{car}==d_{choice}$}
+              \STATE $w_{stay}\leftarrow w_{stay}+1$
+          \ELSE
+              \STATE $w_{switch}\leftarrow w_{switch}+1$
+          \ENDIF
+      \ENDWHILE
+      \PRINT Probality to win if stay: $w_{stay}/n$
+      \PRINT Probality to win if switch choice: $w_{switch}/n$
+    \end{algorithmic}
+  \end{algorithm}
+
+  也许是3个门数量太少导致不太直观。如果将3门换为100扇门会如何呢？
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.4]
+      \begin{scope}
+        \filldraw[pattern=crosshatch,pattern color=black](3-.15,-2+.15)rectangle(3+.75,-2-.95);
+        \foreach \x in{0,1,2,3,4,5,6,7,8,9}{
+          \foreach \y in{0,1,2,3,4,5,6,7,8,9}{
+            \filldraw[fill=blue!10](\x,-\y)rectangle(\x+.6,-\y-.8);
+          }
+        }
+        \filldraw[fill=red!20](3,-2)rectangle(3+.6,-2-.8);
+      \end{scope}
+      \node at(12,-5){\large $\implies$};
+      \begin{scope}[shift={(14,0)}]
+        \filldraw[pattern=crosshatch,pattern color=black](3-.15,-2+.15)rectangle(3+.75,-2-.95);
+        \filldraw[fill=blue!10](5,-7)rectangle(5+.6,-7-.8);
+        \foreach \x in{0,1,2,3,4,5,6,7,8,9}{
+          \foreach \y in{0,1,2,3,4,5,6,7,8,9}{
+            \draw[dashed, help lines](\x,-\y)rectangle(\x+.6,-\y-.8);
+          }
+        }
+        \filldraw[fill=red!20](3,-2)rectangle(3+.6,-2-.8);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  在100扇门中选完之后，Morty帮你消除了其余的98扇后面没有汽车的门，剩余两扇门给你做决定，而这两扇门中必定有一扇后面是有汽车的，如果是坚守不换概率永远是1\%，你换不换？如果是1000000扇呢，你换不换？三门故事在当时引起了非常大的轰动，甚至被搬上了屏幕，出现在了2008年的美国电影《决胜21点》(英文就叫21)上。
 \end{proof}
 
+\begin{example}
+  也许有人仍然会坚持这样的观点：
+  \begin{quotation}
+    当Morty开了门之后，原本选择的门背后是汽车的概率同样也会增加。
+  \end{quotation}
+  应用贝叶斯定理解释一下。
+\end{example}
+\begin{proof}[提示]
+  假设$A$为选择了1号门且汽车在1号门后的事件，$B$是$A$事件发生后Morty打开了2号门的事件。那么有
+  \begin{align*}
+    \mathrm{Pr}(A)=\frac13
+  \end{align*}
+  由以下三种情况
+  \begin{enumerate}
+  \item 如果汽车在1号门后，Morty将会在2号与3号门中将机选择一个，从而此时2号门被打开的概率为1/2；
+  \item 如果汽车在2号门后，Morty永远不会打开2号门，此时2号门被打开的概率为0；
+  \item 如果汽车在3号门后，由于$A$已经发生了，Morty只能打开2号门，此时2号门被打开的概率为1。
+  \end{enumerate}
+
+  由此可知
+  \begin{align*}
+    \mathrm{Pr}(B)=\frac13\times\frac12 + \frac13\times0 + \frac13\times 1=\frac12
+  \end{align*}
+  $\mathrm{Pr}(B|A)$代表什么呢？按贝叶斯定理中的定义，就是在已知$A$发生了的情况下$B$发生的概率，而这定义在本题中恰好也是假设中$B$的定义，从而有
+  \begin{align*}
+    \mathrm{Pr}(B|A) = \mathrm{Pr}(B)=\frac12
+  \end{align*}
+  综合起来，有
+  \begin{align*}
+    \mathrm{Pr}(A|B)=\frac{\mathrm{Pr}(B|A)\times \mathrm{Pr}(A)}{\mathrm{Pr}(B)}
+    =\frac{1/2\times 1/3}{1/2}=\frac13
+  \end{align*}
+  也就是Morty开门这件事并不会影响初始选择获得汽车的概率。
+\end{proof}
 
 \begin{example}[贝特朗悖论，Bertrand paradox]
   在单位圆内的弦中随机选一条，其长度超过圆内接三角形边长的概率是多少？
@@ -167,7 +257,7 @@
 
 \begin{enumerate}
 \item 通过两个端点确定弦。假设圆内弦的端点在圆周上是均分布的，可得概率为$1/3$。在圆周任意选取两点，相当于固定一点，在圆周上任意选取另外一点。在固定点上作为一个顶点作圆内接正三角形。显然当且仅当另一端落中图中阴影部分的圆弧上时此两点组成的弦超过三角形的边长。即概率为1/3。
-\item 通过到圆心的距离确定弦。假设圆内弦到圆心的距离是均匀分布的，可得概率为$1/2$。不妨只考虑某特定方向的弦，且只考虑半圆，则如图2，只有图中阴影部分的弦长度超过三角形边长，其面积为半圆的一半。
+\item 通过到圆心的距离确定弦。假设圆内弦到圆心的距离是均匀分布的，可得概率为$1/2$。不妨只考虑某特定方向的弦，且只考虑半圆，则如图2，只有图中阴影部分的弦长度超过三角形边长，其对应的长度(图中的半径在阴影部分中的长度)为圆半径的一半。
 \item 通过弦的中点确定弦。假设圆内弦的中点在圆内是均匀分布的，可得概率为$1/4$。如图3，只有弦的中点在阴影圆内时弦的长度才能超过三角形边长，其面积为单位圆面积的$1/4$。
 \end{enumerate}
 

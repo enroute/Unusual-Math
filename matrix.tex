@@ -40,31 +40,52 @@
       a_{31} & a_{32} & a_{33}
     \end{pmatrix}
   \end{align*}
-  按图~\ref{fig:Sarrus'-rule}扩充为$3\times 5$的矩阵并沿对角线作出辅助线：
+  按图~\ref{fig:Sarrus'-rule}扩充为$3\times 5$(或$5\times 3$)的矩阵并沿对角线作出辅助线：
   \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[scale=1]
-      \fill[color=blue!10](-.5,.5)rectangle(2.5,-2.5);
-      \foreach \x/\y/\v/\i in{0/0/11/11, 1/0/12/12, 2/0/13/13, 3/0/11/e11, 4/0/12/e12,
-                              0/1/21/21, 1/1/22/22, 2/1/23/23, 3/1/21/e21, 4/1/22/e22,
-                              0/2/31/31, 1/2/32/32, 2/2/33/33, 3/2/31/e31, 4/2/32/e32}{
-        \node(N\i) at (\x, -\y){$a_{\v}$};
-      }
-      \foreach \a/\b/\c in {11/22/33,12/23/e31,13/e21/e32}{
-        \draw(N\a)--(N\b) (N\b)--(N\c);
-      }
-      \foreach \a/\b/\c in {31/22/13,32/23/e11,33/e21/e12}{
-        \draw[dashed](N\a)--(N\b) (N\b)--(N\c);
-      }
+      \begin{scope}
+        \fill[color=blue!10](-.5,.5)rectangle(2.5,-2.5);
+        \foreach \x/\y/\v/\i in{0/0/11/11, 1/0/12/12, 2/0/13/13, 3/0/11/e11, 4/0/12/e12,
+          0/1/21/21, 1/1/22/22, 2/1/23/23, 3/1/21/e21, 4/1/22/e22,
+          0/2/31/31, 1/2/32/32, 2/2/33/33, 3/2/31/e31, 4/2/32/e32}{
+          \node(N\i) at (\x, -\y){$a_{\v}$};
+        }
+        \foreach \a/\b/\c in {11/22/33,12/23/e31,13/e21/e32}{
+          \draw(N\a)--(N\b) (N\b)--(N\c);
+        }
+        \foreach \a/\b/\c in {31/22/13,32/23/e11,33/e21/e12}{
+          \draw[dashed](N\a)--(N\b) (N\b)--(N\c);
+        }
+        \node[above]at(1,.5){列方向扩展};
+      \end{scope}
+      \begin{scope}[shift={(7,0)}]
+        \fill[color=blue!10](-.5,.5)rectangle(2.5,-2.5);
+        \foreach \x/\y/\v/\i in{0/0/11/11, 1/0/12/12, 2/0/13/13, 
+          0/1/21/21,  1/1/22/22, 2/1/23/23,
+          0/2/31/31,  1/2/32/32, 2/2/33/33,
+          0/3/11/e11, 1/3/12/e12, 2/3/13/e13,
+          0/4/21/e21, 1/4/22/e22, 2/4/23/e23%
+        }{
+          \node(N\i) at (\x, -\y){$a_{\v}$};
+        }
+        \foreach \a/\b/\c in {11/22/33,21/32/e13,31/e12/e23}{
+          \draw(N\a)--(N\b) (N\b)--(N\c);
+        }
+        \foreach \a/\b/\c in {31/22/13,e11/32/23,e21/e12/33}{
+          \draw[dashed](N\a)--(N\b) (N\b)--(N\c);
+        }
+        \node[above]at(1,.5){行方向扩展};
+      \end{scope}
     \end{tikzpicture}
     \caption{萨吕法则}
     \label{fig:Sarrus'-rule}
   \end{figure}
   
-  则按实线三数乘积取正，虚线三数乘积取负，然后求和，可得$\det(M)$为
+  则按实线(主对角线$a_{11}a_{22}a_{33}$方向)三数乘积取正，虚线(反对角线方向)三数乘积取负，然后求和，可得$\det(M)$为
   \begin{align*}
     \det(M) ={}& +a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}\\
-               & -a_{31}a_{22}a_{13} + a_{32}a_{23}a_{11} - a_{33}a_{21}a_{12}
+               & -a_{31}a_{22}a_{13} - a_{32}a_{23}a_{11} - a_{33}a_{21}a_{12}
   \end{align*}
 \end{example}
 
@@ -126,7 +147,23 @@
     \end{pmatrix}
     \begin{pmatrix}\vec a_1 \\ \vec a_2 \\ \vdots \\ \vec a_n\end{pmatrix}
   \end{align*}
-  上式中的实系数矩阵必须是満秩的，也就是可逆的，否则{\color{red}怎样？某一行全变为零，又如何？矩阵变，b也在变}
+  上式中的实系数矩阵必须是満秩的，也就是可逆的，否则%{\color{red}怎样？某一行全变为零，又如何？矩阵变，b也在变}
+  用高斯消元法\footnote{\color{red}补充一下高斯消元法？}，可使矩阵中某一行全为零(不妨记为最后一行)，即
+  \begin{align*}
+    \begin{pmatrix}\vec b_1 \\ \vec b_2 \\ \vdots \\ \sum_i x_i\vec b_i\end{pmatrix}=
+    \begin{pmatrix}
+      \alpha_{11} & \alpha_{12} & \cdots & \alpha_{1n}\\
+      \alpha_{21} & \alpha_{22} & \cdots & \alpha_{2n}\\
+      \vdots     & \vdots     & \vdots& \vdots     \\
+      0          & 0 & \cdots & 0
+    \end{pmatrix}
+    \begin{pmatrix}\vec a_1 \\ \vec a_2 \\ \vdots \\ \vec a_n\end{pmatrix}
+  \end{align*}
+  其中$x_i$是不全为零的实数，从而有
+  \begin{align*}
+    \sum_i x_i\vec b_i = \sum_i 0\cdot\vec a_i = 0
+  \end{align*}
+  这与$\vec b_i$非线性相关的假设矛盾。
 
   由系数矩阵的可逆性，存在其逆矩阵，使得
   \begin{align*}
@@ -354,11 +391,51 @@
   \end{align*}
 \end{theorem}
 \begin{proof}[提示]
-  由$\vec a^\perp$与$\vec b$的夹角为$\pi/2 \pm \theta$，且
+  由$\vec a^\perp$与$\vec b$的夹角为$\pi/2 \pm \theta$，其符号与$\vec b$在$\vec a$的顺时针方向还是逆时针方向有关。由点积的几何意义及
   \begin{align*}
     \cos\left(\frac\pi2\pm\theta\right)=\mp\sin\theta
   \end{align*}
   可得。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \coordinate(O)at(0,0);\coordinate(A)at(1,0);\coordinate(C)at($(O)!1!90:(A)$);\coordinate(B)at(2,1.5);
+        \draw[line width=1pt,->](O)--(A)node[below]{$\vec w$};
+        \draw[line width=1pt,->](O)--(C)node[left]{$\vec w^\perp$};
+        \draw[->](O)--(B)node[above right]{$\vec b$};
+        \draw[->](A)--($2*(A)$)node[right]{$\vec a$};
+        \draw[->](C)--($2*(C)$)node[above]{$\vec a^\perp$};
+        \draw[help lines,dashed]($(O)!(B)!(C)$)--(B)--($(O)!(B)!(A)$);
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--B};
+        \tkzDrawPoints(O)
+        \node[below] at($(A)-(0,.7)$){$\vec a^\perp \cdot \vec b=|\vec a|\cdot|\vec b|\sin\theta$};
+      \end{scope}
+      \begin{scope}[shift={(7,0)}]
+        \coordinate(O)at(0,0);\coordinate(A)at(0,1);\coordinate(C)at($(O)!1!90:(A)$);\coordinate(B)at(2,1.5);
+        \draw[line width=1pt,->](O)--(A)node[left]{$\vec w$};
+        \draw[line width=1pt,->](O)--(C)node[below]{$\vec w^\perp$};
+        \draw[->](O)--(B)node[above right]{$\vec b$};
+        \draw[->](A)--($2*(A)$)node[above]{$\vec a$};
+        \draw[->](C)--($2*(C)$)node[left]{$\vec a^\perp$};
+        \draw[help lines,dashed](O)--($(O)!(B)!(C)$)--(B)--($(O)!(B)!(A)$);
+        \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=B--O--A};
+        \tkzDrawPoints(O)
+        \node[below] at($(O)-(0,.7)$){$\vec a^\perp \cdot \vec b=-|\vec a|\cdot|\vec b|\sin\theta$};
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  由上图可直观地看出其几何意义。将$\vec a$及$\vec a^\perp$方向上的单位向量$\vec w$及$\vec w^\perp$
+  \begin{align*}
+    \vec w\equiv \frac{\vec a}{|\vec a|},\quad
+    \vec w^\perp\equiv\frac{\vec a^\perp}{|\vec a^\perp|}=\frac{\vec a^\perp}{|\vec a|}
+  \end{align*}
+  代入，则有
+  \begin{align*}
+    (\vec w^\perp\cdot\vec b)^2 + (\vec w\cdot \vec b)^2 = |\vec b|^2
+  \end{align*}
+  即$\vec b$在两个垂直方向上的投影的模\footnote{可以认为就是向量的长度。}与原向量的模构成勾股数，其本质就是勾股定理。
 \end{proof}
 
 
