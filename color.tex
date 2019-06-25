@@ -1,0 +1,60 @@
+
+\chapter{颜色}
+\label{chap:color}
+
+\section{色彩空间}
+\label{sec:color-space}
+
+\begin{definition}[色彩模型，Color Model]
+  色彩模型是指通过一组数字描述颜色的数学模型，通常有3个或4个分量。
+\end{definition}
+
+\begin{example}[RGB色彩模型，RGB]
+  {\color{red}R}{\color{green}G}{\color{blue}B}表示由{\color{red}Red}--{\color{green}Green}--{\color{blue}Blue}三原色生成颜色的色彩模型，通常用于电子屏幕，是一种加法模型，即通过叠加不同亮度的三原色产生所需的颜色。
+\end{example}
+
+\begin{example}[CMYK色彩模型]
+  {\color{cyan}C}{\color{magenta}M}{\color{yellow}Y}{\color{black}K}表示由{\color{cyan}Cyan}--{\color{magenta}Magenta}--{\color{yellow}Yellow}--{\color{black}blacK}四原色生成颜色的色彩模型，通常用于印刷行业，是一种减法模型。即通过印刷不同的四原色组合，将照射到载体(书籍、杂志等)上的光线吸收一部分(这个被吸收的过程就是减法过程)后反射，使得反射光被人眼感知到的色彩是期望的色彩。这种色彩不光与印刷有关，还与照射到印刷载体上的光线有关，这就是为什么同一本书在不同的环境下可能会看到不同的颜色。
+\end{example}
+
+\begin{example}[HSV色彩模型]
+  
+\end{example}
+
+\begin{definition}[YUV]
+  
+\end{definition}
+
+\begin{definition}[色域]
+  
+\end{definition}
+
+\begin{definition}[色彩空间，Color Space]
+  色彩模型
+\end{definition}
+
+\begin{example}[sRGB色彩空间]
+  
+\end{example}
+
+\begin{example}[Adobe RGB色彩空间]
+  
+\end{example}
+
+\begin{definition}[绝对色彩空间]
+  
+\end{definition}
+
+\section{三原色原理}
+\label{sec:three-primary-color-theory}
+
+在数学上而言，三维线性空间的正交基一般都不是唯一的。那么RGB颜色既然可以由R、G、B三原色生成，自然就带来以下问题：
+\begin{quotation}
+  RGB是否是线性无关的？{\color{red}R}、{\color{green}G}、{\color{blue}B}三原色是正交的吗？
+\end{quotation}
+
+\begin{theorem}[格拉斯曼定律，Grassmann's Law]
+  若两单色色光组合成一测试色光，则观测者感知到的三原色数值为两单色光分别被观测者单独观测到的三原色数值之和。
+
+  格拉斯曼定律是一个根据实验数据得出的经验法则，说明了人对于色彩的感知是线性的。
+\end{theorem}

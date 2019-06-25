@@ -826,7 +826,43 @@
     \lambda(\vec b(\vec a,\vec c) - \vec c(\vec a, \vec b)) = \vec a\times(\vec b\times\vec c)
   \end{align*}
   {\color{red}若$\lambda$是与$\vec a,\vec b,\vec c$无关的常数，则直接将$\ihat, \jhat, \khat$代入可得$\lambda=1$。}
+  $\forall \vec{a}_1, \vec{a}_2$，$\exists \lambda_1,\lambda_2\in\mathbb{R}$，使得
+  \begin{align*}
+    \lambda_1(\vec b(\vec a_1,\vec c) - \vec c(\vec a_1, \vec b)) = \vec a_1\times(\vec b\times\vec c)\\
+    \lambda_2(\vec b(\vec a_2,\vec c) - \vec c(\vec a_2, \vec b)) = \vec a_2\times(\vec b\times\vec c)
+  \end{align*}
+  而对于$\vec a_1 + \vec a_2$，同样存在$\lambda_3$使得
+  \begin{align*}
+    \lambda_3(\vec b(\vec a_1 + \vec a_2,\vec c) - \vec c(\vec a_1 + \vec a_2, \vec b)) = (\vec a_1 + \vec a_2)\times(\vec b\times\vec c)
+  \end{align*}
+  比较上面三式，有
+  \begin{align*}
+    \vec b(\lambda_1\vec a_1 + \lambda_2\vec a_2, \vec c) - \vec c(\lambda_1 \vec a_1 + \lambda_2\vec a_2, \vec b)
+    =\vec b(\lambda_3\vec a_1 + \lambda_3\vec a_2, \vec c) - \vec c(\lambda_3 \vec a_1 + \lambda_3\vec a_2, \vec b)
+  \end{align*}
+  考虑$\vec b\not\parallel\vec c$且$\vec a\not\parallel\vec b\times\vec c$的情况(否则左右两边都为零，$\lambda$可以取任意值)，此时有
+  \begin{align*}
+    (\lambda_1 - \lambda_3)\vec a_1 + (\lambda_2 - \lambda_3)\vec a_2 = 0
+  \end{align*}
+  分两种情况证明$\lambda$与$\vec a$无关：
+  \begin{enumerate}
+  \item 若$\vec a_1\not\parallel \vec a_2$，即$\vec a_1$与$\vec a_2$线性无关，则必有
+    \begin{align*}
+      \lambda_1 = \lambda_3 = \lambda_2
+    \end{align*}
+  \item 若$\vec a_1\parallel \vec a_2$，即$\vec a_1$与$\vec a_2$线性相关，
+    则由于在$\vec a,\vec b,\vec c$都固定后且左右都不为零的情况下$\lambda$是
+    唯一存在的\footnote{请思考，为什么？}，以及点积与叉积关于scale运算
+    是满足结合律
+    \footnote{即任意$\vec a,\vec b,\vec c$及实数$\alpha,\beta$，
+      有$(\alpha\vec a,\vec b)=(\vec a,\alpha\vec b)$，
+      $(\alpha\vec a)\times\vec b=\vec a\times(\alpha\vec b)$
+    }
+    的，容易知道$\lambda_1=\lambda_2$。
+  \end{enumerate}
 
+  综合起来，$\lambda$与$\vec a$无关。类似的，$\lambda$与$\vec b,\vec c$无关。从而将$\ihat, \jhat, \khat$代入可得$\lambda=1$。
+  
 
   % Here's an alternate proof, assuming you know that AxB is always
   % orthogonal to both A and B, and a few more facts. It may or may not be
@@ -857,7 +893,7 @@
   % C, and why (and perhaps a rough idea of how) those somethings should
   % depend on A.
 
-  下面是另外一种方法。考虑满足右手法则的单位正交基
+  上面虽然是啰啰嗦嗦一大堆文字，但还是比较直观的，没有什么特别的技巧。下面是另外一种方法，应用到了正交化的思想。考虑满足右手法则的单位正交基
   \begin{align*}
     \ihat \equiv \frac{\vec b}{\left|\vec b\right|},\quad
     \jhat \equiv \frac{\vec b^\perp}{\left|\vec b^\perp\right|},\quad
@@ -891,7 +927,7 @@
   % \end{align*}
 \end{proof}
 
-\begin{example}[拉格朗日恒等式，Lagrange's Identity]
+\begin{example}[拉格朗日恒等式，Lagrange's Identity]{\color{red}这个不等式是不是叫这个名字？？}
   $\forall \vec a,\vec b,\vec c,\vec d\in\mathbb{R}^3$，有
   \begin{align*}
     (\vec a\times \vec b) \cdot (\vec c\times \vec d) =
