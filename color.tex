@@ -3,6 +3,7 @@
 \label{chap:color}
 
 \newcommand{\RGB}{{\color{red}R}{\color{green}G}{\color{blue}B}}
+\newcommand{\RYB}{{\color{red}R}{\color{yellow}Y}{\color{blue}B}}
 \newcommand{\CMY}{{\color{cyan}C}{\color{magenta}M}{\color{yellow}Y}}
 \newcommand{\CMYK}{\CMY{}{\color{black}K}}
 
@@ -14,6 +15,33 @@
 \definecolor{yellowblue}{RGB}{0,64,255}
 \definecolor{redorange}{RGB}{255,64,0}
 \definecolor{yelloworange}{RGB}{255,192,0}
+
+% RYB color wheel
+% https://bahamas10.github.io/ryb/about.html
+\definecolor{rybRed}{RGB}{255,0,0}
+\definecolor{rybYellow}{RGB}{255,255,0}
+\definecolor{rybBlue}{RGB}{42,96,153}
+% Secondary
+% violet in ryb [1,0,1]->[255,0,255]
+\definecolor{rybViolet}{RGB}{128, 0, 128}
+% green in ryb  [0,1,1]->[0,255,255]
+\definecolor{rybGreen}{RGB}{0, 169, 51}
+% orange in ryb [1,1,0]->[255,255,0]
+\definecolor{rybOrange}{RGB}{255, 128, 0}
+% Tertiary
+% blue green [0,1/2,1]->[0,128,255]
+\definecolor{rybBlueGreen}{RGB}{21, 132, 102}
+% yellow green [0,1,1/2]->[0,255,128]
+\definecolor{rybYellowGreen}{RGB}{127, 212, 26}
+% yellow orange [1/2,1,0]->[128,255,0]
+\definecolor{rybYellowOrange}{RGB}{255, 191, 0}
+% red orange [1,1/2,0]->[255,128,0]
+\definecolor{rybRedOrange}{RGB}{255, 65, 0}
+% red violet [1,0,1/2]->[255,0,128]
+\definecolor{rybRedViolet}{RGB}{191, 0, 65}
+% blue violet [1/2,0,1]->[128,0,255]
+\definecolor{rybBlueViolet}{RGB}{85, 48, 141}
+
 
 \section{色彩空间}
 \label{sec:color-space}
@@ -143,16 +171,85 @@
           }
         }
       \end{scope}
-      \begin{scope}[shift={(11,0)}]
-        \foreach \r/\R/\n/\dt/\rot in{1/2/12/30/75}{
-          \foreach \i/\c in{0/red,1/violet, 2/magenta,3/violet,4/blue,5/black,6/cyan,7/black,8/green,9/black,10/yellow,11/orange}{
+      % \begin{scope}[shift={(11,0)}]
+      %   \foreach \r/\R/\n/\dt/\rot in{1/2/12/30/75}{
+      %     \foreach \i/\c in{0/red,1/violet, 2/magenta,3/violet,4/blue,5/black,6/cyan,7/black,8/green,9/black,10/yellow,11/orange}{
+      %       \fill[color=\c](\i*\dt+\rot:\r)--(\i*\dt+\rot:\R)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R)--(\i*\dt+\dt+\rot:\r)
+      %       arc(\i*\dt+\dt+\rot:\i*\dt+\rot:\r);
+      %       \path%[decorate,decoration={text along path,text align=center,text={\c}]
+      %       (\i*\dt+.5*\dt+\rot:\R+.25)--(\i*\dt+.5*\dt+\rot:\R+1.5)node[midway,sloped]{\color{\c}\c};
+      %     }
+      %   }
+      %   \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+
+\begin{example}[\RYB{} Color Wheel]\mbox{}\par
+  \begin{center}
+    \begin{tikzpicture}[scale=1]
+      \begin{scope}[shift={(-6,-6)}]
+          \foreach \i/\h/\a/\c/\coord/\t in{%
+            0/1.5/right/rybRed/{(1,0,0)}/{Red},
+            1/0.5/left/rybRedViolet/{(1,.5,0)}/{Red Violet},
+            2/1.0/left/rybViolet/{(1,0,1)}/Violet,
+            3/0.5/left/rybBlueViolet/{(0,.5,1)}/{Blue Violet},
+            4/1.5/left/Blue/{(0,0,1)}/Blue,
+            5/0.5/left/rybBlueGreen/{(0,1,.5)}/{Blue Green},
+            6/1.0/right/rybGreen/{(0,1,1)}/Green,
+            7/0.5/right/rybYellowGreen/{(0,1,.5)}/{Yellow Green},
+            8/1.5/right/rybYellow/{(0,1,0)}/Yellow,
+            9/0.5/right/rybYellowOrange/{(.5,1,0)}/{Yellow Orange},
+           10/1.0/right/rybOrange/{(1,1,0)}/Orange,
+           11/0.5/right/rybRedOrange/{(1,.5,0)}/{Red Orange}%
+          }{
+            \fill[color=\c](\i,0)rectangle(\i+1,\h);
+            % \node[anchor=west,rotate=30]at(\i,\h+.1){\tiny \coord};
+            \node[above]at(\i+.5,\h){\tiny \coord};
+            \node[anchor=west,rotate=-45]at(\i+.4,-.1){\tiny \t};
+          }        
+      \end{scope}
+      \begin{scope}[shift={(0,0)}]
+        \foreach \r/\R/\n/\dt/\rot in{1.8/3/12/30/75}{
+          \foreach \i/\a/\c/\t in{%
+            0/right/rybRed/{(1,0,0) Red},
+            1/left/rybRedViolet/{(1,1/2,0) Red Violet},
+            2/left/rybViolet/{(1,0,1) Violet},
+            3/left/rybBlueViolet/{(0,1/2,1) Blue Violet},
+            4/left/Blue/{(0,0,1) Blue},
+            5/left/rybBlueGreen/{(0,1,1/2) Blue Green},
+            6/right/rybGreen/{(0,1,1) Green},
+            7/right/rybYellowGreen/{(0,1,1/2) Yellow Green},
+            8/right/rybYellow/{(0,1,0) Yellow},
+            9/right/rybYellowOrange/{(1/2,1,0) Yellow Orange},
+            10/right/rybOrange/{(1,1,0) Orange},
+            11/right/rybRedOrange/{(1,1/2,0) Red Orange}%
+          }{
             \fill[color=\c](\i*\dt+\rot:\r)--(\i*\dt+\rot:\R)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R)--(\i*\dt+\dt+\rot:\r)
             arc(\i*\dt+\dt+\rot:\i*\dt+\rot:\r);
-            \path%[decorate,decoration={text along path,text align=center,text={\c}]
-            (\i*\dt+.5*\dt+\rot:\R+.25)--(\i*\dt+.5*\dt+\rot:\R+1.5)node[midway,sloped]{\color{\c}\c};
+            % \path%[decorate,decoration={text along path,text align=center,text={\c}}]
+            % (\i*\dt+.5*\dt+\rot:\R+.25)--(\i*\dt+.5*\dt+\rot:\R+.1)node[pos=1,sloped,\a]{\color{\c}\t};
+          }
+
+          \coordinate(R)at(\rot+.5*\dt:\r);
+          \coordinate(V)at(\rot+2.5*\dt:\r);
+          \coordinate(B)at(\rot+4.5*\dt:\r);
+          \coordinate(G)at(\rot+6.5*\dt:\r);
+          \coordinate(Y)at(\rot+8.5*\dt:\r);
+          \coordinate(O)at(\rot+10.5*\dt:\r);
+          \coordinate(C)at(0,0);
+          \coordinate(RY)at($.5*(R)+.5*(Y)$);
+          \coordinate(YB)at($.5*(Y)+.5*(B)$);
+          \coordinate(BR)at($.5*(B)+.5*(R)$);
+          \fill[color=rybRed](R)--(RY)--(C)--(BR)--cycle;
+          \fill[color=rybYellow](Y)--(YB)--(C)--(RY)--cycle;
+          \fill[color=rybBlue](B)--(BR)--(C)--(YB)--cycle;
+          \foreach \x/\y/\z/\c in {R/Y/O/rybOrange,Y/B/G/rybGreen,B/R/V/rybViolet}{%
+            \fill[color=\c](\x)--(\y)--(\z)--cycle;
           }
         }
-    \end{scope}
+      \end{scope}
     \end{tikzpicture}
   \end{center}
 \end{example}
