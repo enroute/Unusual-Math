@@ -2,6 +2,47 @@
 \chapter{颜色}
 \label{chap:color}
 
+\newcommand{\RGB}{{\color{red}R}{\color{green}G}{\color{blue}B}}
+\newcommand{\RYB}{{\color{red}R}{\color{yellow}Y}{\color{blue}B}}
+\newcommand{\CMY}{{\color{cyan}C}{\color{magenta}M}{\color{yellow}Y}}
+\newcommand{\CMYK}{\CMY{}{\color{black}K}}
+
+\definecolor{chartreuse}{RGB}{127,255,0}
+\definecolor{springgreen}{RGB}{0,255,127}
+\definecolor{azure}{RGB}{0,127,255}
+\definecolor{rose}{RGB}{255,0,127}
+\definecolor{yellowgreen}{RGB}{64,255,0}
+\definecolor{yellowblue}{RGB}{0,64,255}
+\definecolor{redorange}{RGB}{255,64,0}
+\definecolor{yelloworange}{RGB}{255,192,0}
+
+% RYB color wheel
+% https://bahamas10.github.io/ryb/about.html
+\definecolor{rybRed}{RGB}{255,0,0}
+\definecolor{rybYellow}{RGB}{255,255,0}
+\definecolor{rybBlue}{RGB}{42,96,153}
+% Secondary
+% violet in ryb [1,0,1]->[255,0,255]
+\definecolor{rybViolet}{RGB}{128, 0, 128}
+% green in ryb  [0,1,1]->[0,255,255]
+\definecolor{rybGreen}{RGB}{0, 169, 51}
+% orange in ryb [1,1,0]->[255,255,0]
+\definecolor{rybOrange}{RGB}{255, 128, 0}
+% Tertiary
+% blue green [0,1/2,1]->[0,128,255]
+\definecolor{rybBlueGreen}{RGB}{21, 132, 102}
+% yellow green [0,1,1/2]->[0,255,128]
+\definecolor{rybYellowGreen}{RGB}{127, 212, 26}
+% yellow orange [1/2,1,0]->[128,255,0]
+\definecolor{rybYellowOrange}{RGB}{255, 191, 0}
+% red orange [1,1/2,0]->[255,128,0]
+\definecolor{rybRedOrange}{RGB}{255, 65, 0}
+% red violet [1,0,1/2]->[255,0,128]
+\definecolor{rybRedViolet}{RGB}{191, 0, 65}
+% blue violet [1/2,0,1]->[128,0,255]
+\definecolor{rybBlueViolet}{RGB}{85, 48, 141}
+
+
 \section{色彩空间}
 \label{sec:color-space}
 
@@ -10,13 +51,13 @@
 \end{definition}
 
 \begin{example}[RGB色彩模型，RGB]
-  {\color{red}R}{\color{green}G}{\color{blue}B}表示由{\color{red}Red}--{\color{green}Green}--{\color{blue}Blue}三原色生成颜色的色彩模型，通常用于电子屏幕，是一种加法模型，即通过叠加不同亮度的三原色产生所需的颜色。
+  \RGB{}表示由{\color{red}Red}--{\color{green}Green}--{\color{blue}Blue}三原色(Primary colors)生成颜色的色彩模型，通常用于电子屏幕，是一种加法模型，即通过叠加不同亮度的三原色产生所需的颜色。
 \end{example}
 
 \begin{example}[CMYK色彩模型]
-  {\color{cyan}C}{\color{magenta}M}{\color{yellow}Y}{\color{black}K}是由{\color{cyan}Cyan}--{\color{magenta}Magenta}--{\color{yellow}Yellow}--{\color{black}blacK}四原色生成颜色的色彩模型，通常用于印刷行业，是一种减法模型。即通过印刷不同的四原色组合，将照射到载体(书籍、杂志等)上的光线吸收一部分(这个被吸收的过程就是减法过程)后反射，使得反射光被人眼感知到的色彩是期望的色彩。
+  \CMYK{}是由{\color{cyan}Cyan}--{\color{magenta}Magenta}--{\color{yellow}Yellow}--{\color{black}blacK}四原色生成颜色的色彩模型，通常用于印刷行业，是一种减法模型。即通过印刷不同的四原色组合，将照射到载体(书籍、杂志等)上的光线吸收一部分(这个被吸收的过程就是减法过程)后反射，使得反射光被人眼感知到的色彩是期望的色彩。
 
-  在实际应用中{\color{cyan}C}{\color{magenta}M}{\color{yellow}Y}三色很难叠加成真正的黑色，一般只能达到褐色，因此在{\color{cyan}C}{\color{magenta}M}{\color{yellow}Y}的基础上又引入了K，即黑色，是为了强化暗调，加深暗部色彩。
+  在实际应用中一方面\CMY{}三色很难叠加成真正的黑色，一般只能达到褐色，另一方面黑色需求比其它颜色要大的多且黑色原料的成本比起\CMY{}三原色的成本低的多，因此在\CMY{}的基础上又引入了K，即黑色，一方面强化暗调，加深暗部色彩，一方面降低印刷成本。
 
   这种色彩不光与印刷有关，还与照射到印刷载体上的光线有关，这就是为什么同一本书在不同的环境下可能会看到不同的颜色。
 \end{example}
@@ -48,6 +89,261 @@
 \begin{definition}[绝对色彩空间]
   
 \end{definition}
+
+
+\begin{example}\RGB{}色彩模型在三维空间中的表示，如下图，分别以三原色为三维直角坐标系的三个正交基，原点为黑色，坐标$(1,1,1)$处为白色。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=2.0]
+      % \begin{scope}
+      %   \shade[upper left=green, upper right=yellow, lower left=black, lower right=red](0,0)rectangle(1,1);
+      % \end{scope}
+      \begin{scope}[shift={(-2.5,0)}]
+        % \draw(0,0,0)--(0,1,0)--(0,1,1)--(0,0,1)--cycle;
+        % \draw(0,0,0)--(1,0,0)--(1,1,0)--(0,1,0)--cycle;
+        % \draw(0,0,0)--(0,0,1)--(1,0,1)--(1,0,0)--cycle;
+        % \draw(1,0,1)--(1,1,1)--(0,1,1) (1,1,1)--(1,1,0);
+        \draw(0,1,0)--(1,1,0)--(1,1,1)--(0,1,1)--cycle;
+        \draw(0,0,1)--(1,0,1)--(1,1,1)--(0,1,1)--cycle;
+        \draw(1,0,0)--(1,1,0)--(1,1,1)--(1,0,1)--cycle;
+        \draw[help lines,dashed](0,0,0)--(1,0,0) (0,0,0)--(0,1,0) (0,0,0)--(0,0,1);
+
+        \draw[->](1,0,0)--(1.5,0,0)node[right]{\color{red}$R$};
+        \draw[->](0,1,0)--(0,1.5,0)node[above]{\color{green}$G$};
+        \draw[->](0,0,1)--(0,0,1.5)node[below left]{\color{blue}$B$};
+
+        \fill[ball color=black](0,0,0)circle(.1);
+        \fill[ball color=red](1,0,0)circle(.1);
+        \fill[ball color=green](0,1,0)circle(.1);
+        \fill[ball color=blue](0,0,1)circle(.1);
+
+        \fill[ball color=cyan](0,1,1)circle(.1);
+        \fill[ball color=magenta](1,0,1)circle(.1);
+        \fill[ball color=yellow](1,1,0)circle(.1);
+
+        \filldraw[draw=black,ball color=white](1,1,1)circle(.1);
+      \end{scope}
+      \begin{scope}
+        \shade[lower left=black,lower right=red,upper left=green,upper right=yellow](0,0,0)--(1,0,0)--(1,1,0)--(0,1,0)--cycle;
+        \shade[lower left=blue,lower right=black,upper left=cyan,upper right=green](0,0,0)--(0,1,0)--(0,1,1)--(0,0,1)--cycle;
+        \shade[lower left=blue, lower right=magenta,upper left=black,upper right=red](0,0,0)--(0,0,1)--(1,0,1)--(1,0,0)--cycle;
+      \end{scope}
+
+      \begin{scope}[shift={(2,0,0)}]
+        % \shade[lower left=white,lower right=cyan,upper left=magenta,upper right=green](0,0,0)--(1,0,0)--(1,1,0)--(0,1,0)--cycle;
+        % \shade[lower left=yellow,lower right=white,upper left=red,upper right=magenta](0,0,0)--(0,1,0)--(0,1,1)--(0,0,1)--cycle;
+        % \shade[lower left=yellow, lower right=blue,upper left=white,upper right=cyan](0,0,0)--(0,0,1)--(1,0,1)--(1,0,0)--cycle;
+
+        \shade[lower left=blue, lower right=magenta,
+               upper left=cyan,  upper right=white]
+               (0,0,1)--(1,0,1)--(1,1,1)--(0,1,1)--cycle;
+        \shade[lower left=magenta, lower right=red,
+               upper left=white,  upper right=yellow]
+               (1,0,0)--(1,1,0)--(1,1,1)--(1,0,1)--cycle;
+        \shade[lower left=cyan, lower right=white,
+               upper left=green,  upper right=yellow]
+               (0,1,0)--(1,1,0)--(1,1,1)--(0,1,1)--cycle;               
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}[Color Wheel]\mbox{}\par
+  \begin{center}
+    \begin{tikzpicture}[scale=.75]
+      \begin{scope}
+        \foreach \r/\R/\n/\dt/\rot in{1/2/3/120/30}{
+          \foreach \i/\c in{0/red,1/blue,2/yellow}{
+            \fill[color=\c](\i*\dt+\rot:\r)--(\i*\dt+\rot:\R)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R)--(\i*\dt+\dt+\rot:\r)
+            arc(\i*\dt+\dt+\rot:\i*\dt+\rot:\r);
+            \path%[decorate,decoration={text along path,text align=center,text={\c}]
+            (\i*\dt+\rot:\R+.25)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R+.25)node[midway,sloped]{\color{\c}\c};
+          }
+        }
+      \end{scope}
+      \begin{scope}[shift={(5.5,0)}]
+        \foreach \r/\R/\n/\dt/\rot in{1/2/6/60/60}{
+          \foreach \i/\c in{0/red,1/violet,2/blue,3/green,4/yellow,5/orange}{
+            \fill[color=\c](\i*\dt+\rot:\r)--(\i*\dt+\rot:\R)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R)--(\i*\dt+\dt+\rot:\r)
+            arc(\i*\dt+\dt+\rot:\i*\dt+\rot:\r);
+            \path%[decorate,decoration={text along path,text align=center,text={\c}]
+            (\i*\dt+\rot:\R+.25)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R+.25)node[midway,sloped]{\color{\c}\c};
+          }
+        }
+      \end{scope}
+      % \begin{scope}[shift={(11,0)}]
+      %   \foreach \r/\R/\n/\dt/\rot in{1/2/12/30/75}{
+      %     \foreach \i/\c in{0/red,1/violet, 2/magenta,3/violet,4/blue,5/black,6/cyan,7/black,8/green,9/black,10/yellow,11/orange}{
+      %       \fill[color=\c](\i*\dt+\rot:\r)--(\i*\dt+\rot:\R)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R)--(\i*\dt+\dt+\rot:\r)
+      %       arc(\i*\dt+\dt+\rot:\i*\dt+\rot:\r);
+      %       \path%[decorate,decoration={text along path,text align=center,text={\c}]
+      %       (\i*\dt+.5*\dt+\rot:\R+.25)--(\i*\dt+.5*\dt+\rot:\R+1.5)node[midway,sloped]{\color{\c}\c};
+      %     }
+      %   }
+      %   \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+
+\begin{example}[\RYB{} Color Wheel]\mbox{}\par
+  \begin{center}
+    \begin{tikzpicture}[scale=1]
+      \begin{scope}[shift={(-6,-6)}]
+          \foreach \i/\h/\a/\c/\coord/\t in{%
+            0/1.5/right/rybRed/{(1,0,0)}/{Red},
+            1/0.5/left/rybRedViolet/{(1,.5,0)}/{Red Violet},
+            2/1.0/left/rybViolet/{(1,0,1)}/Violet,
+            3/0.5/left/rybBlueViolet/{(0,.5,1)}/{Blue Violet},
+            4/1.5/left/Blue/{(0,0,1)}/Blue,
+            5/0.5/left/rybBlueGreen/{(0,1,.5)}/{Blue Green},
+            6/1.0/right/rybGreen/{(0,1,1)}/Green,
+            7/0.5/right/rybYellowGreen/{(0,1,.5)}/{Yellow Green},
+            8/1.5/right/rybYellow/{(0,1,0)}/Yellow,
+            9/0.5/right/rybYellowOrange/{(.5,1,0)}/{Yellow Orange},
+           10/1.0/right/rybOrange/{(1,1,0)}/Orange,
+           11/0.5/right/rybRedOrange/{(1,.5,0)}/{Red Orange}%
+          }{
+            \fill[color=\c](\i,0)rectangle(\i+1,\h);
+            % \node[anchor=west,rotate=30]at(\i,\h+.1){\tiny \coord};
+            \node[above]at(\i+.5,\h){\tiny \coord};
+            \node[anchor=west,rotate=-45]at(\i+.4,-.1){\tiny \t};
+          }        
+      \end{scope}
+      \begin{scope}[shift={(0,0)}]
+        \foreach \r/\R/\n/\dt/\rot in{1.8/3/12/30/75}{
+          \foreach \i/\a/\c/\t in{%
+            0/right/rybRed/{(1,0,0) Red},
+            1/left/rybRedViolet/{(1,1/2,0) Red Violet},
+            2/left/rybViolet/{(1,0,1) Violet},
+            3/left/rybBlueViolet/{(0,1/2,1) Blue Violet},
+            4/left/Blue/{(0,0,1) Blue},
+            5/left/rybBlueGreen/{(0,1,1/2) Blue Green},
+            6/right/rybGreen/{(0,1,1) Green},
+            7/right/rybYellowGreen/{(0,1,1/2) Yellow Green},
+            8/right/rybYellow/{(0,1,0) Yellow},
+            9/right/rybYellowOrange/{(1/2,1,0) Yellow Orange},
+            10/right/rybOrange/{(1,1,0) Orange},
+            11/right/rybRedOrange/{(1,1/2,0) Red Orange}%
+          }{
+            \fill[color=\c](\i*\dt+\rot:\r)--(\i*\dt+\rot:\R)arc(\i*\dt+\rot:\i*\dt+\dt+\rot:\R)--(\i*\dt+\dt+\rot:\r)
+            arc(\i*\dt+\dt+\rot:\i*\dt+\rot:\r);
+            % \path%[decorate,decoration={text along path,text align=center,text={\c}}]
+            % (\i*\dt+.5*\dt+\rot:\R+.25)--(\i*\dt+.5*\dt+\rot:\R+.1)node[pos=1,sloped,\a]{\color{\c}\t};
+          }
+
+          \coordinate(R)at(\rot+.5*\dt:\r);
+          \coordinate(V)at(\rot+2.5*\dt:\r);
+          \coordinate(B)at(\rot+4.5*\dt:\r);
+          \coordinate(G)at(\rot+6.5*\dt:\r);
+          \coordinate(Y)at(\rot+8.5*\dt:\r);
+          \coordinate(O)at(\rot+10.5*\dt:\r);
+          \coordinate(C)at(0,0);
+          \coordinate(RY)at($.5*(R)+.5*(Y)$);
+          \coordinate(YB)at($.5*(Y)+.5*(B)$);
+          \coordinate(BR)at($.5*(B)+.5*(R)$);
+          \fill[color=rybRed](R)--(RY)--(C)--(BR)--cycle;
+          \fill[color=rybYellow](Y)--(YB)--(C)--(RY)--cycle;
+          \fill[color=rybBlue](B)--(BR)--(C)--(YB)--cycle;
+          \foreach \x/\y/\z/\c in {R/Y/O/rybOrange,Y/B/G/rybGreen,B/R/V/rybViolet}{%
+            \fill[color=\c](\x)--(\y)--(\z)--cycle;
+          }
+        }
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\section{RGB颜色的运算}
+\label{sec:RGB-color-operations}
+
+\RGB{}模型是光线的加法模型，等强度的三原色光线混合在一起就是白色，即
+\begin{center}
+  \begin{tikzpicture}[scale=.5]
+    \fill[color=red,draw=black](0,0)circle(1);
+    \node at(1.5,0){$+$};
+    \fill[color=green,draw=black](3,0)circle(1);
+    \node at(4.5,0){$+$};
+    \fill[color=blue,draw=black](6,0)circle(1);
+    \node at(7.5,0){$=$};
+    \fill[color=white,draw=black](9,0)circle(1);
+  \end{tikzpicture}
+\end{center}
+
+\begin{definition}[互补色]
+  若等强度的两个RGB光源混合后是白光，则这两个光源的对应的颜色称为互补色。
+\end{definition}
+
+由等强度的三原色中的两个混合成的颜色称为二次色(Secondary Colors)。图~\ref{fig:complementary-colors-of-light}中三个大圆中的颜色为三原色，三个小圆中的颜色即为与其相邻的两个原色等强度混合而成的二次色。
+
+由等强度的RGB三原色混合后为白色，可知在图~\ref{fig:complementary-colors-of-light}中处于对角线上的两个颜色为互补色。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[scale=0.5]
+    \foreach \r/\R/\L in{.8/1/3.5}{
+      \foreach \x in{30,90,150}{
+        \draw[dashed](\x:\L)--(\x+180:\L);
+      }
+      \foreach \x in{30,150,270}{
+        \draw[very thick,->](\x-60:\L)--($(\x:\L)+(\x-120:\r)$);
+        \draw[very thick,->](\x+60:\L)--($(\x:\L)+(\x+120:\r)$);
+      }
+      \foreach \a/\rc/\c/\t in{90/\R/red/红,150/\r/magenta/洋红,210/\R/blue/蓝,270/\r/cyan/青,330/\R/green/绿,30/\r/yellow/黄}{%
+        \fill[color=\c,draw=black](\a:\L)circle(\rc);
+        \node at(\a:\L){\small \t};
+      }
+    }
+  \end{tikzpicture}
+  \caption{光的互补色}
+  \label{fig:complementary-colors-of-light}
+\end{figure}
+
+\section{颜料的色彩运算}
+\label{sec:operation-of-pigments}
+
+与自主发光的色彩光源不同，颜料呈现的颜色是通过吸收某种颜色的光线达成的，是一种减法模型，比如印刷中常见的\CMYK{}模型。
+
+\CMYK{}模型中的原色是{\color{cyan}Cyan}(青色)、{\color{magenta}Magenta}(洋红)、{\color{yellow}Yellow}(黄色)，因为这些颜色都只吸收单一频率的光线\footnote{光线也是一种波，如果光线中波的频率都一样，就是纯色波。如果由不同频率的波混合出来的光线就是杂色波。}，如表~\ref{tab:absorb-of-primary-colors-of-pigments}所示。
+
+\begin{table}[htbp]
+  \centering
+  \caption{CMY颜料吸收表}
+  \label{tab:absorb-of-primary-colors-of-pigments}
+  \newcommand{\cc}[1]{\tikz[baseline=-.5ex]{\fill[color=#1](0,0)circle(.2)}}
+  % % The point of \arraybackslash is to return \\ to its original
+  % % meaning because the \centering command alters this and could
+  % % possibly give you a noalign error during compilation.
+  % \newcolumntype{C}{>{\centering\arraybackslash}m{.6cm}} 
+  % % \newcolumntype{D}{>{\centering\arraybackslash}m{9cm}}
+  \begin{tabular}{cccl}
+    \hline
+    颜料 & 吸收 & 反射 & 说明\\\hline
+    % \cc{yellow} & \cc[red] & \cc[green] \cc[blue]\\
+    \cc{yellow} & \cc{blue} & \multicolumn{1}{>{\centering\arraybackslash}m{.6cm}}{\cc{red} \cc{green}} & \multicolumn{1}{m{9cm}}{白光遇到\cc{yellow}颜料时\cc{blue}被吸收，反射剩余的\cc{red}和\cc{green}光线，相当于人眼看到的是$\cc{red}+\cc{green}=\cc{yellow}$。} \\\hline
+    \cc{cyan}   & \cc{red}  & \multicolumn{1}{>{\centering\arraybackslash}m{.6cm}}{\cc{green} \cc{blue}}\\\hline
+    \cc{magenta}& \cc{green}& \multicolumn{1}{>{\centering\arraybackslash}m{.6cm}}{\cc{blue} \cc{red}}\\\hline
+  \end{tabular}
+\end{table}
+
+颜料的叠加，实际上就是做色彩的减法，减去入射的光线中更多的成分，如
+\begin{align*}
+  % \newcommand{\cc}[1]{\tikz[baseline=(current bounding box.center)]{\fill[color=#1](0,0)circle(.3)}}
+  \newcommand{\cc}[1]{\tikz[baseline=-.5ex]{\fill[color=#1](0,0)circle(.3)}}
+  \cc{magenta} + \cc{yellow} = \cc{red}   \quad \quad \quad
+  \cc{yellow}  + \cc{cyan}   = \cc{green} \quad \quad \quad
+  \cc{cyan}    + \cc{magenta}= \cc{blue}
+\end{align*}
+
+对于加法的RGB光源，三原色的和是白色。对于减法的CMY颜料，三原色的和(实际是做减法，吸收了对应颜色的光线)是黑色。即
+\begin{align*}
+  \newcommand{\cc}[1]{\tikz[baseline=-.5ex]{\fill[color=#1](0,0)circle(.3)}}
+  \text{光源：} \cc{red} + \cc{green} + \cc{blue} = \tikz[baseline=-.5ex]{\draw(0,0)circle(.3)}\\
+  \newcommand{\cc}[1]{\tikz[baseline=-.5ex]{\fill[color=#1](0,0)circle(.3)}}
+  \text{颜料：} \cc{cyan} + \cc{magenta} + \cc{yellow} = \cc{black}
+\end{align*}
+
+
 
 \section{三原色原理}
 \label{sec:three-primary-color-theory}
