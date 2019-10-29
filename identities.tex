@@ -385,3 +385,78 @@ $x,y$称为$(a,b)$的B\'ezout系数。一般来说，$(a,b)$的B\'ezout系数$x,
     \end{tikzpicture}
   \end{center}
 \end{example}
+
+ \begin{example}
+   任意大于1的正整数$n$，以下不等式成立：
+   \begin{align*}
+     \prod_{m=1}^{n-1}\sin\frac{m\pi}{n}=\frac{n}{2^{n-1}}
+   \end{align*}
+ \end{example}
+ \begin{proof}[提示]
+   利用复数单位根。记$z_m=e^{\frac{2m\pi}{n}i}(m=0,1,2,\cdots,n-1)$是$z^n=1$的$n$个单位根，则
+   \begin{align*}
+     z^n - 1 ={}& (z-z_0)(z-z_1)\cdots(z-z_{n-1})\\
+     ={}&(z-1)(z-z_1)(z-z_2)\cdots(z-z_{n-1})
+   \end{align*}
+   另一方面由因式分解可得
+   \begin{align*}
+     z^n - 1 = (z - 1)(1 + z + z^2 + \cdots + z^{n-1})
+   \end{align*}
+   从而当$z\ne1$时有
+   \begin{align*}
+     (1 + z + z^2 + \cdots + z^{n-1}) = (z-z_1)(z-z_2)\cdots(z-z_{n-1})
+   \end{align*}
+   从而上式对$\forall z\in\mathcal{C}$都是成立\footnote{因为本身是关于$z$的多项式，且有无限多的零点，从而只能恒等}。在其中取$z=1$代入并取模，有
+   \begin{align*}
+     n=|1-z_1|\cdot |1-z_2|\cdot |1-z_3| \cdot |1-z_{n-1}|
+   \end{align*}
+   如果有$|1-z_m|=|1-e^{\frac{2m\pi}{n} i}|=2\sin\frac{m\pi}{n} $就好了。这个可以由下面的引理得出，从而原等式成立。
+ \end{proof}
+
+ \begin{lemma}
+   $\forall z\equiv e^{\theta i}\in\mathcal{C}$，其中$0\le\theta\le2\pi$，则有
+   \begin{align*}
+     \left| z - 1 \right| \equiv \left| e^{\theta i} - 1 \right| = 2\sin\frac\theta2
+   \end{align*}
+ \end{lemma}
+
+  \begin{proof}[提示]
+   多种方法。其一是使用复数。按复数定义，$\left| z - 1\right|$实际上是复平面上点$z$到点$1$的距离，即下图所示的等腰三角形中的底边的长度。
+   \begin{center}
+     \begin{tikzpicture}[scale=1.0]
+       \coordinate(Z)at(60:2);\coordinate(O)at(0,0);\coordinate(A)at(2,0);
+       \draw[->](-3,0)--(3,0);
+       \draw[->](0,-3)--(0,3);
+       \draw[help lines,dashed](0,0)circle(2) (O)--($(A)!(O)!(Z)$);
+       \draw(O)--(Z)node[above right]{$z$}--(A)node[above right]{1};
+       \draw pic["$\theta$",<->,draw=orange,angle eccentricity=1.6,angle radius=.6cm]{angle=A--O--Z};
+     \end{tikzpicture}
+   \end{center}
+   由原点到对边的高，容易得到底边的长度又可以由$2\sin\frac{\theta}{2}$给出，从而引理得证。其中的$0\le\theta\le2\pi$只是为了保证$\sin\frac\theta2$非负。
+
+   另一种方法是直接利用三角函数计算。由$0\le\theta\le2\pi\implies \sin\frac\theta2\ge0$，从而有
+   \begin{align*}
+     \left| e^{\theta i} - 1 \right| = 2\sin\frac\theta2 \iff{} & (\cos\theta - 1)^2 + \sin^2\theta = 4\sin^2\frac\theta 2\\
+     \iff{} & \cos^2\theta - 2\cos\theta + 1 + \sin^2\theta = 4\sin^2\frac\theta2\\
+     \iff{} & 2(1-\cos\theta)=4\sin^2\frac\theta2\\
+     \iff{} & 1-\cos\theta = 2\sin^2\frac\theta2                                                                  
+   \end{align*}
+   最后一式实际上是$\cos$的倍角公式，是成立的。从而原等式成立。
+ \end{proof}
+
+ \begin{example}
+   求$\sin\frac\pi7 \sin\frac{2\pi}7 \sin\frac{3\pi}7$。
+ \end{example}
+ \begin{proof}[提示]
+   利用公式，有
+   \begin{align*}
+     \sin\frac\pi7 \sin\frac{2\pi}7 \sin\frac{3\pi}7 \sin\frac{4\pi}7 \sin\frac{5\pi}7 \sin\frac{6\pi}7 =\frac{7}{2^6}
+   \end{align*}
+   又
+   \begin{align*}
+     \sin\frac\pi7 = \sin\frac{6\pi}7,\quad
+     \sin\frac{2\pi}7 = \sin\frac{5\pi}7,\quad
+     \sin\frac{3\pi}7 = \sin\frac{4\pi}7
+   \end{align*}
+   从而题中所求的值为$\frac{7}{2^6}$的一半，即$\frac{7}{2^7}$。
+ \end{proof}
