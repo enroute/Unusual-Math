@@ -6,6 +6,33 @@
 \label{sec:permutation-and-combination}
 
 从$m$个元素的集合里取$n$个组成的一个子集称为集合的一个$n-\text{组合}$。$n-\text{组合}$的个数通常记为$C_m^n$或者$\binom mn$，简称为组合数。组合是与选出来的元素的次序无关的。若每个组合中元素的排序不一样也视为不同，则其个数称为$m$取$n$的排列数，通常记为$P_m^n$。
+\begin{theorem}[全排列]
+  \begin{align*}
+    P_n^n = n!
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  方法很多，比如归纳法，$n=1$是平凡的，$n=k+1$时，先用前$k$个做全排列有$k!$种，如下图中的插空法，在每种$k$个元素的排列中再插入最后第$k+1$个元素(图中的\tikz{\filldraw[fill=gray](0,0)circle(.2);})有$k+1$种插法。所以$n=k+1$时有$k! \cdot (k+1) = (k+1)!$种排列。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \foreach \i in {0,1,2,3,4,5,6,7,8,9}{
+        \ifnum\i=5
+          \node at(\i,0){$\cdots$};
+        \else
+          \filldraw[fill=white](\i,0)circle(.2);
+        \fi
+      }
+      \draw[decorate,decoration={brace,amplitude=5pt}](0,.3)--(9,.3)node[above,midway]{$k$个};
+      \foreach \i in {0,1,2,3,10}{
+        \filldraw[fill=gray](\i-.5,-.5)circle(.2);
+        \draw[->](\i-.5,-.25)--(\i-.5,0);
+      }
+    \end{tikzpicture}
+  \end{center}
+
+  比如乘法，一个排列中，第1个元素有$n$种选择，然后选第2个元素时有$n-1$种选择(有1个已经被选了)，然后选第3个元素时有$n-2$种选择(前2个已经被选了)，如此下去，总排列数就是$n!$。
+\end{proof}
 
 \begin{theorem}
   \begin{align*}
@@ -19,7 +46,7 @@
 \begin{theorem}
   \begin{align*}
     C_m^n = \underbrace{m\cdot (m-1) \cdot (m-2) \cdot (m-n+1)}_{n\text{个}}
-    =\frac{m!}{n!}
+    =\frac{m!}{(m-n)!\cdot n!}
   \end{align*}
 \end{theorem}
 \begin{proof}[提示]

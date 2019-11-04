@@ -1,6 +1,7 @@
 
 \chapter{逻辑}
 \label{chap:logic}
+\def\BKC{\cellcolor{gray!50}}   % cell background color
 
 \section{排除法}
 \begin{example}
@@ -229,7 +230,7 @@
   \let\qed\relax
 \end{proof}
 
-\begin{example}[爱因斯坦难题]
+\begin{example}[爱因斯坦难题]\label{ex:einstein's-problem}
   在一条街上,有5座房子，喷了5种颜色。每个房子了住着不同国籍的人，每个人
   喝着不同的饮料，抽不同品牌的香烟，养着不同的宠物，这有一些他们的信
   息：
@@ -400,6 +401,229 @@
     此时由(10)，养猫只能在1号房。从而表格中只剩余4号房养什么宠物未知。而由题目是问谁养鱼，故养鱼只能填在4号房。
 \end{proof}
 
+\begin{example}
+  六所房子排成一排，每所房子颜色不同，每位屋主来自不同的地方，吃着不同的水果，喝着不同的饮料，喜欢不同的运动，养不同的宠物。下面是关于他们的一些信息：\
+  \begin{enumerate}%\vspace{-2cm}
+  \begin{multicols}{2}
+  \item 前3位无养鸡和吃葡萄者。
+  \item 吃桔子的人也养马。
+  \item 北京人在养鸟者旁边。
+  \item 湖南人住黄房子。
+  \item 四川人旁边的人吃桔子。
+  \item 绿房子的主人吃西瓜。
+  \item 上海人在白房子旁边。
+  \item 江苏人喜欢打排球。
+  \item 红色屋主喝牛奶。
+  \item 养猫人在第一所房子。
+  \item 打篮球的人养狗。
+  \item 喝咖啡的人吃香蕉。
+  \item 打棒球的人养鸡。
+  \end{multicols}%\vspace{-2cm}
+  \item 喝茶者在喝矿泉水者的右边
+  \item 爱吃香蕉者和打棒球者住在中间（第3、4位置）
+  \item 后3位中没有黑房子，有吃苹果者。
+  \item 篮球、垒球、足球，这3项运动的爱好者互不相邻。
+  \item 上海人和黑房子之间隔有3个位置。
+  \item 白色房子既不在中间，也不在最后，与蓝房子相邻。
+  \item 喝可乐者和山东人之间仅隔喝啤酒者。
+  \item 爱吃苹果的人也爱打桌球。
+  \item 吃桃子者与打桌球者之间仅隔扔垒球者。
+  \end{enumerate}
+那么谁养鱼？
+\end{example}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{center}
+  %https://tex.stackexchange.com/questions/60601/evenly-distributing-column-widths
+  
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1 & 2 & 3 & 4 & 5 & 6\\\hline
+    颜色 &   &   &   &   &   &  \\\hline
+    地方 &   &   &   &   &   &  \\\hline
+    水果 &   &   &   &   &   &  \\\hline
+    饮料 &   &   &   &   &   &  \\\hline
+    运动 &   &   &   &   &   &  \\\hline
+    宠物 &   &   &   &   &   &  \\\hline
+  \end{tabularx}
+\end{center}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+先根据(10)，填猫。根据(1)、(13)和(15)，填棒球、鸡和香蕉。再由(12)填入咖啡。
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1 & 2 & 3     & 4 & 5 & 6\\\hline
+    颜色 &   &   &       &       &   &  \\\hline
+    地方 &   &   &       &       &   &  \\\hline
+    水果 &   &   & 香蕉  &       &   &  \\\hline
+    饮料 &   &   & 咖啡  &       &   &  \\\hline
+    运动 &   &   &       & 棒球  &   &  \\\hline
+    宠物 & 猫&   &       & 鸡    &   &  \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+由(21)和(22)，苹果、桌球、桃子和垒球只能是以下两种排列方式：\nopagebreak
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \BKC 苹果 & & \BKC 桃子\\\hline
+    & & \\\hline
+    \BKC 桌球 & \BKC 垒球 &\\\hline
+  \end{tabular}
+  \hspace{2cm}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \BKC 桃子 & & \BKC 苹果\\\hline
+    & & \\\hline
+     & \BKC 垒球 & \BKC 桌球\\\hline
+  \end{tabular}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+再由(16)苹果在4/5/6号房，从而只有上面第二种排列能放入到表格中：\nopagebreak
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1 & 2 & 3     & 4    & 5    & 6   \\\hline
+    颜色 &   &   &       &      &      &     \\\hline
+    地方 &   &   &       &      &      &     \\\hline
+    水果 &   &   & 香蕉  & \BKC 桃子  &      & \BKC 苹果 \\\hline
+    饮料 &   &   & 咖啡  &      &      &     \\\hline
+    运动 &   &   &       & 棒球  & \BKC 垒球 & \BKC 桌球 \\\hline
+    宠物 & 猫&   &       & 鸡    &      &     \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+由(17)，足球、篮球占据了房间1和3。由(11)，打篮球养狗的人只能在(3)，从而足球在(1)。由(8)，剩下打排球的江苏人在(2)。由(1)，葡萄在(5)。\nopagebreak
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1   & 2 & 3     & 4    & 5    & 6   \\\hline
+    颜色 &     &   &       &      &      &     \\\hline
+    地方 &     & \BKC 江苏  &       &      &      &     \\\hline
+    水果 &     &   & 香蕉  & 桃子  & \BKC 葡萄 & 苹果 \\\hline
+    饮料 &     &   & 咖啡  &      &      &     \\\hline
+    运动 & \BKC 足球 & \BKC 排球 & \BKC 篮球   & 棒球  & 垒球 & 桌球 \\\hline
+    宠物 & 猫  &   & \BKC 狗    & 鸡    &      &     \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+此时剩余1号房和2号房两种水果。由(5)，桔子不能在1号房，从而桔子在2号房。由(6)，填入绿色和西瓜。由(2)，填入马。\nopagebreak
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1   & 2     & 3     & 4    & 5    & 6   \\\hline
+    颜色 & \BKC 绿色 &      &       &      &      &     \\\hline
+    地方 &     & 江苏  &       &      &      &     \\\hline
+    水果 & \BKC 西瓜 & \BKC 桔子 & 香蕉  & 桃子  & 葡萄 & 苹果 \\\hline
+    饮料 &     &     & 咖啡   &      &      &     \\\hline
+    运动 & 足球 & 排球 & 篮球   & 棒球  & 垒球 & 桌球 \\\hline
+    宠物 & 猫  & \BKC 马  & 狗    & 鸡    &      &     \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+由(16)，黑色在2号或3号，从而由(18)，上海在6号或7号(不存在)，从而黑色在2号，上海在6号。由(19)，白色在5号。
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1   & 2     & 3    & 4    & 5    & 6   \\\hline
+    颜色 & 绿色 & \BKC 黑色 &  & % \BKC 黄
+    & \BKC 白色  &     \\\hline
+    地方 &     & 江苏  &      & % \BKC 湖南
+    &      & \BKC 上海 \\\hline
+    水果 & 西瓜 & 桔子 & 香蕉  & 桃子  & 葡萄 & 苹果 \\\hline
+    饮料 &     &      & 咖啡  &      &      &     \\\hline
+    运动 & 足球 & 排球 & 篮球  & 棒球  & 垒球 & 桌球 \\\hline
+    宠物 & 猫  &  马  & 狗    & 鸡    &      &     \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+由(19)，蓝色在4、6。由(9)，红色在4、6。从而由(4)，剩余的一个黄色在3，填入湖南与黄色。由(5)，四川人在1号。
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1   & 2     & 3   & 4    & 5    & 6   \\\hline
+    颜色 & 绿色 & 黑色 & \BKC 黄色 &    & 白色  &     \\\hline
+    地方 & \BKC 四川 & 江苏  & \BKC 湖南 &     &      & 上海 \\\hline
+    水果 & 西瓜 & 桔子 & 香蕉  & 桃子  & 葡萄 & 苹果 \\\hline
+    饮料 &     &      & 咖啡  &      &      &     \\\hline
+    运动 & 足球 & 排球 & 篮球  & 棒球  & 垒球 & 桌球 \\\hline
+    宠物 & 猫  &  马  & 狗    & 鸡    &      &     \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+由(20)，山东、可乐、啤酒的排列形式只有以下两种：
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \BKC 山东 &     &\\\hline
+         &     &\\\hline
+         & \BKC 啤酒 & \BKC 可乐\\\hline
+  \end{tabular}\hspace{2cm}
+  \begin{tabular}{|c|c|c|}
+    \hline
+         &     & \BKC 山东\\\hline
+         &     &\\\hline
+     \BKC 可乐& \BKC 啤酒 & \\\hline
+  \end{tabular}\vspace{.5cm}
+\end{center}
+\end{minipage}
+由此容易将表格剩余内容填满。
+
+% \makeatletter
+% \newcommand{\thickhline}{%
+%     \noalign {\ifnum 0=`}\fi \hrule height 1pt
+%     \futurelet \reserved@a \@xhline
+% }
+% \newcolumntype{"}{@{\vrule width 1pt\hskip\tabcolsep}}
+% \newcolumntype{!}{@{\hskip\tabcolsep\vrule width 1pt}}
+% \makeatother
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1   & 2     & 3   & 4    & 5    & 6   \\\hline
+    颜色 & 绿色 & 黑色 & 黄色 &    & 白色  &     \\\hline
+    地方 & 四川 & 江苏  & 湖南 & \BKC 山东 &      & 上海 \\\hline
+    水果 & 西瓜 & 桔子 & 香蕉  & 桃子  & 葡萄 & 苹果 \\\hline
+    饮料 &     &      & 咖啡  &      & \BKC 啤酒 & \BKC 可乐 \\\hline
+    运动 & 足球 & 排球 & 篮球  & 棒球  & 垒球 & 桌球 \\\hline
+    宠物 & 猫  &  马  & 狗    & 鸡    &      &     \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
+
+由(3)和(19)，填入北京、鸟、红色、牛奶。所以是\underline{北京人养鱼}。
+
+\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{2em}
+\begin{center}
+  \begin{tabularx}{\textwidth}{|c *{7}{|Y}}
+    \hline
+    房间 & 1   & 2     & 3   & 4    & 5    & 6   \\\hline
+    颜色 & 绿色 & 黑色 & 黄色 & \BKC 红色 & 白色  &     \\\hline
+    地方 & 四川 & 江苏  & 湖南 & 山东 & \BKC 北京 & 上海 \\\hline
+    水果 & 西瓜 & 桔子 & 香蕉  & 桃子  & 葡萄 & 苹果 \\\hline
+    饮料 &     &      & 咖啡  & \BKC 牛奶 & 啤酒 & 可乐 \\\hline
+    运动 & 足球 & 排球 & 篮球  & 棒球  & 垒球 & 桌球 \\\hline
+    宠物 & 猫  &  马  & 狗    & 鸡    &      & \BKC 鸟 \\\hline
+  \end{tabularx}\vspace{.5cm}
+\end{center}
+\end{minipage}
 
 \begin{example}
   黛西参加学校举行的小学生数学比赛，比赛结束后，艾玛问黛西得了第几名，黛西故意卖关子，说：“我考的分数、名次和我的年龄的乘积是1958，你猜猜看。”请算算黛西的分数、名次和年龄。

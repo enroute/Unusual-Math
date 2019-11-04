@@ -1,15 +1,23 @@
 
-\chapter{平面几何五大模型}
-\label{chap:five-models-in-geometry}
+\section{平面几何五大模型}
+\label{sec:five-models-in-geometry}
 
-% \subsection{等积模型}
-% \label{sec:same-volumne-model}
+\subsection{等积模型}
+\label{sec:same-volumne-model}
 
 \begin{theorem}
   两个三角形若等底等高，则其面积相等。
 \end{theorem}
 
-此结论由三角形面积公式显然可得。
+\begin{theorem}
+  两个三角形若底相同，则其面积比等于高的比；两个三角形若高相同，则其面积比等于对应底的比。
+\end{theorem}
+
+这两个结论由三角形面积公式（底乘高除以2）显然可得。
+
+
+\subsection{鸟头模型}
+\label{sec:common-angle-theorem}
 
 \begin{definition}[共角三角形]
   两三角形若有一个角相等或互补，则称这两个三角形为共同三角形。
@@ -83,6 +91,9 @@
 \end{question}
 
 
+\subsection{蝴蝶模型}
+\label{sec:butterfly-theorem}
+
 \begin{theorem}[蝴蝶定理]
   如图，任意凸四边形的对角线将四边形分成$4$个小三角形，则其面积$S_1,S_2,S_3,S_4$满足以下关系
   \begin{align*}
@@ -106,7 +117,7 @@
   \end{tikzpicture}
 \end{theorem}
 \begin{proof}
-  找同底或等高关系，可得$\dfrac{S_1}{S_2}=\dfrac{S_4}{S_3}$，变换一下即得证。
+  找三角形的同底或等高关系，可得$\dfrac{S_1}{S_2}=\dfrac{S_4}{S_3}$，变换一下即得证。
 \end{proof}
 
 \begin{example}[梯形中的蝴蝶定理]
@@ -137,6 +148,10 @@
     S_1\cdot S_3=S_2\cdot S_4\implies a^2 \cdot b^2 = S_2^2\implies S_2=ab&\qedhere
   \end{align*}
 \end{proof}
+
+
+\subsection{燕尾模型(swallowtaile-theore??????)}
+\label{sec:swallowtail-theore}
 
 
 \begin{theorem}[燕尾定理]
@@ -190,6 +205,18 @@
 \end{theorem}
 \begin{proof}[说明]
   如第二图的最小模型，若只考虑一个燕尾，可在$AD$上随意取点$O$即有上述结论，即无需知道$E,F$两点。
+\end{proof}
+
+\begin{example}
+  在燕尾定理的图中，燕尾$ABOC$的面积与$\triangle ABC$的面积比等于$AO:AD$。
+\end{example}
+\begin{proof}[提示]
+  将燕尾沿$AD$切成两边分别考虑，有
+  \begin{align*}
+    \frac{S_{\triangle AOB}}{S_{\triangle ADB}} = \frac{AO}{AD},\quad
+    \frac{S_{\triangle AOC}}{S_{\triangle ADC}} = \frac{AO}{AD}
+  \end{align*}
+  两式分子分母分别相加可得\footnote{这里用到了这样一个结论：若$a_1/b_1=a_2/b_2$，则$(a_1+a_2)/(b_1+b_2)=a_1/b_1$。当然，这里$b_1$和$b_2$需要满足一定条件，请自行思考。}。
 \end{proof}
 
 \begin{example}
@@ -277,13 +304,13 @@
     S_{\triangle CGA}:S_{\triangle CGD} ={}& 2\times( S_{\triangle CGA}:S_{\triangle CGB} )\\
     ={}& 2\times( AE:EB ) = 2\times( 1 : (3+2))=2:5
   \end{align*}
-  由此可得$AG:GH:HD$。实际上，$AG$占整个$AD$的$\frac27$，$HD$占整个$AD$的$\frac15$，所以$GH$占整个$AD$的$1-\frac27-\frac15$，由此可得三者的比例为$10:18:7$。从而
+  由此可得$AG:GH:HD$。实际上，$AG$占整个$AD$的$\frac27$，$HD$占整个$AD$的$\frac15$，所以$GH$占整个$AD$的$1-\frac27-\frac15$，由此可得三者的比例为$10:18:7$。从而由共角定理有
   \begin{align*}
     &S_{\triangle AEG} : S_{\triangle AFH} : S_{\triangle ABD}\\
     =&(1\times 10) : ((1+3)\times(10+18)) : ((1+3+2)\times(10+18+7))\\
     =&10 : 112 : 210
   \end{align*}
-  从而由共角定理有
+  由此可得
   \begin{align*}
     S_{\triangle AEG} : S_{EFHG} : S_{FBDH} ={}& 10 : (112-10) : (210-112)\\
     ={}& 10:102:98=5:51:49
@@ -338,3 +365,65 @@
     \frac{CF}{FD}=\dfrac{S_{\triangle BFD}}{S_{\triangle BCF}} = \dfrac{\frac{x}{y}}{1+\frac{u}{v}}&\qedhere
   \end{align*}
 \end{proof}
+
+\begin{example}
+  记$P$为$\forall\triangle ABC$内任意一点，且$AP$、$BP$及$CP$分别与$\triangle ABC$的三边相交于$D$、$E$及$F$。求
+  \begin{align*}
+    \frac{AP}{AD} + \frac{BP}{BE} + \frac{CP}{CF} = ?
+  \end{align*}
+  \centering
+  \begin{tikzpicture}[scale=1.2]
+    \begin{scope}
+      \coordinate[label=above:$A$](A)at(2,2);
+      \coordinate[label=below left:$B$](B)at(0,0);
+      \coordinate[label=below right:$C$](C)at(3,0);
+      \coordinate[label=above:$P$](P)at(1.5,.5);
+      \tkzInterLL(A,P)(B,C)\tkzGetPoint{D}
+      \tkzInterLL(B,P)(C,A)\tkzGetPoint{E}
+      \tkzInterLL(C,P)(A,B)\tkzGetPoint{F}
+      \draw(A)--(B)--(C)--cycle;
+      \draw(A)--(D) (B)--(E) (C)--(F);
+      \tkzDrawPoints(A,B,C,D,E,F,P)
+      \tkzLabelPoints[below](D)
+      \tkzLabelPoints[right](E)
+      \tkzLabelPoints[left](F)
+    \end{scope}
+    \begin{scope}[shift={(5,0)}]
+      \coordinate[label=above:$A$](A)at(2,2);
+      \coordinate[label=below left:$B$](B)at(0,0);
+      \coordinate[label=below right:$C$](C)at(3,0);
+      \coordinate(P)at(1.5,.5);
+      \tkzInterLL(A,P)(B,C)\tkzGetPoint{D}
+      \tkzInterLL(B,P)(C,A)\tkzGetPoint{E}
+      \tkzInterLL(C,P)(A,B)\tkzGetPoint{F}
+      \fill[color=red!20](A)--(P)--(B)--cycle;
+      \fill[pattern=north west lines,pattern color=blue!20](B)--(P)--(C)--cycle;
+      \draw(A)--(B)--(C)--cycle;
+      \draw(A)--(P) (B)--(P) (C)--(P);
+      \tkzDrawPoints(A,B,C,P)
+      % \tkzLabelPoints[below](D)
+      % \tkzLabelPoints[right](E)
+      % \tkzLabelPoints[left](F)
+      \node at($1/3*(A)+1/3*(B)+1/3*(P)$){$S_1$};
+      \node at($1/3*(B)+1/3*(C)+1/3*(P)$){$S_2$};
+      \node at($1/3*(C)+1/3*(A)+1/3*(P)$){$S_3$};
+    \end{scope}
+  \end{tikzpicture}
+\end{example}
+\begin{proof}[提示]
+  有时长度的比可以转化为面积体积的比。记$S_1\equiv S_{\triangle APB}$，$S_2\equiv S_{\triangle BPC}$，$S_3\equiv S_{\triangle CPA}$，则利用燕尾定理可得
+  \begin{align*}
+    \frac{AP}{AD}={}\frac{S_1 + S_3}{S_{\triangle ABC}},\quad
+    \frac{BP}{BE}={}\frac{S_2 + S_1}{S_{\triangle ABC}},\quad
+    \frac{CP}{CF}={}\frac{S_3 + S_2}{S_{\triangle ABC}}
+  \end{align*}
+  三式相加，可得
+  \begin{align*}
+    \frac{AP}{AD} + \frac{BP}{BE} + \frac{CP}{CF} = 2&\qedhere
+  \end{align*}
+\end{proof}
+
+\subsection{相似模型}
+\label{sec:similar-model}
+
+?????

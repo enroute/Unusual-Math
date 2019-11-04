@@ -211,6 +211,11 @@
 \usetikzlibrary{arrows.meta}          %for arrow options
 \usetikzlibrary{shadings}             %for shadings
 
+%% externalizing tikz graphs
+%% https://tex.stackexchange.com/questions/1460/script-to-automate-externalizing-tikz-graphics
+% \usetikzlibrary{external}
+% \tikzexternalize[prefix=figures/]
+
 \newcommand{\tikzmark}[2]{\tikz[overlay,remember picture,baseline] \node [anchor=base] (#1) {$#2$};}
 
 \newcommand{\DrawVLine}[3][black, thick, opacity=0.5]{%
@@ -544,7 +549,7 @@
 % \includeonly{golden-ratio}
 % \includeonly{area}
 % \includeonly{five-models}
-% \includeonly{logic}
+% \includeonly{logic-print}
 % \includeonly{geometry}
 % \includeonly{graphs-of-functions}
 % \includeonly{proofs-without-words}
@@ -577,6 +582,7 @@
 % \includeonly{dp}
 % \includeonly{matrix}
 % \includeonly{color}
+% \includeonly{fractal}
 
 % allow page break inside align environment
 \allowdisplaybreaks
@@ -588,6 +594,7 @@
 \include{cover}
 
 %% Remvoe the self reference of tableofcontents
+\currentpdfbookmark{\contentsname}{tableofcontents}
 \tableofcontents*
 % \begin{KeepFromToc}
 %   \tableofcontents
@@ -611,6 +618,10 @@
 \include{numerical-method}
 % \include{induction}
 \include{trigonometric-functions}
+\include{five-models}           %section under triangle
+\include{triangle-inequality}
+% \include{fermat-point}
+
 \include{area}
 
 \include{matrix}
@@ -636,7 +647,6 @@
 \include{buffalo-way}
 
 \include{pythagorean_triples}
-\include{five-models}
 \include{circle}
 \include{geometry}
 \include{convex}
@@ -656,6 +666,8 @@
 
 \include{magic-square}
 
+\include{fractal}
+
 \include{algorithm}
 \include{dp}
 
@@ -663,5 +675,6 @@
 
 \include{intuition}
 \include{traps}
+\include{logic-print}
 \end{document}
 

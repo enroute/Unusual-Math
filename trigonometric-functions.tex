@@ -451,7 +451,7 @@
 \begin{definition}
   若两个三角形$\triangle ABC$与$\triangle DEF$三个角分别相等，即
   \begin{align*}
-    \angle A = \angle D,\quad \angle B = \angle E, \angle C = \angle F
+    \angle A = \angle D,\quad \angle B = \angle E,\quad \angle C = \angle F
   \end{align*}
   则称两个三角形相似。
 \end{definition}
@@ -1231,11 +1231,12 @@
   \end{align*}
   比较$AA_2$的表达式，可知$AA_2^2 = 3A_1B_1^2$，从而有$AA_2=\sqrt3 A_1B_1$。由于外拿破仑三角形$\triangle A_1B_1C_1$是正三角形，从而有
   \begin{align*}
-    AA_2=BB_2=CC_2=\sqrt3 A_1B_1 = \sqrt3 B_1C_1 = \sqrt3 C_1A_1 &\qedhere
+    AA_2=BB_2=CC_2=\sqrt3 A_1B_1 = \sqrt3 B_1C_1 = \sqrt3 C_1A_1 
   \end{align*}
+  此证明中并没用到$AA_1$、$BB_1$及$CC_1$共点的结论。
 \end{proof}
 
-\begin{theorem}[拿破仑点的推广]
+\begin{theorem}[拿破仑点]\label{th:napoleon's-point}
   如图，任意三角形$\triangle ABC$，以三边为底边分别向外(或向内)作相似的三个等腰三角形形成六边形，则三条对角线$AX$，$BY$，$CZ$共点。
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
@@ -1273,7 +1274,7 @@
       \end{scope}
     \end{tikzpicture}
   \end{center}
-  当$\theta=\pi/6$时，三线的交点即为first Napoleon point，也称为Fermat点；当$\theta=-\pi/6$时(即等腰三角形是向内的)，三线的交点即为second Napoleon point。
+  当$\theta=\pi/6$时，三线的交点即为first Napoleon point；当$\theta=-\pi/6$时(即等腰三角形是向内的)，三线的交点即为second Napoleon point。当$\theta=\pi/3$即向外作正三角形时三线的交点即为费马点(见\ref{sec:fermat-point})。
 \end{theorem}
 % \begin{proof}[提示]
 %   此定理的证明并不平凡，若有兴趣，可以参考Eddy, R. H.; Fritsch, R. (June 1994). "The Conics of Ludwig Kiepert: A Comprehensive Lesson in the Geometry of the Triangle". Mathematics Magazine. 67 (3): 188--205.
@@ -1287,7 +1288,7 @@
     \angle ZBA = \angle XBC = \beta,\quad
     \angle XCB = \angle YCA = \gamma
   \end{align*}
-  则$AX$，$BY$及$CZ$三线共点，该点称为Jacobi点。$\triangle XYZ$称为$\triangle ABC$的一个Jacobi三角形。
+  则$AX$，$BY$及$CZ$三线共点，该点称为雅可比点(Jacobi Point)。$\triangle XYZ$称为$\triangle ABC$的一个雅可比三角形(Jacobi Triangle)。
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
       \coordinate[label=left:$B$] (B) at (0,0);
@@ -1358,6 +1359,93 @@
   \end{align*}
   由塞瓦定理，可知$AX'$，$BY'$，$CZ'$三线共点。
 \end{proof}
+
+\section{费马点}
+\label{sec:fermat-point}
+
+\begin{definition}[费马点，Fermat Point，Torricelli Point，Fermat-Torricelli Point]
+  给定任意$\triangle ABC$，平面上到该三角形顶点距离之和取得最小值的点称为费马点。
+\end{definition}
+费马点也称为费马--托里拆利\footnote{埃万杰利斯塔·托里拆利是意大利的物理学家、数学家，也是气压计的发明者。}点。每个三角形都有唯一的一个费马点，且按定理~\ref{th:napoleon's-point}可由拿破仑三角形构造出来。
+
+\begin{theorem}
+  记$P$为$\triangle ABC$内一点，若$\angle APB=\angle BPC=\angle CPA$，则$P$是$\triangle ABC$的费马点。
+\end{theorem}
+
+\begin{example}[费马点的物理学解释]\label{ex:physics-of-fermat-point}
+  将平面上所给的三个给定点$A,B,C$钻出洞来，再设有三条绳子系在一起，每条绳子各穿过一个洞口，而绳子的末端都绑有一个固定重量$m$的重物。假设摩擦力可以忽略，那么绳子会被拉紧，而绳结最后会停在平面一点的上方。可以证明，这个点$P$就是三个给定点所对应的费马点。首先，由于绳长是固定的，而绳子竖直下垂的部分越长，重物的位置也就越低，势能越低。在平衡态的时候，系统的势能达到最小值，也就是绳子竖直下垂的部分的长度达到最大值，因此水平的部分的长度达到最小值。而绳子的水平部分的长度就是$PA + PB + PC$，因此这时$PA + PB + PC$最小，也就是达到费马点。
+
+  以平面为势能零点，记三根绳子总长为$l$，则平衡状态下系统的势能$E_p$为
+  \begin{align*}
+    E_p=-m(l-PA-PB-PC)=-ml+m(PA+PB+PC)
+  \end{align*}
+  即$PA+PB+PC$取得最小值等价于系统的势能最小，从而平衡时绳结所在的平面上的点$P$就是$\triangle ABC$的费马点。
+
+  此处关键在于三条绳下的重物有相同的重量$m$。%若三个重物的重量不同，则平衡时的点$P$就是加权费马点？似乎不是的。
+\end{example}
+
+\begin{example}[Romanian National Olympiad]
+  复数$u$、$v$和$w$满足
+  \begin{align*}
+    u|vw| + v|wu| + w|uv| = 0
+  \end{align*}
+  则有
+  \begin{align*}
+    |u-v|\cdot |v-w|\cdot |w-u| \ge 3\sqrt3 |uvw|
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  引入记号如下：
+  \begin{align*}
+    u=|u|e^{\alpha i},\qquad
+    v=|v|e^{\beta i},\qquad
+    w=|w|e^{\gamma i}
+  \end{align*}
+  则由$u|vw| + v|wu| + w|uv| = 0$可知
+  \begin{align*}
+    e^{\alpha i} + e^{\beta i} + e^{\gamma i} = 0
+  \end{align*}
+  从而$u$、$v$和$w$之间两两夹角都是$120^\circ$\footnote{三个单位向量，其和为零向量等价于三个向量两两夹角为$120^\circ$。任取一个向量的方向及其正交方向，考虑三个向量在该正交方向上的投影，可知另两个向量关于取定向量对称。由此三个向量，两两关于另一个向量对称，从而两两夹角$120^\circ$。}，即原点是$u$、$v$和$w$三点组成的三角形的费马点。再由余弦定理，有
+  \begin{align*}
+    |u-v|^2=|u|^2 + |v|^2 + |u|\cdot |v| \ge 3|u|\cdot |v| = 3|uv|
+  \end{align*}
+  同理求得$|v-w|$和$|w-u|$的下限估计，然后三式相乘可得。
+\end{proof}
+
+费马点是关于距离之和的最小值，若距离之的平方和的最小值呢？
+\begin{definition}[重心]\label{def:gravity-by-sum-of-squares-ofdistance}
+\end{definition}
+
+\begin{theorem}[重心]
+  $\forall\triangle ABC$，以下两个关于重心的定义是等价的：
+  \begin{enumerate}
+  \item 平面上一点$G$若使得其到三角形三顶点的距离的平方和取到最小值，则称该点为三角形的重心；    
+  \item 点$G\equiv (A+B+C)/3$称为三角形的重心。
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[提示]
+  平面上任一点$P$，记其到三角形三顶点的距离平方和为$f(P)$，即
+  \begin{align*}
+    f(P)=PA^2 + PB^2 + PC^2
+  \end{align*}
+  若用直角坐标系并将$P\equiv(x,y)$代入则可得到关于$x,y$的二次多项式，且可得到当且仅当
+  \begin{align*}
+    x=\frac{x_a + x_b + x_c}{3},\qquad
+    y=\frac{y_a + y_b + y_c}{3}
+  \end{align*}
+  时，$f(P)$取得最小值。
+\end{proof}
+
+\begin{theorem}[垂心]
+  $\forall\triangle ABC$，以下两个关于垂心的定义是等价的：
+  \begin{enumerate}
+  \item 平面上一点$H$若使得其到三角形三边的距离的平方和取到最小值，则称该点为三角形的垂心；    
+  \item 过三个顶点的三条高的交点称为垂心。
+  \end{enumerate}
+\end{theorem}
+
+{\color{red}内心呢？外心呢？是否也有相应的规律？}
+
 
 \section{三角函数--续}
 \label{sec:trigonometric-functions-cont.}
@@ -1763,13 +1851,13 @@
   \end{align*}
   两边平方，则有
   \begin{align*}
-    &\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+    \left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 ={}&
      \left( \frac{\sin\theta - 1+\cos\theta}{\sin\theta + 1-\cos\theta} \right)^2\\
-    \implies&\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+    \left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 ={}&
              \frac{2(1 - \sin\theta - \cos\theta + \sin\theta\cos\theta)}{2(1+\sin\theta-\cos\theta-\sin\theta\cos\theta)}\\
-    \implies&\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+    \left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 ={}&
              \frac{(1 - \sin\theta)(1 - \cos\theta)}{(1+\sin\theta)(1-\cos\theta)}\\
-    \implies&\left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 =
+    \left( \frac{1 - \tan\frac\theta2}{1 + \tan\frac\theta2} \right)^2 ={}&
              \frac{1 - \sin\theta}{1+\sin\theta}
   \end{align*}
 
@@ -1912,7 +2000,7 @@
 \end{proof}
 
 \begin{example}
-  上题中，$B$，$C$，$D$，$F$其实是正18边形的其中四个顶点。
+  上题中，$B$，$C$，$D$，$F$其实是正18边形的其中四个顶点。如图~\ref{fig:bfcd-and-18-polygon}，做$BFCD$的外接圆，不妨设此圆为单位圆。以$D$为第一个顶点$V_0$，逆时针找出外接圆上正18边形的其余17个顶点$V_i$，其中$(i=1,2,\cdots,17)$，则
   \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[scale=1.0]
@@ -1983,7 +2071,6 @@
     \label{fig:bfcd-and-18-polygon}
   \end{figure}
 
-  如图~\ref{fig:bfcd-and-18-polygon}，做$BFCD$的外接圆，不妨设此圆为单位圆。以$D$为第一个顶点$V_0$，逆时针找出外接圆上正18边形的其余17个顶点$V_i$，其中$(i=1,2,\cdots,17)$，则
   \begin{enumerate}
   \item $\angle DCB = 70^\circ + 40^\circ = 110^\circ\implies B$与$V_{11}$重合。
   \item $\angle FCD = 180^\circ - 20^\circ - 20^\circ = 140^\circ \implies F$与$V_{14}$重合。
