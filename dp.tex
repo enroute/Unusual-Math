@@ -1,11 +1,11 @@
 
-\chapter{动态规划}
-\label{chap:dynamic-programming}
+\section{动态规划}
+\label{sec:dynamic-programming}
 
 \begin{example}
   从左下角的格子走到右上角的格子，规定每次只能走一格，且只能往右或者往上走，那么总共有多少种走法？
   \begin{center}
-    \begin{tikzpicture}[scale=1.0]
+    \begin{tikzpicture}[scale=.5]
       \draw(0,0)grid(6,5);
     \end{tikzpicture}
   \end{center}
@@ -13,7 +13,7 @@
 \begin{proof}[提示]
   显然到达最左边一行与最下面一行的格子都只能有一种走法，可以先填入。
   \begin{center}
-    \begin{tikzpicture}[scale=1.0]
+    \begin{tikzpicture}[scale=.5]
       \begin{scope}
         \draw(0,0)grid(6,5);
         \foreach \x in{0,1,2,3,4,5}{%
@@ -28,7 +28,7 @@
 
   考虑其递推关系。容易知道到达一个格子，如果只能用一步的话，那有两种方法，即从其左边的格子到达，或从其下边的格子到达。
   \begin{center}
-    \begin{tikzpicture}[scale=1.0]
+    \begin{tikzpicture}[scale=.5]
       \begin{scope}[shift={(0,2)}]
         \draw(0,0)rectangle(1,1);
         \draw[->](-1,.5)--(0,.5) node[pos=0,left]{1};
@@ -53,7 +53,7 @@
   \end{align*}
   由此结论，可以依次填满整个表格，如下图所示。这种递推关系在利用计算机中编程解决时，通常直观的算法是用递归。然而在用递归时，计算$f(x+1,y)$需要计算$f(x,y)$，计算$f(x,y+1)$时同样需要再计算一次$f(x,y)$，不但浪费时间，而且还是多余的。但是利用表格记忆住$f(x,y)$，则只需计算一次，下次要用时直接拿来即可。
   \begin{center}
-    \begin{tikzpicture}[scale=1.0]
+    \begin{tikzpicture}[scale=.5]
       \begin{scope}
         \foreach \x in{0,1,2,3,4,5}{%
           \node at (\x + .5, .5) {1};

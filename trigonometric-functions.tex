@@ -1412,9 +1412,7 @@
   同理求得$|v-w|$和$|w-u|$的下限估计，然后三式相乘可得。
 \end{proof}
 
-费马点是关于距离之和的最小值，若距离之的平方和的最小值呢？
-\begin{definition}[重心]\label{def:gravity-by-sum-of-squares-ofdistance}
-\end{definition}
+费马点是关于距离之和的最小值，那么使得距离平方和取得最小值的点是什么呢？
 
 \begin{theorem}[重心]
   $\forall\triangle ABC$，以下两个关于重心的定义是等价的：
@@ -1445,6 +1443,34 @@
 \end{theorem}
 
 {\color{red}内心呢？外心呢？是否也有相应的规律？}
+
+\begin{theorem}[费马点推广]
+  给定平面上的凸$n$边形$A_1A_2\cdots A_n$，若平面内一点$O$满足
+  \begin{align*}
+    \angle A_1OA_2=\angle A_2OA_3=\cdots=\angle A_nOA_1
+  \end{align*}
+  则$O$是$n$边形的费马点，即平面内任意点$P$，有
+  \begin{align*}
+    \sum_{i-1}^n |PA_i|\ge \sum_{i}^n |OA_i|
+  \end{align*}
+\end{theorem}
+\begin{proof}[提示]
+  并不是所有的凸多边形都有等分$360^\circ$的费马点，如长方形的费马点(长方形中心)与四个顶点的连线组成的夹角并不是4个相等直角。此定理说明的是，若等分$360^\circ$的点存在的话，则此点必是费马点。
+
+  直接用几何证明很难，可以考虑用复数。以$O$为原点，$\vec{OA_1}$方向为实轴建立复平面坐标系，且不妨设$A_1,A_2,\cdots,A_n$按顺时针方向。记各顶点对应的复数分别为$z_i$，$\epsilon\equiv e^{\frac{2\pi}n i}$，则$z_i\epsilon^i$的幅角都相同，从而有
+  \begin{align*}
+    \sum_{i=1}^n |OA_i| = \sum_{i=1}^n |z_i|
+    = \sum_{i=1}^n |z_i \epsilon^{i}| = \left| \sum_{i=1}^n z_i \epsilon^{i} \right|
+  \end{align*}
+  上式第2个等号是由于$\epsilon$是单位复数，取模符号中再乘以一个$\epsilon$不会影响其值；第3个等号是由于取模符号内各个复数的幅角都相同，即是同一个方向的向量，取模符号可外移。
+
+  同样，对于$P$，记其对应的复数为$p$，则
+  \begin{align*}
+    \sum_{i=1}^n |PA_i|={}&\sum_{i=1}^n |p-z_i|=\sum_{i=1}^n |(p-z_i)\epsilon^{i}|\\
+    \ge{}& \left| \sum_{i=1}^n (p-z_i)\epsilon^i \right| = \left| p \sum_{i=1}^n \epsilon^i - \sum_{i=1}^n z_i \epsilon^i \right| = \left| \sum_{i=1}^n z_i \epsilon^i \right|
+  \end{align*}
+  最后一个等号是由于$\sum_{i=1}^n \epsilon^i=0$。从而原不等式成立。关键之处在于几个向量旋转(相当于乘以一个幅角为旋转角度的单位复数)后，取模符号与求和符号可交换位置。另外，此处证明并没有用到凸这个性质。
+\end{proof}
 
 
 \section{三角函数--续}
