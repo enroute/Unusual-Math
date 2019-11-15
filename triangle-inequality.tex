@@ -1,0 +1,176 @@
+
+\section{三角形中的不等式}
+\label{sec:inequality-in-triangle}
+
+以下不等式中，$a$、$b$、$c$及$A$、$B$、$C$分别表示$\triangle ABC$中的三边及对角；$m_a$、$m_b$和$m_c$分别是三条中线；$l_a$、$l_b$和$l_c$分别是三条角平分线；$R$和$r$分别是外接圆和内切圆的半径；$p=(a+b+c)/2$是半周长。
+
+\begin{center}
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate[label=below left:$A$](A)at(0,0);
+    \coordinate[label=below right:$B$](B)at(3,0);
+    \coordinate[label=above:$C$](C)at(2,2);
+    \coordinate(D)at($.5*(B)+.5*(C)$);
+    \coordinate(E)at($.5*(C)+.5*(A)$);
+    \coordinate(F)at($.5*(A)+.5*(B)$);
+    \draw(A)--(B)node[below,midway]{$c$}
+            --(C)node[above,midway]{$a$}
+            --(A)node[above,midway]{$b$};
+    \draw(A)--(D)node[pos=.2]{$m_a$};
+    \draw(B)--(E)node[pos=.2]{$m_b$};
+    \draw(C)--(F)node[pos=.2]{$m_c$};
+    \tkzDrawPoints(A,B,C,D,E,F)
+  \end{tikzpicture}
+\end{center}
+
+
+\begin{theorem}\label{th:sinA2-le-a/2sqrt-bc}
+  \begin{align}
+    \sin\frac A2\le \frac{a}{2\sqrt{bc}}
+  \end{align}
+\end{theorem}
+\begin{proof}[提示]
+  应用余弦定理及倍角公式有
+  \begin{align*}
+    a^2=b^2+c^2-2bc\cos A=(b-c)^2+4bc\sin^2\frac A2
+  \end{align*}
+  由$(b-c)^2\ge 0$可得。当且仅当$b=c$即$A$是等腰三角形的顶角时等号成立。
+\end{proof}
+
+\begin{theorem}
+  \begin{align}
+    \sin\frac A2 \sin\frac B2 \sin\frac C2\le \frac 18
+  \end{align}
+\end{theorem}
+\begin{proof}[提示]
+  将定理~\ref{th:sinA2-le-a/2sqrt-bc}分别应用到$A$、$B$和$C$上，然后三式相乘可得。
+\end{proof}
+
+\begin{theorem}\label{th:cosA+cosB+cosC-le-frac32}
+  \begin{align}
+    \cos A + \cos B + \cos C \le \frac 32
+  \end{align}
+\end{theorem}
+\begin{proof}[提示]
+  $\cos$在$[0,\pi]$上是凸函数，从而有
+  \begin{align*}
+    \cos A + \cos B + \cos C \le 3 \cos\frac{A+B+C}{3} = \frac 32
+  \end{align*}
+  当且仅当$A=B=C=\frac \pi3$时等号成立。
+
+  或者对$\cos A + \cos B$用和差化积公式，对$\cos C$用倍角公式可得。
+\end{proof}
+
+\begin{theorem}
+  \begin{align}
+    \cos A \cos B \cos C \le \frac 18
+  \end{align}
+\end{theorem}
+\begin{proof}[提示]
+  对定理~\ref{th:cosA+cosB+cosC-le-frac32}的左边应用AM--GM不等式可得。
+\end{proof}
+
+
+\begin{theorem}
+  \begin{align}
+    \sin\frac A2 + \sin\frac B2 + \sin\frac C2\le \frac 32
+  \end{align}
+\end{theorem}
+\begin{proof}[提示]
+  变换。令
+  \begin{align*}
+    \alpha\equiv\frac{\pi-A}{2}\in(0,\pi),\quad
+    \beta \equiv\frac{\pi-B}{2}\in(0,\pi),\quad
+    \gamma\equiv\frac{\pi-C}{2}\in(0,\pi)
+  \end{align*}
+  则$\alpha + \beta + \gamma=\pi$，从而$\alpha$、$\beta$及$\gamma$是某个三角形的三个角，从而有
+  \begin{align*}
+    \frac 32\ge{}& \cos\alpha + \cos\beta + \cos\gamma\\
+    ={}& \cos\frac{\pi-A}{2} + \cos\frac{\pi-B}{2} + \cos\frac{\pi-C}{2} \\
+    ={}& \sin\frac A2 + \sin\frac B2 + \sin\frac C2 &\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{theorem}
+  \begin{align}
+    \cos\frac A2 \cos\frac B2 \cos\frac C2\le\frac{3\sqrt3}{8}
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    m_a^2 + m_b^2 + m_c^2 \le \frac{27}{4}R^2
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    4(m_a^2 + m_b^2 + m_c^2) = 3(a^2 + b^2 + c^2)
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    a^2 + b^2 + c^2 \le 9R^2
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    6\sqrt3 r \le a + b + c \le 3\sqrt3 R
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    \sin A + \sin B + \sin C \le \frac{3\sqrt3}{2},\quad
+    \cos\frac A2 + \cos\frac B2 + \cos\frac C2 \le \frac{3\sqrt3}{2}
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    \sin A \sin B \sin C\le \frac{3\sqrt3}{8}
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    a^3b + b^3c + c^3a - a^2b^2 - b^2c^2 - c^2a^2 \ge 0
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    R\ge 2r
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    m_al_a + m_bl_b + m_cl_c \ge p^2
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    \frac{a(b+c)}{bc\cos^2\frac A2} + \frac{b(c+a)}{ca\cos^2\frac B2} +
+    \frac{c(a+b)}{ab\cos^2\frac C2} \ge 8
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  \begin{align}
+    \tan\frac A2 + \tan\frac B2 + \tan\frac C2 \ge \sqrt3
+  \end{align}
+\end{theorem}
+
+\begin{theorem}[Leuenberger's inequality]
+  \begin{align}
+    m_a + m_b + m_c \le 4R + r
+  \end{align}
+\end{theorem}
+
+
+
+
+

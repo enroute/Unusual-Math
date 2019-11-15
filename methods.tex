@@ -235,7 +235,31 @@
 
 \begin{example}
   在区间$(1,\sqrt2)$内任取$n$个点，按大小顺序记为$x_1,x_2,\cdots,x_n$，再加上$x_0=1$，$x_{n+1}=\sqrt2$
+
+  {\color{red}后面的呢？}
 \end{example}
+
+\begin{example}
+  某班有49位学生，坐成7行7列。每个座位的前、后、左、右的座叫做它的“邻座”。有没有一种调换位置的方案，使得这49位同学都换到他的邻座上去？\footnote{出自罗增儒的《中学数学竞赛的内容与方法》。}
+\end{example}
+\begin{proof}[解]用奇偶性。
+    \begin{center}
+    \begin{tikzpicture}[scale=.5]
+      \draw(0,0)grid(7,7);
+      \foreach \x/\y in{%
+        1/0, 3/0, 5/0,
+        0/1, 2/1, 4/1, 6/1,
+        1/2, 3/2, 5/2,
+        0/3, 2/3, 4/3, 6/3,
+        1/4, 3/4, 5/4,
+        0/5, 2/5, 4/5, 6/5,
+        1/6, 3/6, 5/6}{
+        \fill(\x,\y)rectangle(\x+1,\y+1);
+      }
+    \end{tikzpicture}
+  \end{center}
+  每个人换位置后都会改变奇偶性，即白变黑，黑变白，从而若有一种能实现的换法则必须黑白同样多，而这显然是不成立的。
+\end{proof}
 
 \section{假设}
 \label{sec:assumption}
