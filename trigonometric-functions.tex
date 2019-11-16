@@ -771,6 +771,48 @@
   \end{align*}
 \end{proof}
 
+\subsection{代沙格定理}
+\label{sec:desargues-theorem}
+
+\begin{theorem}[代沙格定理，Desargues' Theorem]
+  若$\triangle ABC$和$\triangle A'B'C'$中，$AA'$、$BB'$和$CC'$所在的直线相交于一点$P$，则两个三角形每组对应边的交点(若存在时)共线，即$AB$与$A'B'$的交点$D$、$BC$与$B'C'$的交点$E$、$CA$与$C'A'$的交点$F$共线。
+\end{theorem}
+\begin{proof}[提示]
+  严格的证明有不少需要考虑的地方，可以应用梅涅劳斯或者塞瓦定理证明。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate(A)at(0,0);
+      \coordinate(B)at(2,-.5);
+      \coordinate(C)at(3.5,1);
+      \coordinate(P)at(2,4);
+      \coordinate(A')at($.4*(A)+.6*(P)$);
+      \coordinate(B')at($.7*(B)+.3*(P)$);
+      \coordinate(C')at($.8*(C)+.2*(P)$);
+      \tkzInterLL(A,B)(A',B')\tkzGetPoint{D}
+      \tkzInterLL(B,C)(B',C')\tkzGetPoint{E}
+      \tkzInterLL(C,A)(C',A')\tkzGetPoint{F}
+      \tkzInterLL(B,E)(A',D)\tkzGetPoint{G}
+      % \tkzInterLL(B,E)(A',F)\tkzGetPoint{H}
+      \fill[color=red!20](A')--(B')--(C')--cycle (A)--(B)--(C)--cycle;
+      \draw[dashed](A)--(F) (A')--(C') (C)--(C') (G)--(E);
+      \draw(P)--(A) (P)--(B) (P)--(C')--(F) (B')--(E)
+           (A)--(D)--(A')
+           (B)--(G)
+           (D)--(E);
+      \foreach \v/\p in{P/above,A/below left,B/below,C/below,
+        A'/left, B'/left, C'/above right,
+        D/below right, E/above right, F/right%
+      }{
+        \tkzLabelPoints[\p](\v)
+      }
+      \tkzDrawPoints(P,A,B,C,A',B',C',D,E,F)
+    \end{tikzpicture}
+  \end{center}
+
+  这里介绍一种直观的思路\footnote{这只有有助于理解的方法，并不是严格的数学证明。}：\underline{盯着图看，直到它变得显然成立为止}。怎么看呢，就是把图形立体化，把$\triangle ABC$和$\triangle A'B'C'$看作是三棱锥\mbox{$P$-$ABC$}的两个截面，那么所有的交点都落在平面$ABC$与平面$A'B'C'$的交线上，自然它们是共线的。
+\end{proof}
+
 \section{正三角形}
 \label{sec:equilateral-triangle}
 
