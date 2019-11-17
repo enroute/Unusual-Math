@@ -701,6 +701,26 @@
   \end{center}
 \end{example}
 
+\begin{example}
+  对于斐波那契数列$F_n=1,1,2,3,5,8,\cdots$，有
+  \begin{align*}
+    F_1^2 + F_2^2 + F_3^2 + \cdots + F_n^2 = F_n F_{n+1}
+  \end{align*}
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.3]
+      \draw(0,0)rectangle(1,1)node[midway]{\tiny 1}
+           (1,0)rectangle(2,1)node[midway]{\tiny 1}
+           (0,1)rectangle(2,3)node[midway]{\small 2}
+           (0,0)rectangle(-3,3)node[midway]{3}
+           (-3,0)rectangle(2,-5)node[midway]{5}
+           (2,3)rectangle(10,-5)node[midway]{8}
+           (-3,3)rectangle(10,16)node[midway]{13}
+           (-3,-5)rectangle(-24,16)node[midway]{21};
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
 \section{几何}
 \label{sec:proofs-without-words-geometry}
 
@@ -800,5 +820,5 @@
     \end{tikzpicture}
   \end{center}
 
-把每种菱形涂上一种颜色，整个图形瞬间有了立体感，看上去就成了一个个立方体在墙角堆叠起来的样子。三种菱形分别是从左侧、右侧、上方观察整个立体图形能够看到的面，它们的数目显然应该相等\footnote{这并不是严格的证明，但并不影响数学家们对此方法的喜爱。}。
+把每种菱形涂上一种颜色，整个图形瞬间有了立体感，看上去就成了一个个立方体在墙角堆叠起来的样子。三种菱形分别是从左侧、右侧、上方观察整个立体图形能够看到的面，它们的数目显然应该相等\footnote{这并不是严格的证明，但并不影响数学家们对此方法的喜爱，以至于这个图甚至出现在了《最迷人的数学趣题 —— 一位数学名家精彩的趣题珍集》（Mathematical Puzzles: A Connoisseur's Collection）一书的封面上。}。
 \end{example}

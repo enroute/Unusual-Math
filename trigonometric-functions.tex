@@ -56,11 +56,23 @@
 
 \begin{theorem}[倒数勾股定理，Inverse Pythagorean Theorem]
   直角三角形两直角边分别为$a$和$b$，斜边上的高为$h$，则
-  \begin{align*}
-    \frac 1{h^2} = \frac 1{a^2} + \frac 1{b^2}
-  \end{align*}
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate(C)at(0,0);
+      \coordinate(A)at(4,0);
+      \coordinate(B)at(0,2);
+      \coordinate(H)at($(A)!(C)!(B)$);
+      \draw(C)--(A)node[midway,above]{$a$}
+              --(B)node[midway,sloped,above]{$c$}
+              --(C)node[midway,left]{$b$}
+              --(H)node[midway,sloped,below]{$h$};
+      \tkzMarkRightAngle(A,C,B)\tkzMarkRightAngle(C,H,A)
+      \node[left]at(-2,1){$\dfrac 1{h^2} = \dfrac 1{a^2} + \dfrac 1{b^2}$};
+    \end{tikzpicture}
+  \end{center}
 \end{theorem}
 \begin{proof}
+  记斜边为$c$，则
   \begin{align*}
     \frac 1{h^2} = \frac 1{a^2} + \frac 1{b^2} \iff a^2b^2 = (a^2+b^2)h^2 \iff ab = ch
   \end{align*}
