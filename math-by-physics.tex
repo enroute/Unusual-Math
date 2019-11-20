@@ -1,0 +1,118 @@
+
+\section{物理方法}
+\label{sec:math-by-physics}
+
+这里的方法，严格来说可能并不是真正的数学方法，也就是说如果你是在做试题的时候用了这些方法来解答，很有可能你得不到满分，甚至不得分。但这并不影响这些方法的有效性及其对从数学角度解决问题的启发。
+
+\subsection{摆线}
+\label{sec:cycloid}
+
+\begin{definition}[摆线，Cycloid]
+  摆线，又称旋轮线、圆滚线，是指一个圆在一条定直线上滚动时，圆周上一个定点的轨迹。
+\end{definition}
+
+\begin{example}[旋轮线的面积]
+  求半径为1的圆形成的旋轮线与直线围成的形状的面积。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \draw(-1,0)--(7.283,0);
+
+      \setcounter{X}{0}
+      \whiledo{\not{\value{X}>10}}{%
+        \begin{scope}[shift={(2*3.1415926/10*\theX,1)}]
+          \draw[dashed](0,0)circle(1);
+          \draw[fill=black](0,0)circle(.03)--++(-90-360/10*\theX:1)circle(.05);
+          %\filldraw($(2*3.1415926/10*\theX,1)+(-90-360/10*\theX:1)$)circle(.05);
+        \end{scope}
+        \stepcounter{X}
+      }
+      \draw[very thick,smooth,samples=100,domain=0:360]plot({\x/360*2*3.1415926-sin(\x)},{1-cos(\x)});
+    \end{tikzpicture}
+  \end{center}
+
+  容易得到旋轮线的参数方程为
+  \begin{align*}
+    \begin{cases}
+      x= r(\theta - \sin\theta)\\
+      y= r(1      - \cos\theta)
+    \end{cases}
+  \end{align*}
+  其一个周期的面积可以用微积分的知识求得，一段旋轮线下方的面积恰好是这个圆的面积的3倍。然而在微积分未出现的时候，人们是如何得到旋轮线的面积的呢？这个结论最早是由伽利略(Galileo Galilei)发现的，而他使用的方法简单得出人意料：他在金属板上切出旋轮线的形状，拿到秤上称了称，发现重量正好是对应的圆形金属片的3倍\footnote{这种实验物理的方法在数学上来说并不是严格的证明方法，但这并不妨碍数学家们根据此方法先得到一个猜测然后再朝此方向论证。}。
+\end{example}
+
+\subsection{重心}
+\label{sec:math-physics-gravity}
+
+\begin{example}
+  如图，$D,E,F$分别是$\triangle ABC$边上的三等分点，求$\dfrac{S_{\triangle MNL}}{S_{\triangle ABC}}$。
+  \begin{center}
+    \begin{tikzpicture}
+      \coordinate[label=above:$A$](A)at(1,3);
+      \coordinate[label=below left:$B$](B)at(0,0);
+      \coordinate[label=below right:$C$](C)at(4,0);
+      \coordinate(D')at($2/3*(B)+1/3*(C)$);
+      \coordinate[label=below:$D$](D)at($1/3*(B)+2/3*(C)$);
+      \coordinate[label=right:$E$](E)at($1/3*(C)+2/3*(A)$);
+      \coordinate(E')at($2/3*(C)+1/3*(A)$);
+      \coordinate(F')at($2/3*(A)+1/3*(B)$);
+      \coordinate[label=left:$F$](F)at($1/3*(A)+2/3*(B)$);
+      \tkzInterLL(B,E)(C,F)\tkzGetPoint{M}
+      \tkzInterLL(C,F)(A,D)\tkzGetPoint{N}
+      \tkzInterLL(A,D)(B,E)\tkzGetPoint{L}
+      \fill[color=red!20](M)--(N)--(L)--cycle;
+      \draw(A)--(B)--(C)--cycle (A)--(D) (B)--(E) (C)--(F);
+      \tkzDrawPoints(A,B,C,D,E,F,D',E',F',M,N,L)
+      \tkzLabelPoints[below](M)
+      \tkzLabelPoints[above right](N)
+      \tkzLabelPoints[left](L)
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+\begin{proof}[提示]
+  假设$A,B,C$是质点系，$m_a,m_b,m_c$分别是对应质点的质量。若$F$是$A,B$的质心，$D$是$B,C$的质心，则必有
+  \begin{align*}
+    2m_a=m_b, \qquad 2m_b=m_c
+  \end{align*}
+  从而若令$m_a=1,m_b=2,m_c=4$，则有
+  \begin{enumerate}
+  \item $F$是$A,B$的质心，从而$A,B,C$的质心在$CF$上；
+  \item $D$是$B,C$的质心，从而$A,B,C$的质心在$AD$上。
+  \end{enumerate}
+  综合可得$A,B,C$的质心在$CF$和$AD$的交点$N$上。又$m_d=m_b+m_c=6$，从而$AN:ND=6:1$。于是
+  \begin{align*}
+    S_{\triangle ANC} = \frac67 S_{\triangle ADC} = \frac67 \cdot \frac23 S_{\triangle ABC} = \frac27 S_{\triangle ABC}
+  \end{align*}
+  同理可得$S_{\triangle CMB}$和$S_{\triangle BLA}$，从而
+  \begin{align*}
+    \frac{S_{\triangle MNL}}{S_{\triangle ABC}} = \frac{S_{\triangle ABC} - S_{\triangle ANC} - S_{\triangle CMB} - S_{\triangle BLA}}{S_{\triangle ABC}} = \frac17 &\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{question}
+上例中，$\triangle ABC$与$\triangle MNL$看起来是相似的，能得出此结论吗？$BM$和$ML$看起来是等长的，能得出此结论吗？
+\end{question}
+
+
+\begin{example}
+  上面的例子利用了这样一个结论：用部分质点的质心代替这些质点并不影响整体的质心。
+\end{example}
+\begin{proof}[提示]
+  设质点系各质点的坐标为$\vec x_1$，$\vec x_2$，$\cdots$，$\vec x_n$，对应的质量分别为$m_1$，$m_2$，$\cdots$，$m_n$，则其质心对应的位置及质量分别为
+  \begin{align*}
+    \vec x_c = \dfrac{\sum m_i \vec x_i}{\sum m_i},\qquad m_c = \sum m_i
+  \end{align*}
+  将质点系分成$P$、$Q$两部分，且将$P$中质点用其质心$p$代替，则其质心$p$的坐标及质量分别为
+  \begin{align*}
+    \vec x_p={}\dfrac{\sum_P m_i\vec x_i}{\sum_P m_i},\qquad
+    m_p={} \sum_P m_i
+  \end{align*}
+  从而有
+  \begin{align*}
+    m_p \vec x_p = \sum_P m_i\vec x_i
+  \end{align*}
+  考虑$P$中质点用$p$代替，即由$p$和$Q$中质点所组成的新质点系，该新质点系的质心对应的坐标及质量分别为
+  \begin{align*}
+    \vec x_c' ={}& \dfrac{ \vec x_p m_p + \sum_{Q} m_i\vec x_i}{ m_p + \sum_{Q} m_i} = \dfrac{\sum_P m_i \vec x_i + \sum_Q m_i \vec x_i}{\sum_P m_i + \sum_Q m_i} = \vec x_c\\
+    m_c' ={}& m_p + \sum_{Q} m_i  = \sum_{P} m_i + \sum_{Q} m_i = \sum_{P+Q} m_i = m_c \qedhere
+  \end{align*}
+\end{proof}

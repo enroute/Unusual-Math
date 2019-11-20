@@ -70,15 +70,16 @@
     \hline
   \end{tabular}
 \end{table}
-
-重复3排列，就组成了八卦，如表~\ref{tab:ba-gua}。
+重复3排列，就组成了八卦，如表~\ref{tab:ba-gua}\footnote{记忆口决：乾三连，坤六断；震仰盂，艮覆碗；离中虚，坎中满；兑上缺，巽下断。}。
 \begin{table}[htbp]
   \centering
   \caption{八卦}
   \label{tab:ba-gua}
   \begin{tabular}{cccccccc}
     \hline
-    \trigram{0} & \trigram{1} & \trigram{2} & \trigram{3} & \trigram{4} & \trigram{5} & \trigram{6} & \trigram{7}\\\hline
+    \trigram{0} & \trigram{1} & \trigram{2} & \trigram{3} & \trigram{4} & \trigram{5} & \trigram{6} & \trigram{7}\\
+    乾 & 兑 & 离 & 震 & 巽 & 坎 & 艮 & 坤\\
+    \hline
   \end{tabular}
 \end{table}
 
@@ -110,7 +111,7 @@
 
   \begin{enumerate}
   \item 当$n=2$时，有$b_1\ne a_1 + a_2$，由于$a_1\ne a_2$，$a_1,a_2$中总有一个不等于$b_1$，从而蚱蜢先跳不等于$b_1$的那个长度，然后再跳另一个长度，它就可以安全地跳完$n$步而不会踩到地雷。
-  \item 假设当$n=k$时，总有一种跳法是安全的。当$n=k+1$时，若存在$i,j$使得$a_i= b_j$，那么考虑去掉$a_i$和$b_j$的情况，这是一个$n=k$的情况，从而存在某种跳法使得
+  \item 假设当$n=k$时，总有一种跳法是安全的。当$n=k+1$时，若存在$i,j$使得$a_i= b_j$，那么考虑去掉$a_i$和$b_j$的情况，这是一个$n=k$的情况，从而存在某种跳法使得{\color{red}剩下的呢？}
   \end{enumerate}
 \end{proof}
 
