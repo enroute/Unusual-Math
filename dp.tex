@@ -42,7 +42,10 @@
           \draw[help lines](\x+.5,.5)--(\x+.5,.75)node[pos=0,below]{\small \x};
         }
         \foreach \x in{1,2,3,4}{%
-          \draw[help lines](.5,\x+.5)--(.5,\x+.75)node[pos=0,left]{\small \x};
+          \draw[help lines](.5,\x+.5)--(.75,\x+.5)node[pos=0,left]{\small \x};
+        }
+        \foreach \x/\y in{0/0,1/0,2/0,3/0,4/0,5/0,0/1,0/2,0/3,0/4}{
+          \draw(\x+.5,\y+.5)circle(2pt);
         }
       \end{scope}
     \end{tikzpicture}

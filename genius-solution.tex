@@ -32,19 +32,19 @@
 \end{proof}
 
 \begin{example}[IMO 1977]
-  在一个有限的褛列中，任意7个连续项之和都是负数，而任意连续11项之和都是正数，这样的数列最多有多少项？
+  在一个有限的数列中，任意7个连续项之和都是负数，而任意连续11项之和都是正数，这样的数列最多有多少项？
 \end{example}
 \begin{proof}[英国John Richard的解法]
   将数列$a_1,a_2,\cdots,a_n$排列数阵：
-  \begin{align*}
-    \begin{matrix}
+  \begin{align*}\setlength\arraycolsep{5pt}
+    \begin{array}{lllllll}
       a_1 & a_2 & a_3 & a_4 & a_5 & a_6 & a_7\\
       a_2 & a_3 & a_4 & a_5 & a_6 & a_7 & a_8\\
       a_3 & a_4 & a_5 & a_6 & a_7 & a_8 & a_9\\
-      \cdots\\
+      \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots \\
       a_{11} & a_{12} & a_{13} & a_{14} & a_{15} & a_{16} & a_{17}\\
-      \cdots
-    \end{matrix}
+      \cdots & \cdots & \cdots & \cdots & \cdots & \cdots & \cdots
+    \end{array}
   \end{align*}
   然后对前11行7列横、竖分别求和(计算两次)可得和$S$的表达式为
   \begin{align*}
@@ -180,12 +180,12 @@
       \end{scope}
     \end{tikzpicture}
   \end{center}
-  考虑上下两个由若干个电阻组成的电路，上面的电阻为
+  考虑上下两个由若干个电阻组成的电路，上图的等效电阻为
   \begin{align*}
     \frac 1R = \frac 1{\sum x_k} + \frac 1{\sum y_k} \implies
     R = \frac{(\sum x_k)(\sum y_k)}{\sum (x_k+y_k)}
   \end{align*}
-  下面的电阻为
+  下图的等效电阻为
   \begin{align*}
     R'=\sum \frac{x_ky_k}{x_k+y_k}
   \end{align*}
@@ -195,4 +195,3 @@
 
 
 
-xsx
