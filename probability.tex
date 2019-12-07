@@ -2,6 +2,109 @@
 \chapter{概率}
 \label{chap:probability}
 
+\section{基本问题}
+\label{sec:basic-probability-problems}
+
+\begin{example}
+  某个国家的人们都仅想生养男孩，所有家庭在生养男孩之前是不会停止生养的。如果生养的是女孩，他们将继续生养，只到生个男孩为止。如果生养的是男孩，他们将不再生养。那么，在这个国家男孩和女孩的比例是多少？
+\end{example}
+\begin{proof}[提示]
+  举个例子，假如有16个家庭，按概率，大概有8个家庭头胎生男孩，8个家庭头胎生女孩。头胎生女孩的8个家庭又有4个二胎生男孩，4个二胎生女孩。4个二胎生女孩的家庭又有2个三胎生男孩，2个三胎生女孩。2个三胎生女孩的家庭又有1个四胎生男孩，1个四胎生女孩。1个四胎生女孩的家庭再继续下去，
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.8]
+      \node(N02)[draw,circle,pattern=dots]at(0,0){1};%\fill[color=white](0,0)circle(.2)node{1};
+      \foreach \x/\v in{1/2, 2/4, 3/8, 4/16, 5/32, 6/64}{
+        \node(N\x1)[draw,circle,fill=red!20]at(2*\x,1.5){\tiny $\frac1{\v}$};
+        \node(N\x2)[draw,circle]at(2*\x,0){\tiny $\frac1{\v}$};
+      }
+      \node(N71)[draw,circle,fill=red!20]at(2*7,1.5){\tiny $\cdots$};
+      \node(N72)[draw,circle]at(2*7,0){\tiny $\cdots$};
+      \foreach \x/\y in{0/1,1/2,2/3,3/4,4/5,5/6,6/7}{
+        \draw[->](N\x2)--(N\y1);
+        \draw[->](N\x2)--(N\y2);
+      }
+    \end{tikzpicture}
+  \end{center}
+  图中阴影部分\tikz{\draw[fill=red!20](0,0)circle(.2)}表示生养了男孩，此家庭在此位置停止生养；\tikz{\draw(0,0)circle(.2)}表示此家庭在此位置生养了女孩，此家庭在此位置继续生养。
+
+  这样无穷尽的下去，可以得到所有第一代家庭生养的男孩总数与女孩总数都为
+  \begin{align*}
+    16\times\left(\frac12 + \frac14 + \frac18 + \frac1{16}+\cdots\right)=16\times 1 = 16
+  \end{align*}
+
+  如果第一代家族总数是无数多的，那么比例会接近于$1:1$。而事实上，第二代家庭、第三代家庭等都是可以直接算到第一代家庭中来计算而不会影响概率的本身，而人类总是无穷无尽地在繁衍，所以家庭数可以当做是无限大的，该地的男孩女孩比例总会随着时间的流逝而越来越接近于$1:1$。
+\end{proof}
+
+
+\begin{example}
+  在一线段上随机取两个点将线段分为三份，求此三份线段能组成一个三角形的概率是多少？
+\end{example}
+\begin{proof}[提示]
+  转换为几何模型。不妨设线段的长度为1，记线段上随机取的两个点到同一个顶点的距离分别为$x$和$y$。由对称性，不妨只考虑$0<x<y<1$的情况。从而$x,y-x,1-y$三个长度的线段能组成三角形，等价于以下条件同时成立：
+  \begin{align*}
+    \begin{cases}
+      x < (y-x) + (1-y)\\
+      y - x < x + (1 - y)\\
+      1 - y < x + (y - x)
+    \end{cases}
+    \implies
+    \begin{cases}
+      x<\frac12\\ y<x + \frac12\\ y>\frac12
+    \end{cases}
+  \end{align*}
+  在笛卡尔坐标上作出上述图形，利用面积比可以容易得到概率。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \fill[color=red!20](0,.5)--(.5,.5)--(.5,1)--cycle;
+      \draw[->](-1,0)--(4,0)node[right]{$x$};
+      \draw[->](0,-1)--(0,2)node[above]{$y$};
+      \draw[very thick](0,0)--(1,1)--(0,1)--cycle; % domain
+      \draw[dashed](-1,-.5)--(-.5,0)--(.5,1)--(1,1.5)node[right]{$y=x+\frac12$};
+      \draw[dashed](-1,.5)--(2,.5)node[right]{$y=\frac12$};
+      \draw[dashed](.5,-1)node[right]{$x=\frac12$}--(.5,2);
+    \end{tikzpicture}
+  \end{center}
+  可行区域是由$0<x<y<1$组成的粗边框三角形。图中阴影中的点对应的$(x,y)$为可以组成三角形的情况，从而其概率为$\frac14$。
+\end{proof}
+
+\begin{example}
+  在一个圆周上随机取三个点，求此三点能组成一个锐角三角形的概率是多少？
+\end{example}
+\begin{proof}[提示]
+  由对称性，可以考虑固定一个点的情况。过此固定点作圆的直径，那么三个点组成锐角三角形等价于剩余两个点分别落在该直径的两侧。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[scale=2.0]
+        \draw(0,0)circle(1);
+        \coordinate[label=below right:\small 固定点](A)at(1,0);
+        \coordinate[label=above right:\small 动点](B)at(50:1);
+        \coordinate[label=below left:\small 动点](C)at(210:1);
+        \tkzDrawPoints(A,B,C);
+        \draw(A)--(B)--(C)--cycle;
+        \draw[->](-1.1,0)--(1.2,0);
+        \draw[->](0,-1.1)--(0,1.2);
+      \end{scope}
+      \begin{scope}[shift={(5.5,0)}]
+        \fill[color=red!20](0,.5)--(.5,.5)--(.5,1)--(0,1)--cycle;
+        \draw[->](-1,0)--(4,0)node[right]{$x$};
+        \draw[->](0,-1)--(0,2)node[above]{$y$};
+        \draw[very thick](0,0)--(1,1)--(0,1)--cycle; % domain
+        % \draw[dashed](-1,-.5)--(-.5,0)--(.5,1)--(1,1.5)node[right]{$y=x+\frac12$};
+        \draw[dashed](-.5,-.5)--(2,2)node[right]{$y=x$};
+        \draw[dashed](-1,.5)--(2,.5)node[right]{$y=\pi$};
+        \draw[dashed](-1,1)--(2,1)node[right]{$y=2\pi$};
+        \draw[dashed](.5,-1)node[right]{$x=\pi$}--(.5,2);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  同样的，由对称性不妨考虑另外两个点对应的弧度满足$0<x<y<2\pi$的情况。从而$0,x,y$三个弧度对应的圆周上的点组成锐角三角形，等价于$0 < x < \pi < y < 2\pi$。由图中阴影面积可得概率为$\frac12$。
+\end{proof}
+
+
+
 \section{37法则}
 \label{sec:37-rule}
 
