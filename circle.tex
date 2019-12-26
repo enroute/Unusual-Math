@@ -13,9 +13,108 @@
 \begin{proof}[提示]\mbox{}\par
   \begin{center}
     \begin{tikzpicture}[scale=1.0]
-      \draw(0,0)circle(1.5);
-      \draw(80:1.5)--(-1.5,0)--(1.5,0)node[midway,below]{$a$}--cycle--($(-1.5,0)!(35:1.5)!(1.5,0)$)  node[midway, left]{$h$};
+      \foreach \r/\theta in{1.5/55}{
+        \draw(0,0)circle(1.5);
+        \coordinate(A)at(-1.5,0);\coordinate(B)at(1.5,0);\coordinate(C)at(\theta:1.5);
+        \coordinate(D)at($(B)!(C)!(A)$);
+        \draw(C)--(A)--(B)node[midway,below]{$a$}--(C)--(D)  node[midway, left]{$h$};
+        \tkzMarkRightAngle(C,D,B)
+      }
     \end{tikzpicture}
   \end{center}
   另外一个顶点都是落在图中的圆上，显然高的最大值是圆的半径。
+\end{proof}
+
+\begin{theorem}[圆内接四边形]
+  平面上四边形$ABCD$，以下几个命题等价：
+  \begin{enumerate}
+  \item $A,B,C,D$共圆；
+  \item $\angle A + \angle C = \pi$；
+  \item $\angle ACB = \angle ADB$。
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[提示]
+  $(1)\implies(2)$及$(1)\implies(3)$都是显然的。
+
+  $(2)\implies(1)$。等价于固定$A,B,C$，平面上不含点$B$的直线$AC$的另一侧上所有使$\angle AD'C + \angle ABC=\pi$的动点$D'$都落在$\triangle ABC$的外接圆上。分动点在圆内及圆外两种情况考虑即可。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \foreach \r/\a/\b/\c/\d/\dd in{1.5/210/320/40/120/150}{
+          \coordinate(O)at(0,0);
+          \coordinate[label=left:$A$](A)at(\a:\r);
+          \coordinate[label=above:$C$](C)at(\c:\r);
+          \coordinate[label=above:$D$](D)at(\d:\r);
+          \coordinate[label=above:$D''$](D'')at(\dd:\r);
+          % \tkzInterLC(C,D')(O,C)\tkzGetPoints{D''}{}
+          \coordinate[label=above:$D'$](D')at($(D'')+.3*(D'')-.3*(C)$);
+          \coordinate(A')at($(A)+.3*(A)-.3*(C)$);
+          \coordinate(C')at($(C)+.3*(C)-.3*(A)$);
+          \coordinate(X)at(0,-1.1*\r);
+          \fill[color=blue!30](A')--(A' |- X)--(C' |- X)--(C');
+          \coordinate[label=right:$B$](B)at(\b:\r);
+          \draw(0,0)circle(\r);
+          \draw(A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D);
+          \draw[dashed](C)--(D')--(A)--(D'');
+          \tkzDrawPoints(A,B,C,D,D',D'')
+          \draw[dashed](A')--(C');
+        }
+      \end{scope}
+      \begin{scope}[shift={(6,0)}]
+        \foreach \r/\a/\b/\c/\d/\dd in{1.5/210/320/40/120/170}{
+          \coordinate(O)at(0,0);
+          \coordinate[label=left:$A$](A)at(\a:\r);
+          \coordinate[label=above:$C$](C)at(\c:\r);
+          \coordinate(A')at($(A)+.3*(A)-.3*(C)$);
+          \coordinate(C')at($(C)+.3*(C)-.3*(A)$);
+          \fill[color=blue!30](A')--(A' |- X)--(C' |- X)--(C');
+
+          \coordinate[label=above:$D$](D)at(\d:\r);
+          \coordinate[label=above:$D''$](D'')at(\dd:\r);
+          \coordinate[label=right:$B$](B)at(\b:\r);
+          \coordinate[label=above:$D'$](D')at($(D'')+.3*(D'')-.3*(B)$);
+          \coordinate(X)at(0,-1.1*\r);
+          \draw(0,0)circle(\r);
+          \draw(A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D);
+          \draw[dashed](B)--(D')--(A)--(D'');
+          \tkzDrawPoints(A,B,C,D,D',D'')
+          \draw[dashed](A')--(C');
+        }
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  $(3)\implies(1)$。类似的，分半平面内圆内与圆外两种情况分别考虑动点$D'$，若$\angle AD'B=\angle ACB$，则$D'$必落在$\triangle ABC$的外接圆上\footnote{但外接圆上的任一点$P$不一定有$\angle APB=\angle ACB$，除非$A,B$是圆上一直径的两端点。}，这可以分动点在圆内及圆外两种情况分别考虑得到。
+\end{proof}
+
+\begin{theorem}[割线定理]
+  平面上线段$AB$与$CD$相交于$E$，则以下命题等价：
+  \begin{enumerate}
+  \item $A,B,C,D$共圆；
+  \item $AE\cdot EB=CE\cdot ED$。
+  \end{enumerate}
+\end{theorem}
+\begin{proof}[提示]
+  $(1)\implies(2)$。连接$AC$及$BD$(或者连接$AD$及$BC$)，由三角形相似显然可得。
+
+  \begin{center}
+    \begin{tikzpicture}
+      \foreach \r/\a/\b/\c/\d in{1.5/210/50/320/120}{
+        \coordinate(O)at(0,0);
+        \coordinate[label=left:$A$](A)at(\a:\r);
+        \coordinate[label=above:$B$](B)at(\b:\r);
+        \coordinate[label=right:$C$](C)at(\c:\r);
+        \coordinate[label=above:$D$](D)at(\d:\r);
+        \tkzInterLL(A,B)(C,D)\tkzGetPoint{E}
+        \draw(O)circle(\r);
+        \draw(A)--(B) (C)--(D);
+        \draw[dashed](A)--(D) (B)--(C);
+        \tkzDrawPoints(A,B,C,D,E)
+        \node[above]at(E){$E$};
+      }
+    \end{tikzpicture}
+  \end{center}
+
+  $(2)\implies(1)$。由$AE\cdot EB=CE\cdot ED$，可知$\triangle AED\sim\triangle CEB$，从而$\angle A=\angle C$，四点共圆。
 \end{proof}
