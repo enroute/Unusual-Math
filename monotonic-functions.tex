@@ -33,3 +33,36 @@
   \end{align*}
   由这种形式可以很容易看出$f(x)$在$x>0$时是严格单调递增的，从而$f(2018)<f(2019)$。
 \end{proof}
+
+
+\begin{example}[清华自主招生题]
+  已知$f(x)=x^3-6$，求方程$f(f(x))=x$的解。
+\end{example}
+\begin{proof}[提示]
+  利用$f(x)$的严格单调性，可以证明$f(f(x))=x$的解等价于$f(x)=x$的解。
+
+  事实上，若$x=x_0$是$f(x)=x$的解，则
+  \begin{align*}
+    f(x_0) = x_0
+  \end{align*}
+  从而$f(f(x_0))=f(x_0)=x_0$，即$x=x_0$是$f(f(x))=x$的解。
+
+  反之，若$x=x_0$不是$f(x)=x$的解，即
+  \begin{align*}
+    f(x_0)\ne x_0
+  \end{align*}
+  不妨记$f(x_0) < x_0$($f(x_0)>x_0$的情况类似)，则由$f(x)$的严格递增，有
+  \begin{align*}
+    f(f(x_0)) < f(x_0) < x_0
+  \end{align*}
+  从而$x=x_0$不是$f(f(x))=x$的解。
+
+  综合可知
+  \begin{align*}
+        & f(f(x))=x\\
+    \iff& f(x) = x\\
+    \iff& x^3 - 6 = x\\
+    \iff& (x-2)(x^2+2x+3) = 0
+  \end{align*}
+  由最后一个方程可得原问题的解。实数域只有1个解，复数域有3个解。
+\end{proof}

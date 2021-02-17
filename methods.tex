@@ -274,3 +274,105 @@
 
   若假设全是兔子，也可以用类似的分析方法得到相同的答案。
 \end{proof}
+
+\begin{example}
+  27 apples in $3\times3\times3$ box. A worm, in the apple which
+  resides at the center of the box, wants to eat all of the apples
+  with minimum move, i.e., it can move up, down, forward, backward,
+  left or right. Can it walk through all of the apples without
+  touching an apple second time?
+\end{example}
+\begin{proof}[hint]
+  Even odd coloring all of the apples, then there's 13 apples the same
+  color(make it red) as the center one, 14 apples the other color(make
+  it green). Then after every move, the target apple changes color,
+  i.e, From the starting red(R) apple, the color sequence should be
+
+  R, G, R, G, R, G, $\cdots$, R, G, R
+
+  Since there're 27 apples in total, the first and last must be R,
+  which means there should be 14 Red apples and 13 Green
+  apple. Conflicts.
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.8]
+      % horizontal lines
+      \foreach \y in{0,1,2}{
+        \filldraw[fill=gray!20](0,\y,0)--(0,\y,2)--(2,\y,2)--(2,\y,0)--cycle;
+        \draw(0,\y,1)--(2,\y,1);
+        \draw(1,\y,0)--(1,\y,2);
+      }
+      % vertical lines
+      \foreach \x in{0,1,2}{
+        \foreach \z in{0,1,2}{
+          \ifnum2=\x
+          \draw(\x,0,\z)--(\x,2,\z);
+          \else\ifnum2=\z
+          \draw(\x,0,\z)--(\x,2,\z);
+          \else
+          \draw[dashed](\x,0,\z)--(\x,2,\z);
+          \fi\fi
+        }}
+      \foreach \x in{0,1,2}{
+        \foreach \y in{0,1,2}{
+          \foreach \z in{0,1,2}{
+            \pgfmathsetmacro\result{\x + \y + \z}
+            \ifodd\result
+              \fill[ball color=red](\x,\y,\z)circle(.1);
+            \else
+              \fill[ball color=green](\x,\y,\z)circle(.1);
+            \fi
+          }}}
+      \fill[ball color=red](1,1,1)circle(.2);
+      \begin{scope}[shift={(4,0)}]
+        \node(0,-3){Top layer};
+        \foreach \y in{2}{
+          \filldraw[fill=gray!20](0,\y,0)--(0,\y,2)--(2,\y,2)--(2,\y,0)--cycle;
+          \draw(0,\y,1)--(2,\y,1);
+          \draw(1,\y,0)--(1,\y,2);
+          \foreach \x in{0,1,2}{
+            \foreach \z in{0,1,2}{
+              \pgfmathsetmacro\result{\x + \y + \z}
+              \ifodd\result
+              \fill[ball color=red](\x,\y,\z)circle(.1);
+              \else
+              \fill[ball color=green](\x,\y,\z)circle(.1);
+              \fi
+            }}}
+      \end{scope}
+      \begin{scope}[shift={(8,0)}]
+        \node(0,-3){Middle layer};
+        \foreach \y in{1}{
+          \filldraw[fill=gray!20](0,\y,0)--(0,\y,2)--(2,\y,2)--(2,\y,0)--cycle;
+          \draw(0,\y,1)--(2,\y,1);
+          \draw(1,\y,0)--(1,\y,2);
+          \foreach \x in{0,1,2}{
+            \foreach \z in{0,1,2}{
+              \pgfmathsetmacro\result{\x + \y + \z}
+              \ifodd\result
+              \fill[ball color=red](\x,\y,\z)circle(.1);
+              \else
+              \fill[ball color=green](\x,\y,\z)circle(.1);
+              \fi
+            }}}
+        \fill[ball color=red](1,1,1)circle(.2);
+      \end{scope}
+      \begin{scope}[shift={(12,0)}]
+        \node(0,-3){Bottom layer};
+        \foreach \y in{0}{
+          \filldraw[fill=gray!20](0,\y,0)--(0,\y,2)--(2,\y,2)--(2,\y,0)--cycle;
+          \draw(0,\y,1)--(2,\y,1);
+          \draw(1,\y,0)--(1,\y,2);
+          \foreach \x in{0,1,2}{
+            \foreach \z in{0,1,2}{
+              \pgfmathsetmacro\result{\x + \y + \z}
+              \ifodd\result
+              \fill[ball color=red](\x,\y,\z)circle(.1);
+              \else
+              \fill[ball color=green](\x,\y,\z)circle(.1);
+              \fi
+            }}}
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{proof}
