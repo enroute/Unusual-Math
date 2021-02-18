@@ -694,6 +694,20 @@
 \end{proof}
 
 
+\begin{example}
+  求图中阴影部分面积，其中的三角形是直角三角形。
+
+  \centering
+  \begin{tikzpicture}[scale=0.5]
+    \draw[fill=red!30, even odd rule](0,0) arc(180:0:3) arc(270:90:2) --cycle;
+    \draw(0,0)--(6,0)node[midway, below]{$6$} -- (6,4)node[midway, right]{$4$};
+  \end{tikzpicture}
+\end{example}
+\begin{proof}[提示]
+  大半圆 + 小半圆 = 三角形 + 阴影
+\end{proof}
+
+
 \section{数形结合}
 \label{sec:combine-number-and-figure}
 
@@ -733,3 +747,5 @@
   \end{center}
   通过空白区域的面积，容易求得图中阴影三角形的面积。
 \end{proof}
+
+

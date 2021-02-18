@@ -376,3 +376,75 @@
     \end{tikzpicture}
   \end{center}
 \end{proof}
+
+
+\section{齐次与换元}
+\label{sec:homogeneous-and-substitution}
+
+\begin{example}[美国竞赛题]
+  求解方程
+  \begin{align*}
+    4^x + 6^x = 9^x
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  两边除以$4^x$或者$6^x$或者$9^x$，再换元。以除$4^x$为例，可得
+  \begin{align*}
+                               4^x + 6^x &= 9^x\\
+    \iff\quad 1 + \left(\frac32\right)^x &= \left[\left(\frac32\right)^x\right]^2
+  \end{align*}
+  令$t\equiv (3/2)^x$，可得一个一元二次方程。
+\end{proof}
+
+
+\begin{example}[安徽竞赛题]
+  求解方程
+  \begin{align*}
+    4^x + 9^x + 25^x = 6^x + 10^x + 15^x
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  观察方程中数字
+  \begin{align*}
+    4 &= 2^2,       & 9 &= 3^2,        & 25 &= 5^2\\
+    6 &= 2\times 3, & 10&= 2\times  5, & 15 &= 3\times 5
+  \end{align*}
+  可以联想$a^2+b^2+c^2$与$ab+bc+ca$的关系。令
+  \begin{align*}
+    a\equiv 2^x, \quad b\equiv 3^x, \quad c\equiv 5^x
+  \end{align*}
+  代入则有
+  \begin{align*}
+    a^2 + b^2 + c^2 = ab + bc + ca
+  \end{align*}
+  两边乘2可得
+  \begin{align*}
+    (a-b)^2 + (b-c)^2 + (c-a)^2 = 0
+  \end{align*}
+  即当且仅当$a=b=c$时等号成立。
+\end{proof}
+
+
+\section{其它}
+\label{sec:misc-method}
+
+\begin{example}[德国竞赛题]
+  求解方程组
+  \begin{align*}
+    \begin{cases}
+      x^3 + 1 - xy^2 - y^2 = 0\\
+      y^3 + 1 - x^2y - x^2 = 0
+    \end{cases}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  联想立方差公式。两式相减可得
+  \begin{align*}
+    \underline{x^3 - y^3} - \uwave{xy^2} - y^2 + \uwave{x^2y} + x^2 = 0
+  \end{align*}
+  两两组合，因式分解可得
+  \begin{align*}
+    (x-y)(x+y)(x+y+1)=0
+  \end{align*}
+  分三种情况$x-y=0$、$x+y=0$及$x+y+1=0$分别考虑可得。
+\end{proof}
