@@ -708,6 +708,78 @@
 \end{proof}
 
 
+\begin{question}
+  图中四边形是直角梯形，求其中两部分阴影面积的差。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \coordinate(A)at(0,0);
+      \coordinate(B)at(8,0);
+      \coordinate(C)at(2,6);
+      \coordinate(D)at(0,6);
+      \begin{scope}
+        \clip (A)arc(180:135:8)--(B)--cycle;
+        \fill[pattern=north west lines, pattern color=red!70](D)arc(180:315:2)--(C)--cycle;
+      \end{scope}
+      \begin{scope}
+        \clip(A)--(D)arc(180:315:2)--(B)--(A);
+        \fill[color=blue!20](A)arc(180:135:8)--(C)--(D)--cycle;
+      \end{scope}
+      \draw(A)--(B)node[midway, below]{8}--(C)--(D)node[midway,above]{2}--(A)node[midway, left]{6};
+      \draw(A)arc(180:135:8) (D)arc(180:315:2);
+      \node[draw,circle](none)at(1,5.3){\small $3$};
+      \node[fill=white,draw,circle](none)at(0.5,3.9){\small $1$};
+      \node[fill=white,draw,circle](none)at(2.2, 4.7){\small $2$};
+      \tkzMarkRightAngle(B,A,D)
+      \tkzMarkRightAngle(A,D,C)
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+\begin{proof}[提示]
+  记编号1、2、3的区域面积分别为$S_1, S_2, S_3$，则$S_1$与$S_2$的面积差与两者分别加上$S_3$之后的面积差相等，即
+  \begin{align*}
+    |S_1 - S_2| = |(\underline{S_1 + S_3}) - (\uwave{S_2 + S_3})|
+  \end{align*}
+  而$S_1+S_3$及$S_2+S_3$都容易求得。
+\end{proof}
+
+
+\begin{question}
+  已知圆半径1,求阴影面积。
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \coordinate(A)at(0,0);
+      \coordinate(B)at(2,0);
+      \coordinate(C)at($(A)!1!60:(B)$);
+      \coordinate(D)at($(A)!1!60:(C)$);
+      \fill[color=red!50](A)arc(240:180:2)arc(120:60:2)arc(120:180:2);
+      \fill[color=red!50](A)arc(180:240:2)arc(300:360:2)arc(300:240:2);
+      \fill[color=red!50](B)arc(300:360:2)arc(60:120:2)arc(60:0:2);
+      \draw(A)circle(2);
+      \draw(B)circle(2);
+      \draw(C)circle(2);
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+\begin{proof}[提示]
+  作辅助线。
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \coordinate(A)at(0,0);
+      \coordinate(B)at(2,0);
+      \coordinate(C)at($(A)!1!60:(B)$);
+      \coordinate(D)at($(A)!1!60:(C)$);
+      \fill[color=red!50](A)arc(240:180:2)--(C)--(A);
+      \fill[color=red!50](A)arc(180:240:2)arc(300:360:2)arc(300:240:2);
+      \fill[color=red!50](B)arc(300:360:2)arc(60:120:2)arc(60:0:2);
+      \draw(A)circle(2);
+      \draw(B)circle(2);
+      \draw(C)circle(2);
+      \draw[dashed](D)--(C)--(A);
+    \end{tikzpicture}
+  \end{center}
+  可知，每个阴影的面积等于一个$60^\circ$的扇形面积，三个加起来等于半个圆。
+\end{proof}
+
 \section{数形结合}
 \label{sec:combine-number-and-figure}
 
