@@ -1232,7 +1232,6 @@
     \end{tikzpicture}
   \end{center}
 
-  \newcommand{\redcross}{{\color{red}\ding{53}}}
   Fill in each grid a True(e.g. \tikz{\draw[fill=green]circle(0.2);}) or False(e.g.\redcross). Similar to sodoku, there must contain one and only one True mark for every rows and columns in every $4\times 4$ sub-grid.
 
   From (1), the grids can be filled as the following left
@@ -1339,7 +1338,8 @@ Base on the hints:
 \item If the 4 years girl had the blue basket, then Gina got 24 apples.
 \item The 7-year-old girl didn't collect 20 apples.
 \end{enumerate}
-Fill the Logic Puzzle Grid.
+
+Fill the Logic Puzzle Grid, the 4 \redcross of which is filled by the hint (2).
 
 \begin{center}
   \begin{tikzpicture}[scale=0.5]
@@ -1379,6 +1379,16 @@ Fill the Logic Puzzle Grid.
       \node[left]at(0, -2.5 - \y){\tc};
       \node[left]at(0, -3.5 - \y){\td};
     }
+
+    \foreach \x/\y/\t in {2/4/0, 4/4/0, 5/4/0, 8/4/0%Trisha
+    }{%
+      \ifnum\t=1
+      \draw[fill=green](\x-0.5,-\y+0.5)circle(0.3);
+      \else
+      \node at(\x-0.5, -\y+0.5){\redcross};
+      \fi
+    }
+
   \end{tikzpicture}
 \end{center}
 
