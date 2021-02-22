@@ -1177,3 +1177,209 @@
 
   所以运气好的时候，10场即可决出前4名的排名，运气不好时则需要11场。
 \end{proof}
+
+
+
+\section{逻辑益智游戏方格}
+\label{sec:logic-puzzle}
+
+爱因斯坦的难题也可以通过Logic Grid Puzzle\footnote{\url{https://en.wikipedia.org/wiki/Logic_puzzle}}的方法来解决。
+
+
+\begin{example}
+  Fill the logic puzzle grid with hints:
+  \begin{enumerate}
+  \item Bryan likes Spiderman.
+  \item Tony doesn't like Superman.
+  \item The youngest kid likes Spiderman.
+  \item The kid who likes Superman is 8.
+  \end{enumerate}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \foreach \xc/\yc/\n/\th/\tw in{2/2/3/4.5/2.5}{
+        \fill[color=gray!10](0,0)rectangle(\n,-\n);
+        \draw(6, 0) grid (0, -3) grid (3, -6);
+        \foreach \y/\xa/\xb in {0/0/6, -3/0/6, -6/0/3}{
+          \draw[thick](\xa,\y)--(\xb,\y);
+        }
+        \foreach \x/\ya/\yb in {0/0/-6, 3/0/-6, 6/0/-3}{
+          \draw[thick](\x,\ya)--(\x,\yb);
+        }
+        \foreach \x in{0,1,2,3,4,5,6}{
+          \draw(\x,0)--(\x,\th);
+        }
+        % \draw(0,3)--(6,3);
+        \foreach \x/\t/\ta/\tb/\tc/\c in {0/Heroes/Batman/Spiderman/Superman/red!20,
+          3/Age/6/8/10/blue!50}{
+          \draw[fill=\c](\x, \th) rectangle (\x + \n, \th + 1) node[midway]{\t};
+          \node[rotate=90, anchor=west]at(0.5 + \x, 0){\ta};
+          \node[rotate=90, anchor=west]at(1.5 + \x, 0){\tb};
+          \node[rotate=90, anchor=west]at(2.5 + \x, 0){\tc};
+        }
+        \foreach \y in{0,1,2,3,4,5,6}{
+          \draw(0,-\y)--(-\tw,-\y);
+        }
+        \draw(-\tw,0)--(-\tw, -6);
+        \foreach \y/\t/\ta/\tb/\tc/\c in {0/Name/Brian/Sean/Tony/red!20,
+          3/Age/6/8/10/blue!50}{
+          \draw[fill=\c](-\tw, -\y) rectangle (-\tw-1, -\y - \n) node[midway, rotate=90, anchor=center]{\t};
+          % \node[rotate=90, anchor=west]at(-4.5, -\y-4){\t};
+          \node[left]at(0, -0.5 - \y){\ta};
+          \node[left]at(0, -1.5 - \y){\tb};
+          \node[left]at(0, -2.5 - \y){\tc};
+        }
+      }        
+    \end{tikzpicture}
+  \end{center}
+
+  \newcommand{\redcross}{{\color{red}\ding{53}}}
+  Fill in each grid a True(e.g. \tikz{\draw[fill=green]circle(0.2);}) or False(e.g.\redcross). Similar to sodoku, there must contain one and only one True mark for every rows and columns in every $4\times 4$ sub-grid.
+
+  From (1), the grids can be filled as the following left
+  figure. Considering the (2), (3) and (4) conditions, the right
+  figure can be filled.
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \foreach \xc/\yc/\n/\th/\tw in{2/2/3/4.5/2.5}{
+        \fill[color=gray!10](0,0)rectangle(\n,-\n);
+        \draw(6, 0) grid (0, -3) grid (3, -6);
+        \foreach \y/\xa/\xb in {0/0/6, -3/0/6, -6/0/3}{
+          \draw[thick](\xa,\y)--(\xb,\y);
+        }
+        \foreach \x/\ya/\yb in {0/0/-6, 3/0/-6, 6/0/-3}{
+          \draw[thick](\x,\ya)--(\x,\yb);
+        }
+        \foreach \x in{0,1,2,3,4,5,6}{
+          \draw(\x,0)--(\x,\th);
+        }
+        % \draw(0,3)--(6,3);
+        \foreach \x/\t/\ta/\tb/\tc/\c in {0/Heroes/Batman/Spiderman/Superman/red!20,
+          3/Age/6/8/10/blue!50}{
+          \draw[fill=\c](\x, \th) rectangle (\x + \n, \th + 1) node[midway]{\t};
+          \node[rotate=90, anchor=west]at(0.5 + \x, 0){\ta};
+          \node[rotate=90, anchor=west]at(1.5 + \x, 0){\tb};
+          \node[rotate=90, anchor=west]at(2.5 + \x, 0){\tc};
+        }
+        \foreach \y in{0,1,2,3,4,5,6}{
+          \draw(0,-\y)--(-\tw,-\y);
+        }
+        \draw(-\tw,0)--(-\tw, -6);
+        \foreach \y/\t/\ta/\tb/\tc/\c in {0/Name/Brian/Sean/Tony/red!20,
+          3/Age/6/8/10/blue!50}{
+          \draw[fill=\c](-\tw, -\y) rectangle (-\tw-1, -\y - \n) node[midway, rotate=90, anchor=center]{\t};
+          % \node[rotate=90, anchor=west]at(-4.5, -\y-4){\t};
+          \node[left]at(0, -0.5 - \y){\ta};
+          \node[left]at(0, -1.5 - \y){\tb};
+          \node[left]at(0, -2.5 - \y){\tc};
+        }
+      }
+      \foreach \x/\y/\t in {1/1/0, 2/1/1, 3/1/0, 2/2/0, 2/3/0}{
+        \ifnum\t=1
+        \draw[fill=green](\x-0.5,-\y+0.5)circle(0.3);
+        \else
+        \node at(\x-0.5, -\y+0.5){\redcross};
+        \fi
+      }
+
+      \begin{scope}[shift={(14,0)}]
+        \foreach \xc/\yc/\n/\th/\tw in{2/2/3/4.5/2.5}{
+          \fill[color=gray!10](0,0)rectangle(\n,-\n);
+          \draw(6, 0) grid (0, -3) grid (3, -6);
+          \foreach \y/\xa/\xb in {0/0/6, -3/0/6, -6/0/3}{
+            \draw[thick](\xa,\y)--(\xb,\y);
+          }
+          \foreach \x/\ya/\yb in {0/0/-6, 3/0/-6, 6/0/-3}{
+            \draw[thick](\x,\ya)--(\x,\yb);
+          }
+          \foreach \x in{0,1,2,3,4,5,6}{
+            \draw(\x,0)--(\x,\th);
+          }
+          % \draw(0,3)--(6,3);
+          \foreach \x/\t/\ta/\tb/\tc/\c in {0/Heroes/Batman/Spiderman/Superman/red!20,
+            3/Age/6/8/10/blue!50}{
+            \draw[fill=\c](\x, \th) rectangle (\x + \n, \th + 1) node[midway]{\t};
+            \node[rotate=90, anchor=west]at(0.5 + \x, 0){\ta};
+            \node[rotate=90, anchor=west]at(1.5 + \x, 0){\tb};
+            \node[rotate=90, anchor=west]at(2.5 + \x, 0){\tc};
+          }
+          \foreach \y in{0,1,2,3,4,5,6}{
+            \draw(0,-\y)--(-\tw,-\y);
+          }
+          \draw(-\tw,0)--(-\tw, -6);
+          \foreach \y/\t/\ta/\tb/\tc/\c in {0/Name/Brian/Sean/Tony/red!20,
+            3/Age/6/8/10/blue!50}{
+            \draw[fill=\c](-\tw, -\y) rectangle (-\tw-1, -\y - \n) node[midway, rotate=90, anchor=center]{\t};
+            % \node[rotate=90, anchor=west]at(-4.5, -\y-4){\t};
+            \node[left]at(0, -0.5 - \y){\ta};
+            \node[left]at(0, -1.5 - \y){\tb};
+            \node[left]at(0, -2.5 - \y){\tc};
+          }
+        }
+        \foreach \x/\y/\t in {1/1/0, 2/1/1, 3/1/0, 2/2/0, 2/3/0, 3/3/0,2/4/1, 3/5/1}{
+          \ifnum\t=1
+          \draw[fill=green](\x-0.5,-\y+0.5)circle(0.3);
+          \else
+          \node at(\x-0.5, -\y+0.5){\redcross};
+          \fi
+        }
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+\end{example}
+
+\begin{example}
+Base on the hints:
+\begin{enumerate}
+\item Exactly one girl has the same initial in her name and in the color of her basket.
+\item Trisha is 4 or 6 years old, and had the green or red basket.
+\item The girl who collected 28 apples is 1 year older than Trisha.
+\item The green basket had 4 apples less than the blue one. The other two baskets belonged to Berenice and the 6-year-old girl.
+\item Gina is 5 years old, or she had the white basket. She collected more apples than Berenice.
+\item If the 4 years girl had the blue basket, then Gina got 24 apples.
+\item The 7-year-old girl didn't collect 20 apples.
+\end{enumerate}
+Fill the Logic Puzzle Grid.
+
+\begin{center}
+  \begin{tikzpicture}[scale=0.5]
+    % \foreach \rows/\cols/\individuals in{3/3/5}{%4 rows, 4 cols, everty grid contains 5x5 sub-grids
+    \fill[color=gray!10](8,0)rectangle(4,-4)rectangle(0,-8);
+    \draw(12, 0) grid (0, -4) grid (8, -8) (4, -8) grid (0, -12);
+    \foreach \y/\xa/\xb in {0/0/12, -4/0/12, -8/0/8, -12/0/4}{
+      \draw[thick](\xa,\y)--(\xb,\y);
+    }
+    \foreach \x/\ya/\yb in {0/0/-12, 4/0/-12, 8/0/-8, 12/0/-4}{
+      \draw[thick](\x,\ya)--(\x,\yb);
+    }
+    \foreach \x in{0,1,2,3,4,5,6,7,8,9,10,11,12}{
+      \draw(\x,0)--(\x,3);
+    }
+    \draw(0,3)--(12,3);
+    \foreach \x/\t/\ta/\tb/\tc/\td/\c in {0/Age/4/5/6/7/red!20,
+      4/Basket/blue/green/red/white/blue!50,
+      8/Quantity/20/24/25/28/green}{
+      \draw[fill=\c](\x, 3) rectangle (\x + 4, 4) node[midway]{\t};
+      \node[rotate=90, anchor=south west]at(1 + \x, 0){\ta};
+      \node[rotate=90, anchor=south west]at(2 + \x, 0){\tb};
+      \node[rotate=90, anchor=south west]at(3 + \x, 0){\tc};
+      \node[rotate=90, anchor=south west]at(4 + \x, 0){\td};
+    }
+    \foreach \y in{0,1,2,3,4,5,6,7,8,9,10,11,12}{
+      \draw(0,-\y)--(-4,-\y);
+    }
+    \draw(-4,0)--(-4, -12);
+    \foreach \y/\t/\ta/\tb/\tc/\td/\c in {0/Name/Berenice/Gina/Rachel/Trisha/red!20,
+      4/Basket/blue/green/red/white/blue!50,
+      8/Quantity/20/24/25/28/green}{
+      \draw[fill=\c](-4, -\y) rectangle (-5, -\y - 4) node[midway, rotate=90, anchor=center]{\t};
+      % \node[rotate=90, anchor=west]at(-4.5, -\y-4){\t};
+      \node[left]at(0, -0.5 - \y){\ta};
+      \node[left]at(0, -1.5 - \y){\tb};
+      \node[left]at(0, -2.5 - \y){\tc};
+      \node[left]at(0, -3.5 - \y){\td};
+    }
+  \end{tikzpicture}
+\end{center}
+
+\end{example}
