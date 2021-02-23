@@ -10,7 +10,7 @@
   \begin{align*}
     |z_1| + |z_2| + \cdots + |z_n| = 1
   \end{align*}
-  则$\{z_1,z_2,\cdots,z_n\}$中必能取出若干个，使得其模的和不小于$\frac16$。
+  则$\{z_1,z_2,\cdots,z_n\}$中必能取出若干个，使得其和的模不小于$\frac16$。
 \end{example}
 \begin{proof}
   记$z_k=x_k + i y_k$，其中$x_k,y_k$是实数。则
@@ -24,9 +24,9 @@
   \begin{align*}
     \sum_{x_k\ge 0}x_k\ge\frac14
   \end{align*}
-  从而将这些$x_k\ge 0$对应的$z_k$取出便可得到其模的和不小于$\frac14$：
+  从而将这些$x_k\ge 0$对应的$z_k$取出便可得到其和的模不小于$\frac14$：
   \begin{align*}
-    \sum_{x_k\ge0}|z_k|={}&\sum_{x_k\ge0}|x_k+iy_k|\ge \sum_{x_k\ge0}|x_k|
+    \left|\sum_{x_k\ge0}z_k \right|={}&\left| \sum_{x_k\ge0} x_k+iy_k \right|\ge \left| \sum_{x_k\ge0}x_k \right|
     ={}\sum_{x_k\ge0}x_k\ge\frac14>\frac16&\qedhere
   \end{align*}
 \end{proof}
