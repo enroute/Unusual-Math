@@ -237,3 +237,72 @@
     \int f(x)g(x)\mathrm{d}x\ge\int f(x)\dx\int g(x)\dx
   \end{align*}
 \end{example}
+
+
+\section{卡尔松不等式}
+\label{sec:carlson-inequality}
+
+\begin{theorem}
+  不全为零的非负实数$a_n$，必有
+  \begin{align}
+    \left(\sum_{n=1}^N a^2 \right)^4 < \pi \cdot \sum_{n=1}^N a_n^2 \cdot \sum_{n=1}^N n^2 a_n^2
+  \end{align}
+\end{theorem}
+
+\begin{theorem}
+  $m\times n$的非负实数阵中，$n$列每列元素之和的几何平均值不小于矩阵中$m$行每行元素的平均值之和。即满足$\forall a_{rc}\ge 0$的矩阵
+  \begin{align*}
+    \begin{matrix}
+      a_{11} & a_{12} & a_{13} & \cdots & a_{1n}\\
+      a_{21} & a_{22} & a_{23} & \cdots & a_{2n}\\
+      a_{31} & a_{32} & a_{33} & \cdots & a_{3n}\\
+      \cdots\\
+      a_{m1} & a_{m2} & a_{m3} & \cdots & a_{mn}
+    \end{matrix}
+  \end{align*}
+  必有
+  \begin{align}
+    \left (\prod_{c=1}^n \sum_{r=1}^m a_{rc} \right) ^{1/n}  \ge
+    \sum_{r=1}^m \left( \prod_{c=1}^n a_{rc} \right)^{1/n}
+  \end{align}
+  当$n=2$时，卡尔松不等式即为柯西不等式(见\ref{sec:cauchy-schwarz-inequalities}节)。
+\end{theorem}
+
+\begin{question}
+  将矩阵转置，是否也有每行元素之和的几何平均值不小于第列元素的平均值之和？
+\end{question}
+
+
+\begin{example}
+  正数$a,b,c$，求下式的最小值：
+  \begin{align*}
+    \frac{ (4a+1)(9a+b)(4b+c)(9c+1) }{abc}
+  \end{align*}
+\end{example}
+\begin{proof}[提示]
+  首先齐次化，令
+  \begin{align*}
+    a\equiv \frac AD,\quad b\equiv\frac BD,\quad c\equiv\frac CD
+  \end{align*}
+  其中$A,B,C,D$均为正数。从而原式化为
+  \begin{align*}
+    \frac{ (4A+D)(9A+B)(4B+C)(9C+D) }{ ABCD }
+  \end{align*}
+  然后配平系数，令
+  \begin{align*}
+    3A\equiv p,\quad B\equiv q,\quad 3C/4\equiv r,\quad D/4\equiv s
+  \end{align*}
+  则原式转化为
+  \begin{align*}
+    \frac{ 4 (3p+q)(3q+r)(3r+s)(3s+p) }{pqrs}
+  \end{align*}
+  上式利用卡尔松不等式，则有
+  \begin{align*}
+    &\frac{ 4 (3p+q)(3q+r)(3r+s)(3s+p) }{pqrs}\\
+    \ge &
+    \frac{ 4 \left[ (3p \cdot 3q \cdot 3r \cdot 3s)^{1/4} +
+    (q \cdot r \cdot s \cdot p)^{1/4} \right]^4 } {pqrs} \\
+    =& 4 \cdot (3+1)^4=2^2 \cdot 2^8 = 2^{10} = 1024
+  \end{align*}
+  
+\end{proof}

@@ -448,3 +448,29 @@
   \end{align*}
   分三种情况$x-y=0$、$x+y=0$及$x+y+1=0$分别考虑可得。
 \end{proof}
+
+
+\begin{example}
+  Find the range of $a$, s.t. hyperbolic
+  \begin{align*}
+    f(x)\equiv ax^2 + 4ax
+  \end{align*}
+  has common point with line segment between point $P(2,2)$ and $Q(2+2a, 5a)$.
+\end{example}
+\begin{proof}[Hint]
+  The curve $f$ and point $Q$ are both dynamic, make one of them static.
+
+  Let $t=y/a$, then it's equivalent to the curve of
+  \begin{align*}
+    g(x) = x^2 + 4x
+  \end{align*}
+  has common point with line segment between points $(2, 2/a)$ and $(2+2a, 5)$, which equivalent to
+  \begin{align*}
+    \left(g(2) - 2/a\right) \cdot \left( g(2+2a) - 5 \right) \le 0
+  \end{align*}
+  i.e.
+  \begin{align*}
+    (2a+3)(2a+1)(2a-3)/a \ge 0
+  \end{align*}
+  Consider the intervals $(-\infty, -2/3)$, $(-2/3, -1/2)$, $(-1/2, 0)$, $(0, 3/2)$ and $(3/2, +\infty)$ and the ending points respectively, the result can be easily deduced.
+\end{proof}

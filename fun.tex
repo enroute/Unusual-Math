@@ -383,3 +383,29 @@
   %   \bottomrule
   % \end{tabular}
 \end{proof}
+
+
+\begin{example}
+  Farmer Daniel and Paul are selling eggs in the market. Professor Prince says it looks like Daniel has more eggs than Paul.
+
+  Maybe Daniel has 70 eggs and Paul has 30? Prince says.
+
+  You're right on the total number. We'll get the same money if all our eggs are sold. If we exchange the number of eggs, then I'll get 18 dollars. Says Paul.
+
+  Yes. And I'll get only 8 dollars if I sold eggs with the number of Paul's. Says Daniel.
+
+  How many eggs, respectively, do they bring to the market?
+\end{example}
+\begin{proof}[Hint]
+  It's easy to solve with equations. Let $a,b$ denote the number of eggs Daniel and Paul have, $x$ is the unit price of eggs sold by Daniel. Then since they get the same money if all their eggs are sold, the unit price of eggs sold by Paul is $ax/b$. And obviously the following equations holds:
+  \begin{align*}
+    \begin{cases}
+      ax/b\cdot a &=18\\
+      x\cdot b    &= 8
+    \end{cases} \overset{\text{Divide 2 equations}}{\implies}
+    \left(\frac ab\right)^2=\frac{18}{8}=\left(\frac{3}{2}\right)^2
+    \implies \frac ab=\frac32
+  \end{align*}
+
+  {\color{red}But, what if we're talking to primary students who're not aware of equations yet?}
+\end{proof}

@@ -73,9 +73,9 @@
     由对称性不妨设$A\ge B$。下面由韦达跳跃找到一个更小的来导出矛盾。
   \item 固定$B$，若能找到$C$，使$(B,C)\in S$且$C<A$，则$B+C<A+B$与$(A,B)$的定义矛盾。设$k = \frac{A^2+B^2}{AB+1}$，若同时有$k = \frac{C^2+B^2}{CB+1}$，则$A,C$都是以下方程的解：
     \begin{align*}
-      \frac{x^2 + B^2}{Bx + 1} = 0 \implies x^2 - kxB + B^2 - k = 0
+      \frac{x^2 + B^2}{Bx + 1} = k \implies x^2 - kxB + B^2 - k = 0
     \end{align*}
-    即若$A,C$是这个方程的角，则由韦达定理，有
+    即若$A,C$是这个方程的解，则由韦达定理，有
     \begin{align*}
       C = kB - A, \quad\text{且}\quad C = \frac{B^2 - k}{A}
     \end{align*}
@@ -127,10 +127,14 @@
       \coordinate (f1) at (5.7524,1.2585);
       \coordinate[label=below:$x_2$] (x2) at (4.4283,0);
       \coordinate (f2) at (4.4283,0.1753);
-      \draw[help lines,postaction={decorate}](x0)--(f0);
-      \draw[help lines,postaction={decorate}](f0)--(x1);
-      \draw[help lines,postaction={decorate}](x1)--(f1);
-      \draw[help lines,postaction={decorate}](f1)--(x2);%--(f2);
+      % \draw[help lines,postaction={decorate}](x0)--(f0);
+      % \draw[help lines,postaction={decorate}](f0)--(x1);
+      % \draw[help lines,postaction={decorate}](x1)--(f1);
+      % \draw[help lines,postaction={decorate}](f1)--(x2);%--(f2);
+      \draw[help lines](x0)--(f0);
+      \draw[help lines](f0)--(x1);
+      \draw[help lines](x1)--(f1);
+      \draw[help lines](f1)--(x2);%--(f2);
       \tkzDrawPoints(x0,f0,x1,f1,x2)
       \draw[help lines,|<->|](9.3,-1)--(5.7524,-1)node[midway,fill=white,black]{$\dfrac{f(x_0)}{f'(x_0)}$};
       \draw[help lines, <->|](10,0)--(10,5.889)node[midway,fill=white,black]{$f(x_0)$};

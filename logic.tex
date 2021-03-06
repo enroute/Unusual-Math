@@ -1393,3 +1393,20 @@ Fill the Logic Puzzle Grid, the 4 \redcross of which is filled by the hint (2).
 \end{center}
 
 \end{example}
+
+
+\begin{example}
+  10 people line up, s.t. the taller one is behind. Everyone has a hat either black or blue. Everyone can see the color of the hats before him. Do they have a strategy that they can make sure at least 9 people can tell the color of his own hat?
+
+  \begin{center}
+    \begin{tikzpicture}[scale=.8]
+      \foreach \s/\x/\h in{1cm/15.4/black, 1.2cm/14.2/yellow, 1.3cm/12.9/yellow, 1.4cm/11.5/black, 1.5cm/10/yellow, 1.6cm/8.4/black, 1.7cm/6.7/black, 1.8cm/4.9/yellow, 1.9cm/3/black, 2.0cm/1/yellow}{
+        \node[conductor, minimum size=\s, hat=\h] at(\x,0){};
+      }      
+    \end{tikzpicture}
+  \end{center}
+
+  Who to sacrify to help others? The shortest one? No, since he has no information on the color of all the hats. He sacrifies in vain.
+
+  Sacrifice the tallest one to tell the even-odd property of the other nine hats. Then the second tallest can tell the color of his own hat. After that, so could the third tallest. And so on.
+\end{example}
