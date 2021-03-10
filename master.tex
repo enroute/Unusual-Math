@@ -504,8 +504,10 @@
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
-\newcommand{\dx}{\mathrm{d}x}
-\newcommand{\dy}{\mathrm{d}y}
+\newcommand{\dx}{\,\mathrm{d}x}
+\newcommand{\dy}{\,\mathrm{d}y}
+\newcommand{\dt}{\,\mathrm{d}t}
+
 % \newcommand{\dz}{\mathrm{d}z}
 % \newcommand{\gcd}{\mathrm{gcd}}
 \newcommand{\lcm}{\mathrm{lcm}}
@@ -546,6 +548,7 @@
 
 
 % comment this when compile the whole document
+% \includeonly{basic-operation}
 % \includeonly{basic-inequalities}
 % \includeonly{proofs-without-words}
 % \includeonly{golden-ratio}
@@ -618,6 +621,8 @@
 \include{diophantine-equation}
 \include{calendar}
 \include{golden-ratio}
+
+\include{basic-operation}
 
 % 集合 -> 离散(含排列组合) -> 概率
 \include{set}

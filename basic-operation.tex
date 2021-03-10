@@ -1,0 +1,179 @@
+
+\chapter{基本符号与运算}
+\label{chap:basic-operations}
+
+\section{阶乘}
+\label{sec:factorial}
+
+\begin{definition}[阶乘，Factorial]
+  $\forall n\in\mathcal{Z}^+$，$1,2,3,\cdots,n$这$n$个正整数的乘积记为$n$的阶乘，用符号$n!$表示。即
+  \begin{align}
+    n!\equiv 1\times 2\times 3\times \cdots \times (n-1) \times n
+  \end{align}
+  $0$的阶乘定义为1，即
+  \begin{align}
+    0!\equiv 1
+  \end{align}
+\end{definition}
+
+\begin{definition}[阶乘的等价定义]阶乘也可以通过递归定义。
+  $\forall n\in\mathcal{Z}^+$，$n!$由下式定义
+  \begin{align}
+    n!\equiv
+    \begin{cases}
+      1               & n=0\\
+      n\times (n-1)!  & n\ne 0
+    \end{cases}
+  \end{align}
+\end{definition}
+
+
+\begin{definition}[双阶乘，Double Factorial]双阶乘的定义分奇偶。
+  \begin{enumerate}
+  \item 当$n$是正奇数时，
+    \begin{align}
+      n!!\equiv 1\times 3\times 5\times \cdots \times (n-2) \times n
+    \end{align}
+  \item 当$n$是正偶数时，
+    \begin{align}
+      n!!\equiv 2\times 4\times 6\times \cdots \times (n-2) \times n
+    \end{align}
+  \item 0的双阶乘定义为1，即
+    \begin{align}
+      0!!\equiv 1
+    \end{align}
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  同样，双阶乘也可以通过递归来定义。
+  \begin{align}
+    n!!\equiv
+    \begin{cases}
+      1                & n=0, 1\\
+      n\times (n-2)!!  & n\ne 0, 1
+    \end{cases}
+  \end{align}
+\end{definition}
+
+\begin{example}
+  $\forall n\in\mathcal{Z}^+$,
+  \begin{align}
+    n!! = \frac{n!}{(n-1)!!}
+  \end{align}
+
+  $\forall n=2k$, where $k$ is non-negative integer,
+  \begin{align}
+    n!! = 2^k\cdot k!
+  \end{align}
+\end{example}
+
+
+\begin{definition}[Gamma函数]
+  阶乘可以在实数或复数域上延拓\footnote{除去某些点外}。下面两个等价定义称为Gamma函数：
+  \begin{align}
+    \Gamma(x) \equiv \int_{t=0}^\infty e^{-t} \cdot t^{x-1} \dt
+    = \int_{t=0}^1 (-\ln t)^x \dt
+  \end{align}
+  $\Gamma(x)$也记为$x!$。以下形式有时更容易找到积分与$\Gamma$之间的关系：
+  \begin{align}
+    \int_{t=0}^\infty e^{-t} \cdot t^{x} \dt = \Gamma(x + 1)
+  \end{align}
+\end{definition}
+
+\begin{example}
+  欧拉在研究阶乘$n!$时，先找到的函数是
+  \begin{align}
+    J(m, n)\equiv\int_0^1 x^m\cdot (1-x)^n \dx
+  \end{align}
+  显然$J(m,0)=1/(m+1)$。利用分部积分，容易得到以下性质
+  \begin{align}
+    J(m,n)=\frac{n}{m+1}J(m+1,n-1)
+  \end{align}
+  递推到$n=0$时，容易得到
+  \begin{align}
+    J(m,n)=\frac{n(n-1)(n-2)\cdots 1}{(m+1)(m+2)(m+3)\cdots (m+n)}\cdot J(m+n,0)
+  \end{align}
+  由此，欧拉得到了如下公式
+  \begin{align}
+    n!=(m+1)(m+2)(m+3)\cdots (m+n+1)\int_0^1 x^m\cdot (1-x)^n\dx
+  \end{align}
+  之后，再利用其他数学技巧，欧拉得到了$\Gamma$函数。
+\end{example}
+
+\begin{question}
+  任意定义域内的$x$，有$\Gamma(x + 1) = x\cdot \Gamma(x)$。
+\end{question}
+
+\begin{question}
+  对于非负整数$n$，$\Gamma(n + 1) = n! = n\cdot (n-1) \cdots 2\cdot 1$。
+\end{question}
+
+\begin{question}
+  证明：
+  \begin{align}
+    \left(-\frac12\right)! = \sqrt\pi
+  \end{align}
+  实际上，
+  \begin{align*}
+    \left(-\frac12\right)! = \Gamma\left(-\frac12 + 1\right) = \Gamma\left(\frac12\right)
+  \end{align*}
+\end{question}
+
+\begin{example}
+  对于正奇数$2k+1$，有
+  \begin{align*}
+    \left(\frac{2k+1}{2}\right)! =&
+    \frac{2k+1}2 \cdot\frac{2k-1}2 \cdot\frac{2k-3}2 \cdot \cdot\frac{1}2 \cdot \left(-\frac12\right)!\\
+    =&\frac{(2k+1)!!}{2^{k+1}} \sqrt\pi
+  \end{align*}
+\end{example}
+
+\begin{example}
+  求定积分
+  \begin{align}
+    \int_0^{+\infty} x^2\cdot e^{-2x} \dx
+  \end{align}
+  令$2x\to t$，可得原式等于
+  \begin{align}
+    \frac18 \int_0^{+\infty} t^2\cdot e^{-t} \dt = \frac18 \cdot \Gamma(2 + 1) = \frac18 \cdot 2! = \frac14
+  \end{align}
+\end{example}
+
+\begin{example}
+  求定积分
+  \begin{align}
+    \int_0^{+\infty} x^2\cdot e^{-x^2} \dx
+  \end{align}
+  令$x^2\to t$再利用$\Gamma$函数，可得原式$=\Gamma(1/2 + 1) / 2 = \sqrt\pi / 4$。
+\end{example}
+
+\begin{question}
+  证明：正态分布中的高斯积分等于$\Gamma(3/2)$，即
+  \begin{align}
+    \int_0^{+\infty} e^{-x^2}\dx = \Gamma\left(\frac12+1\right) = \frac{\sqrt\pi}2
+  \end{align}
+\end{question}
+
+
+\begin{definition}[Beta函数]
+  下面定义的函数称为Beta函数
+  \begin{align}
+    B(x,y)\equiv\int_{t=0}^1 t^{x-1} \cdot (1-t)^{1-y} \dt
+  \end{align}
+\end{definition}
+
+\begin{question}
+  任意定义域内的$x,y$，有
+  \begin{align}
+    B(x,y)=\frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
+  \end{align}
+\end{question}
+
+\begin{question}
+  证明：
+  \begin{align}
+    \frac21\cdot\frac23 \cdot\frac43 \cdot\frac45 \cdot\frac65 \cdot\frac67 \cdot\frac87
+    \cdot\frac89\cdots=\frac\pi2
+  \end{align}
+\end{question}
