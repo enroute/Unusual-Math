@@ -780,6 +780,37 @@
   可知，每个阴影的面积等于一个$60^\circ$的扇形面积，三个加起来等于半个圆。
 \end{proof}
 
+\begin{example}
+  如图,$\triangle ABC$与$\triangle ADE$都是边长为3的正三角形，$\angle DAC=30^\circ$。求图中阴影部分面积。
+
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    \coordinate[label=above:$A$] (A) at (0,0);
+    \coordinate[label=left:$B$] (B) at (225:3);
+    \coordinate[label=left:$D$] (D) at (255:3);
+    \coordinate[label=right:$C$] (C) at (285:3);
+    \coordinate[label=right:$E$] (E) at (315:3);
+    \coordinate[label=below:$F$] (F) at ($0.25*(B)+0.75*(C)$);
+    \coordinate[label=above left:$O$] (O) at ($0.5*(B) + 0.5*(C)$);
+    \fill[color=blue!10](A)--(D)--(F)--(C)--cycle;
+    \draw(A)--(B)--(C)--cycle (A)--(D)--(E)--cycle;
+  \end{tikzpicture}
+\end{example}
+\begin{proof}[提示]
+  容易看出来，$AF$是整个图形的一个对称轴，从而$AF$是阴影角$\angle DAC$的角平分线，从而角平分线的性质，可以求得$DF$与$CF$的长度，从而可得阴影部分面积。
+
+  也可以利用特殊直角三角形的性质。$\triangle ACF$与$\triangle ADF$都是边长为$3$的三角形，设其高$OF$为$x$，则由有一个$60^\circ$角的直角三角形$ODF$，有
+  \begin{align*}
+    DF = CF = \frac2{\sqrt3} x
+  \end{align*}
+  且由$BC = 2 OC$及$OC = OF +FC$，可知
+  \begin{align*}
+    x + \frac2{\sqrt3} x = \frac32
+  \end{align*}
+  从而可得$OF$。
+\end{proof}
+
+
 \section{数形结合}
 \label{sec:combine-number-and-figure}
 
@@ -807,7 +838,6 @@
       \end{scope}
     \end{tikzpicture}
   \end{center}
-
   画到网格上，可以得到下面的图形
   \begin{center}
     \begin{tikzpicture}[scale=0.5]
@@ -820,4 +850,6 @@
   通过空白区域的面积，容易求得图中阴影三角形的面积。
 \end{proof}
 
-
+\begin{question}
+  已知$a>0$，$b>0$，求以$\sqrt{a^2+b^2}$、$\sqrt{a^2+9b^2}$和$\sqrt{4a^2+4b^2}$为边长的三角形的面积。
+\end{question}
