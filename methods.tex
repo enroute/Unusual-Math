@@ -425,6 +425,31 @@
 \end{proof}
 
 
+
+\begin{example}
+  若 $x\in\mathcal{R}$，求解方程：
+  \begin{align*}
+    \frac1{x^2+11x-8} + \frac1{x^2+2x-8} + \frac1{x^2-13x-8} = 0
+  \end{align*}
+\end{example}
+\begin{proof}
+  观察分母共同点。显然，$x\ne 0$。从而 $\exists a\in\matchcal{R}$，使得 $ax = x^2-8$。
+  \begin{align*}
+    \frac1{(a+11)x} + \frac1{(a+2)x} + \frac1{(a-13)x} = 0\\
+    (a^2-11x-26)+(a^2-2x-143)+(a^2+13x+22)=0\\
+    3a^2=147\implies a=\pm7
+  \end{align*}
+  再将$a$代入$ax=x^2-8$，可得$x$。
+\end{proof}
+
+
+
+% \begin{example}
+%   Given $a+b+c$, $\any x\in\{\mathcal{R}-\{a,b,c\}\}$,
+% \end{example}
+
+
+
 \section{其它}
 \label{sec:misc-method}
 

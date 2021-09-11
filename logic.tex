@@ -1,4 +1,4 @@
-
+s
 \chapter{逻辑}
 \label{chap:logic}
 \def\BKC{\cellcolor{gray!50}}   % cell background color
@@ -1546,3 +1546,41 @@ Omohundro的贡献是他把这一问题扩大到有500名海盗的情形，即50
 
   那么，$x$ 和 $y$ 各是多少？
 \end{example}
+
+
+\begin{example}[Google面试题]
+  有一个无限长的整数刻度的坐标轴，有一只蚂蚁在某一个整数刻度上，但是具
+  体位置未知，现在蚂蚁每秒钟都会向正方向前进一格。你有一把手枪，每秒钟
+  你能向坐标轴的某个刻度开一枪，之后只能知道打中还是没打中，请你设计一
+  种开枪的策略，保证最终一定能打中这只蚂蚁。
+\end{example}
+\begin{proof}[提示]
+  假设蚂蚁不动，怎么打？从某个坐标开始，向两边扩张，就可以覆盖所有的整数坐标，比如
+  \begin{align*}
+    0,\quad 1,\quad -1,\quad 2,\quad -2,\quad 3,\quad -3, \quad 4,\quad -4, \cdots
+  \end{align*}
+  其中奇数下标子序列是向左半轴扩散，偶数下标子序列向正半轴扩散。这样，
+  不管蚂蚁初始在哪里，总有被追上的时候。
+
+  上面的打法，可以写为以下通项：
+  \begin{align*}
+    f(n) =
+    \begin{cases}
+      (1 - n) / 2 & n = 1, 3, 5, 7\\
+      n / 2       & n = 2, 4, 6, 8
+    \end{cases}
+  \end{align*}
+
+  再考虑到蚂蚁匀速向前，其速度是$1$，第$n$次向前移动了$n$，所以为了使$f(n)$与蚂蚁保持相对不动，$f(n)$也要加上$n$的通项，从而可得到如下打法
+  \begin{align*}
+    g(n)\equiv f(n) + n=
+    \begin{cases}
+      n + (1 - n) / 2 & n = 1, 3, 5, 7\\
+      n + n / 2       & n = 2, 4, 6, 8
+    \end{cases}=
+    \begin{cases}
+      (1 + n) / 2 & n = 1, 3, 5, 7\\
+      3n/2       & n = 2, 4, 6, 8
+    \end{cases}
+  \end{align*}
+\end{proof}

@@ -1,5 +1,11 @@
 \documentclass[a4paper,12pt,book]{memoir}
 
+% remove margin notes on book class of memoir
+% \setmarginnotes not work
+\setlrmarginsandblock{3.5cm}{3.5cm}{*}
+\setulmarginsandblock{3.5cm}{*}{1}
+\checkandfixthelayout 
+
 %% To fix a bug in TeXLive 2018, ref.
 %% https://tex.stackexchange.com/questions/427451/dot-between-chapter-number-and-figure-number-disapear-after-update
 %% https://tex.stackexchange.com/questions/427995/memoir-on-tex-live-2018-breaks-figure-numbering-after-mainmatter

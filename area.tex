@@ -213,10 +213,14 @@
   \end{tikzpicture}
 \end{example}
 \begin{proof}[解]
-  除了积分，暂时未发现有其它好方法。
+  除了积分，暂时未发现有其它好方法。(超过中小学知识？)
   \begin{align*}
     S&=\int_{x=0}^1 \left| \sqrt{0.5^2 - (x-0.5)^2} - \left(1-\sqrt{1-x^2}\right)\right| \dx\qedhere
   \end{align*}
+
+  % 假设可以求出大圆弧将小圆弧切割成的两部分，小部分的弧角是$x$，则是可
+  % 以求出面积与$x$之间的关系。连接圆弧交点与正方形右下角顶点，可以求得
+  % 弓形面积
 \end{proof}
 
 \begin{example}
@@ -778,6 +782,32 @@
     \end{tikzpicture}
   \end{center}
   可知，每个阴影的面积等于一个$60^\circ$的扇形面积，三个加起来等于半个圆。
+\end{proof}
+
+
+\begin{question}
+  如图，一个单位圆和等腰直角三角形，求其中阴影面积。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}
+        \draw[fill=blue!30,even odd rule](0,0) arc(0:360:1) -- (-2,0)--(0,2)--cycle;
+      \end{scope}
+      \begin{scope}[shift={(2,0)}]
+        \coordinate(O) at (0,0);
+        \coordinate(A) at (1,0);
+        \coordinate(B) at (-1,0);
+        \coordinate(C) at (1,2);
+        \coordinate(D) at ($(C)!1!-45:(A)$);
+        \coordinate(E) at (0,1);
+        \fill[color=blue!30](O)circle(1);
+        \fill[color=white](B)--(A) arc(270:225:2) -- cycle;
+        \draw(A)arc(0:360:1)--(C)--(B)--cycle (A) arc(270:225:2);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+\begin{proof}[提示]
+  先求圆内空白部分面积。
 \end{proof}
 
 \begin{example}
