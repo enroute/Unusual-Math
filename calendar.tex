@@ -4,7 +4,7 @@
 
 \epigraph{清明时节雨纷纷，路上行人欲断魂。\\借问酒家何处有，牧童遥指杏花村。}{唐·杜牧《清明》}
 
-清明是中国从古流传至今的二十四节气之一，而公历是近代才传入中国的，为什么每年的清明不是公历4月4日就是4月5日呢？看完这节，希望你能想明白，一年中在2月29日之前的节气，每年都是固定日期的，而在2月29日之后的节气，每年都是差不多是固定日期的，最多相差一天。
+清明是中国从古流传至今的二十四节气之一，而公历是近代才传入中国的，为什么每年的清明不是公历4月4日就是4月5日呢？看完这节，希望你能想明白，一年中在2月28日之前的节气，每年都是固定日期的，而在2月28日之后的节气，每年都是差不多是固定日期的，最多相差一天，极少数相差两天。
 
 \section{太阳历}
 \label{sec:solar-calendars}
@@ -156,11 +156,14 @@
 \section{太阴历}
 \label{sec:tai-yin-calendar}
 
-太阴历(即常说的阴历，Lunar Calendar)，是指按月亮的月相周期来安排的历法。太阴历的一年有12个朔望月，约354或355天。根据月亮绕地球运行一周定为一个月，称为朔望月，大约是29.53天，分为大月30日，小月29日。
+太阴历(即常说的阴历，Lunar Calendar)，是指按月亮的月相周期来安排的历法。太阴历的一年有12个朔望月，约354或355天。根据月亮绕地球运行一周定为一个月，称为朔望月(如表~\ref{fig:lunar-phases})，大约是29.53天，分为大月30日，小月29日。
 
-{\color{red}补充月相!!!。}
-
-{\color{red}补充农历的定义！！}
+\begin{figure}[htbp]
+  \centering
+  \scalebox{0.75}{\input{images/lunar-phases.tex}}
+  \caption{月相}
+  \label{fig:lunar-phases}
+\end{figure}
 
 农历是东亚地区传统广泛使用的阴阳历，据说是由黄帝所创，亦有说是夏朝时他创，所以也称为黄历、夏历。后来以西历格里历为公历，夏历就改称为了农历。西历通常又称为阳历，对应的农历就常被称为阴历。在农耕活动中，阳历更能反映春天播种、秋天收割的农业周期。然而由于古代历法是阴历用的是月相周期，所以古人就用了符合阳历规律的节气来指导农耕。即现在所说的阴历(农历)在天文学中实际上是一种阴阳合历。
 
@@ -168,9 +171,9 @@
 \section{大明历}
 \label{sec:da-ming-calendar}
 
-南北朝时期的祖冲之在公元465(也有人说是公元462年，即刘宋大明六年，而非明朝)制定了大明历，亦称为甲子元历。祖冲之在此之前就测得了地球围绕太阳旋转一周的天数大约为$365\dfrac{9589}{39491}$，即约365.2428148天；一个朔望月为$29\dfrac{2090}{3939}$，即约29.53天。
+南北朝时期的祖冲之在公元465(也有人说是公元462年，即刘宋大明六年，而非明朝)制定了大明历，亦称为甲子元历。祖冲之在此之前就测得了地球围绕太阳旋转一周的天数大约为$365\dfrac{9589}{39491}$，即约365.2428148天；一个朔望月为$29\dfrac{2090}{3939}$，即约29.5309天\footnote{与现代测得的朔望月长度相差不到1秒}。
 
-大明历首次采用了岁差的概念，这是中国历法上的第二次大变革。
+中国古代历法中，冬至点是制订历法的起算点，然而在祖冲之之前，一直认为冬至点的位置是固定不变的。大明历首次采用了岁差的概念，这是中国历法上的第二次大变革。
 
 \begin{definition}[岁差，Axial Precession\footnote{字面意思为自转轴进动。}]
   天文学中，一个天体由于其重力作用导致的自转轴指向在空间中缓慢且连续的变化称为岁差。
@@ -180,6 +183,16 @@
 
 \section{节气}
 \label{sec:jie-qi}
+
+太阴国描述的是月相，与太阳历相差甚远。而古代中国是农耕社会，为了指导农耕，历算家们又制定了与太阳历吻合的节气。
+
+\begin{quotation}
+节气歌
+
+春雨惊春清谷天，夏满芒夏暑相连，
+
+秋处露秋寒霜降，冬雪雪冬小大寒。
+\end{quotation}
 
 古人把$360^\circ$黄经划分24等分，每隔$15^\circ$为一节气，其中$0^\circ$为春分，夏至是$90^\circ$，秋分是$180^\circ$，冬至是$270^\circ$。而太阳黄经在$15^\circ$时则定为清明，太阳直射北回归线之日即中国北方最热之时定为夏至，如图~\ref{fig:24-jie-qi}所示。
 
@@ -213,8 +226,8 @@
 
 
 
-\section{儒略历}
-\label{sec:Julian-calender}
+\section{古罗马日历}
+\label{sec:Rome-calender}
 
 学习英语的时候，通常都会有人提出疑问，按照英语的词根，sept是7，oct是8，
 nov是9，dec是10，但为什么 September, October, November 和 December 不是
@@ -230,38 +243,147 @@ October, November 和 December 就变成了现在的9、10、11和12月了。
 
 还有一种说法，是古罗马日历只有10个月，后来在年尾加了2个月，然后再后来，
 又把这新加的两个月移到了年初变成了新的1月和2月，原来的10个月都往后顺移
-了两个朋，所以原来的September, October, November 和 December 自然就变成
+了两个月，所以原来的September, October, November 和 December 自然就变成
 了9、10、11和12月了。凯撒和屋大维只是把7、8两月改了个名字。
+
+
+% \begin{table}[htbp]
+%   \centering
+%   \caption{10 Months of Julius Calendar}
+%   \label{tab:10-months-of-julius-calendar}
+%   \begin{minipage}{\textwidth}  %for footnote in tabular
+%   \centering
+%   \begin{tabular}{llll}
+%     \toprule
+%     月份 & English           & Latin       & Meaning                                                                   \\\midrule
+%     1    & January           & Ianuarius   & Month of Janus                                                            \\
+%     2    & February          & Februarius  & Month of the Februa                                                       \\
+%          & Intercalary Month & Mercedonius & Month of Wages                                                            \\           
+%     3    & March             & Martius     & Month of Mars                                                             \\
+%     4    & April             & Aprilis     & Month of Aphrodite – from which the Etruscan Apru might have been derived \\
+%     5    & May               & Maius       & Month of Maia                                                             \\
+%     6    & June              & Iunius      & Month of Juno                                                             \\
+%     7    & July              & Quintilis   & Fifth Month (from the earlier calendar starting in March)                 \\
+%     8    & August            & Sextilis    & Sixth Month                                                               \\
+%     9    & September         & September   & Seventh Month                                                             \\
+%     10   & October           & October     & Eighth Month                                                              \\
+%     11   & November          & November    & Ninth Month                                                               \\
+%     12   & December          & December    & Tenth Month                                                               \\
+%     \bottomrule
+%   \end{tabular}
+%   \end{minipage}
+% \end{table}
+%% The first month in the Julian calendar was Martius for March, followed by Aprilis for April, Maius for May, Lunius for June, Quintilis or July, Sextilis or August, then September for the seventh month, October for the 8th, November for the 9th and December for the 10th month.
+
+\subsection{First Roman Calendar}
+\label{sec:first-roman-calendar}
+第一个罗马历是太阴历，是基于月亮形状的周期变化而来的。由于新月出现的平均周期是29.5天，所以罗马太阴历中每个月是29天或者30天，一年总共是10个月共304天。这十个月的名字见表~\ref{tab:10-months-of-roman-calendar}。从December到来年的March之间的冬天日子，古罗马人是不算在日历当中的。
+
+从表~\ref{tab:10-months-of-roman-calendar}也可以看出，前4个月是以神命名，后6个月则是以数字命名。
+
+% The first Roman calendar was a lunar calendar, based on the Greek lunar calendars where months begin and end when new moons occur. Because the time between new moons averages 29.5 days, the Roman lunar calendar had either 29 or 30 days. It had 304 days subdivided into 10 months starting from March and ending with December (from the Latin word decem or ten in Latin), while no months were assigned to the winter days between December and March.
 
 \begin{table}[htbp]
   \centering
-  \caption{10 Months of Julius Calendar}
-  \label{tab:10-months-of-julius-calendar}
+  \caption{10个月的罗马历}
+  \label{tab:10-months-of-roman-calendar}
   \begin{minipage}{\textwidth}  %for footnote in tabular
   \centering
-  \begin{tabular}{llll}
+  \begin{tabular}{lll}
     \toprule
-    月份 & English           & Latin       & Meaning                                                                   \\\midrule
-    1    & January           & Ianuarius   & Month of Janus                                                            \\
-    2    & February          & Februarius  & Month of the Februa                                                       \\
-         & Intercalary Month & Mercedonius & Month of Wages                                                            \\           
-    3    & March             & Martius     & Month of Mars                                                             \\
-    4    & April             & Aprilis     & Month of Aphrodite – from which the Etruscan Apru might have been derived \\
-    5    & May               & Maius       & Month of Maia                                                             \\
-    6    & June              & Iunius      & Month of Juno                                                             \\
-    7    & July              & Quintilis   & Fifth Month (from the earlier calendar starting in March)                 \\
-    8    & August            & Sextilis    & Sixth Month                                                               \\
-    9    & September         & September   & Seventh Month                                                             \\
-    10   & October           & October     & Eighth Month                                                              \\
-    11   & November          & November    & Ninth Month                                                               \\
-    12   & December          & December    & Tenth Month                                                               \\
+    月份 & 拉丁语    & 含义               \\\midrule
+    1    & Martius   & Month of Mars      \\
+    2    & Aprilis   & Month of Aphrodite \\
+    3    & Maius     & Month of Maia      \\
+    4    & Iunius    & Month of Juno      \\
+    5    & Quintilis & Fifth Month        \\
+    6    & Sextilis  & Sixth Month        \\
+    7    & September & Seventh Month      \\
+    8    & October   & Eighth Month       \\
+    9    & November  & Ninth Month        \\
+    10   & December  & Tenth Month        \\
     \bottomrule
   \end{tabular}
   \end{minipage}
 \end{table}
 
-%% The first month in the Julian calendar was Martius for March, followed by Aprilis for April, Maius for May, Lunius for June, Quintilis or July, Sextilis or August, then September for the seventh month, October for the 8th, November for the 9th and December for the 10th month.
+\subsection{十二个月的罗马历}
+\label{sec:12-months-roman-calendar}
+后来，罗马人发现一年304天实在与太阳年相差太多，于是就在December后面加了两个月。再后来，又把这新加的两个月放到年初，于是罗马历就成了一年十二个月共355天，如表~\ref{tab:12-months-of-roman-calendar}。
+\begin{table}[htbp]
+  \centering
+  \caption{12个月的罗马历}
+  \label{tab:12-months-of-roman-calendar}
+  \begin{minipage}{\textwidth}  %for footnote in tabular
+  \centering
+  \begin{tabular}{lllc}
+    \toprule
+    月份  & 拉丁语    & 含义              & 天数 \\\midrule
+    1     & Ianuarius & Month of Janus    & 29   \\
+    2     & Februarius&                   & 28   \\
+    3     & Martius   & Month of Mars     & 31   \\
+    4     & Aprilis   & Month of Aphrodite& 29   \\
+    5     & Maius     & Month of Maia     & 31   \\
+    6     & Iunius    & Month of Juno     & 29   \\
+    7     & Quintilis & Fifth Month       & 31   \\
+    8     & Sextilis  & Sixth Month       & 29   \\
+    9     & September & Seventh Month     & 29   \\
+    10    & October   & Eighth Month      & 31   \\
+    11    & November  & Ninth Month       & 29   \\
+    12    & December  & Tenth Month       & 29   \\
+    \bottomrule
+  \end{tabular}
+  \end{minipage}
+\end{table}
 
+然而，这355天与太阳历还是有不小的差距，于时罗马人再次次修订历法，在必要时（通常是每隔一年，即两年插一次）在2月和3月之间插入一个有27天的叫Intercalary(也叫Mercedonius)的月，以弥补历法与太阳历之间的差距。
+
+再后来，凯撒大帝和屋大维分别将7、8两月按自己的名字和尊号改了名字，再传到英国，就有了现在的十二个月的叫法了。
+
+\begin{example}
+  当罗马官方机构 College of Pontiffs 宣布当年要增加Intercalary月份之后，当年的2月份就要改为只有23天，或者是24天(每四年一次，对应于闰年)。罗马历实行之后，到了公元前47年，结果发现罗马日历几乎比太阳相差了差不多两个半月。
+
+  为什么呢？
+
+  因为按照这个历法，将4年里日历总天数除以4，可以得到平均每年的天数为
+  \begin{align*}
+    & \left(4 \times 355 + 27 \times 2(\text{两次闰月}) - 5 (\text{一次23天的二月})\right.\\
+    & \left. - 4 (\text{一次24天的二月})\right) \div 4\\
+    = & 366\frac14
+  \end{align*}
+  与真实的太阳历每年天数有一天左右的差距，所以随着多年的积累，误差就越来越大了。
+\end{example}
+
+\begin{question}
+  按照上题的描述，可以估算出来罗马大概是什么时候开始实行这个历法吗？
+\end{question}
+
+
+\begin{example}
+  古罗马人将每周改为7天后，是按神给每一天命名的。传到英国后，Anglo--Saxon将其中4个改造成了自己的神，从而有了如今英语命名。
+  \begin{table}[htbp]
+    \centering
+    \begin{tabular}{cllll}
+      \toprule
+      天     & 英文名    & 罗马的神         & Anglo--Saxon的神 & 其它含义 \\\midrule
+      星期天 & Sunday    & 太阳神 Solis     &                  & 太阳     \\
+      星期一 & Monday    & 月亮女神 Lunae   &                  & 月亮     \\
+      星期二 & Tuesday   & 战神 Martis      & 战神 Tiu         & 火星     \\
+      星期三 & Wednesday & 神使 Mercurii    & 主神 Woden       & 水星     \\
+      星期四 & Thursday  & 天神 Iovis       & 雷神 Thor        & 木星     \\
+      星期五 & Friday    & 爱神 Veneris     & 爱神 Frigg       & 金星     \\
+      星期六 & Saturday  & 农业之神 Saturni &                  & 土星     \\
+      \bottomrule
+    \end{tabular}
+    \caption{星期的命名}
+    \label{tab:name-of-week-day}
+  \end{table}
+% Sunday (dies Solis) was the day of the god sun Sol. Monday (dies Lunae) was the day of the moon and celebrated the goddess Luna. Tuesday (dies Martis) was the day of Mars, the god of war. Wednesday (dies Mercurii) was the day of the god Mercury. Thursday (dies Iovis) was the day of the god Jupiter. Friday (dies Veneris) was the day of goddess Venus. Saturday (dies Saturni) was the day of god Saturn. 
+\end{example}
+
+\begin{example}
+  古罗马人在每周的最后一天赶集，到城镇售卖他们的产品。在Julian历之前，古罗马日历中每年有355天，每周有8天，分别用$A$到$H$八个字母代替。
+\end{example}
 
 
 \section{天干地支}
