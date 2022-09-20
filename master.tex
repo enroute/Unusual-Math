@@ -390,6 +390,10 @@
 \newcommand{\kurschak}{K\"ursch\'ak}
 \newcommand{\term}[1]{\begingroup\bfseries\kai{#1}\endgroup}
 
+% 填空的横线
+%\newcommand{\blankline}{\underline{\hbox to 15mm{}}}
+\newcommand{\blankline}{\rule{1.5cm}{0.15mm}}
+
 \DeclareMathOperator{\atan}{atan}
 
 % Change colon(:) in figure caption to period(.)
@@ -604,6 +608,8 @@
 % \includeonly{probability}
 % \includeonly{circle}
 % \includeonly{number-to-graph}
+\includeonly{pengchengbei}
+% \includeonly{charts}
 
 % allow page break inside align environment
 \allowdisplaybreaks
@@ -708,5 +714,7 @@
 
 \include{traps}
 \include{logic-print}
+
+\include{pengchengbei}
 \end{document}
 
