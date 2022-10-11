@@ -1,3 +1,107 @@
+\url{https://en.wikipedia.org/wiki/International_Mathematical_Olympiad}
+\url{brilliant.org/wiki/muirhead-inequality/}
+
+\chapter{Calculation Tricks}
+\label{chap:calculation-tricks}
+
+
+\chapter{Division and Remainder}
+\label{chap:division-and-remainder}
+
+\chapter{Pigeonhole Principle}
+\label{chap:pigeonhole-principle}
+
+For infinite sets, the Hilbert's Grand Hotel violates the Pigeonhole Principle.
+Location: \url{https://en.wikipedia.org/wiki/Hilbert's_paradox_of_the_Grand_Hotel}
+
+\section{Worse Case Scenario}
+\label{sec:worst-case-scenario}
+
+
+
+\chapter{Even Odd}
+\label{chap:even-odd}
+
+\url{https://en.wikipedia.org/wiki/Mutilated_chessboard_problem}
+
+\chapter{Sequence}
+\label{chap:sequence}
+
+\section{Arithmetic Progression}
+\label{sec:arithmetic-progression}
+\url{https://en.wikipedia.org/wiki/Arithmetic_progression}
+
+\section{Geometric Progression}
+\label{sec:geometric-progression}
+\url{https://en.wikipedia.org/wiki/Geometric_progression}
+
+\chapter{Geometry}
+\label{chap:geometry}
+
+\section{Angle}
+\label{sec:angle}
+
+\subsection{Parallel}
+\label{sec:parallel}
+
+\subsection{Perpendicular}
+\label{sec:perpendicular}
+
+
+\section{Polygon}
+\label{sec:polygon}
+
+
+
+\chapter{Measurement: Perimeter, Area, Volume}
+\label{chap:perimeter-area-volume}
+
+\section{Volume}
+\label{sec:volume}
+
+\subsection{Volume of Cones}
+\label{sec:volume-of-cones}
+\url{https://math.stackexchange.com/questions/623/why-is-the-volume-of-a-cone-one-third-of-the-volume-of-a-cylinder}
+
+\section{Time, Velocity, Range}
+\label{sec:time-velocity-range}
+
+\section{Weight, Density, Volume}
+\label{sec:weight-density-volume}
+
+
+\chapter{Logic}
+\label{chap:logic}
+
+
+
+\chapter{Calender}
+\label{chap:calendar}
+
+\chapter{Combination and Permutation}
+\label{chap:combination-and-permutation}
+
+\chapter{Graph Theory}
+\label{chap:graph-theory}
+
+\section{Bipartite}
+\label{sec:bipartite}
+
+
+
+
+\chapter{Set Theory}
+\label{chap:set-theory}
+
+\section{Venn's Diagram}
+\label{sec:venn's-diagram}
+
+
+
+\chapter{Probability}
+\label{chap:probability}
+
+
 
 \chapter{深圳鹏程杯}
 \label{chap:pengchengbei}
@@ -287,6 +391,177 @@ Assumption: KNOW is bi-direction, which means if A knows B, then B must knows A.
 \end{question}
 
 
+\begin{question}
+  正方形$ABCD$的面积等于8平方厘米，它的对角线交点为$O$，分别以$A,B,C,D$为圆心画过$O$点的四条圆弧，如图所示，图中四个花瓣形（阴影部分）的总面积是多少平方厘米？（圆周率$=3.14$）
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      \coordinate[label=above left:$A$](A)at(0,2);
+      \coordinate[label=below left:$B$](B)at(0,0);
+      \coordinate[label=below right:$C$](C)at(2,0);
+      \coordinate[label=above right:$D$](D)at(2,2);
+      \coordinate(O)at(1,1);
+      \coordinate(A1)at($(A)!1!45:(O)$);
+      \coordinate(A2)at($(A)!1!-45:(O)$);
+      \coordinate(B1)at($(B)!1!45:(O)$);
+      \coordinate(B2)at($(B)!1!-45:(O)$);
+      \coordinate(C1)at($(C)!1!45:(O)$);
+      \coordinate(C2)at($(C)!1!-45:(O)$);
+      \coordinate(D1)at($(D)!1!45:(O)$);
+      \coordinate(D2)at($(D)!1!-45:(O)$);
+
+      \calcLength(O,A){r}
+      %\centerarc(A)(270:360:\r pt);
+      % \draw[fill=red!20, non zero rule] (A1)arc(0:-90:\r pt) --(B1) arc(90:0:\r pt)
+      %         (C1) arc(180:90:\r pt) -- (D1) arc(270:180:\r pt);
+      \begin{scope}
+        \clip (B1)arc(90:0:\r pt) -- (B) -- cycle;
+        \fill[color=red!20] (A1)arc(0:-90:\r pt) -- (A)-- cycle;
+      \end{scope}
+      \begin{scope}
+        \clip (D1)arc(270:180:\r pt) -- (D) -- cycle;
+        \fill[color=red!20] (A1)arc(0:-90:\r pt) -- (A)-- cycle;
+      \end{scope}
+      \begin{scope}
+        \clip (B1)arc(90:0:\r pt) -- (B) -- cycle;
+        \fill[color=red!20] (C1)arc(180:90:\r pt) -- (C)-- cycle;
+      \end{scope}
+      \begin{scope}
+        \clip (D1)arc(270:180:\r pt) -- (D) -- cycle;
+        \fill[color=red!20] (C1)arc(180:90:\r pt) -- (C)-- cycle;
+      \end{scope}
+
+      \draw(A)--(B)--(C)--(D)--(A)--(C) (B)--(D)
+          (A1)arc(0:-90:\r pt)
+          (B1)arc(90:0:\r pt)
+          (C1)arc(180:90:\r pt)
+          (D1)arc(270:180:\r pt);
+      \tkzLabelPoints[right](O)
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+\begin{proof}[提示]
+  可以用方程组。
+
+  也可以用几何变换。其中每个花瓣都可以变换成一个弓形，四个花瓣加起来可以变换成一个圆挖去一个跟$ABCD$一样大的正方形。
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+      \coordinate[label=above left:$A$](A)at(0,2);
+      \coordinate[label=below left:$B$](B)at(0,0);
+      \coordinate[label=below right:$C$](C)at(2,0);
+      \coordinate[label=above right:$D$](D)at(2,2);
+      \coordinate(O)at(1,1);
+      \coordinate(A1)at($(A)!1!45:(O)$);
+      \coordinate(A2)at($(A)!1!-45:(O)$);
+      \coordinate(B1)at($(B)!1!45:(O)$);
+      \coordinate(B2)at($(B)!1!-45:(O)$);
+      \coordinate(C1)at($(C)!1!45:(O)$);
+      \coordinate(C2)at($(C)!1!-45:(O)$);
+      \coordinate(D1)at($(D)!1!45:(O)$);
+      \coordinate(D2)at($(D)!1!-45:(O)$);
+
+      \calcLength(O,A){r}
+
+      \begin{scope}
+        \clip (B1)arc(90:0:\r pt) -- (B) -- cycle;
+        \fill[color=red!20] (A1)arc(0:-90:\r pt) -- (A)-- cycle;
+      \end{scope}
+
+      \filldraw[pattern=north west lines](O)arc(45:135:\r pt)--(O);
+
+      \coordinate(O1)at($(B)!1!-90:(O)$);
+      \coordinate(O2)at($(B)!1!180:(O)$);
+      \coordinate(O3)at($(B)!1!90:(O)$);
+
+      
+      \draw(A)--(B)--(C)--(D)--(A)--(C) (B)--(D)
+          (O)arc(-45:-90:\r pt);
+          %(O)arc(45:135:\r pt);
+      \tkzLabelPoints[right](O)
+
+      \begin{scope}[shift={(5,0)}]
+        \coordinate[label=above left:$A$](A)at(0,2);
+        \coordinate(B)at(0,0);
+        \coordinate[label=below right:$C$](C)at(2,0);
+        \coordinate[label=above right:$D$](D)at(2,2);
+        \coordinate(O)at(1,1);
+        \coordinate(A1)at($(A)!1!45:(O)$);
+        \coordinate(A2)at($(A)!1!-45:(O)$);
+        \coordinate(B1)at($(B)!1!45:(O)$);
+        \coordinate(B2)at($(B)!1!-45:(O)$);
+        \coordinate(C1)at($(C)!1!45:(O)$);
+        \coordinate(C2)at($(C)!1!-45:(O)$);
+        \coordinate(D1)at($(D)!1!45:(O)$);
+        \coordinate(D2)at($(D)!1!-45:(O)$);
+        \coordinate(O1)at($(B)!1!-90:(O)$);
+        \coordinate(O2)at($(B)!1!180:(O)$);
+        \coordinate(O3)at($(B)!1!90:(O)$);
+
+        \filldraw[pattern=north west lines](B) circle(\r pt);
+        \draw($(B)!1!135:(O)$)--(B)--($(B)!1!-135:(O)$);
+        \draw[fill=white](O)--(O1)--(O2)--(O3)--cycle;
+        \draw(A)--(B)node[below right]{$B$}--(C)--(D)--(A)--(C) (B)--(D);
+      \end{scope}
+
+    \end{tikzpicture}
+  \end{center}
+\end{proof}
+
+
+\begin{question}
+  如图是一个边长为100米的正方形跑道$ABCE$，甲、乙两人同时分别从$A,C$两点出发，沿着跑道顺时针方向出发，甲的速度为每秒7米，乙的速度为每秒5米，他们每到转弯处都要停留5秒钟，请问，当甲第一次追上乙时，要用多少时间？
+
+  \begin{center}
+    \begin{tikzpicture}
+      \draw(0,0)node[below left]{$B$}--(2,0)node[below right]{$C$}
+         --(2,2)node[above right]{$D$}--(0,2)node[above left]{$A$}--cycle;
+      \draw[->](0.5,2.3)--(1.5,2.3);
+      \draw[->](1.5,-0.3)--(0.5,-0.3);
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+
+
+\begin{question}
+  四只容量相同且有刻度的玻璃杯，其中三只分别装满三种不同的果汁，另外一只为空杯。你可以利用这只空杯，怎样操作得到三杯成分相同的混合果汁？如果增加一个同容量，而且装满与以上三种不相同的饮料的玻璃杯，你又怎样操作得到四杯成分相同的混合果汁？
+\end{question}
+
+
+
+\begin{question}
+  阅读以下材料：如图所示，长方形$ABCD$中，$AB=a$，$AD=b$，分割成四个小正方形，其中$AG=a-1$，$AE=b-1$。由于$S_{ABCD}=S_{AEPG}+S_{EFCD}+S_{BCHG}-S_{PFCH}$，即
+  \begin{align*}
+    ab=(a-1)(b-1)+a+b-1,\quad \therefore\ (a-1)(b-1)=ab-a-b+1
+  \end{align*}
+
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \coordinate[label=below left:$D$](D)at(0,0);
+      \coordinate[label=below:$H$](H)at(5,0);
+      \coordinate[label=below right:$C$](C)at(6,0);
+      \coordinate[label=left:$E$](E)at(0,1);
+      \coordinate[label=above left:$P$](P)at(5,1);
+      \coordinate[label=right:$F$](F)at(6,1);
+      \coordinate[label=above left:$A$](A)at(0,4);
+      \coordinate[label=above:$G$](G)at(5,4);
+      \coordinate[label=above right:$B$](B)at(6,4);
+      \draw(A)--(B)--(C)--(D)--(A) (E)--(F) (G)--(H);
+    \end{tikzpicture}
+  \end{center}
+  
+  运用上述公式，解决以下问题：
+
+  一个数，其所有位数上的非零数字之积恰好等于这些数字之和，这样的数称为“鹏程数”，例如，8000，11125都是五位数的“鹏程数”。
+
+  特别地，我们把各个数字均不为零的“鹏程数”叫做“真鹏程数”。
+  \begin{enumerate}
+  \item 求出所有三位“鹏程数”之和。
+  \item 求出四位“真鹏程数”的四个数字。
+  \item 写出一个2019位的“鹏程数”，其中包含数字2，0，1，9。
+  \end{enumerate}
+\end{question}
+
+
 
 \section{2020年}
 \label{chap:pengcheng-2020}
@@ -510,8 +785,11 @@ Assumption: KNOW is bi-direction, which means if A knows B, then B must knows A.
       \coordinate[label=below right:$D$](D)at(1,0);
       \coordinate[label=      left :$M$](M)at($0.5*(A)+0.5*(B)$);
       \coordinate[label=right      :$P$](P)at($(C)!1!60:(D)$);
-      \coordinate[label=above right:$K$](K)at($0.75*(C)+0.25*(D)$);
-      \coordinate[label=below right:$L$](L)at($0.25*(C)+0.75*(D)$);
+      % K, L 不是一半
+      %\coordinate[label=above right:$K$](K)at($0.75*(C)+0.25*(D)$);
+      %\coordinate[label=below right:$L$](L)at($0.25*(C)+0.75*(D)$);
+      \tkzInterLL(B,P)(C,D)\tkzGetPoint{K}\tkzLabelPoints[above right](K)
+      \tkzInterLL(A,P)(C,D)\tkzGetPoint{L}\tkzLabelPoints[below right](L)
       \tkzInterLL(B,D)(A,P)\tkzGetPoint{E}\tkzLabelPoints[below](E)
       \draw(A)--(B)--(C)--(D)--(A)--(P)--(B) (C)--(P)--(D) (B)--(D) (K)--(M)--(L);
     \end{tikzpicture}
@@ -539,8 +817,125 @@ Assumption: KNOW is bi-direction, which means if A knows B, then B must knows A.
 
 
 
+\section{2021六年级预赛}
+\label{sec:pengcheng-grade6-2021-pre}
+
+\begin{question}
+  计算：
+  \begin{align*}
+    \frac{ \frac7{18} \times 4\frac12 + \frac16 }
+    { 13\frac12 - \frac34 \div \frac5{16}}
+    \times 18 = (\quad \quad)
+  \end{align*}
+
+  \testxxfive{21}{22}{23}{$2\frac59$}{以上都不对}
+\end{question}
 
 
+\begin{question}
+  下面是由六个相同的正方形重叠起来构成的图形，连接点正好是正方形边的中点，正方形边长是$a$，则该图形的周长是$(\quad \quad)$。
+
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \draw(0,0)rectangle(2,2);
+      \begin{scope}[shift={(-1,-1)}]
+        \draw[fill=white](0,0)rectangle(2,2);
+      \end{scope}
+      \begin{scope}[shift={(-2,-2)}]
+        \draw[fill=white](0,0)rectangle(2,2);
+      \end{scope}
+      \begin{scope}[shift={(-3,-3)}]
+        \draw[fill=white](0,0)rectangle(2,2);
+      \end{scope}
+      \begin{scope}[shift={(-4,-4)}]
+        \draw[fill=white](0,0)rectangle(2,2);
+      \end{scope}
+      \begin{scope}[shift={(-5,-5)}]
+        \draw[fill=white](0,0)rectangle(2,2);
+        \coordinate[label=below:$a$](A)at(1,0);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+
+  \testxxfive{$24a$}{$14a$}{$12a$}{$18a$}{以上都不对}
+\end{question}
+
+
+\begin{question}
+  由3个不同的自然数组成一等式：
+  \begin{align*}
+    \Box + \bigtriangleup + \bigcirc = \Box \times \bigtriangleup - \bigcirc
+  \end{align*}
+  这三个数中最多有$(\quad\quad)$ 个奇数。
+
+  \testxxfive{1}{2}{3}{0}{无法确定}
+\end{question}
+
+
+\section{2022年}
+\label{sec:pengcheng-2022-grade-6}
+
+\begin{question}
+  算式 $\dfrac{0.25\times2+\frac14}{3.2-2.95} + \dfrac{4\times0.9}{2.3-1\frac25}=(\quad\quad).$
+  \testxxfive{0}{1}{2}{3}{7}
+\end{question}
+
+\begin{question}
+  $A,B,C,D$四位小朋友分成两组做游戏，每组两个人，问$A,B$分在同一组的可能性是
+  \testxxfive{$\dfrac16$}{$\dfrac14$}{$\dfrac12$}{$\dfrac13$}{以上都不对}
+\end{question}
+
+\begin{question}
+  图中的正方形$ABCD$中，$E$为$AB$边的中点，$DE$把正方形分成了两部分，已知这两部分的周长相差4厘米，则正方形的面积为$(\quad\quad)$平方厘米。
+
+  \begin{center}
+    \begin{tikzpicture}
+      \coordinate[label=above left:$A$](A) at(0,2);
+      \coordinate[label=below left:$B$](B) at(0,0);
+      \coordinate[label=below right:$C$](C) at(2,0);
+      \coordinate[label=above right:$D$](D) at(2,2);
+      \coordinate[label=left:$E$](E) at(0,1);
+      \draw(D)--(A)--(B)--(C)--(D)--(E);
+    \end{tikzpicture}
+  \end{center}
+
+  \testxxfive{9}{4}{1}{25}{16}  
+\end{question}
+
+\begin{question}
+  6位中国象棋选手进行比赛，每两人之间比赛一局。如果平局，参赛选手各得1分；否则赢者得3分，输者得0分。最后六位选手的得分之和为39分，则平了$(\quad\quad)$局。
+  \testxxfive{2}{3}{4}{5}{6}
+\end{question}
+
+\begin{question}
+  若三角形的三个内角$\angle A$，$\angle B$，$\angle C$满足条件：$\angle A+2\angle B=\angle C$，则这个三角形可能是$(\quad\quad)$三角形。
+  \testxxfive{锐角}{直角}{钝角}{等腰}{以上都不对}
+\end{question}
+
+\begin{question}
+  两支粗细、长短都不同的蜡烛，长的可以点4小时，短的可以点6小时。将它们同时点燃，两小时后，两支蜡烛所余下的部分长度正好相等。那么，原来短蜡烛的长度是长蜡烛的$(\quad\quad)$。
+  \testxxfive{$\dfrac45$}{$\dfrac35$}{$\dfrac34$}{$\dfrac12$}{以上都不对}
+\end{question}
+
+
+\begin{question}
+  如图，$AEBO$是四分之一圆。$CEDO$是正方形，面积是16平方厘米，则阴影部分面积是$(\quad\quad)$平方厘米。(取$\pi=3.14$)
+
+  \begin{center}
+    \begin{tikzpicture}[scale=2.0]
+      \coordinate[label=below left:$O$](O)at(0,0);
+      \coordinate[label=below right:$B$](B)at(1,0);
+      \coordinate[label=above left:$A$](A)at(0,1);
+      \coordinate[label=above right:$E$](E)at($(O)!1!45:(B)$);
+      \coordinate[label=left:$C$](C)at($(O)!(E)!(A)$); % project of E to OA
+      \coordinate[label=below:$D$](D)at($(O)!(E)!(B)$); % project of E to OB
+      \filldraw[fill=blue!20](O)--(B)arc(0:90:1)--(O);
+      \filldraw[fill=white](O)--(D)--(E)--(C)--(O);
+    \end{tikzpicture}
+  \end{center}
+
+  \testxxfive{4.12}{9.12}{10.12}{5.12}{11.12}
+\end{question}
 
 \section{Using mind maps to find the way out}
 \label{sec:mind-map}
