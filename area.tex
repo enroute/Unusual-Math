@@ -899,3 +899,101 @@
     \draw(0,0) rectangle(6,6);
   \end{tikzpicture}
 \end{example}
+
+
+\begin{example}
+  % https://math.stackexchange.com/questions/1544719/point-in-the-interior-of-a-square
+  A point in the interior of a square $ABCD$ is at distances 3, 4 and meters from the vertices $A$, $B$ and $C$, respectively. What's the area of $ABCD$?
+\end{example}
+
+
+\begin{example}[Same length of side, different height]
+  Any point $P$ in the interior of a square $ABCD$, $S_{\triangle ABP} + S_{\triangle CDP}
+  = S_{\triangle ACP} + S_{\triangle BDP}$.
+
+  $\triangle ABP$ and $\triangle CDP$ both have a side the length of which is the that of the square, and the heights of them sum up to the length of square too, which makes the sum of the area of the two triangle the half of the square.
+  
+
+  Any point $P$ in the interior of square, connect it with the middle points each side. It split into two parts each of which sums to the same area.
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(0,0)}]
+        \coordinate(A)at(0,0);
+        \coordinate(B)at(2,0);
+        \coordinate(C)at(2,2);
+        \coordinate(D)at(0,2);
+        \coordinate(P)at(0.7,1.1);
+        \draw(A)--(B)--(C)--(D)--(A)--(P)--(B) (C)--(P)--(D);
+        \fill[color=blue!20](A)--(P)--(D)--cycle;
+        \fill[color=blue!20](B)--(P)--(C)--cycle;
+      \end{scope}
+      \begin{scope}[shift={(4,0)}]
+        \coordinate(A)at(0,0);
+        \coordinate(B)at(2,0);
+        \coordinate(C)at(2,2);
+        \coordinate(D)at(0,2);
+        \coordinate(P)at(0.7,1.1);
+        \coordinate(E)at($0.5*(A)+0.5*(B)$);
+        \coordinate(F)at($0.5*(B)+0.5*(C)$);
+        \coordinate(G)at($0.5*(C)+0.5*(D)$);
+        \coordinate(H)at($0.5*(D)+0.5*(A)$);
+        \draw(A)--(B)--(C)--(D)--cycle (E)--(P)--(F) (G)--(P)--(H);
+        \fill[color=blue!20](A)--(E)--(P)--(H)--cycle;
+        \fill[color=blue!20](C)--(G)--(P)--(F)--cycle;
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+\begin{example}
+  Any trapezoid $ABCE$ where $AB\parallel CD$, the two diaganl intersects in $P$, then $S_{\triangle ADP}=S_{\triangle BCP}$.
+\end{example}
+
+
+\begin{example}
+  $\triangle ABC$, $AB$, $AC$ split into 5 parts equally. The area of the shadow region is 21. What's the area of the triangle?
+
+  \begin{tikzpicture}
+    \coordinate[label=left:$A$](A)at(0,0);
+    \coordinate[label=below right:$B$](B)at(4,0);
+    \coordinate[label=above right:$C$](C)at(3,2);
+    \foreach \x/\y/\s in{4/1/5,3/2/5,2/3/5,1/4/5}{%
+      \coordinate(B\y)at($\x/\s*(A)+\y/\s*(B)$);
+      \coordinate(C\y)at($\x/\s*(A)+\y/\s*(C)$);
+    }
+    \foreach \a/\b/\c in{A/B1/C1, B1/B2/C2, B2/B3/C3, B3/B4/C4, B4/B/C}{%
+      \fill[color=blue!20](\a)--(\b)--(\c)--cycle;
+    }
+    \draw(C)--(A)--(B)--(C)--(B4)--(C4)--(B3)--(C3)--(B2)--(C2)--(B1)--(C1);
+  \end{tikzpicture}
+\end{example}
+
+\begin{example}
+  Circle with radius 1, find the area of the shadow region.
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(0,0)}]
+        \filldraw[black, fill=blue!20](-1,0) arc(-90:0:1) arc(180:270:1) arc(90:180:1) arc(0:90:1);
+      \end{scope}
+      \begin{scope}[shift={(3,0)}]
+        \filldraw[black, fill=blue!20](0,0)circle(1);
+        \filldraw[black, fill=white](-1,0) arc(-90:0:1) arc(180:270:1) arc(90:180:1) arc(0:90:1);
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+Draw an auxilary square like the following
+\begin{center}
+  \begin{tikzpicture}
+    \filldraw[black, fill=blue!20](-1,0) arc(-90:0:1) arc(180:270:1) arc(90:180:1) arc(0:90:1);
+    \draw(-1,-1)rectangle(1,1);
+  \end{tikzpicture}
+\end{center}
+Then the area of the shadow is that of the square subtracted by the 4 quater-of-circle, i.e.,
+\begin{align*}
+  S_{\text{shadow}} =& S_{\text{square}} - 4\times S_{\text{quarter of square}}\\
+  =& 2\times2 - \pi \times 1\times 1 = 4-\pi
+\end{align*}

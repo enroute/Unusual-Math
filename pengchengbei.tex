@@ -4,6 +4,21 @@
 \chapter{Calculation Tricks}
 \label{chap:calculation-tricks}
 
+\section{Classification}
+\label{sec:classification-method}
+
+\begin{example}
+  In series $1,2,3,\cdots,2010$, how many digits in total, and what's the sum of all the digits?
+\end{example}
+\begin{proof}[Hint]
+  \begin{itemize}
+  \item $1,2,3,\cdots,9$
+  \item $10,11,12,\cdots,99$
+  \item $100,101,102,\cdots,999$
+  \item $1000,1001,1002,\cdots,2010$
+  \end{itemize}
+\end{proof}
+
 
 \chapter{Division and Remainder}
 \label{chap:division-and-remainder}
@@ -63,6 +78,19 @@ Location: \url{https://en.wikipedia.org/wiki/Hilbert's_paradox_of_the_Grand_Hote
 \label{sec:volume-of-cones}
 \url{https://math.stackexchange.com/questions/623/why-is-the-volume-of-a-cone-one-third-of-the-volume-of-a-cylinder}
 
+\section{Symmetry, Similar, Conguent}
+\label{sec:symmetry-similar-conguent}
+
+\subsection{Line Symmetry}
+\label{sec:line-symmetry}
+
+\subsection{Point Symmetry}
+\label{sec:point-symmetry}
+
+\subsection{Rotation Symmetry}
+\label{sec:rotation-symmetry}
+
+
 \section{Time, Velocity, Range}
 \label{sec:time-velocity-range}
 
@@ -80,6 +108,52 @@ Location: \url{https://en.wikipedia.org/wiki/Hilbert's_paradox_of_the_Grand_Hote
 
 \chapter{Combination and Permutation}
 \label{chap:combination-and-permutation}
+
+\section{Basic rules}
+\label{sec:basic-rule-of-combinatorics}
+
+\subsection{Rule of addition}
+\label{sec:rule-of-addition}
+
+\subsection{Rule of multiplication}
+\label{sec:rule-of-multiplication}
+
+\subsection{Inclusion Exclusion Principle}
+\label{sec:inclusion-exclusion-principle}
+
+(a) A postman has to deliver four letters to four different houses in a street. Unfortunately the rain has erased the
+addresses, so he just distributes them randomly, one letter per house. What is the probability that every house gets
+the right letter? (☆ What is the probability that every house gets a wrong letter?)
+
+(b) In a lottery you have to guess 6 out of 49 numbers. What is the probability that you get all of them right? If
+submit 100 guesses every week, how long on average will it take you to win?
+
+(a) There are 4! = 24 ways to randomly distribute the letters, and only one way to get all of them right. Thus the
+probability that every letter is delivered to the right house is 1 / 24 = 0.0417 = 4.17\%.
+
+To find the probability that every letter gets delivered to the wrong house is a bit more difficult. It is not simply
+1 – 0.0417, since there are many cases in which one or two, but not all houses get the right letter. In this simple
+case, the easiest solution would be to write down all 24 possibilities. You will find that in 9 out of the 24 cases
+every house gets a wrong letter, which gives a probability of 0.375 = 37.5\%. If there more too many houses to write
+down all possibilities, you can use an idea called the Inclusion Exclusion principle.
+
+(b) There are 49C6 = 13,983,816 possible outcomes of the lottery, so the probability of getting the right solution is
+1 / 49C6 = 0.000000072.
+
+On average it will also take 13,983,816 attempts to win. If we submit 100 guesses every week this corresponds to
+139,838 weeks, which is the same as 2,689 years. The lesson to learn: don’t play lotto!
+
+
+\section{Count}
+\label{sec:count}
+
+\section{Permutation}
+\label{sec:permutation}
+
+\section{Combination}
+\label{sec:combination}
+
+
 
 \chapter{Graph Theory}
 \label{chap:graph-theory}
@@ -100,6 +174,45 @@ Location: \url{https://en.wikipedia.org/wiki/Hilbert's_paradox_of_the_Grand_Hote
 
 \chapter{Probability}
 \label{chap:probability}
+
+\chapter{Problem solving}
+\label{chap:problem-solving}
+
+\section{Drawing a Picture or Diagram}
+\label{sec:drawing-a-picture-or-diagram}
+
+\section{Making an organised list}
+\label{sec:making-an-organised-list}
+
+\section{Solving a simpler related problem}
+\label{sec:solving-a-simpler-related-problem}
+
+\section{Finding a pattern}
+\label{sec:finding-a-pattern}
+
+\section{Guessing and check}
+\label{sec:guessing-and-check}
+
+\section{Experimenting}
+\label{sec:experimenting}
+
+\section{Acting out the problem}
+\label{sec:acting-out-the-problem}
+
+\section{Working backwords}
+\label{sec:working-backwards}
+
+\section{Writing an equation}
+\label{sec:writing-an-equation}
+
+\section{Changing your point of view}
+\label{sec:changing-your-point-of-view}
+
+\section{Miscellanea}
+\label{sec:miscellanea}
+
+
+
 
 
 
