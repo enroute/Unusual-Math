@@ -663,3 +663,29 @@ $\forall a,b,c,d\in\mathcal{R}$，有
 \end{align*}
 剩余略。
 
+
+
+\begin{example}[Proof GM $le$ AM]
+  For non negative sequence $(a_1, a_2, \cdots, a_n)$, if there's one $a_i=0$, then GM=0, which is obvious that GM$le$AM, iff $a_1=a_2=\cdots=a_n=0$ the equal sign holds.
+
+  So we just consider positive sequence $(a_1, a_2, \cdots, a_n)$. Let $\alpha$ be the arithmetic mean. If the numbers in the sequence is not all equal, then there must exist two elements $x$, $y$ s.t. $x < \alpha < y$.
+  Let $X\equiv\alpha$, $Y\equiv  x+y-\alpha$, then $X+Y=x+y$ and also $XY\ge xy$, since
+  \begin{align*}
+    xy=&(\alpha-u)(\alpha+v)=\alpha^2+(v-u)\alpha-uv\\
+    XY=&\alpha(x+y-\alpha)=\alpha(\alpha-u+\alpha+v-\alpha)=\alpha(\alpha-u+v)=\alpha^2+(v-u)\alpha
+  \end{align*}
+  which means, if we change the sequence of $(a_1,a_2,\cdots,a_n)$ in to another sequence simply by replace the two elements $x, y$ into $\alpha, Y$, then the sum and the AM of the sequence is not changed, but the GM get bigger, if not equal. Repeating this stratedgy, we get a sequnce consists of $n$ $\alpha$, i.e.
+  \begin{align*}
+    (\alpha,\quad \alpha,\quad \alpha,\quad \cdots,\quad \alpha)
+  \end{align*}
+  the GM of which is no less than that of the original one.
+\end{example}
+
+\begin{question}
+  Proof QM--AM inequality.
+\end{question}
+
+\begin{question}
+  Proof GM--HM inequality.
+\end{question}
+

@@ -954,6 +954,7 @@
 \begin{example}
   $\triangle ABC$, $AB$, $AC$ split into 5 parts equally. The area of the shadow region is 21. What's the area of the triangle?
 
+  \begin{center}
   \begin{tikzpicture}
     \coordinate[label=left:$A$](A)at(0,0);
     \coordinate[label=below right:$B$](B)at(4,0);
@@ -967,6 +968,7 @@
     }
     \draw(C)--(A)--(B)--(C)--(B4)--(C4)--(B3)--(C3)--(B2)--(C2)--(B1)--(C1);
   \end{tikzpicture}
+  \end{center}
 \end{example}
 
 \begin{example}
@@ -997,3 +999,49 @@ Then the area of the shadow is that of the square subtracted by the 4 quater-of-
   S_{\text{shadow}} =& S_{\text{square}} - 4\times S_{\text{quarter of square}}\\
   =& 2\times2 - \pi \times 1\times 1 = 4-\pi
 \end{align*}
+
+
+\begin{example}
+  An equilateral triangle and a regular hexagon have equal
+  perimeters. If the triangle's area is 4, what is the area of the
+  hexagon?
+
+  \begin{center}
+    % 2 / sqrt(3) = 1.1547
+    \begin{tikzpicture}[scale=1.0]
+      \begin{scope}[shift={(0,0)}]
+        \draw(-30:1.1547)--(90:1.1547)--(210:1.1547)--cycle;
+      \end{scope}
+      % height of hexgon sqrt(3) = 1.7321
+      % height of triangle 1.5r = 3/2*2/sqrt(3)=3/sqrt(3)=1.7321
+      % height difference of center = 1/6 * height = 1.7321/6=0.2887
+      \begin{scope}[shift={(4,0.2887)}]
+        \draw(0:1)--(60:1)--(120:1)--(180:1)--(240:1)--(300:1)--cycle;
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{example}
+
+The side length of the equilateral triangle would then be twice of the sidelength of the hexagon.
+\begin{center}
+  \begin{tikzpicture}
+    \begin{scope}[shift={(0,0)}]
+      \coordinate(A)at(-30:1.1547);
+      \coordinate(B)at(90:1.1547);
+      \coordinate(C)at(210:1.1547);
+      \coordinate(D)at($0.5*(A)+0.5*(B)$);
+      \coordinate(E)at($0.5*(B)+0.5*(C)$);
+      \coordinate(F)at($0.5*(C)+0.5*(A)$);
+      \draw(A)--(B)--(C)--cycle (D)--(E)--(F)--cycle;
+    \end{scope}
+    \begin{scope}[shift={(4,0.2887)}]
+      \coordinate(A)at(0:1);
+      \coordinate(B)at(60:1);
+      \coordinate(C)at(120:1);
+      \coordinate(D)at(180:1);
+      \coordinate(E)at(240:1);
+      \coordinate(F)at(300:1);
+      \draw(A)--(B)--(C)--(D)--(E)--(F)--(A)--(D) (B)--(E) (C)--(F);
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
